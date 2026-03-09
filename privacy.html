@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>tera · Privacy Policy</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", sans-serif;
+      background: #f5f5f7;
+      color: #1d1d1f;
+      line-height: 1.7;
+    }
+
+    header {
+      background: rgba(255,255,255,0.85);
+      backdrop-filter: saturate(180%) blur(20px);
+      -webkit-backdrop-filter: saturate(180%) blur(20px);
+      border-bottom: 1px solid #d2d2d7;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    header .inner {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 18px 24px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    header .logo {
+      width: 36px;
+      height: 36px;
+      background: linear-gradient(135deg, #6e40f7, #3b82f6);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      color: #fff;
+      font-weight: 700;
+      flex-shrink: 0;
+      text-decoration: none;
+    }
+
+    header .breadcrumb {
+      flex: 1;
+      font-size: 15px;
+      color: #6e6e73;
+    }
+
+    header .breadcrumb a {
+      color: #1d1d1f;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    header .breadcrumb a:hover { opacity: 0.7; }
+    header .breadcrumb span.sep { margin: 0 6px; color: #aeaeb2; }
+
+    .lang-toggle {
+      display: flex;
+      background: #e8e8ed;
+      border-radius: 980px;
+      padding: 3px;
+      gap: 2px;
+    }
+
+    .lang-toggle button {
+      border: none;
+      background: transparent;
+      padding: 5px 14px;
+      border-radius: 980px;
+      font-size: 13px;
+      font-weight: 500;
+      color: #6e6e73;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .lang-toggle button.active {
+      background: #fff;
+      color: #1d1d1f;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.12);
+    }
+
+    main {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 48px 24px 80px;
+    }
+
+    /* ── Hero ── */
+    .hero {
+      text-align: center;
+      padding: 48px 0 56px;
+    }
+
+    .hero h2 {
+      font-size: 42px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      background: linear-gradient(135deg, #6e40f7, #3b82f6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 16px;
+    }
+
+    .hero p {
+      font-size: 18px;
+      color: #6e6e73;
+      max-width: 560px;
+      margin: 0 auto;
+    }
+
+    /* ── Section title ── */
+    .section-title {
+      font-size: 13px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #6e6e73;
+      margin: 40px 0 16px;
+    }
+
+    /* ── Cards ── */
+    .cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-bottom: 32px;
+    }
+
+    @media (max-width: 600px) {
+      .cards { grid-template-columns: 1fr; }
+      .hero h2 { font-size: 30px; }
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 16px;
+      padding: 28px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    }
+
+    .card .icon {
+      font-size: 32px;
+      margin-bottom: 14px;
+    }
+
+    .card h3 {
+      font-size: 17px;
+      font-weight: 600;
+      margin-bottom: 10px;
+      color: #1d1d1f;
+    }
+
+    .card p {
+      font-size: 15px;
+      color: #6e6e73;
+    }
+
+    /* ── Full-width prose card ── */
+    .prose-card {
+      background: #fff;
+      border-radius: 16px;
+      padding: 28px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+      margin-bottom: 20px;
+    }
+
+    .prose-card .icon {
+      font-size: 32px;
+      margin-bottom: 14px;
+    }
+
+    .prose-card h3 {
+      font-size: 17px;
+      font-weight: 600;
+      margin-bottom: 10px;
+      color: #1d1d1f;
+    }
+
+    .prose-card p {
+      font-size: 15px;
+      color: #6e6e73;
+    }
+
+    .prose-card .note {
+      margin-top: 14px;
+      padding: 12px 16px;
+      background: #f5f5f7;
+      border-radius: 10px;
+      font-size: 13px;
+      color: #6e6e73;
+    }
+
+    /* ── Contact card (reused from index) ── */
+    .contact-card {
+      background: #fff;
+      border-radius: 16px;
+      padding: 32px 36px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+      display: flex;
+      align-items: flex-start;
+      gap: 20px;
+    }
+
+    .contact-card .contact-icon { font-size: 40px; flex-shrink: 0; }
+
+    .contact-card h3 {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .contact-card p {
+      font-size: 15px;
+      color: #6e6e73;
+      margin-bottom: 16px;
+    }
+
+    .contact-card .email-link {
+      display: inline-block;
+      background: linear-gradient(135deg, #6e40f7, #3b82f6);
+      color: #fff;
+      text-decoration: none;
+      padding: 10px 22px;
+      border-radius: 980px;
+      font-size: 14px;
+      font-weight: 500;
+      transition: opacity 0.15s;
+    }
+
+    .contact-card .email-link:hover { opacity: 0.85; }
+
+    /* ── Effective date chip ── */
+    .date-chip {
+      display: inline-block;
+      background: #e8e8ed;
+      color: #6e6e73;
+      font-size: 12px;
+      font-weight: 500;
+      padding: 4px 12px;
+      border-radius: 980px;
+      margin-bottom: 32px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 32px 24px;
+      font-size: 13px;
+      color: #aeaeb2;
+      border-top: 1px solid #d2d2d7;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="inner">
+    <a class="logo" href="index.html">T</a>
+    <div class="breadcrumb">
+      <a href="index.html">tera</a>
+      <span class="sep">›</span>
+      <span data-i18n="nav.privacy"></span>
+    </div>
+    <div class="lang-toggle">
+      <button id="btn-zh" class="active" onclick="setLang('zh')">中文</button>
+      <button id="btn-en" onclick="setLang('en')">EN</button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <h2 data-i18n="hero.title"></h2>
+    <p data-i18n="hero.subtitle"></p>
+  </section>
+
+  <span class="date-chip" data-i18n="page.date"></span>
+
+  <p class="section-title" data-i18n="s.storage.label"></p>
+  <div class="cards">
+    <div class="card">
+      <div class="icon">🔒</div>
+      <h3 data-i18n="s1.title"></h3>
+      <p data-i18n="s1.body"></p>
+    </div>
+    <div class="card">
+      <div class="icon">🚫</div>
+      <h3 data-i18n="s2.title"></h3>
+      <p data-i18n="s2.body"></p>
+    </div>
+  </div>
+
+  <p class="section-title" data-i18n="s.access.label"></p>
+  <div class="cards">
+    <div class="card">
+      <div class="icon">🛡️</div>
+      <h3 data-i18n="s3.title"></h3>
+      <p data-i18n="s3.body"></p>
+    </div>
+    <div class="card">
+      <div class="icon">🔑</div>
+      <h3 data-i18n="s4.title"></h3>
+      <p data-i18n="s4.body"></p>
+    </div>
+  </div>
+
+  <p class="section-title" data-i18n="s.third.label"></p>
+  <div class="prose-card">
+    <div class="icon">🌐</div>
+    <h3 data-i18n="s5.title"></h3>
+    <p data-i18n="s5.body"></p>
+    <div class="note" data-i18n="s5.note"></div>
+  </div>
+
+  <p class="section-title" data-i18n="s.contact.label"></p>
+  <div class="contact-card">
+    <div class="contact-icon">✉️</div>
+    <div>
+      <h3 data-i18n="s6.title"></h3>
+      <p data-i18n="s6.body"></p>
+      <a class="email-link" href="mailto:tera-support@teramoby.com" data-i18n="s6.btn"></a>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <span data-i18n="footer.copy"></span>
+</footer>
+
+<script>
+  const i18n = {
+    zh: {
+      "nav.privacy": "隐私政策",
+      "hero.title": "隐私政策",
+      "hero.subtitle": "tera 不保存您的任何信息。所有数据仅存储在您的设备上，开发者在技术上无任何途径获取您的数据。",
+      "page.date": "生效日期：2026 年 3 月 9 日",
+      "s.storage.label": "数据存储",
+      "s1.title": "数据本地存储",
+      "s1.body": "您在 tera 中产生的所有数据——包括对话记录、应用配置、偏好设置——均仅保存在您所安装的设备上。我们没有云端同步、没有远程备份，也没有任何形式的服务器端存储。",
+      "s2.title": "零数据收集",
+      "s2.body": "tera 不收集、不记录、不传输任何用户数据，包括：对话内容与历史记录、使用行为与统计、设备信息与标识符、地理位置信息，以及任何个人身份信息（PII）。",
+      "s.access.label": "数据安全",
+      "s3.title": "开发者无法访问您的数据",
+      "s3.body": "tera 不设任何后端服务器、数据管道或遥测系统。即便开发者想获取您的数据，在技术上也无从实现。您的隐私受到架构层面的保护，而非仅依赖于承诺。",
+      "s4.title": "API 密钥安全",
+      "s4.body": "您配置的第三方 AI 服务商 API 密钥，仅存储于本地设备的系统安全存储中（如 macOS Keychain）。这些密钥不会传输给 tera 开发者，也不会用于其他任何目的。",
+      "s.third.label": "第三方服务",
+      "s5.title": "第三方 AI 服务商",
+      "s5.body": "tera 作为客户端，您的请求会直接从您的设备发送至您所选择的 AI 模型服务商（如 OpenAI、Anthropic、Google 等）。这些第三方服务商会依据其各自的隐私政策处理您的数据，与 tera 无关。",
+      "s5.note": "建议您在使用前阅读所选 AI 服务商的隐私政策，以了解其数据处理方式。",
+      "s.contact.label": "联系我们",
+      "s6.title": "对本政策有疑问？",
+      "s6.body": "如您对本隐私政策有任何疑问，欢迎发送邮件与我们联系。",
+      "s6.btn": "发送邮件",
+      "footer.copy": "© 2026 tera · tera-support@teramoby.com",
+    },
+    en: {
+      "nav.privacy": "Privacy Policy",
+      "hero.title": "Privacy Policy",
+      "hero.subtitle": "tera stores nothing about you. All data lives on your device, and our developers have no technical means to access it — ever.",
+      "page.date": "Effective Date: March 9, 2026",
+      "s.storage.label": "Data Storage",
+      "s1.title": "Stored Locally on Your Device",
+      "s1.body": "Everything you create in tera — conversations, configurations, preferences — is stored exclusively on your device. There is no cloud sync, no remote backup, and no server-side storage of any kind.",
+      "s2.title": "We Collect Zero Data",
+      "s2.body": "tera does not collect, log, or transmit any user data — including conversation content and history, usage behavior and analytics, device information and identifiers, location data, or any personally identifiable information (PII).",
+      "s.access.label": "Data Security",
+      "s3.title": "Developers Cannot Access Your Data",
+      "s3.body": "tera has no backend servers, data pipelines, or telemetry systems. Even if we wanted to access your data, it would be technically impossible. Your privacy is protected at the architectural level — not just by policy.",
+      "s4.title": "API Key Security",
+      "s4.body": "API keys you configure for third-party AI providers are stored only in your device's secure system storage (e.g., macOS Keychain). They are never transmitted to tera's developers and are never used for any other purpose.",
+      "s.third.label": "Third-Party Services",
+      "s5.title": "Third-Party AI Providers",
+      "s5.body": "tera acts as a client: your requests travel directly from your device to the AI provider you choose (e.g., OpenAI, Anthropic, Google). Those providers process your data under their own privacy policies, independently of tera.",
+      "s5.note": "We recommend reviewing the privacy policy of your chosen AI provider before use to understand how they handle your data.",
+      "s.contact.label": "Contact",
+      "s6.title": "Questions About This Policy?",
+      "s6.body": "If you have any questions about this Privacy Policy, feel free to reach out by email.",
+      "s6.btn": "Send Email",
+      "footer.copy": "© 2026 tera · tera-support@teramoby.com",
+    }
+  };
+
+  function setLang(lang) {
+    document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.getAttribute('data-i18n');
+      if (i18n[lang][key] !== undefined) el.textContent = i18n[lang][key];
+    });
+    document.getElementById('btn-zh').classList.toggle('active', lang === 'zh');
+    document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+    localStorage.setItem('tera-lang', lang);
+  }
+
+  const saved = localStorage.getItem('tera-lang');
+  const preferred = saved || (navigator.language.startsWith('zh') ? 'zh' : 'en');
+  setLang(preferred);
+</script>
+
+</body>
+</html>
