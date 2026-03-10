@@ -11,6 +11,10 @@
       padding: 0;
     }
 
+    html {
+      scrollbar-gutter: stable;
+    }
+
     body {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", sans-serif;
       background: transparent;
@@ -25,12 +29,14 @@
       z-index: -1;
       background: #f0effa;
       overflow: hidden;
+      transform: translateZ(0);
     }
 
     .orb {
       position: absolute;
       border-radius: 50%;
       filter: blur(80px);
+      will-change: transform;
     }
 
     .orb-1 {
@@ -87,6 +93,7 @@
       position: absolute;
       border-radius: 50%;
       pointer-events: none;
+      will-change: transform, opacity;
     }
 
     .ring-1 {
@@ -119,6 +126,7 @@
     .diamond {
       position: absolute;
       pointer-events: none;
+      will-change: transform, opacity;
     }
 
     .diamond-1 {
@@ -387,6 +395,8 @@
         inset 0 1px 0 rgba(255,255,255,0.95);
       transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
       animation: fadeUp 0.5s ease both;
+      will-change: transform;
+      transform: translateZ(0);
     }
 
     .cards .card:nth-child(1) { animation-delay: 0.05s; }
