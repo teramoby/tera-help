@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>tt · FAQ</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scrollbar-gutter: stable; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", sans-serif;
+      background: transparent;
+      color: #1d1d1f;
+      line-height: 1.7;
+    }
+
+    /* ── Animated background ── */
+    .bg-wrap {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      background: #f0effa;
+      overflow: hidden;
+      transform: translateZ(0);
+    }
+
+    .orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      will-change: transform;
+    }
+
+    .orb-1 {
+      width: 640px; height: 640px;
+      background: radial-gradient(circle, rgba(110,64,247,0.32), transparent 68%);
+      top: -220px; left: -140px;
+      animation: drift1 22s ease-in-out infinite alternate;
+    }
+    .orb-2 {
+      width: 520px; height: 520px;
+      background: radial-gradient(circle, rgba(59,130,246,0.26), transparent 68%);
+      top: 30%; right: -160px;
+      animation: drift2 28s ease-in-out infinite alternate;
+    }
+    .orb-3 {
+      width: 460px; height: 460px;
+      background: radial-gradient(circle, rgba(6,182,212,0.22), transparent 68%);
+      bottom: -100px; left: 28%;
+      animation: drift3 24s ease-in-out infinite alternate;
+    }
+    .orb-4 {
+      width: 320px; height: 320px;
+      background: radial-gradient(circle, rgba(236,72,153,0.14), transparent 68%);
+      top: 55%; left: -60px;
+      animation: drift1 32s ease-in-out infinite alternate-reverse;
+    }
+
+    @keyframes drift1 { from { transform: translate(0,0); } to { transform: translate(100px,80px); } }
+    @keyframes drift2 { from { transform: translate(0,0); } to { transform: translate(-80px,100px); } }
+    @keyframes drift3 { from { transform: translate(0,0); } to { transform: translate(70px,-90px); } }
+
+    /* ── Geometric decorations ── */
+    .ring {
+      position: absolute; border-radius: 50%;
+      pointer-events: none; will-change: transform, opacity;
+    }
+    .ring-1 { width:380px; height:380px; top:-40px; right:6%; border:1px solid rgba(110,64,247,0.16); animation: spin-ring 65s linear infinite, breathe 9s ease-in-out infinite alternate; }
+    .ring-2 { width:240px; height:240px; top:36%; left:2%; border:1px solid rgba(59,130,246,0.13); animation: spin-ring 85s linear infinite reverse, breathe 13s ease-in-out infinite alternate; }
+    .ring-3 { width:130px; height:130px; bottom:12%; right:22%; border:1px solid rgba(6,182,212,0.12); animation: spin-ring 50s linear infinite, breathe 7s ease-in-out infinite alternate; }
+    .ring-4 { width:180px; height:180px; top:8%; left:28%; border:1px solid rgba(236,72,153,0.10); animation: spin-ring 75s linear infinite reverse, breathe 10s ease-in-out infinite alternate; }
+    .ring-5 { width:90px; height:90px; top:72%; left:42%; border:1px solid rgba(110,64,247,0.11); animation: spin-ring 40s linear infinite, breathe 6s ease-in-out infinite alternate; }
+
+    .diamond {
+      position: absolute; pointer-events: none; will-change: transform, opacity;
+    }
+    .diamond-1 { width:70px; height:70px; top:18%; left:7%; border:1px solid rgba(110,64,247,0.14); animation: spin-diamond 42s linear infinite, breathe 8s ease-in-out infinite alternate; }
+    .diamond-2 { width:44px; height:44px; bottom:22%; right:8%; border:1px solid rgba(59,130,246,0.11); animation: spin-diamond 58s linear infinite reverse, breathe 11s ease-in-out infinite alternate; }
+    .diamond-3 { width:108px; height:108px; top:54%; right:14%; border:1px solid rgba(110,64,247,0.08); animation: spin-diamond 72s linear infinite, breathe 16s ease-in-out infinite alternate; }
+    .diamond-4 { width:56px; height:56px; top:32%; right:3%; border:1px solid rgba(6,182,212,0.12); animation: spin-diamond 48s linear infinite, breathe 10s ease-in-out infinite alternate; }
+    .diamond-5 { width:34px; height:34px; top:62%; left:22%; border:1px solid rgba(59,130,246,0.10); animation: spin-diamond 36s linear infinite reverse, breathe 8s ease-in-out infinite alternate; }
+
+    @keyframes spin-ring    { from { transform: rotate(0deg); }   to { transform: rotate(360deg); } }
+    @keyframes spin-diamond { from { transform: rotate(45deg); }  to { transform: rotate(405deg); } }
+    @keyframes breathe      { from { opacity: 0.35; }             to { opacity: 1; } }
+
+    /* ── Header ── */
+    header {
+      background: rgba(240,239,250,0.6);
+      backdrop-filter: blur(24px) saturate(1.8);
+      -webkit-backdrop-filter: blur(24px) saturate(1.8);
+      border-bottom: 1px solid rgba(110,64,247,0.12);
+      position: sticky; top: 0; z-index: 100;
+    }
+
+    header .inner {
+      max-width: 860px; margin: 0 auto;
+      padding: 16px 24px;
+      display: flex; align-items: center; gap: 12px;
+    }
+
+    header .logo {
+      width: 34px; height: 34px;
+      background: linear-gradient(135deg, #6e40f7, #3b82f6);
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 14px; color: #fff; font-weight: 800;
+      flex-shrink: 0; text-decoration: none;
+      box-shadow: 0 3px 14px rgba(110,64,247,0.42);
+      letter-spacing: -0.5px;
+    }
+
+    header .breadcrumb { flex: 1; font-size: 15px; color: #6e6e73; }
+    header .breadcrumb a { color: #6e40f7; text-decoration: none; font-weight: 700; }
+    header .breadcrumb a:hover { opacity: 0.7; }
+    header .breadcrumb span.sep { margin: 0 6px; color: #b0b0c0; }
+
+    .lang-toggle {
+      display: flex; background: rgba(110,64,247,0.10);
+      border-radius: 980px; padding: 3px; gap: 2px;
+    }
+    .lang-toggle button {
+      border: none; background: transparent;
+      padding: 5px 14px; border-radius: 980px;
+      font-size: 13px; font-weight: 500; color: #6e6e73;
+      cursor: pointer; transition: background 0.2s, color 0.2s;
+    }
+    .lang-toggle button.active {
+      background: #fff; color: #6e40f7; font-weight: 700;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.12);
+    }
+
+    /* ── Main ── */
+    main { max-width: 860px; margin: 0 auto; padding: 48px 24px 80px; }
+
+    /* ── Hero ── */
+    .hero {
+      text-align: center; padding: 64px 0 72px;
+      position: relative; overflow: hidden;
+    }
+    .hero::after {
+      content: '';
+      position: absolute; inset: 0;
+      background-image: radial-gradient(circle, rgba(110,64,247,0.14) 1px, transparent 1px);
+      background-size: 28px 28px;
+      mask-image: radial-gradient(ellipse at 50% 55%, black 15%, transparent 62%);
+      -webkit-mask-image: radial-gradient(ellipse at 50% 55%, black 15%, transparent 62%);
+      pointer-events: none; z-index: 0;
+    }
+    .hero > * { position: relative; z-index: 1; }
+
+    .hero-badge {
+      display: inline-flex; align-items: center;
+      background: rgba(110,64,247,0.10); color: #6e40f7;
+      font-size: 11px; font-weight: 800;
+      padding: 5px 14px; border-radius: 980px; margin-bottom: 24px;
+      border: 1px solid rgba(110,64,247,0.22);
+      letter-spacing: 0.08em; text-transform: uppercase;
+      backdrop-filter: blur(8px);
+    }
+
+    .hero h2 {
+      font-size: 46px; font-weight: 800; letter-spacing: -1.5px;
+      background: linear-gradient(135deg, #4c1d95 0%, #6e40f7 40%, #3b82f6 80%, #06b6d4 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text; margin-bottom: 20px; line-height: 1.12;
+    }
+
+    .hero p {
+      font-size: 17px; color: #5a5a6a;
+      max-width: 520px; margin: 0 auto; line-height: 1.75;
+    }
+
+    /* ── Section title ── */
+    .section-title {
+      font-size: 11px; font-weight: 800; text-transform: uppercase;
+      letter-spacing: 0.12em; color: #6e40f7;
+      margin: 48px 0 16px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .section-title::before {
+      content: ''; display: block; width: 18px; height: 3px;
+      background: linear-gradient(to right, #6e40f7, #3b82f6);
+      border-radius: 2px; flex-shrink: 0;
+    }
+
+    /* ── FAQ accordion ── */
+    .faq-list {
+      display: flex; flex-direction: column; gap: 10px;
+      animation: fadeUp 0.5s 0.1s ease both;
+    }
+
+    .faq-item {
+      background: rgba(255,255,255,0.62);
+      backdrop-filter: blur(24px) saturate(1.8);
+      -webkit-backdrop-filter: blur(24px) saturate(1.8);
+      border: 1px solid rgba(255,255,255,0.88);
+      border-radius: 16px;
+      box-shadow: 0 4px 24px rgba(110,64,247,0.07), 0 1px 4px rgba(0,0,0,0.04), inset 0 1px 0 rgba(255,255,255,0.95);
+      overflow: hidden;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .faq-item.open {
+      border-color: rgba(110,64,247,0.2);
+      box-shadow: 0 0 0 1px rgba(110,64,247,0.12), 0 8px 32px rgba(110,64,247,0.10), inset 0 1px 0 rgba(255,255,255,0.95);
+    }
+
+    .faq-question {
+      padding: 20px 24px;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: space-between; gap: 16px;
+      user-select: none;
+    }
+
+    .faq-question h3 {
+      font-size: 15px; font-weight: 700; color: #1d1d1f;
+      line-height: 1.4;
+    }
+
+    .faq-chevron {
+      flex-shrink: 0; width: 22px; height: 22px;
+      background: rgba(110,64,247,0.08);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      transition: transform 0.3s ease, background 0.2s;
+    }
+
+    .faq-chevron svg {
+      width: 12px; height: 12px;
+      stroke: #6e40f7; stroke-width: 2.5;
+      fill: none; stroke-linecap: round; stroke-linejoin: round;
+      transition: transform 0.3s ease;
+    }
+
+    .faq-item.open .faq-chevron { background: rgba(110,64,247,0.14); }
+    .faq-item.open .faq-chevron svg { transform: rotate(180deg); }
+
+    .faq-answer {
+      max-height: 0; overflow: hidden;
+      transition: max-height 0.35s ease, padding 0.35s ease;
+      padding: 0 24px;
+    }
+
+    .faq-item.open .faq-answer {
+      max-height: 400px;
+      padding: 0 24px 20px;
+    }
+
+    .faq-answer p {
+      font-size: 14px; color: #5a5a6a; line-height: 1.75;
+      border-top: 1px solid rgba(110,64,247,0.08);
+      padding-top: 16px;
+    }
+
+    /* ── Contact card ── */
+    .contact-card {
+      background: rgba(255,255,255,0.62);
+      backdrop-filter: blur(24px) saturate(1.8);
+      -webkit-backdrop-filter: blur(24px) saturate(1.8);
+      border: 1px solid rgba(255,255,255,0.88);
+      border-radius: 20px; padding: 32px 36px;
+      box-shadow: 0 4px 24px rgba(110,64,247,0.08), 0 1px 4px rgba(0,0,0,0.04), inset 0 1px 0 rgba(255,255,255,0.95);
+      display: flex; align-items: flex-start; gap: 20px;
+      position: relative; overflow: hidden;
+      animation: fadeUp 0.55s 0.3s ease both;
+    }
+    .contact-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(to right, #6e40f7, #3b82f6, #06b6d4);
+    }
+    .contact-card .contact-icon {
+      font-size: 26px; flex-shrink: 0;
+      width: 56px; height: 56px;
+      background: rgba(110,64,247,0.10);
+      border: 1px solid rgba(110,64,247,0.15);
+      border-radius: 16px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .contact-card h3 { font-size: 17px; font-weight: 700; margin-bottom: 8px; }
+    .contact-card p { font-size: 15px; color: #6e6e73; margin-bottom: 18px; }
+    .contact-card .email-link {
+      display: inline-flex; align-items: center;
+      background: linear-gradient(135deg, #6e40f7, #3b82f6);
+      color: #fff; text-decoration: none;
+      padding: 10px 22px; border-radius: 980px;
+      font-size: 14px; font-weight: 600;
+      transition: opacity 0.18s, transform 0.18s, box-shadow 0.18s;
+      box-shadow: 0 4px 16px rgba(110,64,247,0.36);
+    }
+    .contact-card .email-link:hover {
+      opacity: 0.9; transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(110,64,247,0.44);
+    }
+
+    /* ── Animations ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .hero { animation: fadeUp 0.65s ease both; }
+
+    /* ── Footer ── */
+    footer {
+      text-align: center; padding: 32px 24px;
+      font-size: 13px; color: #9696a8; position: relative;
+    }
+    footer::before {
+      content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+      width: 200px; height: 1px;
+      background: linear-gradient(to right, transparent, rgba(110,64,247,0.4), transparent);
+    }
+    footer a { color: #9696a8; text-decoration: none; margin: 0 8px; }
+    footer a:hover { color: #6e40f7; }
+
+    @media (max-width: 600px) {
+      .hero h2 { font-size: 32px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="bg-wrap" aria-hidden="true">
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+  <div class="orb orb-4"></div>
+  <div class="ring ring-1"></div>
+  <div class="ring ring-2"></div>
+  <div class="ring ring-3"></div>
+  <div class="ring ring-4"></div>
+  <div class="ring ring-5"></div>
+  <div class="diamond diamond-1"></div>
+  <div class="diamond diamond-2"></div>
+  <div class="diamond diamond-3"></div>
+  <div class="diamond diamond-4"></div>
+  <div class="diamond diamond-5"></div>
+</div>
+
+<header>
+  <div class="inner">
+    <a class="logo" href="index.html">tt</a>
+    <div class="breadcrumb">
+      <a href="index.html">tt</a>
+      <span class="sep">›</span>
+      <span data-i18n="nav.faq"></span>
+    </div>
+    <div class="lang-toggle">
+      <button id="btn-zh" class="active" onclick="setLang('zh')">中文</button>
+      <button id="btn-en" onclick="setLang('en')">EN</button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="hero-badge" data-i18n="hero.badge"></div>
+    <h2 data-i18n="hero.title"></h2>
+    <p data-i18n="hero.subtitle"></p>
+  </section>
+
+  <p class="section-title" data-i18n="s.basic.label"></p>
+  <div class="faq-list">
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggle(this)">
+        <h3 data-i18n="q1.title"></h3>
+        <div class="faq-chevron"><svg viewBox="0 0 12 12"><polyline points="2,4 6,8 10,4"/></svg></div>
+      </div>
+      <div class="faq-answer"><p data-i18n="q1.body"></p></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggle(this)">
+        <h3 data-i18n="q2.title"></h3>
+        <div class="faq-chevron"><svg viewBox="0 0 12 12"><polyline points="2,4 6,8 10,4"/></svg></div>
+      </div>
+      <div class="faq-answer"><p data-i18n="q2.body"></p></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggle(this)">
+        <h3 data-i18n="q3.title"></h3>
+        <div class="faq-chevron"><svg viewBox="0 0 12 12"><polyline points="2,4 6,8 10,4"/></svg></div>
+      </div>
+      <div class="faq-answer"><p data-i18n="q3.body"></p></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggle(this)">
+        <h3 data-i18n="q4.title"></h3>
+        <div class="faq-chevron"><svg viewBox="0 0 12 12"><polyline points="2,4 6,8 10,4"/></svg></div>
+      </div>
+      <div class="faq-answer"><p data-i18n="q4.body"></p></div>
+    </div>
+  </div>
+
+  <p class="section-title" data-i18n="s.privacy.label"></p>
+  <div class="faq-list">
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggle(this)">
+        <h3 data-i18n="q5.title"></h3>
+        <div class="faq-chevron"><svg viewBox="0 0 12 12"><polyline points="2,4 6,8 10,4"/></svg></div>
+      </div>
+      <div class="faq-answer"><p data-i18n="q5.body"></p></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggle(this)">
+        <h3 data-i18n="q6.title"></h3>
+        <div class="faq-chevron"><svg viewBox="0 0 12 12"><polyline points="2,4 6,8 10,4"/></svg></div>
+      </div>
+      <div class="faq-answer"><p data-i18n="q6.body"></p></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggle(this)">
+        <h3 data-i18n="q7.title"></h3>
+        <div class="faq-chevron"><svg viewBox="0 0 12 12"><polyline points="2,4 6,8 10,4"/></svg></div>
+      </div>
+      <div class="faq-answer"><p data-i18n="q7.body"></p></div>
+    </div>
+  </div>
+
+  <p class="section-title" data-i18n="s.billing.label"></p>
+  <div class="faq-list">
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggle(this)">
+        <h3 data-i18n="q8.title"></h3>
+        <div class="faq-chevron"><svg viewBox="0 0 12 12"><polyline points="2,4 6,8 10,4"/></svg></div>
+      </div>
+      <div class="faq-answer"><p data-i18n="q8.body"></p></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggle(this)">
+        <h3 data-i18n="q9.title"></h3>
+        <div class="faq-chevron"><svg viewBox="0 0 12 12"><polyline points="2,4 6,8 10,4"/></svg></div>
+      </div>
+      <div class="faq-answer"><p data-i18n="q9.body"></p></div>
+    </div>
+  </div>
+
+  <p class="section-title" data-i18n="s.contact.label"></p>
+  <div class="contact-card">
+    <div class="contact-icon">✉️</div>
+    <div>
+      <h3 data-i18n="contact.title"></h3>
+      <p data-i18n="contact.desc"></p>
+      <a class="email-link" href="mailto:tera-support@teramoby.com" data-i18n="contact.btn"></a>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <span data-i18n="footer.copy"></span>
+  <br style="margin-bottom:6px;">
+  <a href="index.html" data-i18n="footer.home"></a>
+  <a href="privacy.html" data-i18n="footer.privacy"></a>
+</footer>
+
+<script>
+  function toggle(questionEl) {
+    const item = questionEl.closest('.faq-item');
+    const isOpen = item.classList.contains('open');
+    // Close all open items in the same list
+    const siblings = item.parentElement.querySelectorAll('.faq-item.open');
+    siblings.forEach(s => s.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  }
+
+  const i18n = {
+    zh: {
+      "nav.faq": "常见问题",
+      "hero.badge": "常见问题",
+      "hero.title": "有什么疑问？",
+      "hero.subtitle": "这里整理了最常见的问题。没找到答案？随时发邮件联系我们。",
+      "s.basic.label": "基础功能",
+      "q1.title": "tt 支持哪些 AI 模型？",
+      "q1.body": "tt 支持目前主流的大语言模型服务商，包括 OpenAI、Anthropic、Google 等。具体可用的模型列表可在应用内「设置 → 模型配置」中查看，我们也会持续更新支持范围。",
+      "q2.title": "为什么需要我自己的 API 密钥？",
+      "q2.body": "tt 直接与 AI 服务商通信，不经过任何中间服务器。使用您自己的 API 密钥，请求从您的设备直接发送到服务商，数据流向完全透明，安全性更高，也不存在被第三方截获的风险。",
+      "q3.title": "如何添加 API 密钥？",
+      "q3.body": "打开 tt，进入「设置 → 模型配置」，选择对应的服务商，将 API 密钥粘贴到输入框并保存。密钥会安全存储在系统 Keychain（macOS 钥匙串）中，不会以明文形式保存在任何文件里。",
+      "q4.title": "交叉验证是如何工作的？",
+      "q4.body": "当您提交一个问题，tt 会同时向您选择的多个模型发起请求，并行获取各自的回答。随后，tt 将这些回答交叉发送给其他模型进行审阅，让模型互相评估彼此的结果，最后综合所有反馈生成更可靠的最终答案。",
+      "s.privacy.label": "隐私与安全",
+      "q5.title": "tt 会保存我的对话记录吗？",
+      "q5.body": "会，但仅保存在您的本地设备上。对话数据不会上传至任何服务器，tt 的开发者也在技术上无法访问您的任何数据。",
+      "q6.title": "我的 API 密钥安全吗？",
+      "q6.body": "是的。您配置的所有 API 密钥均存储在系统级安全存储（macOS Keychain）中，不会以明文形式写入磁盘，也不会传输给 tt 的开发者或任何第三方。",
+      "q7.title": "tt 会收集使用数据或分析数据吗？",
+      "q7.body": "不会。tt 没有任何后端服务器、数据管道或遥测系统。我们不收集、不记录任何用户行为数据、设备信息或个人身份信息。",
+      "s.billing.label": "下载与费用",
+      "q8.title": "tt 是免费的吗？",
+      "q8.body": "tt 应用本身免费下载使用。您只需为实际使用的 AI 服务商的 API 调用支付费用，费用由各服务商按其定价标准收取，与 tt 无关。",
+      "q9.title": "支持哪些平台？",
+      "q9.body": "目前 tt 支持 macOS。更多平台支持正在规划中，如您希望优先支持某个平台，欢迎发邮件告诉我们。",
+      "s.contact.label": "还有其他问题？",
+      "contact.title": "没找到答案？",
+      "contact.desc": "发邮件给我们，我们会认真回复每一封邮件。",
+      "contact.btn": "发送邮件",
+      "footer.copy": "© 2026 teramoby · tera-support@teramoby.com",
+      "footer.home": "帮助中心",
+      "footer.privacy": "隐私政策",
+    },
+    en: {
+      "nav.faq": "FAQ",
+      "hero.badge": "FAQ",
+      "hero.title": "Got Questions?",
+      "hero.subtitle": "Answers to the most common questions about tt. Still not finding what you need? Just email us.",
+      "s.basic.label": "Basics",
+      "q1.title": "What AI models does tt support?",
+      "q1.body": "tt supports major large language model providers including OpenAI, Anthropic, Google, and more. The full list of available models can be found in the app under Settings → Model Configuration. We add new providers regularly.",
+      "q2.title": "Why do I need my own API key?",
+      "q2.body": "tt communicates directly with AI providers without any intermediary server. Using your own API key means your requests travel straight from your device to the provider — fully transparent, more secure, and free from any third-party interception.",
+      "q3.title": "How do I add an API key?",
+      "q3.body": "Open tt, go to Settings → Model Configuration, select your provider, paste your API key, and save. Keys are stored securely in your system Keychain and are never written to disk as plain text.",
+      "q4.title": "How does cross-verification work?",
+      "q4.body": "When you submit a query, tt simultaneously calls all the models you've selected. Once responses arrive, tt cross-sends them to other models for peer review — each model evaluates the others' answers. The final result is synthesized from all that feedback, giving you a more reliable response.",
+      "s.privacy.label": "Privacy & Security",
+      "q5.title": "Does tt save my conversations?",
+      "q5.body": "Yes — but only locally on your device. No conversation data is ever uploaded to any server, and tt's developers have no technical means to access your data.",
+      "q6.title": "Are my API keys safe?",
+      "q6.body": "Yes. All API keys you configure are stored in your system's secure storage (macOS Keychain). They are never written to disk as plain text, and are never transmitted to tt's developers or any third party.",
+      "q7.title": "Does tt collect usage or analytics data?",
+      "q7.body": "No. tt has no backend servers, data pipelines, or telemetry of any kind. We do not collect or record any user behavior, device information, or personal identifiers.",
+      "s.billing.label": "Download & Pricing",
+      "q8.title": "Is tt free?",
+      "q8.body": "tt is free to download and use. You only pay for the API calls you make to the AI providers you choose — billed directly by those providers at their own rates. tt takes no cut.",
+      "q9.title": "What platforms are supported?",
+      "q9.body": "tt currently supports macOS. Support for additional platforms is on the roadmap. If there's a platform you'd like to see prioritized, let us know by email.",
+      "s.contact.label": "Still Have Questions?",
+      "contact.title": "Didn't find your answer?",
+      "contact.desc": "Send us an email and we'll get back to you. We read every message.",
+      "contact.btn": "Send Email",
+      "footer.copy": "© 2026 teramoby · tera-support@teramoby.com",
+      "footer.home": "Help Center",
+      "footer.privacy": "Privacy Policy",
+    }
+  };
+
+  function setLang(lang) {
+    document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.getAttribute('data-i18n');
+      if (i18n[lang][key] !== undefined) el.textContent = i18n[lang][key];
+    });
+    document.getElementById('btn-zh').classList.toggle('active', lang === 'zh');
+    document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+    localStorage.setItem('tera-lang', lang);
+  }
+
+  const saved = localStorage.getItem('tera-lang');
+  const preferred = saved || (navigator.language.startsWith('zh') ? 'zh' : 'en');
+  setLang(preferred);
+</script>
+
+</body>
+</html>
