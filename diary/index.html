@@ -352,6 +352,20 @@
       opacity: 0.9; transform: translateY(-2px);
       box-shadow: 0 8px 24px rgba(90,153,120,0.44);
     }
+    .contact-card .group-link {
+      display: inline-flex; align-items: center;
+      border: 1.5px solid rgba(90,153,120,0.3);
+      color: #5a9978; text-decoration: none;
+      padding: 9px 22px; border-radius: 980px;
+      font-size: 14px; font-weight: 600;
+      margin-left: 10px;
+      transition: background 0.18s, color 0.18s, border-color 0.18s, box-shadow 0.18s;
+      backdrop-filter: blur(8px);
+    }
+    .contact-card .group-link:hover {
+      background: #5a9978; color: #fff; border-color: #5a9978;
+      box-shadow: 0 4px 14px rgba(90,153,120,0.32);
+    }
 
     /* ── Animations ── */
     @keyframes fadeUp {
@@ -482,6 +496,7 @@
       <h3 data-i18n="help.title"></h3>
       <p data-i18n="help.desc"></p>
       <a class="email-link" href="mailto:tera-support@teramoby.com" data-i18n="help.emailBtn"></a>
+      <a class="group-link" href="https://groups.google.com/g/tera-help" target="_blank" rel="noopener" data-i18n="help.groupBtn"></a>
     </div>
   </div>
 </main>
@@ -520,9 +535,10 @@
       "privacy.note": "无论是否开启 iCloud 同步或 AI 功能，TeraDiary 本身均不收集您的任何数据。",
       "privacy.readFull": "查看完整隐私政策 →",
       "help.label": "联系我们",
-      "help.title": "有问题或建议？",
-      "help.desc": "使用过程中遇到问题，或有功能建议？欢迎发送邮件与我们联系，我们认真对待每一条反馈。",
+      "help.title": "联系我们 / 加入社群",
+      "help.desc": "使用过程中遇到问题，或有功能建议？欢迎发送邮件，也可以加入 Google Groups 与其他用户交流。",
       "help.emailBtn": "发送邮件",
+      "help.groupBtn": "加入 Google Group",
       "footer.copy": "© 2026 teramoby · tera-support@teramoby.com",
       "footer.privacy": "隐私政策",
     },
@@ -552,9 +568,10 @@
       "privacy.note": "Regardless of whether iCloud sync or AI features are enabled, TeraDiary itself never collects any of your data.",
       "privacy.readFull": "Read full Privacy Policy →",
       "help.label": "Contact",
-      "help.title": "Questions or Feedback?",
-      "help.desc": "Run into an issue or have a feature request? Send us an email — we read and take every message seriously.",
+      "help.title": "Contact Us / Join the Community",
+      "help.desc": "Run into an issue or have a feature request? Send us an email or join our Google Group to connect with other users.",
       "help.emailBtn": "Send Email",
+      "help.groupBtn": "Join Google Group",
       "footer.copy": "© 2026 teramoby · tera-support@teramoby.com",
       "footer.privacy": "Privacy Policy",
     }
