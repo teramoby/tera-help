@@ -165,28 +165,58 @@
       border-radius: 2px; flex-shrink: 0;
     }
 
-    /* ── Post date ── */
-    .post-date {
-      font-size: 13px; font-weight: 600; color: #9696a8;
-      letter-spacing: 0.03em;
-      margin-bottom: 20px;
-      display: block;
-    }
-
     /* ── Intro card ── */
     .intro-card {
       background: rgba(255,255,255,0.62);
       backdrop-filter: blur(24px) saturate(1.8);
       -webkit-backdrop-filter: blur(24px) saturate(1.8);
       border: 1px solid rgba(255,255,255,0.88);
-      border-radius: 20px; padding: 32px 36px;
+      border-radius: 20px; padding: 36px 40px;
       box-shadow: 0 4px 24px rgba(110,64,247,0.08), 0 1px 4px rgba(0,0,0,0.04), inset 0 1px 0 rgba(255,255,255,0.95);
       animation: fadeUp 0.5s 0.1s ease both;
     }
-    .intro-card p {
-      font-size: 15px; color: #4a4a5a; line-height: 1.8;
+    .intro-card .dateline {
+      display: block;
+      font-size: 12px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.08em;
+      color: #9696a8;
+      margin-bottom: 20px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid rgba(110,64,247,0.1);
     }
-    .intro-card p + p { margin-top: 14px; }
+    .intro-card p {
+      font-size: 15px; color: #3a3a4a; line-height: 1.85;
+    }
+    .intro-card p + p { margin-top: 16px; }
+    .pr-quote {
+      margin: 24px 0;
+      padding: 18px 22px;
+      background: rgba(110,64,247,0.04);
+      border-left: 3px solid rgba(110,64,247,0.4);
+      border-radius: 0 12px 12px 0;
+    }
+    .pr-quote p {
+      font-size: 15px; color: #3a3a4a;
+      line-height: 1.8; font-style: italic;
+    }
+    .pr-quote cite {
+      display: block; margin-top: 10px;
+      font-size: 13px; color: #6e6e73;
+      font-style: normal; font-weight: 600;
+    }
+    .avail-section {
+      margin-top: 28px; padding-top: 24px;
+      border-top: 1px solid rgba(110,64,247,0.1);
+    }
+    .avail-section h4 {
+      font-size: 11px; font-weight: 800;
+      text-transform: uppercase; letter-spacing: 0.1em;
+      color: #6e40f7; margin-bottom: 6px; margin-top: 18px;
+    }
+    .avail-section h4:first-child { margin-top: 0; }
+    .avail-section p {
+      font-size: 14px; color: #4a4a5a; line-height: 1.7;
+    }
 
     /* ── Steps ── */
     .steps {
@@ -342,11 +372,20 @@
   </section>
 
   <div class="intro-card">
-    <span class="post-date" data-i18n="intro.date"></span>
+    <span class="dateline" data-i18n="intro.dateline"></span>
     <p data-i18n="intro.p1"></p>
     <p data-i18n="intro.p2"></p>
+    <blockquote class="pr-quote">
+      <p data-i18n="intro.quote"></p>
+      <cite data-i18n="intro.quote.attr"></cite>
+    </blockquote>
     <p data-i18n="intro.p3"></p>
-    <p data-i18n="intro.p4"></p>
+    <div class="avail-section">
+      <h4 data-i18n="intro.avail.title"></h4>
+      <p data-i18n="intro.avail.body"></p>
+      <h4 data-i18n="intro.sysreq.title"></h4>
+      <p data-i18n="intro.sysreq.body"></p>
+    </div>
   </div>
 
   <p class="section-title" data-i18n="howto.label"></p>
@@ -416,14 +455,19 @@
   const i18n = {
     zh: {
       "nav.launch": "发布公告",
-      "hero.badge": "正式发布",
-      "hero.title": "tera 正式发布",
-      "hero.subtitle": "多模型 AI 助手，同时调用多个模型，再由 AI 汇总生成一个可靠的综合答案。",
-      "intro.date": "2026 年 3 月 17 日",
-      "intro.p1": "今天，我们正式发布 tera —— 一款 macOS 上的多模型 AI 对话助手。",
-      "intro.p2": "tera 的核心理念来自一个简单的观察：不同的 AI 模型对同一个问题往往给出不同的答案，有时甚至相互矛盾。与其只信任一个模型，不如让多个模型同时作答，再让它们互相检验。tera 允许你同时向多个主流大语言模型（包括 OpenAI、Anthropic、Google 等）发送同一个问题，并行获取各模型的回答。",
-      "intro.p3": "获得多个答案后，tera 会将所有回答汇总，发给一个模型进行综合整理，生成一个客观可靠的最终答案。",
-      "intro.p4": "tera 免费下载，使用你自己的 API 密钥。所有数据仅在你的设备上处理，不经过任何中间服务器。",
+      "hero.badge": "现已上市",
+      "hero.title": "tera 正式上市",
+      "hero.subtitle": "macOS 多模型 AI 助手，并行调用多个模型，由 AI 汇总生成一个客观可靠的答案。",
+      "intro.dateline": "加利福尼亚州库比蒂诺——2026 年 3 月 17 日",
+      "intro.p1": "teramoby 今日宣布 tera 正式上市。tera 是一款适用于 macOS 的多模型 AI 助手，支持用户同时向多个主流大语言模型发起查询，并将所有回答汇总，由 AI 综合生成一个客观可靠的最终答案。",
+      "intro.p2": "当前主流 AI 应用通常依赖单一模型，而不同模型对同一问题往往给出差异显著乃至相互矛盾的回答。tera 通过并行调用 OpenAI、Anthropic、Google 等多家主流服务商的模型，同步获取多个独立视角的回答，再将所有结果汇总交由一个模型进行综合整理，生成兼顾多方意见的最终答案。",
+      "intro.quote": "最可靠的答案，不一定来自最强的单个模型，而是来自多个独立视角的汇聚。tera 让这一过程变得触手可及。",
+      "intro.quote.attr": "—— teramoby 创始人",
+      "intro.p3": "tera 采用自带密钥（BYOK）模式，用户自行提供各 AI 服务商的 API 密钥。所有对话数据直接在用户设备与服务商之间传输，不经过 teramoby 的任何服务器，从架构层面确保数据隐私。",
+      "intro.avail.title": "上市信息",
+      "intro.avail.body": "tera 即日起面向 macOS 用户免费提供下载，用户需自行准备所选 AI 服务商的 API 密钥。",
+      "intro.sysreq.title": "系统要求",
+      "intro.sysreq.body": "macOS 26.2 或更高版本。通用版二进制文件，原生支持 Apple Silicon 及 Intel 处理器。",
       "howto.label": "如何使用",
       "step1.title": "下载并安装",
       "step1.desc": "从官网下载 tera，打开 DMG 文件，将 tera.app 拖入 Applications 文件夹即可完成安装。",
@@ -450,14 +494,19 @@
     },
     en: {
       "nav.launch": "Launch",
-      "hero.badge": "Now Available",
+      "hero.badge": "Generally Available",
       "hero.title": "Introducing tera",
-      "hero.subtitle": "A multi-model AI assistant that queries multiple models in parallel, then lets AI synthesize their answers into one reliable response.",
-      "intro.date": "March 17, 2026",
-      "intro.p1": "Today we are pleased to announce the release of tera — a multi-model AI assistant for macOS.",
-      "intro.p2": "The idea behind tera is simple: different AI models often give different answers to the same question, and sometimes those answers contradict each other. Rather than trusting a single model, tera lets you ask multiple models at once and have them cross-check each other. With tera, you can send any question simultaneously to multiple leading large language models — including OpenAI, Anthropic, Google, and more — and receive all their responses in parallel.",
-      "intro.p3": "Once all responses arrive, tera sends them together to a single model, which synthesizes them into one final, objective answer. We built tera because we believe better answers come from more perspectives.",
-      "intro.p4": "tera is free to download. You bring your own API keys, and all data is processed directly on your device — no intermediary servers involved.",
+      "hero.subtitle": "A multi-model AI assistant for macOS that queries multiple models in parallel and synthesizes their answers into one reliable response.",
+      "intro.dateline": "CUPERTINO, Calif., March 17, 2026",
+      "intro.p1": "teramoby today announced the general availability of tera, a multi-model AI assistant for macOS that enables users to query multiple large language models simultaneously and receive a single, synthesized answer.",
+      "intro.p2": "Most AI applications today rely on a single model, yet different models frequently produce divergent — and sometimes contradictory — responses to the same question. tera addresses this by querying multiple leading providers in parallel, including OpenAI, Anthropic, and Google, then collecting all responses and sending them to a designated model for synthesis. The result is a final answer that draws on multiple independent perspectives.",
+      "intro.quote": "The most reliable answer doesn't come from the best single model — it comes from bringing multiple independent perspectives together. tera makes that accessible to everyone.",
+      "intro.quote.attr": "— Founder, teramoby",
+      "intro.p3": "tera operates on a bring-your-own-key (BYOK) model. Users supply their own API keys for each AI provider, and all conversation data flows directly between the user's device and the provider. No data passes through teramoby's servers, ensuring privacy at the architectural level.",
+      "intro.avail.title": "Pricing and Availability",
+      "intro.avail.body": "tera is available today as a free download for macOS. Users are required to supply their own API keys from supported AI providers.",
+      "intro.sysreq.title": "System Requirements",
+      "intro.sysreq.body": "macOS 26.2 or later. Universal binary with native support for Apple Silicon and Intel processors.",
       "howto.label": "Getting Started",
       "step1.title": "Download & Install",
       "step1.desc": "Download tera from the website, open the DMG file, and drag tera.app into your Applications folder.",
