@@ -709,6 +709,33 @@
 
     footer a { color: #9696a8; text-decoration: none; margin: 0 8px; }
     footer a:hover { color: #6e40f7; }
+
+    /* ── Announce bar ── */
+    .announce-bar {
+      background: linear-gradient(90deg, #4c1d95, #6e40f7 40%, #3b82f6 80%, #06b6d4);
+      color: #fff;
+      text-align: center;
+      padding: 11px 24px;
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+      position: relative;
+      z-index: 101;
+    }
+    .announce-bar a {
+      color: #fff;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: opacity 0.18s;
+    }
+    .announce-bar a:hover { opacity: 0.85; }
+    .announce-bar .arrow {
+      display: inline-block;
+      transition: transform 0.18s;
+    }
+    .announce-bar a:hover .arrow { transform: translateX(4px); }
   </style>
 </head>
 <body>
@@ -728,6 +755,13 @@
   <div class="ring ring-5"></div>
   <div class="diamond diamond-4"></div>
   <div class="diamond diamond-5"></div>
+</div>
+
+<div class="announce-bar">
+  <a href="launch.html">
+    <span data-i18n="announce.text"></span>
+    <span class="arrow">→</span>
+  </a>
 </div>
 
 <header>
@@ -850,6 +884,7 @@
 <script>
   const i18n = {
     zh: {
+      "announce.text": "🎉 tera 正式上线！查看发布公告",
       "hero.badge": "AI 多模型助手",
       "hero.title": "智能多模型对话助手",
       "hero.subtitle": "连接主流大语言模型，同时调用多个模型并交叉验证，给你更可靠的综合答案。",
@@ -890,6 +925,7 @@
       "footer.privacy": "隐私政策",
     },
     en: {
+      "announce.text": "🎉 tera is now available! View launch announcement",
       "hero.badge": "Multi-Model AI Assistant",
       "hero.title": "Multi-Model AI Assistant",
       "hero.subtitle": "Connect to leading large language models, query multiple models in parallel, cross-verify their answers, and get a more reliable synthesized response.",
