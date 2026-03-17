@@ -165,6 +165,14 @@
       border-radius: 2px; flex-shrink: 0;
     }
 
+    /* ── Post date ── */
+    .post-date {
+      font-size: 13px; font-weight: 600; color: #9696a8;
+      letter-spacing: 0.03em;
+      margin-bottom: 20px;
+      display: block;
+    }
+
     /* ── Intro card ── */
     .intro-card {
       background: rgba(255,255,255,0.62);
@@ -333,10 +341,12 @@
     </div>
   </section>
 
-  <p class="section-title" data-i18n="intro.label"></p>
   <div class="intro-card">
+    <span class="post-date" data-i18n="intro.date"></span>
     <p data-i18n="intro.p1"></p>
     <p data-i18n="intro.p2"></p>
+    <p data-i18n="intro.p3"></p>
+    <p data-i18n="intro.p4"></p>
   </div>
 
   <p class="section-title" data-i18n="howto.label"></p>
@@ -409,9 +419,11 @@
       "hero.badge": "正式发布",
       "hero.title": "tera 正式发布",
       "hero.subtitle": "多模型 AI 助手，同时调用多个模型并交叉验证，给你更可靠的综合答案。",
-      "intro.label": "tera 是什么",
-      "intro.p1": "tera 是一款 macOS 上的多模型 AI 对话助手。与普通 AI 应用不同，tera 允许你同时向多个大语言模型（如 OpenAI、Anthropic、Google 等）发送同一个问题，并行获取各模型的回答。",
-      "intro.p2": "获得多个答案后，tera 会将这些回答交叉发送给其他模型进行互相审阅——让模型互相评估、识别错误与分歧，最终综合所有反馈生成一个更可靠、更全面的答案。",
+      "intro.date": "2026 年 3 月 17 日",
+      "intro.p1": "今天，我们正式发布 tera —— 一款 macOS 上的多模型 AI 对话助手。",
+      "intro.p2": "tera 的核心理念来自一个简单的观察：不同的 AI 模型对同一个问题往往给出不同的答案，有时甚至相互矛盾。与其只信任一个模型，不如让多个模型同时作答，再让它们互相检验。tera 允许你同时向多个主流大语言模型（包括 OpenAI、Anthropic、Google 等）发送同一个问题，并行获取各模型的回答。",
+      "intro.p3": "获得多个答案后，tera 会将这些回答交叉发送给其他模型进行审阅——让模型互相评估、识别错误与分歧，最终综合所有反馈生成更可靠的答案。",
+      "intro.p4": "tera 免费下载，使用你自己的 API 密钥。所有数据仅在你的设备上处理，不经过任何中间服务器。",
       "howto.label": "如何使用",
       "step1.title": "下载并安装",
       "step1.desc": "从官网下载 tera，打开 DMG 文件，将 tera.app 拖入 Applications 文件夹即可完成安装。",
@@ -441,9 +453,11 @@
       "hero.badge": "Now Available",
       "hero.title": "Introducing tera",
       "hero.subtitle": "A multi-model AI assistant that queries multiple models in parallel, cross-verifies their answers, and gives you a more reliable synthesized response.",
-      "intro.label": "What is tera",
-      "intro.p1": "tera is a macOS app for multi-model AI conversations. Unlike typical AI apps, tera lets you send the same question to multiple large language models simultaneously — OpenAI, Anthropic, Google, and more — and receive all their answers in parallel.",
-      "intro.p2": "Once the responses arrive, tera cross-sends them between models for peer review: each model evaluates the others' answers, flags disagreements and errors, and the final result is synthesized from all that feedback — giving you a more accurate and well-rounded response.",
+      "intro.date": "March 17, 2026",
+      "intro.p1": "Today we are pleased to announce the release of tera — a multi-model AI assistant for macOS.",
+      "intro.p2": "The idea behind tera is simple: different AI models often give different answers to the same question, and sometimes those answers contradict each other. Rather than trusting a single model, tera lets you ask multiple models at once and have them cross-check each other. With tera, you can send any question simultaneously to multiple leading large language models — including OpenAI, Anthropic, Google, and more — and receive all their responses in parallel.",
+      "intro.p3": "Once the responses arrive, tera cross-sends them between models for peer review: each model evaluates the others' answers, flags inconsistencies and errors, and a synthesized final answer is produced from all that feedback. We built tera because we believe better answers come from more perspectives — and from holding those perspectives accountable to each other.",
+      "intro.p4": "tera is free to download. You bring your own API keys, and all data is processed directly on your device — no intermediary servers involved.",
       "howto.label": "Getting Started",
       "step1.title": "Download & Install",
       "step1.desc": "Download tera from the website, open the DMG file, and drag tera.app into your Applications folder.",
