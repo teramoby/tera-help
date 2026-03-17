@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>tera · 正式发布</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scrollbar-gutter: stable; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", sans-serif;
+      background: transparent;
+      color: #1d1d1f;
+      line-height: 1.7;
+    }
+
+    /* ── Animated background ── */
+    .bg-wrap {
+      position: fixed; inset: 0; z-index: -1;
+      background: #f0effa; overflow: hidden;
+      transform: translateZ(0);
+    }
+    .orb { position: absolute; border-radius: 50%; filter: blur(80px); will-change: transform; }
+    .orb-1 { width:640px; height:640px; background: radial-gradient(circle, rgba(110,64,247,0.32), transparent 68%); top:-220px; left:-140px; animation: drift1 22s ease-in-out infinite alternate; }
+    .orb-2 { width:520px; height:520px; background: radial-gradient(circle, rgba(59,130,246,0.26), transparent 68%); top:30%; right:-160px; animation: drift2 28s ease-in-out infinite alternate; }
+    .orb-3 { width:460px; height:460px; background: radial-gradient(circle, rgba(6,182,212,0.22), transparent 68%); bottom:-100px; left:28%; animation: drift3 24s ease-in-out infinite alternate; }
+    .orb-4 { width:320px; height:320px; background: radial-gradient(circle, rgba(236,72,153,0.14), transparent 68%); top:55%; left:-60px; animation: drift1 32s ease-in-out infinite alternate-reverse; }
+    @keyframes drift1 { from { transform: translate(0,0); } to { transform: translate(100px,80px); } }
+    @keyframes drift2 { from { transform: translate(0,0); } to { transform: translate(-80px,100px); } }
+    @keyframes drift3 { from { transform: translate(0,0); } to { transform: translate(70px,-90px); } }
+
+    .ring { position: absolute; border-radius: 50%; pointer-events: none; will-change: transform, opacity; }
+    .ring-1 { width:380px; height:380px; top:-40px; right:6%; border:1px solid rgba(110,64,247,0.16); animation: spin-ring 65s linear infinite, breathe 9s ease-in-out infinite alternate; }
+    .ring-2 { width:240px; height:240px; top:36%; left:2%; border:1px solid rgba(59,130,246,0.13); animation: spin-ring 85s linear infinite reverse, breathe 13s ease-in-out infinite alternate; }
+    .ring-3 { width:130px; height:130px; bottom:12%; right:22%; border:1px solid rgba(6,182,212,0.12); animation: spin-ring 50s linear infinite, breathe 7s ease-in-out infinite alternate; }
+    .ring-4 { width:180px; height:180px; top:8%; left:28%; border:1px solid rgba(236,72,153,0.10); animation: spin-ring 75s linear infinite reverse, breathe 10s ease-in-out infinite alternate; }
+    .ring-5 { width:90px; height:90px; top:72%; left:42%; border:1px solid rgba(110,64,247,0.11); animation: spin-ring 40s linear infinite, breathe 6s ease-in-out infinite alternate; }
+    .diamond { position: absolute; pointer-events: none; will-change: transform, opacity; }
+    .diamond-1 { width:70px; height:70px; top:18%; left:7%; border:1px solid rgba(110,64,247,0.14); animation: spin-diamond 42s linear infinite, breathe 8s ease-in-out infinite alternate; }
+    .diamond-2 { width:44px; height:44px; bottom:22%; right:8%; border:1px solid rgba(59,130,246,0.11); animation: spin-diamond 58s linear infinite reverse, breathe 11s ease-in-out infinite alternate; }
+    .diamond-3 { width:108px; height:108px; top:54%; right:14%; border:1px solid rgba(110,64,247,0.08); animation: spin-diamond 72s linear infinite, breathe 16s ease-in-out infinite alternate; }
+    .diamond-4 { width:56px; height:56px; top:32%; right:3%; border:1px solid rgba(6,182,212,0.12); animation: spin-diamond 48s linear infinite, breathe 10s ease-in-out infinite alternate; }
+    .diamond-5 { width:34px; height:34px; top:62%; left:22%; border:1px solid rgba(59,130,246,0.10); animation: spin-diamond 36s linear infinite reverse, breathe 8s ease-in-out infinite alternate; }
+    @keyframes spin-ring    { from { transform: rotate(0deg); }   to { transform: rotate(360deg); } }
+    @keyframes spin-diamond { from { transform: rotate(45deg); }  to { transform: rotate(405deg); } }
+    @keyframes breathe      { from { opacity: 0.35; }             to { opacity: 1; } }
+
+    /* ── Header ── */
+    header {
+      background: rgba(240,239,250,0.6);
+      backdrop-filter: blur(24px) saturate(1.8);
+      -webkit-backdrop-filter: blur(24px) saturate(1.8);
+      border-bottom: 1px solid rgba(110,64,247,0.12);
+      position: sticky; top: 0; z-index: 100;
+    }
+    header .inner {
+      max-width: 860px; margin: 0 auto;
+      padding: 16px 24px;
+      display: flex; align-items: center; gap: 12px;
+    }
+    header .logo {
+      width: 34px; height: 34px;
+      background: linear-gradient(135deg, #6e40f7, #3b82f6);
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 14px; color: #fff; font-weight: 800; flex-shrink: 0;
+      text-decoration: none;
+      box-shadow: 0 3px 14px rgba(110,64,247,0.42);
+      letter-spacing: -0.5px;
+    }
+    header .breadcrumb { flex: 1; font-size: 15px; color: #6e6e73; }
+    header .breadcrumb a { color: #6e40f7; text-decoration: none; font-weight: 700; }
+    header .breadcrumb a:hover { opacity: 0.7; }
+    header .breadcrumb span.sep { margin: 0 6px; color: #b0b0c0; }
+
+    .lang-toggle {
+      display: flex; background: rgba(110,64,247,0.1);
+      border-radius: 980px; padding: 3px; gap: 2px;
+    }
+    .lang-toggle button {
+      border: none; background: transparent;
+      padding: 5px 14px; border-radius: 980px;
+      font-size: 13px; font-weight: 500; color: #6e6e73;
+      cursor: pointer; transition: background 0.2s, color 0.2s;
+    }
+    .lang-toggle button.active {
+      background: #fff; color: #6e40f7; font-weight: 700;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.12);
+    }
+
+    /* ── Main ── */
+    main { max-width: 860px; margin: 0 auto; padding: 48px 24px 80px; }
+
+    /* ── Hero ── */
+    .hero {
+      text-align: center; padding: 56px 0 48px;
+      position: relative; overflow: hidden;
+    }
+    .hero::after {
+      content: ''; position: absolute; inset: 0;
+      background-image: radial-gradient(circle, rgba(110,64,247,0.14) 1px, transparent 1px);
+      background-size: 28px 28px;
+      mask-image: radial-gradient(ellipse at 50% 55%, black 15%, transparent 62%);
+      -webkit-mask-image: radial-gradient(ellipse at 50% 55%, black 15%, transparent 62%);
+      pointer-events: none; z-index: 0;
+    }
+    .hero > * { position: relative; z-index: 1; }
+
+    .hero-badge {
+      display: inline-flex; align-items: center;
+      background: rgba(110,64,247,0.1); color: #6e40f7;
+      font-size: 11px; font-weight: 800;
+      padding: 5px 14px; border-radius: 980px;
+      margin-bottom: 24px;
+      border: 1px solid rgba(110,64,247,0.22);
+      letter-spacing: 0.08em; text-transform: uppercase;
+      backdrop-filter: blur(8px);
+    }
+    .hero h2 {
+      font-size: 46px; font-weight: 800; letter-spacing: -1.5px;
+      background: linear-gradient(135deg, #4c1d95 0%, #6e40f7 40%, #3b82f6 80%, #06b6d4 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text; margin-bottom: 20px; line-height: 1.12;
+    }
+    .hero p {
+      font-size: 17px; color: #5a5a6a;
+      max-width: 540px; margin: 0 auto; line-height: 1.75;
+    }
+
+    /* ── Video ── */
+    .video-wrap {
+      margin-top: 40px;
+      background: rgba(255,255,255,0.62);
+      backdrop-filter: blur(24px) saturate(1.8);
+      -webkit-backdrop-filter: blur(24px) saturate(1.8);
+      border: 1px solid rgba(255,255,255,0.88);
+      border-radius: 24px;
+      padding: 10px;
+      box-shadow:
+        0 8px 40px rgba(110,64,247,0.14),
+        0 2px 8px rgba(0,0,0,0.06),
+        inset 0 1px 0 rgba(255,255,255,0.95);
+      animation: fadeUp 0.6s 0.2s ease both;
+    }
+    .video-wrap video {
+      width: 100%; border-radius: 16px;
+      display: block;
+      background: #000;
+    }
+
+    /* ── Section title ── */
+    .section-title {
+      font-size: 11px; font-weight: 800; text-transform: uppercase;
+      letter-spacing: 0.12em; color: #6e40f7;
+      margin: 52px 0 16px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .section-title::before {
+      content: ''; display: block; width: 18px; height: 3px;
+      background: linear-gradient(to right, #6e40f7, #3b82f6);
+      border-radius: 2px; flex-shrink: 0;
+    }
+
+    /* ── Intro card ── */
+    .intro-card {
+      background: rgba(255,255,255,0.62);
+      backdrop-filter: blur(24px) saturate(1.8);
+      -webkit-backdrop-filter: blur(24px) saturate(1.8);
+      border: 1px solid rgba(255,255,255,0.88);
+      border-radius: 20px; padding: 32px 36px;
+      box-shadow: 0 4px 24px rgba(110,64,247,0.08), 0 1px 4px rgba(0,0,0,0.04), inset 0 1px 0 rgba(255,255,255,0.95);
+      animation: fadeUp 0.5s 0.1s ease both;
+    }
+    .intro-card p {
+      font-size: 15px; color: #4a4a5a; line-height: 1.8;
+    }
+    .intro-card p + p { margin-top: 14px; }
+
+    /* ── Steps ── */
+    .steps {
+      display: flex; flex-direction: column; gap: 14px;
+      animation: fadeUp 0.5s 0.15s ease both;
+    }
+    .step {
+      background: rgba(255,255,255,0.62);
+      backdrop-filter: blur(24px) saturate(1.8);
+      -webkit-backdrop-filter: blur(24px) saturate(1.8);
+      border: 1px solid rgba(255,255,255,0.88);
+      border-radius: 18px; padding: 22px 28px;
+      box-shadow: 0 4px 24px rgba(110,64,247,0.07), 0 1px 4px rgba(0,0,0,0.04), inset 0 1px 0 rgba(255,255,255,0.95);
+      display: flex; align-items: flex-start; gap: 18px;
+      transition: transform 0.22s ease, box-shadow 0.22s ease;
+    }
+    .step:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 0 0 1px rgba(110,64,247,0.16), 0 16px 40px rgba(110,64,247,0.12), inset 0 1px 0 rgba(255,255,255,0.95);
+    }
+    .step-num {
+      width: 36px; height: 36px; border-radius: 10px; flex-shrink: 0;
+      background: linear-gradient(135deg, #6e40f7, #3b82f6);
+      color: #fff; font-size: 15px; font-weight: 800;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 3px 10px rgba(110,64,247,0.36);
+    }
+    .step-body h4 { font-size: 15px; font-weight: 700; color: #1d1d1f; margin-bottom: 4px; }
+    .step-body p  { font-size: 14px; color: #6e6e73; line-height: 1.65; }
+    .step-body code {
+      font-family: ui-monospace, "SF Mono", monospace;
+      font-size: 12px; background: rgba(110,64,247,0.08);
+      color: #6e40f7; padding: 2px 7px; border-radius: 6px;
+    }
+
+    /* ── Help cards ── */
+    .help-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      animation: fadeUp 0.5s 0.2s ease both;
+    }
+    @media (max-width: 600px) {
+      .help-grid { grid-template-columns: 1fr; }
+      .hero h2 { font-size: 32px; }
+    }
+    .help-card {
+      background: rgba(255,255,255,0.62);
+      backdrop-filter: blur(24px) saturate(1.8);
+      -webkit-backdrop-filter: blur(24px) saturate(1.8);
+      border: 1px solid rgba(255,255,255,0.88);
+      border-radius: 20px; padding: 28px;
+      box-shadow: 0 4px 24px rgba(110,64,247,0.08), 0 1px 4px rgba(0,0,0,0.04), inset 0 1px 0 rgba(255,255,255,0.95);
+      display: flex; flex-direction: column; gap: 14px;
+      transition: transform 0.22s ease, box-shadow 0.22s ease;
+    }
+    .help-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 0 0 1px rgba(110,64,247,0.18), 0 18px 48px rgba(110,64,247,0.12), inset 0 1px 0 rgba(255,255,255,0.95);
+    }
+    .help-card .hc-icon {
+      width: 48px; height: 48px; border-radius: 14px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 24px;
+    }
+    .help-card:nth-child(1) .hc-icon { background: rgba(237,233,254,0.9); }
+    .help-card:nth-child(2) .hc-icon { background: rgba(219,234,254,0.9); }
+    .help-card:nth-child(3) .hc-icon { background: rgba(209,250,229,0.9); }
+    .help-card h4 { font-size: 15px; font-weight: 700; color: #1d1d1f; }
+    .help-card p  { font-size: 14px; color: #6e6e73; line-height: 1.65; flex: 1; }
+    .help-card a.action-link {
+      display: inline-flex; align-items: center;
+      background: linear-gradient(135deg, #6e40f7, #3b82f6);
+      color: #fff; text-decoration: none;
+      padding: 9px 20px; border-radius: 980px;
+      font-size: 13px; font-weight: 600;
+      box-shadow: 0 3px 12px rgba(110,64,247,0.32);
+      transition: opacity 0.18s, transform 0.18s;
+      align-self: flex-start;
+    }
+    .help-card a.action-link:hover { opacity: 0.88; transform: translateY(-2px); }
+    .help-card a.outline-link {
+      display: inline-flex; align-items: center;
+      border: 1.5px solid rgba(110,64,247,0.3);
+      color: #6e40f7; text-decoration: none;
+      padding: 8px 20px; border-radius: 980px;
+      font-size: 13px; font-weight: 600;
+      transition: background 0.18s, color 0.18s, border-color 0.18s;
+      align-self: flex-start;
+    }
+    .help-card a.outline-link:hover {
+      background: #6e40f7; color: #fff; border-color: #6e40f7;
+    }
+
+    /* ── Animations ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .hero { animation: fadeUp 0.65s ease both; }
+
+    /* ── Footer ── */
+    footer {
+      text-align: center; padding: 32px 24px;
+      font-size: 13px; color: #9696a8; position: relative;
+    }
+    footer::before {
+      content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+      width: 200px; height: 1px;
+      background: linear-gradient(to right, transparent, rgba(110,64,247,0.4), transparent);
+    }
+    footer a { color: #9696a8; text-decoration: none; margin: 0 8px; }
+    footer a:hover { color: #6e40f7; }
+  </style>
+</head>
+<body>
+
+<div class="bg-wrap" aria-hidden="true">
+  <div class="orb orb-1"></div><div class="orb orb-2"></div>
+  <div class="orb orb-3"></div><div class="orb orb-4"></div>
+  <div class="ring ring-1"></div><div class="ring ring-2"></div>
+  <div class="ring ring-3"></div><div class="ring ring-4"></div>
+  <div class="ring ring-5"></div>
+  <div class="diamond diamond-1"></div><div class="diamond diamond-2"></div>
+  <div class="diamond diamond-3"></div><div class="diamond diamond-4"></div>
+  <div class="diamond diamond-5"></div>
+</div>
+
+<header>
+  <div class="inner">
+    <a class="logo" href="index.html">t</a>
+    <div class="breadcrumb">
+      <a href="index.html">tera</a>
+      <span class="sep">›</span>
+      <span data-i18n="nav.launch"></span>
+    </div>
+    <div class="lang-toggle">
+      <button id="btn-zh" class="active" onclick="setLang('zh')">中文</button>
+      <button id="btn-en" onclick="setLang('en')">EN</button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="hero-badge" data-i18n="hero.badge"></div>
+    <h2 data-i18n="hero.title"></h2>
+    <p data-i18n="hero.subtitle"></p>
+    <div class="video-wrap">
+      <video controls playsinline preload="metadata">
+        <source src="tt-launch.mp4" type="video/mp4">
+      </video>
+    </div>
+  </section>
+
+  <p class="section-title" data-i18n="intro.label"></p>
+  <div class="intro-card">
+    <p data-i18n="intro.p1"></p>
+    <p data-i18n="intro.p2"></p>
+  </div>
+
+  <p class="section-title" data-i18n="howto.label"></p>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-body">
+        <h4 data-i18n="step1.title"></h4>
+        <p data-i18n="step1.desc"></p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-body">
+        <h4 data-i18n="step2.title"></h4>
+        <p data-i18n="step2.desc"></p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-body">
+        <h4 data-i18n="step3.title"></h4>
+        <p data-i18n="step3.desc"></p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-body">
+        <h4 data-i18n="step4.title"></h4>
+        <p data-i18n="step4.desc"></p>
+      </div>
+    </div>
+  </div>
+
+  <p class="section-title" data-i18n="help.label"></p>
+  <div class="help-grid">
+    <div class="help-card">
+      <div class="hc-icon">📖</div>
+      <h4 data-i18n="help.faq.title"></h4>
+      <p data-i18n="help.faq.desc"></p>
+      <a class="action-link" href="faq.html" data-i18n="help.faq.btn"></a>
+    </div>
+    <div class="help-card">
+      <div class="hc-icon">✉️</div>
+      <h4 data-i18n="help.email.title"></h4>
+      <p data-i18n="help.email.desc"></p>
+      <a class="action-link" href="mailto:tera-support@teramoby.com" data-i18n="help.email.btn"></a>
+    </div>
+    <div class="help-card">
+      <div class="hc-icon">💬</div>
+      <h4 data-i18n="help.group.title"></h4>
+      <p data-i18n="help.group.desc"></p>
+      <a class="outline-link" href="https://groups.google.com/g/tera-help" target="_blank" rel="noopener" data-i18n="help.group.btn"></a>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <span data-i18n="footer.copy"></span>
+  <br style="margin-bottom:6px;">
+  <a href="index.html" data-i18n="footer.home"></a>
+  <a href="faq.html" data-i18n="footer.faq"></a>
+  <a href="privacy.html" data-i18n="footer.privacy"></a>
+</footer>
+
+<script>
+  const i18n = {
+    zh: {
+      "nav.launch": "发布公告",
+      "hero.badge": "正式发布",
+      "hero.title": "tera 正式发布",
+      "hero.subtitle": "多模型 AI 助手，同时调用多个模型并交叉验证，给你更可靠的综合答案。",
+      "intro.label": "tera 是什么",
+      "intro.p1": "tera 是一款 macOS 上的多模型 AI 对话助手。与普通 AI 应用不同，tera 允许你同时向多个大语言模型（如 OpenAI、Anthropic、Google 等）发送同一个问题，并行获取各模型的回答。",
+      "intro.p2": "获得多个答案后，tera 会将这些回答交叉发送给其他模型进行互相审阅——让模型互相评估、识别错误与分歧，最终综合所有反馈生成一个更可靠、更全面的答案。",
+      "howto.label": "如何使用",
+      "step1.title": "下载并安装",
+      "step1.desc": "从官网下载 tera，打开 DMG 文件，将 tera.app 拖入 Applications 文件夹即可完成安装。",
+      "step2.title": "配置 API 密钥",
+      "step2.desc": "打开 tera，进入「设置 → 模型配置」，选择你想使用的 AI 服务商（如 OpenAI、Anthropic 等），粘贴对应的 API 密钥并保存。密钥会安全存储在系统 Keychain 中。",
+      "step3.title": "选择模型并提问",
+      "step3.desc": "在主界面选择你想同时调用的模型，输入问题后发送。tera 会并行向所有选中的模型发起请求，同步获取各自的回答。",
+      "step4.title": "获取综合答案",
+      "step4.desc": "tera 将各模型的回答进行交叉验证——让模型互相审阅彼此的结果，识别偏差与错误，最终给出经过多模型验证的综合答案。",
+      "help.label": "遇到问题？",
+      "help.faq.title": "常见问题",
+      "help.faq.desc": "覆盖安装、配置、隐私等高频问题，大多数疑问都能在这里找到答案。",
+      "help.faq.btn": "查看 FAQ",
+      "help.email.title": "发送邮件",
+      "help.email.desc": "遇到 bug 或有具体问题？直接发邮件给我们，我们认真对待每一封邮件。",
+      "help.email.btn": "发送邮件",
+      "help.group.title": "加入社群",
+      "help.group.desc": "加入 Google Groups 与其他用户交流使用心得，也可以在这里提出建议和反馈。",
+      "help.group.btn": "加入 Google Group",
+      "footer.copy": "© 2026 teramoby · tera-support@teramoby.com",
+      "footer.home": "帮助中心",
+      "footer.faq": "常见问题",
+      "footer.privacy": "隐私政策",
+    },
+    en: {
+      "nav.launch": "Launch",
+      "hero.badge": "Now Available",
+      "hero.title": "Introducing tera",
+      "hero.subtitle": "A multi-model AI assistant that queries multiple models in parallel, cross-verifies their answers, and gives you a more reliable synthesized response.",
+      "intro.label": "What is tera",
+      "intro.p1": "tera is a macOS app for multi-model AI conversations. Unlike typical AI apps, tera lets you send the same question to multiple large language models simultaneously — OpenAI, Anthropic, Google, and more — and receive all their answers in parallel.",
+      "intro.p2": "Once the responses arrive, tera cross-sends them between models for peer review: each model evaluates the others' answers, flags disagreements and errors, and the final result is synthesized from all that feedback — giving you a more accurate and well-rounded response.",
+      "howto.label": "Getting Started",
+      "step1.title": "Download & Install",
+      "step1.desc": "Download tera from the website, open the DMG file, and drag tera.app into your Applications folder.",
+      "step2.title": "Configure Your API Keys",
+      "step2.desc": "Open tera and go to Settings → Model Configuration. Select the AI providers you want to use (e.g. OpenAI, Anthropic), paste in your API keys, and save. Keys are stored securely in your system Keychain.",
+      "step3.title": "Choose Models & Ask",
+      "step3.desc": "On the main screen, select the models you want to query at the same time. Type your question and send — tera will fire off requests to all selected models in parallel.",
+      "step4.title": "Get a Synthesized Answer",
+      "step4.desc": "tera cross-verifies all responses — models review each other's answers, identify errors and inconsistencies, and a final synthesized answer is produced based on multi-model consensus.",
+      "help.label": "Need Help?",
+      "help.faq.title": "FAQ",
+      "help.faq.desc": "Covers common questions about setup, configuration, privacy, and more. Most questions are answered here.",
+      "help.faq.btn": "View FAQ",
+      "help.email.title": "Email Support",
+      "help.email.desc": "Found a bug or have a specific question? Send us an email — we read and respond to every message.",
+      "help.email.btn": "Send Email",
+      "help.group.title": "Join the Community",
+      "help.group.desc": "Join our Google Group to connect with other users, share tips, and post feedback or feature requests.",
+      "help.group.btn": "Join Google Group",
+      "footer.copy": "© 2026 teramoby · tera-support@teramoby.com",
+      "footer.home": "Help Center",
+      "footer.faq": "FAQ",
+      "footer.privacy": "Privacy Policy",
+    }
+  };
+
+  function setLang(lang) {
+    document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.getAttribute('data-i18n');
+      if (i18n[lang][key] !== undefined) el.textContent = i18n[lang][key];
+    });
+    document.getElementById('btn-zh').classList.toggle('active', lang === 'zh');
+    document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+    localStorage.setItem('tera-lang', lang);
+  }
+
+  const saved = localStorage.getItem('tera-lang');
+  const preferred = saved || (navigator.language.startsWith('zh') ? 'zh' : 'en');
+  setLang(preferred);
+</script>
+
+</body>
+</html>
