@@ -255,6 +255,27 @@
       padding-top: 16px;
     }
 
+    .faq-item.open.has-links .faq-answer { max-height: 800px; }
+
+    .api-links {
+      list-style: none;
+      margin-top: 12px;
+      display: flex; flex-direction: column; gap: 10px;
+    }
+    .api-links li {
+      font-size: 14px; color: #4a4a5a; line-height: 1.6;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .api-links li::before {
+      content: ''; width: 6px; height: 6px; border-radius: 50%;
+      background: #6e40f7; flex-shrink: 0;
+    }
+    .api-links .provider { font-weight: 700; color: #1d1d1f; min-width: 160px; }
+    .api-links a {
+      color: #6e40f7; text-decoration: none; font-weight: 500; font-size: 13px;
+    }
+    .api-links a:hover { text-decoration: underline; }
+
     /* ── Contact card ── */
     .contact-card {
       background: rgba(255,255,255,0.62);
@@ -392,6 +413,24 @@
       </div>
       <div class="faq-answer"><p data-i18n="q4.body"></p></div>
     </div>
+    <div class="faq-item has-links">
+      <div class="faq-question" onclick="toggle(this)">
+        <h3 data-i18n="q_apikey.title"></h3>
+        <div class="faq-chevron"><svg viewBox="0 0 12 12"><polyline points="2,4 6,8 10,4"/></svg></div>
+      </div>
+      <div class="faq-answer">
+        <p data-i18n="q_apikey.intro"></p>
+        <ul class="api-links">
+          <li><span class="provider">ChatGPT (OpenAI)</span><a href="https://help.openai.com/en/articles/4936850-where-do-i-find-my-openai-api-key" target="_blank" rel="noopener" data-i18n="q_apikey.get"></a></li>
+          <li><span class="provider">Claude (Anthropic)</span><a href="https://platform.claude.com/login?returnTo=%2Fsettings%2Fkeys" target="_blank" rel="noopener" data-i18n="q_apikey.get"></a></li>
+          <li><span class="provider">Grok (xAI)</span><a href="https://console.x.ai/team/5aeeaef0-f088-49bd-90fb-8658c2992539" target="_blank" rel="noopener" data-i18n="q_apikey.get"></a></li>
+          <li><span class="provider">Gemini (Google)</span><a href="https://ai.google.dev/gemini-api/docs/api-key" target="_blank" rel="noopener" data-i18n="q_apikey.get"></a></li>
+          <li><span class="provider">DeepSeek</span><a href="https://platform.deepseek.com/api_keys" target="_blank" rel="noopener" data-i18n="q_apikey.get"></a></li>
+          <li><span class="provider">AWS Bedrock</span><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/api-keys.html" target="_blank" rel="noopener" data-i18n="q_apikey.get"></a></li>
+          <li><span class="provider">火山引擎 (VolcEngine)</span><a href="https://console.volcengine.com/auth/login?redirectURI=%2Fark%2Fregion%3Aark%2Bcn-beijing%2FapiKey" target="_blank" rel="noopener" data-i18n="q_apikey.get"></a></li>
+        </ul>
+      </div>
+    </div>
   </div>
 
   <p class="section-title" data-i18n="s.privacy.label"></p>
@@ -480,6 +519,9 @@
       "q3.body": "打开 tera，进入「设置 → 模型配置」，选择对应的服务商，将 API 密钥粘贴到输入框并保存。密钥会安全存储在系统 Keychain（macOS 钥匙串）中，不会以明文形式保存在任何文件里。",
       "q4.title": "综合答案是如何生成的？",
       "q4.body": "当您提交一个问题，tera 会同时向您选择的多个模型发起请求，并行获取各自的回答。收到所有回答后，tera 将它们汇总发给一个模型，由该模型综合整理，生成一个客观可靠的最终答案。",
+      "q_apikey.title": "在哪里获取各服务商的 API 密钥？",
+      "q_apikey.intro": "点击以下链接，前往各服务商的官方页面申请或查看 API 密钥：",
+      "q_apikey.get": "获取 API Key →",
       "s.privacy.label": "隐私与安全",
       "q5.title": "tera 会保存我的对话记录吗？",
       "q5.body": "会，但仅保存在您的本地设备上。对话数据不会上传至任何服务器，tera 的开发者也在技术上无法访问您的任何数据。",
@@ -514,6 +556,9 @@
       "q3.body": "Open tera, go to Settings → Model Configuration, select your provider, paste your API key, and save. Keys are stored securely in your system Keychain and are never written to disk as plain text.",
       "q4.title": "How does tera generate the final answer?",
       "q4.body": "When you submit a question, tera simultaneously sends it to all the models you've selected and collects their responses in parallel. Once all answers are in, tera sends them together to a single model, which synthesizes them into one objective, reliable final answer.",
+      "q_apikey.title": "Where do I get API keys for each provider?",
+      "q_apikey.intro": "Click the links below to visit each provider's official page to create or retrieve your API key:",
+      "q_apikey.get": "Get API Key →",
       "s.privacy.label": "Privacy & Security",
       "q5.title": "Does tera save my conversations?",
       "q5.body": "Yes — but only locally on your device. No conversation data is ever uploaded to any server, and tera's developers have no technical means to access your data.",
