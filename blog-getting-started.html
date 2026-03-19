@@ -194,6 +194,27 @@
     .api-links a { color: #6e40f7; text-decoration: none; font-weight: 500; }
     .api-links a:hover { text-decoration: underline; }
 
+    /* ── Aside ── */
+    .aside-note {
+      margin-top: 52px;
+      padding: 24px 28px;
+      background: rgba(255,255,255,0.5);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(110,64,247,0.12);
+      border-radius: 16px;
+      box-shadow: 0 2px 12px rgba(110,64,247,0.06);
+    }
+    .aside-note h3 {
+      font-size: 14px; font-weight: 800;
+      text-transform: uppercase; letter-spacing: 0.08em;
+      color: #9696a8; margin-bottom: 12px;
+    }
+    .aside-note p {
+      font-size: 14px; color: #6e6e73; line-height: 1.8; margin-bottom: 10px;
+    }
+    .aside-note p:last-child { margin-bottom: 0; }
+
     /* ── Footer divider ── */
     .post-footer {
       margin-top: 56px; padding-top: 32px;
@@ -259,11 +280,6 @@
   </div>
 
   <div class="post-body">
-
-    <!-- Section: Two names -->
-    <h2 data-i18n="s1.title"></h2>
-    <p data-i18n="s1.p1"></p>
-    <p data-i18n="s1.p2"></p>
 
     <!-- Section: Install -->
     <h2 data-i18n="s2.title"></h2>
@@ -337,6 +353,12 @@
       <img src="/img/screenshot-result.jpeg" alt="tera synthesized answer">
       <figcaption data-i18n="img4.caption"></figcaption>
     </figure>
+
+    <aside class="aside-note">
+      <h3 data-i18n="s1.title"></h3>
+      <p data-i18n="s1.p1"></p>
+      <p data-i18n="s1.p2"></p>
+    </aside>
 
     <div class="post-footer">
       <p data-i18n="footer.help"></p>
