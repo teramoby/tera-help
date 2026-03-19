@@ -157,6 +157,16 @@
     .callout strong { color: #6e40f7; }
 
     /* ── Screenshot ── */
+    .screenshot-row {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      margin: 28px 0;
+    }
+    .screenshot-row .screenshot {
+      margin: 0;
+      flex: 1;
+    }
     .screenshot {
       margin: 28px auto;
       text-align: center;
@@ -277,18 +287,20 @@
       <li><span class="provider">火山引擎 (VolcEngine)</span><a href="https://console.volcengine.com/auth/login?redirectURI=%2Fark%2Fregion%3Aark%2Bcn-beijing%2FapiKey" target="_blank" rel="noopener" data-i18n="apikey.get"></a></li>
     </ul>
     <div class="callout" data-i18n="s3.tip"></div>
-    <figure class="screenshot">
-      <img src="/img/screenshot-settings.jpeg" alt="tera Settings — LLM Configuration">
-      <figcaption data-i18n="img2.caption"></figcaption>
-    </figure>
+    <div class="screenshot-row">
+      <figure class="screenshot">
+        <img src="/img/screenshot-home.jpeg" alt="tera main screen">
+        <figcaption data-i18n="img3.caption"></figcaption>
+      </figure>
+      <figure class="screenshot">
+        <img src="/img/screenshot-settings.jpeg" alt="tera Settings — LLM Configuration">
+        <figcaption data-i18n="img2.caption"></figcaption>
+      </figure>
+    </div>
 
     <!-- Section: Using tera -->
     <h2 data-i18n="s4.title"></h2>
     <p data-i18n="s4.p1"></p>
-    <figure class="screenshot">
-      <img src="/img/screenshot-home.jpeg" alt="tera main screen">
-      <figcaption data-i18n="img3.caption"></figcaption>
-    </figure>
     <div class="steps">
       <div class="step">
         <div class="step-num">1</div>
