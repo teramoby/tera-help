@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico?v=2">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png?v=2">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png?v=2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=2">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>tera · 使用指南</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scrollbar-gutter: stable; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", sans-serif;
+      background: transparent; color: #1d1d1f; line-height: 1.7;
+    }
+
+    /* ── Animated background ── */
+    .bg-wrap { position: fixed; inset: 0; z-index: -1; background: #f0effa; overflow: hidden; transform: translateZ(0); }
+    .orb { position: absolute; border-radius: 50%; filter: blur(80px); will-change: transform; }
+    .orb-1 { width:640px; height:640px; background: radial-gradient(circle, rgba(110,64,247,0.32), transparent 68%); top:-220px; left:-140px; animation: drift1 22s ease-in-out infinite alternate; }
+    .orb-2 { width:520px; height:520px; background: radial-gradient(circle, rgba(59,130,246,0.26), transparent 68%); top:30%; right:-160px; animation: drift2 28s ease-in-out infinite alternate; }
+    .orb-3 { width:460px; height:460px; background: radial-gradient(circle, rgba(6,182,212,0.22), transparent 68%); bottom:-100px; left:28%; animation: drift3 24s ease-in-out infinite alternate; }
+    .orb-4 { width:320px; height:320px; background: radial-gradient(circle, rgba(236,72,153,0.14), transparent 68%); top:55%; left:-60px; animation: drift1 32s ease-in-out infinite alternate-reverse; }
+    @keyframes drift1 { from { transform: translate(0,0); } to { transform: translate(100px,80px); } }
+    @keyframes drift2 { from { transform: translate(0,0); } to { transform: translate(-80px,100px); } }
+    @keyframes drift3 { from { transform: translate(0,0); } to { transform: translate(70px,-90px); } }
+    .ring { position: absolute; border-radius: 50%; pointer-events: none; will-change: transform, opacity; }
+    .ring-1 { width:380px; height:380px; top:-40px; right:6%; border:1px solid rgba(110,64,247,0.16); animation: spin-ring 65s linear infinite, breathe 9s ease-in-out infinite alternate; }
+    .ring-2 { width:240px; height:240px; top:36%; left:2%; border:1px solid rgba(59,130,246,0.13); animation: spin-ring 85s linear infinite reverse, breathe 13s ease-in-out infinite alternate; }
+    .ring-3 { width:130px; height:130px; bottom:12%; right:22%; border:1px solid rgba(6,182,212,0.12); animation: spin-ring 50s linear infinite, breathe 7s ease-in-out infinite alternate; }
+    .diamond { position: absolute; pointer-events: none; will-change: transform, opacity; }
+    .diamond-1 { width:70px; height:70px; top:18%; left:7%; border:1px solid rgba(110,64,247,0.14); animation: spin-diamond 42s linear infinite, breathe 8s ease-in-out infinite alternate; }
+    .diamond-2 { width:44px; height:44px; bottom:22%; right:8%; border:1px solid rgba(59,130,246,0.11); animation: spin-diamond 58s linear infinite reverse, breathe 11s ease-in-out infinite alternate; }
+    .diamond-3 { width:108px; height:108px; top:54%; right:14%; border:1px solid rgba(110,64,247,0.08); animation: spin-diamond 72s linear infinite, breathe 16s ease-in-out infinite alternate; }
+    @keyframes spin-ring    { from { transform: rotate(0deg); }   to { transform: rotate(360deg); } }
+    @keyframes spin-diamond { from { transform: rotate(45deg); }  to { transform: rotate(405deg); } }
+    @keyframes breathe      { from { opacity: 0.35; }             to { opacity: 1; } }
+
+    /* ── Header ── */
+    header {
+      background: rgba(240,239,250,0.6);
+      backdrop-filter: blur(24px) saturate(1.8);
+      -webkit-backdrop-filter: blur(24px) saturate(1.8);
+      border-bottom: 1px solid rgba(110,64,247,0.12);
+      position: sticky; top: 0; z-index: 100;
+    }
+    header .inner {
+      max-width: 760px; margin: 0 auto; padding: 16px 24px;
+      display: flex; align-items: center; gap: 12px;
+    }
+    header .logo {
+      width: 38px; height: 38px; border-radius: 10px;
+      overflow: hidden; flex-shrink: 0; text-decoration: none;
+    }
+    header .breadcrumb { flex: 1; font-size: 15px; color: #6e6e73; }
+    header .breadcrumb a { color: #6e40f7; text-decoration: none; font-weight: 700; }
+    header .breadcrumb a:hover { opacity: 0.7; }
+    header .breadcrumb span.sep { margin: 0 6px; color: #b0b0c0; }
+
+    .lang-toggle {
+      display: flex; background: rgba(110,64,247,0.1);
+      border-radius: 980px; padding: 3px; gap: 2px;
+    }
+    .lang-toggle button {
+      border: none; background: transparent;
+      padding: 5px 14px; border-radius: 980px;
+      font-size: 13px; font-weight: 500; color: #6e6e73;
+      cursor: pointer; transition: background 0.2s, color 0.2s;
+    }
+    .lang-toggle button.active {
+      background: #fff; color: #6e40f7; font-weight: 700;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.12);
+    }
+
+    /* ── Main ── */
+    main { max-width: 760px; margin: 0 auto; padding: 48px 24px 80px; }
+
+    /* ── Post header ── */
+    .post-header {
+      padding: 48px 0 40px;
+      border-bottom: 1px solid rgba(110,64,247,0.1);
+      margin-bottom: 40px;
+      animation: fadeUp 0.6s ease both;
+    }
+    .post-meta {
+      font-size: 12px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.08em; color: #9696a8;
+      margin-bottom: 16px;
+    }
+    .post-title {
+      font-size: 38px; font-weight: 800; letter-spacing: -1.2px;
+      background: linear-gradient(135deg, #4c1d95 0%, #6e40f7 40%, #3b82f6 80%, #06b6d4 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text; line-height: 1.15; margin-bottom: 16px;
+    }
+    .post-lead {
+      font-size: 17px; color: #5a5a6a; line-height: 1.75; max-width: 600px;
+    }
+
+    /* ── Blog body ── */
+    .post-body { animation: fadeUp 0.6s 0.1s ease both; }
+
+    .post-body h2 {
+      font-size: 22px; font-weight: 800; color: #1d1d1f;
+      margin: 44px 0 14px; letter-spacing: -0.4px;
+    }
+    .post-body h2:first-child { margin-top: 0; }
+
+    .post-body p {
+      font-size: 16px; color: #3a3a4a; line-height: 1.85;
+      margin-bottom: 16px;
+    }
+
+    .name-badge {
+      display: inline-block;
+      background: rgba(110,64,247,0.08);
+      border: 1px solid rgba(110,64,247,0.18);
+      color: #6e40f7;
+      font-size: 14px; font-weight: 700;
+      padding: 3px 10px; border-radius: 6px;
+      font-family: ui-monospace, "SF Mono", monospace;
+    }
+
+    /* ── Steps ── */
+    .steps { display: flex; flex-direction: column; gap: 12px; margin: 24px 0; }
+    .step {
+      background: rgba(255,255,255,0.62);
+      backdrop-filter: blur(24px) saturate(1.8);
+      -webkit-backdrop-filter: blur(24px) saturate(1.8);
+      border: 1px solid rgba(255,255,255,0.88);
+      border-radius: 16px; padding: 20px 24px;
+      box-shadow: 0 3px 16px rgba(110,64,247,0.07), inset 0 1px 0 rgba(255,255,255,0.95);
+      display: flex; align-items: flex-start; gap: 16px;
+    }
+    .step-num {
+      width: 32px; height: 32px; border-radius: 9px; flex-shrink: 0;
+      background: linear-gradient(135deg, #6e40f7, #3b82f6);
+      color: #fff; font-size: 14px; font-weight: 800;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 2px 8px rgba(110,64,247,0.32);
+    }
+    .step-body h4 { font-size: 15px; font-weight: 700; color: #1d1d1f; margin-bottom: 4px; }
+    .step-body p  { font-size: 14px; color: #6e6e73; line-height: 1.65; margin: 0; }
+    .step-body a  { color: #6e40f7; text-decoration: none; font-weight: 500; }
+    .step-body a:hover { text-decoration: underline; }
+
+    /* ── Callout ── */
+    .callout {
+      background: rgba(110,64,247,0.05);
+      border-left: 3px solid rgba(110,64,247,0.4);
+      border-radius: 0 12px 12px 0;
+      padding: 16px 20px; margin: 24px 0;
+      font-size: 14px; color: #4a4a5a; line-height: 1.75;
+    }
+    .callout strong { color: #6e40f7; }
+
+    /* ── API links ── */
+    .api-links { list-style: none; margin: 14px 0; display: flex; flex-direction: column; gap: 8px; }
+    .api-links li { font-size: 14px; color: #4a4a5a; display: flex; align-items: center; gap: 10px; }
+    .api-links li::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: #6e40f7; flex-shrink: 0; }
+    .api-links .provider { font-weight: 700; color: #1d1d1f; min-width: 170px; }
+    .api-links a { color: #6e40f7; text-decoration: none; font-weight: 500; }
+    .api-links a:hover { text-decoration: underline; }
+
+    /* ── Footer divider ── */
+    .post-footer {
+      margin-top: 56px; padding-top: 32px;
+      border-top: 1px solid rgba(110,64,247,0.1);
+      font-size: 14px; color: #6e6e73; line-height: 1.75;
+    }
+    .post-footer a { color: #6e40f7; text-decoration: none; font-weight: 500; }
+    .post-footer a:hover { text-decoration: underline; }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    footer {
+      text-align: center; padding: 32px 24px;
+      font-size: 13px; color: #9696a8; position: relative;
+    }
+    footer::before {
+      content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+      width: 200px; height: 1px;
+      background: linear-gradient(to right, transparent, rgba(110,64,247,0.4), transparent);
+    }
+    footer a { color: #9696a8; text-decoration: none; margin: 0 8px; }
+    footer a:hover { color: #6e40f7; }
+
+    @media (max-width: 600px) {
+      .post-title { font-size: 28px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="bg-wrap" aria-hidden="true">
+  <div class="orb orb-1"></div><div class="orb orb-2"></div>
+  <div class="orb orb-3"></div><div class="orb orb-4"></div>
+  <div class="ring ring-1"></div><div class="ring ring-2"></div>
+  <div class="ring ring-3"></div>
+  <div class="diamond diamond-1"></div><div class="diamond diamond-2"></div>
+  <div class="diamond diamond-3"></div>
+</div>
+
+<header>
+  <div class="inner">
+    <a class="logo" href="index.html"><img src="/icon-64.png" alt="tera" width="38" height="38" style="display:block;"></a>
+    <div class="breadcrumb">
+      <a href="index.html">tera</a>
+      <span class="sep">›</span>
+      <span data-i18n="nav.blog"></span>
+    </div>
+    <div class="lang-toggle">
+      <button id="btn-zh" class="active" onclick="setLang('zh')">中文</button>
+      <button id="btn-en" onclick="setLang('en')">EN</button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="post-header">
+    <p class="post-meta" data-i18n="post.meta"></p>
+    <h1 class="post-title" data-i18n="post.title"></h1>
+    <p class="post-lead" data-i18n="post.lead"></p>
+  </div>
+
+  <div class="post-body">
+
+    <!-- Section: Two names -->
+    <h2 data-i18n="s1.title"></h2>
+    <p data-i18n="s1.p1"></p>
+    <p data-i18n="s1.p2"></p>
+
+    <!-- Section: Install -->
+    <h2 data-i18n="s2.title"></h2>
+    <p data-i18n="s2.p1"></p>
+    <div class="callout" data-i18n="s2.note"></div>
+
+    <!-- Section: API Keys -->
+    <h2 data-i18n="s3.title"></h2>
+    <p data-i18n="s3.p1"></p>
+    <ul class="api-links">
+      <li><span class="provider">ChatGPT (OpenAI)</span><a href="https://help.openai.com/en/articles/4936850-where-do-i-find-my-openai-api-key" target="_blank" rel="noopener" data-i18n="apikey.get"></a></li>
+      <li><span class="provider">Claude (Anthropic)</span><a href="https://platform.claude.com/login?returnTo=%2Fsettings%2Fkeys" target="_blank" rel="noopener" data-i18n="apikey.get"></a></li>
+      <li><span class="provider">Grok (xAI)</span><a href="https://console.x.ai/team/5aeeaef0-f088-49bd-90fb-8658c2992539" target="_blank" rel="noopener" data-i18n="apikey.get"></a></li>
+      <li><span class="provider">Gemini (Google)</span><a href="https://ai.google.dev/gemini-api/docs/api-key" target="_blank" rel="noopener" data-i18n="apikey.get"></a></li>
+      <li><span class="provider">DeepSeek</span><a href="https://platform.deepseek.com/api_keys" target="_blank" rel="noopener" data-i18n="apikey.get"></a></li>
+      <li><span class="provider">AWS Bedrock</span><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/api-keys.html" target="_blank" rel="noopener" data-i18n="apikey.get"></a></li>
+      <li><span class="provider">火山引擎 (VolcEngine)</span><a href="https://console.volcengine.com/auth/login?redirectURI=%2Fark%2Fregion%3Aark%2Bcn-beijing%2FapiKey" target="_blank" rel="noopener" data-i18n="apikey.get"></a></li>
+    </ul>
+    <div class="callout" data-i18n="s3.tip"></div>
+
+    <!-- Section: Using tera -->
+    <h2 data-i18n="s4.title"></h2>
+    <p data-i18n="s4.p1"></p>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <h4 data-i18n="step1.title"></h4>
+          <p data-i18n="step1.desc"></p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <h4 data-i18n="step2.title"></h4>
+          <p data-i18n="step2.desc"></p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <h4 data-i18n="step3.title"></h4>
+          <p data-i18n="step3.desc"></p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-body">
+          <h4 data-i18n="step4.title"></h4>
+          <p data-i18n="step4.desc"></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="post-footer">
+      <p data-i18n="footer.help"></p>
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  <span data-i18n="footer.copy"></span>
+  <br style="margin-bottom:6px;">
+  <a href="index.html" data-i18n="footer.home"></a>
+  <a href="faq.html" data-i18n="footer.faq"></a>
+</footer>
+
+<script>
+  const i18n = {
+    zh: {
+      "nav.blog": "使用指南",
+      "post.meta": "指南 · 2026 年 3 月 19 日",
+      "post.title": "如何使用 tera（tt）：多模型 AI 助手入门",
+      "post.lead": "tera 是一款让你同时向多个 AI 模型提问、并得到一个综合答案的助手。这篇文章带你从零开始，快速上手。",
+
+      "s1.title": "为什么这个 App 有两个名字？",
+      "s1.p1": "这款应用的正式名称是 tera，由 teramoby 开发，全名为 teramoby tera。日常使用中，你会经常看到它被缩写为 tt——这两个字母来自 teramoby tera 的首字母组合。tt 和 tera 指的是同一款应用，并无区别。",
+      "s1.p2": "在 App Store 中，应用以 tera 上架；搜索时，需要输入开发者名称 teramoby 才能准确找到它。这是因为 tera 是一个较为通用的词，单独搜索可能会混入其他无关结果。",
+
+      "s2.title": "下载安装",
+      "s2.p1": "打开 iPhone、iPad 或 Mac 上的 App Store，搜索 teramoby，即可找到 tera 并免费下载。安装完成后，首次启动会看到一个隐私说明页面，请阅读并确认后继续。",
+      "s2.note": "⚠️ 注意：由于合规要求，tera 目前暂不在中国区 App Store 上架。",
+
+      "s3.title": "配置 API 密钥",
+      "s3.p1": "tera 本身不提供 AI 能力，它是一个连接各家 AI 服务商的客户端。使用前，你需要在对应服务商处申请 API 密钥，并在 tera 的「设置 → 模型配置」中填入。点击以下链接可直接前往各服务商的密钥申请页面：",
+      "s3.tip": "💡 建议至少配置两个以上的服务商。多模型同时作答后，tera 会将所有回答汇总给一个模型进行综合整理，提升答案的准确性与客观性。",
+      "apikey.get": "获取 API Key →",
+
+      "s4.title": "开始使用",
+      "s4.p1": "配置完成后，就可以开始使用了。tera 的工作流程非常直观：",
+      "step1.title": "选择模型",
+      "step1.desc": "在主界面勾选你想同时调用的模型，可以选择一个或多个。",
+      "step2.title": "输入问题",
+      "step2.desc": "在输入框中输入你的问题，点击发送。tera 会将这个问题同时发给所有选中的模型。",
+      "step3.title": "获取多方回答",
+      "step3.desc": "各模型的回答会并行返回，你可以分别查看每个模型的原始答案。",
+      "step4.title": "查看综合答案",
+      "step4.desc": "tera 将所有回答汇总，发给一个模型进行综合整理，生成一个更客观、更可靠的最终答案。",
+
+      "footer.help": "遇到问题或有建议？发邮件至 <a href=\"mailto:tera-support@teramoby.com\">tera-support@teramoby.com</a>，也欢迎加入 <a href=\"https://groups.google.com/g/tera-help\" target=\"_blank\" rel=\"noopener\">Google Group</a> 与其他用户交流。",
+      "footer.copy": "© 2026 teramoby · tera-support@teramoby.com",
+      "footer.home": "帮助中心",
+      "footer.faq": "常见问题",
+    },
+    en: {
+      "nav.blog": "Getting Started",
+      "post.meta": "Guide · March 19, 2026",
+      "post.title": "Getting Started with tera (tt): A Multi-Model AI Assistant",
+      "post.lead": "tera lets you ask multiple AI models the same question at once and receive a single, synthesized answer. Here's everything you need to get up and running.",
+
+      "s1.title": "Why Does This App Have Two Names?",
+      "s1.p1": "The app's official name is tera, developed by teramoby — making its full name teramoby tera. In practice, you'll often see it shortened to tt, an abbreviation of teramoby tera. Both names refer to the same app; tt is simply the convenient shorthand used in everyday conversation and documentation.",
+      "s1.p2": "On the App Store, the app is listed as tera. To find it, search for teramoby — the developer name — rather than tera alone, since tera is a common word that may surface unrelated results.",
+
+      "s2.title": "Download & Install",
+      "s2.p1": "Open the App Store on your iPhone, iPad, or Mac, search for teramoby, and download tera for free. On first launch, you'll be presented with a privacy disclosure page — read it and tap to continue.",
+      "s2.note": "⚠️ Note: tera is not currently available on the China App Store due to compliance requirements.",
+
+      "s3.title": "Configure Your API Keys",
+      "s3.p1": "tera is a client — it connects to AI providers on your behalf but does not supply AI capabilities of its own. Before you can use it, you'll need to obtain an API key from at least one provider and enter it in Settings → Model Configuration. Click the links below to go directly to each provider's API key page:",
+      "s3.tip": "💡 Tip: We recommend configuring two or more providers. When multiple models respond to the same question, tera collects all their answers and sends them to a single model for synthesis — producing a more accurate and well-rounded final response.",
+      "apikey.get": "Get API Key →",
+
+      "s4.title": "Using tera",
+      "s4.p1": "Once your API keys are set up, you're ready to go. The workflow is straightforward:",
+      "step1.title": "Select Your Models",
+      "step1.desc": "On the main screen, choose one or more models you want to query simultaneously.",
+      "step2.title": "Ask a Question",
+      "step2.desc": "Type your question and tap Send. tera dispatches it to all selected models at the same time.",
+      "step3.title": "Review Each Response",
+      "step3.desc": "Responses arrive in parallel. You can read each model's individual answer side by side.",
+      "step4.title": "Get the Synthesized Answer",
+      "step4.desc": "tera collects all responses and sends them to a single model, which synthesizes them into one objective, reliable final answer.",
+
+      "footer.help": "Questions or feedback? Email us at <a href=\"mailto:tera-support@teramoby.com\">tera-support@teramoby.com</a> or join the <a href=\"https://groups.google.com/g/tera-help\" target=\"_blank\" rel=\"noopener\">Google Group</a> to connect with other users.",
+      "footer.copy": "© 2026 teramoby · tera-support@teramoby.com",
+      "footer.home": "Help Center",
+      "footer.faq": "FAQ",
+    }
+  };
+
+  function setLang(lang) {
+    document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.getAttribute('data-i18n');
+      if (i18n[lang][key] !== undefined) el.innerHTML = i18n[lang][key];
+    });
+    document.getElementById('btn-zh').classList.toggle('active', lang === 'zh');
+    document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+    localStorage.setItem('tera-lang', lang);
+  }
+
+  const saved = localStorage.getItem('tera-lang');
+  const preferred = saved || (navigator.language.startsWith('zh') ? 'zh' : 'en');
+  setLang(preferred);
+</script>
+
+</body>
+</html>
