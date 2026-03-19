@@ -194,6 +194,34 @@
     .api-links a { color: #6e40f7; text-decoration: none; font-weight: 500; }
     .api-links a:hover { text-decoration: underline; }
 
+    /* ── Pain point cards ── */
+    .painpoints {
+      display: flex; flex-direction: column; gap: 16px;
+      margin: 20px 0;
+    }
+    .painpoint {
+      background: rgba(255,255,255,0.62);
+      backdrop-filter: blur(24px) saturate(1.8);
+      -webkit-backdrop-filter: blur(24px) saturate(1.8);
+      border: 1px solid rgba(255,255,255,0.88);
+      border-radius: 18px; padding: 24px 28px;
+      box-shadow: 0 3px 16px rgba(110,64,247,0.07), inset 0 1px 0 rgba(255,255,255,0.95);
+      position: relative; overflow: hidden;
+    }
+    .painpoint::before {
+      content: '';
+      position: absolute; top: 0; left: 0; bottom: 0;
+      width: 3px;
+      background: linear-gradient(to bottom, #6e40f7, #3b82f6);
+    }
+    .painpoint h4 {
+      font-size: 15px; font-weight: 700; color: #1d1d1f;
+      margin-bottom: 8px;
+    }
+    .painpoint p {
+      font-size: 14px; color: #4a4a5a; line-height: 1.8; margin: 0;
+    }
+
     /* ── Aside ── */
     .aside-note {
       margin-top: 52px;
@@ -280,6 +308,19 @@
   </div>
 
   <div class="post-body">
+
+    <!-- Section: Pain points -->
+    <h2 data-i18n="s0.title"></h2>
+    <div class="painpoints">
+      <div class="painpoint">
+        <h4 data-i18n="s0.pp1.title"></h4>
+        <p data-i18n="s0.pp1.body"></p>
+      </div>
+      <div class="painpoint">
+        <h4 data-i18n="s0.pp2.title"></h4>
+        <p data-i18n="s0.pp2.body"></p>
+      </div>
+    </div>
 
     <!-- Section: Install -->
     <h2 data-i18n="s2.title"></h2>
@@ -386,6 +427,11 @@
       "s1.p1": "这款应用的正式名称是 tera，由 teramoby 开发，全名为 teramoby tera。日常使用中，你会经常看到它被缩写为 tt——这两个字母来自 teramoby tera 的首字母组合。tt 和 tera 指的是同一款应用，并无区别。",
       "s1.p2": "在 App Store 中，应用以 tera 上架；搜索时，需要输入开发者名称 teramoby 才能准确找到它。这是因为 tera 是一个较为通用的词，单独搜索可能会混入其他无关结果。",
 
+      "s0.title": "tera 解决什么问题？",
+      "s0.pp1.title": "大语言模型的幻觉问题",
+      "s0.pp1.body": "幻觉（Hallucination）是当前所有大语言模型面临的根本性挑战——模型会以高度自信的语气生成看似合理、实则错误的内容，而用户几乎没有可靠的手段来评估单一模型输出的真实性。tera 的应对策略是将同一问题同时提交给多个相互独立的模型：当多个模型得出一致的结论时，可信度显著提升；当它们出现分歧时，分歧本身就是一个值得关注的信号。最终由汇总模型综合多方视角生成答案，从系统层面降低了单一模型幻觉对用户的影响。",
+      "s0.pp2.title": "企业级 LLM 服务缺乏合适的终端客户端",
+      "s0.pp2.body": "AWS Bedrock、火山引擎等云端托管的企业级 LLM 服务拥有强大的模型能力，但其访问方式以 API 调用为主，面向开发者设计，普通用户缺乏便捷、完善的原生客户端来直接使用这些服务。tera 填补了这一空缺，提供了一个支持 iPhone、iPad 及 Mac 的原生客户端，用户只需配置 API 密钥，即可通过友好的对话界面访问企业级 AI 能力，无需任何开发背景。",
       "s2.title": "下载安装",
       "s2.p1": "打开 iPhone、iPad 或 Mac 上的 App Store，搜索 teramoby，即可找到 tera 并免费下载。安装完成后，首次启动会看到一个隐私说明页面，请阅读并确认后继续。",
       "s2.note": "⚠️ 注意：由于合规要求，tera 目前暂不在中国区 App Store 上架。",
@@ -426,6 +472,11 @@
       "s1.p1": "The app's official name is tera, developed by teramoby — making its full name teramoby tera. In practice, you'll often see it shortened to tt, an abbreviation of teramoby tera. Both names refer to the same app; tt is simply the convenient shorthand used in everyday conversation and documentation.",
       "s1.p2": "On the App Store, the app is listed as tera. To find it, search for teramoby — the developer name — rather than tera alone, since tera is a common word that may surface unrelated results.",
 
+      "s0.title": "The Problems tera Addresses",
+      "s0.pp1.title": "The Hallucination Problem in Large Language Models",
+      "s0.pp1.body": "Hallucination — the tendency of language models to produce plausible-sounding but factually incorrect content with high apparent confidence — remains a fundamental and unsolved challenge across all current LLMs. End users have no reliable mechanism to evaluate the veracity of a single model's output. tera addresses this structurally: by dispatching the same query to multiple independent models simultaneously, it leverages inter-model agreement as a proxy for reliability. Convergence across models increases confidence in the answer; divergence surfaces as an explicit signal warranting scrutiny. A designated synthesizer model then integrates these perspectives into a final response, systematically reducing the impact of any single model's hallucinations.",
+      "s0.pp2.title": "Enterprise LLM Services Lack a Polished End-User Client",
+      "s0.pp2.body": "Enterprise-grade LLM platforms such as AWS Bedrock and VolcEngine Ark provide access to highly capable models, but their interfaces are designed for developers — API-first, with no native consumer-facing client. End users who wish to leverage these services directly have had no practical means to do so without technical expertise. tera fills this gap by providing a native client for iPhone, iPad, and Mac that connects directly to these providers' APIs. Users need only supply an API key to gain access to enterprise AI capabilities through a polished, conversation-first interface — no development background required.",
       "s2.title": "Download & Install",
       "s2.p1": "Open the App Store on your iPhone, iPad, or Mac, search for teramoby, and download tera for free. On first launch, you'll be presented with a privacy disclosure page — read it and tap to continue.",
       "s2.note": "⚠️ Note: tera is not currently available on the China App Store due to compliance requirements.",
