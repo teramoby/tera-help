@@ -309,18 +309,10 @@
 
   <div class="post-body">
 
-    <!-- Section: Pain points -->
-    <h2 data-i18n="s0.title"></h2>
-    <div class="painpoints">
-      <div class="painpoint">
-        <h4 data-i18n="s0.pp1.title"></h4>
-        <p data-i18n="s0.pp1.body"></p>
-      </div>
-      <div class="painpoint">
-        <h4 data-i18n="s0.pp2.title"></h4>
-        <p data-i18n="s0.pp2.body"></p>
-      </div>
-    </div>
+    <!-- Flowing intro -->
+    <p data-i18n="intro.p1"></p>
+    <p data-i18n="intro.p2"></p>
+    <p data-i18n="intro.p3"></p>
 
     <!-- Section: Install -->
     <h2 data-i18n="s2.title"></h2>
@@ -421,43 +413,42 @@
       "nav.blog": "使用指南",
       "post.meta": "指南 · 2026 年 3 月 19 日",
       "post.title": "如何使用 tera（tt）：多模型 AI 助手入门",
-      "post.lead": "tera 是一款让你同时向多个 AI 模型提问、并得到一个综合答案的助手。这篇文章带你从零开始，快速上手。",
+      "post.lead": "tera 是一款让你同时向多个 AI 模型提问、并得到一个综合答案的原生客户端，适用于 iPhone、iPad 及 Mac。",
+
+      "intro.p1": "大语言模型在过去几年重塑了人机交互的方式，但一个根本问题始终没有得到解决：幻觉（Hallucination）。模型会以高度自信的语气生成看似合理、实则错误的内容，而用户几乎没有可靠的手段来判断一个回答是否值得信任。你问了一个问题，得到了一个听起来很有道理的答案——但它是真的吗？",
+      "intro.p2": "与此同时，另一个问题同样被忽视：企业级 LLM 服务——例如 AWS Bedrock、火山引擎方舟——拥有强大的模型能力，却长期缺乏面向普通用户的成熟客户端。这类服务的访问方式以 API 调用为主，技术门槛将大多数潜在用户拒之门外。",
+      "intro.p3": "tera 尝试同时解决这两个问题。它将同一个问题同时提交给多个独立的 LLM——包括 OpenAI、Anthropic、AWS Bedrock、DeepSeek 等——并行收集各自的回答。多个模型得出一致结论时，可信度显著提升；出现分歧时，分歧本身就是值得审视的信号。最终，tera 将所有回答汇总发给一个指定的总结模型，生成兼顾多方视角的综合答案。",
 
       "s1.title": "为什么这个 App 有两个名字？",
-      "s1.p1": "这款应用的正式名称是 tera，由 teramoby 开发，全名为 teramoby tera。日常使用中，你会经常看到它被缩写为 tt——这两个字母来自 teramoby tera 的首字母组合。tt 和 tera 指的是同一款应用，并无区别。",
-      "s1.p2": "在 App Store 中，应用以 tera 上架；搜索时，需要输入开发者名称 teramoby 才能准确找到它。这是因为 tera 是一个较为通用的词，单独搜索可能会混入其他无关结果。",
+      "s1.p1": "这款应用的正式名称是 tera，由 teramoby 开发，全名为 teramoby tera。日常中常被缩写为 tt——取自 teramoby tera 的首字母。tt 和 tera 是同一款应用，并无区别。",
+      "s1.p2": "在 App Store 中，应用以 tera 上架；搜索时需要输入开发者名称 teramoby 才能准确找到它，因为 tera 是个较为通用的词，单独搜索容易混入无关结果。",
 
-      "s0.title": "tera 解决什么问题？",
-      "s0.pp1.title": "大语言模型的幻觉问题",
-      "s0.pp1.body": "幻觉（Hallucination）是当前所有大语言模型面临的根本性挑战——模型会以高度自信的语气生成看似合理、实则错误的内容，而用户几乎没有可靠的手段来评估单一模型输出的真实性。tera 的应对策略是将同一问题同时提交给多个相互独立的模型：当多个模型得出一致的结论时，可信度显著提升；当它们出现分歧时，分歧本身就是一个值得关注的信号。最终由汇总模型综合多方视角生成答案，从系统层面降低了单一模型幻觉对用户的影响。",
-      "s0.pp2.title": "企业级 LLM 服务缺乏合适的终端客户端",
-      "s0.pp2.body": "AWS Bedrock、火山引擎等云端托管的企业级 LLM 服务拥有强大的模型能力，但其访问方式以 API 调用为主，面向开发者设计，普通用户缺乏便捷、完善的原生客户端来直接使用这些服务。tera 填补了这一空缺，提供了一个支持 iPhone、iPad 及 Mac 的原生客户端，用户只需配置 API 密钥，即可通过友好的对话界面访问企业级 AI 能力，无需任何开发背景。",
-      "s2.title": "下载安装",
-      "s2.p1": "打开 iPhone、iPad 或 Mac 上的 App Store，搜索 teramoby，即可找到 tera 并免费下载。安装完成后，首次启动会看到一个隐私说明页面，请阅读并确认后继续。",
+      "s2.title": "安装",
+      "s2.p1": "在 App Store 中搜索 teramoby，找到 tera 后免费下载。首次启动会看到隐私说明页面，阅读并确认后即可进入应用。",
       "s2.note": "⚠️ 注意：由于合规要求，tera 目前暂不在中国区 App Store 上架。",
 
       "s3.title": "配置 API 密钥",
-      "s3.p1": "tera 本身不提供 AI 能力，它是一个连接各家 AI 服务商的客户端。使用前，你需要在对应服务商处申请 API 密钥，并在 tera 的「设置 → 模型配置」中填入。点击以下链接可直接前往各服务商的密钥申请页面：",
-      "s3.faq": "如需获取最新的服务商支持信息，请参阅 <a href=\"https://app.teramoby.com/faq.html\">app.teramoby.com/faq.html</a>。",
-      "s3.tip": "💡 建议至少配置两个以上的服务商。多模型同时作答后，tera 会将所有回答汇总给一个模型进行综合整理，提升答案的准确性与客观性。",
+      "s3.p1": "tera 本身不提供 AI 能力——它是一个连接各家服务商的客户端，数据直接从你的设备发往服务商，不经过任何中间服务器。使用前，需要在各服务商处申请 API 密钥，然后在 tera 的「Settings → Providers」中填入。以下是各服务商密钥申请页面的直链：",
+      "s3.faq": "如需了解最新支持的服务商列表，请参阅 <a href=\"https://app.teramoby.com/faq.html\">app.teramoby.com/faq.html</a>。",
+      "s3.tip": "建议配置两个以上的服务商。模型越多，综合答案的参考维度越丰富，准确性和客观性也越高。",
       "apikey.get": "获取 API Key →",
 
-      "s4.title": "开始使用",
-      "s4.p1": "配置完成后，就可以开始使用了。tera 的工作流程非常直观：",
+      "s4.title": "开始提问",
+      "s4.p1": "配置完成后即可使用。流程很直接：",
       "step1.title": "选择模型",
-      "step1.desc": "在主界面勾选你想同时调用的模型，可以选择一个或多个。",
-      "step2.title": "输入问题",
-      "step2.desc": "在输入框中输入你的问题，点击发送。tera 会将这个问题同时发给所有选中的模型。",
-      "step3.title": "获取多方回答",
-      "step3.desc": "各模型的回答会并行返回，你可以分别查看每个模型的原始答案。",
-      "step4.title": "查看综合答案",
-      "step4.desc": "tera 将所有回答汇总，发给一个模型进行综合整理，生成一个更客观、更可靠的最终答案。",
+      "step1.desc": "在主界面勾选想同时调用的模型，一个或多个均可。",
+      "step2.title": "输入问题并发送",
+      "step2.desc": "tera 会将问题同时发给所有选中的模型，并行等待回答。",
+      "step3.title": "查看各模型的原始回答",
+      "step3.desc": "各模型的回答并行返回，可以分别查看每个模型的完整原始答案。",
+      "step4.title": "获取综合答案",
+      "step4.desc": "tera 将所有回答汇总发给总结模型，生成一个客观可靠的最终答案。",
 
       "footer.help": "遇到问题或有建议？发邮件至 <a href=\"mailto:tera-support@teramoby.com\">tera-support@teramoby.com</a>，也欢迎加入 <a href=\"https://groups.google.com/g/tera-help\" target=\"_blank\" rel=\"noopener\">Google Group</a> 与其他用户交流。",
       "img1.caption": "在 App Store 搜索 teramoby 即可找到 tera",
-      "img2.caption": "在「设置 → Providers」中配置 LLM 服务商和 API 密钥",
-      "img3.caption": "配置完成后，主界面提示你可以开始提问",
-      "img4.caption": "tera 将多个模型的回答汇总，由 Summarizer 模型生成最终答案",
+      "img2.caption": "在 Settings → Providers 中配置服务商和 API 密钥",
+      "img3.caption": "配置完成后，主界面提示你可以开始提问了",
+      "img4.caption": "tera 将多模型回答汇总，由 Summarizer 生成最终答案",
       "footer.copy": "© 2026 teramoby · tera-support@teramoby.com",
       "footer.home": "帮助中心",
       "footer.faq": "常见问题",
@@ -466,43 +457,42 @@
       "nav.blog": "Getting Started",
       "post.meta": "Guide · March 19, 2026",
       "post.title": "Getting Started with tera (tt): A Multi-Model AI Assistant",
-      "post.lead": "tera lets you ask multiple AI models the same question at once and receive a single, synthesized answer. Here's everything you need to get up and running.",
+      "post.lead": "tera is a native multi-model AI client for iPhone, iPad, and Mac that lets you query multiple LLMs at once and receive a single, synthesized answer.",
+
+      "intro.p1": "Large language models have transformed how people interact with information, but one fundamental problem remains stubbornly unsolved: hallucination. Models generate plausible-sounding answers with apparent confidence, and users have no reliable way to know whether what they're reading is actually true. You ask a question, you get a well-written answer — but is it right?",
+      "intro.p2": "A separate but equally overlooked problem: powerful enterprise LLM services — AWS Bedrock, VolcEngine Ark, and others — have long lacked a polished end-user client. They're API-first by design, built for developers, and that technical barrier has kept most people from using them directly.",
+      "intro.p3": "tera addresses both. It dispatches the same question to multiple independent LLMs simultaneously — OpenAI, Anthropic, AWS Bedrock, DeepSeek, and more — and collects their responses in parallel. Where models agree, confidence is higher. Where they diverge, the disagreement itself is worth examining. tera then sends all responses to a designated summarizer model, which synthesizes them into a single, well-rounded final answer.",
 
       "s1.title": "Why Does This App Have Two Names?",
-      "s1.p1": "The app's official name is tera, developed by teramoby — making its full name teramoby tera. In practice, you'll often see it shortened to tt, an abbreviation of teramoby tera. Both names refer to the same app; tt is simply the convenient shorthand used in everyday conversation and documentation.",
-      "s1.p2": "On the App Store, the app is listed as tera. To find it, search for teramoby — the developer name — rather than tera alone, since tera is a common word that may surface unrelated results.",
+      "s1.p1": "The app's official name is tera, developed by teramoby — full name teramoby tera. In practice it's often shortened to tt, from the initials of teramoby tera. Both names refer to the same app; tt is just the everyday shorthand.",
+      "s1.p2": "On the App Store, the app is listed as tera. Search for teramoby — the developer name — to find it reliably, since tera alone is a common word that may surface unrelated results.",
 
-      "s0.title": "The Problems tera Addresses",
-      "s0.pp1.title": "The Hallucination Problem in Large Language Models",
-      "s0.pp1.body": "Hallucination — the tendency of language models to produce plausible-sounding but factually incorrect content with high apparent confidence — remains a fundamental and unsolved challenge across all current LLMs. End users have no reliable mechanism to evaluate the veracity of a single model's output. tera addresses this structurally: by dispatching the same query to multiple independent models simultaneously, it leverages inter-model agreement as a proxy for reliability. Convergence across models increases confidence in the answer; divergence surfaces as an explicit signal warranting scrutiny. A designated synthesizer model then integrates these perspectives into a final response, systematically reducing the impact of any single model's hallucinations.",
-      "s0.pp2.title": "Enterprise LLM Services Lack a Polished End-User Client",
-      "s0.pp2.body": "Enterprise-grade LLM platforms such as AWS Bedrock and VolcEngine Ark provide access to highly capable models, but their interfaces are designed for developers — API-first, with no native consumer-facing client. End users who wish to leverage these services directly have had no practical means to do so without technical expertise. tera fills this gap by providing a native client for iPhone, iPad, and Mac that connects directly to these providers' APIs. Users need only supply an API key to gain access to enterprise AI capabilities through a polished, conversation-first interface — no development background required.",
-      "s2.title": "Download & Install",
-      "s2.p1": "Open the App Store on your iPhone, iPad, or Mac, search for teramoby, and download tera for free. On first launch, you'll be presented with a privacy disclosure page — read it and tap to continue.",
+      "s2.title": "Installation",
+      "s2.p1": "Search for teramoby on the App Store, download tera for free, and open it. On first launch you'll see a privacy disclosure — read it and tap to continue.",
       "s2.note": "⚠️ Note: tera is not currently available on the China App Store due to compliance requirements.",
 
-      "s3.title": "Configure Your API Keys",
-      "s3.p1": "tera is a client — it connects to AI providers on your behalf but does not supply AI capabilities of its own. Before you can use it, you'll need to obtain an API key from at least one provider and enter it in Settings → Model Configuration. Click the links below to go directly to each provider's API key page:",
-      "s3.faq": "For the most up-to-date list of supported providers, please refer to <a href=\"https://app.teramoby.com/faq.html\">app.teramoby.com/faq.html</a>.",
-      "s3.tip": "💡 Tip: We recommend configuring two or more providers. When multiple models respond to the same question, tera collects all their answers and sends them to a single model for synthesis — producing a more accurate and well-rounded final response.",
+      "s3.title": "Setting Up API Keys",
+      "s3.p1": "tera is a client — it doesn't supply AI of its own. Data flows directly from your device to the provider; nothing passes through our servers. To get started, you'll need an API key from at least one provider, entered in Settings → Providers. Direct links to each provider's key page:",
+      "s3.faq": "For the latest list of supported providers, see <a href=\"https://app.teramoby.com/faq.html\">app.teramoby.com/faq.html</a>.",
+      "s3.tip": "Configure two or more providers if you can. The more models in the mix, the richer the perspectives feeding into the final answer.",
       "apikey.get": "Get API Key →",
 
-      "s4.title": "Using tera",
-      "s4.p1": "Once your API keys are set up, you're ready to go. The workflow is straightforward:",
-      "step1.title": "Select Your Models",
-      "step1.desc": "On the main screen, choose one or more models you want to query simultaneously.",
-      "step2.title": "Ask a Question",
-      "step2.desc": "Type your question and tap Send. tera dispatches it to all selected models at the same time.",
-      "step3.title": "Review Each Response",
-      "step3.desc": "Responses arrive in parallel. You can read each model's individual answer side by side.",
-      "step4.title": "Get the Synthesized Answer",
-      "step4.desc": "tera collects all responses and sends them to a single model, which synthesizes them into one objective, reliable final answer.",
+      "s4.title": "Asking Your First Question",
+      "s4.p1": "Once your keys are in, you're ready. The workflow is simple:",
+      "step1.title": "Select your models",
+      "step1.desc": "On the main screen, pick one or more models to query at the same time.",
+      "step2.title": "Type your question and send",
+      "step2.desc": "tera fires the request to all selected models in parallel.",
+      "step3.title": "Read each model's response",
+      "step3.desc": "Responses come back simultaneously. You can read each model's full answer individually.",
+      "step4.title": "Get the synthesized answer",
+      "step4.desc": "tera sends all responses to the summarizer model, which produces one objective, reliable final answer.",
 
-      "footer.help": "Questions or feedback? Email us at <a href=\"mailto:tera-support@teramoby.com\">tera-support@teramoby.com</a> or join the <a href=\"https://groups.google.com/g/tera-help\" target=\"_blank\" rel=\"noopener\">Google Group</a> to connect with other users.",
-      "img1.caption": "Search for teramoby on the App Store to find tera",
-      "img2.caption": "Configure your LLM providers and API keys in Settings → Providers",
-      "img3.caption": "Once configured, the main screen is ready for your first question",
-      "img4.caption": "tera collects responses from all models and the Summarizer produces a final synthesized answer",
+      "footer.help": "Questions or feedback? Email <a href=\"mailto:tera-support@teramoby.com\">tera-support@teramoby.com</a> or join the <a href=\"https://groups.google.com/g/tera-help\" target=\"_blank\" rel=\"noopener\">Google Group</a>.",
+      "img1.caption": "Search for teramoby on the App Store",
+      "img2.caption": "Settings → Providers: configure your LLM providers and API keys",
+      "img3.caption": "The main screen, ready for your first question",
+      "img4.caption": "The Summarizer model synthesizes all responses into one final answer",
       "footer.copy": "© 2026 teramoby · tera-support@teramoby.com",
       "footer.home": "Help Center",
       "footer.faq": "FAQ",
