@@ -341,6 +341,28 @@
     @media (max-width: 600px) {
       .hero h2 { font-size: 32px; }
     }
+
+    /* ── Footer QR ── */
+    .footer-qr {
+      margin-bottom: 18px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 7px;
+    }
+    .footer-qr a { display: block; }
+    .footer-qr img {
+      width: 88px; height: 88px;
+      border-radius: 10px;
+      opacity: 0.82;
+      transition: opacity 0.2s;
+    }
+    .footer-qr img:hover { opacity: 1; }
+    .footer-qr span {
+      font-size: 11px;
+      color: #b0b0c0;
+      letter-spacing: 0.02em;
+    }
   </style>
 </head>
 <body>
