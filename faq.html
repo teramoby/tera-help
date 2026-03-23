@@ -436,7 +436,7 @@
       </div>
       <div class="faq-answer"><p data-i18n="q4.body"></p></div>
     </div>
-    <div class="faq-item has-links">
+    <div id="api-keys" class="faq-item has-links">
       <div class="faq-question" onclick="toggle(this)">
         <h3 data-i18n="q_apikey.title"></h3>
         <div class="faq-chevron"><svg viewBox="0 0 12 12"><polyline points="2,4 6,8 10,4"/></svg></div>
@@ -624,6 +624,15 @@
   const saved = localStorage.getItem('tera-lang');
   const preferred = saved || (navigator.language.startsWith('zh') ? 'zh' : 'en');
   setLang(preferred);
+
+  // Auto-open and scroll to anchored FAQ item
+  if (location.hash) {
+    const target = document.querySelector(location.hash);
+    if (target && target.classList.contains('faq-item')) {
+      target.classList.add('open');
+      setTimeout(() => target.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
+    }
+  }
 </script>
 
 </body>
