@@ -391,6 +391,50 @@
     }
     footer a { color: #9696a8; text-decoration: none; margin: 0 8px; }
     footer a:hover { color: #5a9978; }
+
+    /* ── Announce bar ── */
+    .announce-bar {
+      background: linear-gradient(90deg, #1a4030, #5a9978 50%, #80c8a8);
+      color: #fff;
+      text-align: center;
+      padding: 11px 24px;
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+      position: relative;
+      z-index: 101;
+    }
+    .announce-bar a {
+      color: #fff;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: opacity 0.18s;
+    }
+    .announce-bar a:hover { opacity: 0.85; }
+
+    /* ── Footer QR ── */
+    .footer-qr {
+      margin-bottom: 18px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 7px;
+    }
+    .footer-qr a { display: block; }
+    .footer-qr img {
+      width: 88px; height: 88px;
+      border-radius: 10px;
+      opacity: 0.82;
+      transition: opacity 0.2s;
+    }
+    .footer-qr img:hover { opacity: 1; }
+    .footer-qr span {
+      font-size: 11px;
+      color: #b0b0c0;
+      letter-spacing: 0.02em;
+    }
   </style>
 </head>
 <body>
@@ -411,6 +455,8 @@
   <div class="diamond diamond-4"></div>
   <div class="diamond diamond-5"></div>
 </div>
+
+  <div class="announce-bar"><a href="https://apps.apple.com/us/app/terajournal/id6760472493" target="_blank" rel="noopener"><span id="announce-text">🎉 TeraJournal 现已上架 App Store！</span></a></div>
 
 <header>
   <div class="inner">
@@ -590,6 +636,8 @@
     document.getElementById('btn-zh').classList.toggle('active', lang === 'zh');
     document.getElementById('btn-en').classList.toggle('active', lang === 'en');
     localStorage.setItem('terajournal-lang', lang);
+    const at = document.getElementById('announce-text');
+    if (at) at.textContent = lang === 'zh' ? '🎉 TeraJournal 现已上架 App Store！' : '🎉 TeraJournal is now on the App Store!';
   }
 
   const saved = localStorage.getItem('terajournal-lang');
