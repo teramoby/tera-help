@@ -10,7 +10,7 @@
   <title>TeraJournal · AI Journal Companion</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;1,8..60,400&display=swap">
   <link rel="stylesheet" href="/assets/site.css">
 </head>
 <body class="theme-journal">
@@ -35,46 +35,50 @@
 
 <main>
   <section class="hero">
-    <p class="eyebrow" data-i18n="hero.badge"></p>
-    <h1 data-i18n="hero.title"></h1>
-    <p class="lede" data-i18n="hero.subtitle"></p>
+    <div class="hero-copy">
+      <p class="eyebrow"><span class="dot"></span><span data-i18n="hero.badge"></span></p>
+      <h1><span data-i18n="hero.titleLead"></span> <em data-i18n="hero.titleEm"></em></h1>
+      <p class="lede" data-i18n="hero.subtitle"></p>
 
-    <div class="hero-download">
-      <div class="download-stack">
-        <a class="btn btn-primary" href="https://apps.apple.com/us/app/terajournal/id6760472493" target="_blank" rel="noopener" data-i18n="hero.downloadBtn"></a>
-        <p class="download-meta" data-i18n="hero.downloadMeta"></p>
-      </div>
-      <a class="hero-qr" href="https://apps.apple.com/us/app/terajournal/id6760472493" target="_blank" rel="noopener">
-        <img src="/img/qr-journal-appstore.png" alt="App Store QR">
-        <div class="qr-text">
-          <strong data-i18n="hero.qrTitle"></strong>
-          <span data-i18n="hero.appstoreLabel"></span>
+      <div class="hero-download">
+        <div class="download-stack">
+          <a class="btn btn-primary" href="https://apps.apple.com/us/app/terajournal/id6760472493" target="_blank" rel="noopener" data-i18n="hero.downloadBtn"></a>
+          <p class="download-meta" data-i18n="hero.downloadMeta"></p>
         </div>
-      </a>
+        <a class="hero-qr" href="https://apps.apple.com/us/app/terajournal/id6760472493" target="_blank" rel="noopener">
+          <img src="/img/qr-journal-appstore.png" alt="App Store QR">
+          <div class="qr-text">
+            <strong data-i18n="hero.qrTitle"></strong>
+            <span data-i18n="hero.appstoreLabel"></span>
+          </div>
+        </a>
+      </div>
     </div>
   </section>
 
   <section class="section">
-    <p class="section-eyebrow" data-i18n="features.label"></p>
-    <h2 class="section-title" data-i18n="features.headline"></h2>
-    <div class="grid">
-      <div class="grid-item">
-        <p class="num">01</p>
+    <div class="section-header">
+      <p class="section-eyebrow" data-i18n="features.label"></p>
+      <h2 class="section-title"><span data-i18n="features.headlineLead"></span> <em data-i18n="features.headlineEm"></em></h2>
+    </div>
+    <div class="features">
+      <div class="feature">
+        <span class="num">01</span>
         <h3 data-i18n="features.ai.title"></h3>
         <p data-i18n="features.ai.desc"></p>
       </div>
-      <div class="grid-item">
-        <p class="num">02</p>
+      <div class="feature">
+        <span class="num">02</span>
         <h3 data-i18n="features.privacy.title"></h3>
         <p data-i18n="features.privacy.desc"></p>
       </div>
-      <div class="grid-item">
-        <p class="num">03</p>
+      <div class="feature">
+        <span class="num">03</span>
         <h3 data-i18n="features.icloud.title"></h3>
         <p data-i18n="features.icloud.desc"></p>
       </div>
-      <div class="grid-item">
-        <p class="num">04</p>
+      <div class="feature">
+        <span class="num">04</span>
         <h3 data-i18n="features.llm.title"></h3>
         <p data-i18n="features.llm.desc"></p>
       </div>
@@ -82,8 +86,10 @@
   </section>
 
   <section class="section">
-    <p class="section-eyebrow" data-i18n="privacy.label"></p>
-    <h2 class="section-title" data-i18n="privacy.title"></h2>
+    <div class="section-header">
+      <p class="section-eyebrow" data-i18n="privacy.label"></p>
+      <h2 class="section-title"><span data-i18n="privacy.titleLead"></span> <em data-i18n="privacy.titleEm"></em></h2>
+    </div>
     <div class="deflist">
       <div class="item">
         <h4 data-i18n="privacy.local.title"></h4>
@@ -112,12 +118,16 @@
   </section>
 
   <section class="cta-band">
-    <p class="section-eyebrow" data-i18n="help.label"></p>
-    <h2 data-i18n="help.title"></h2>
-    <p data-i18n="help.desc"></p>
-    <div class="cta-row">
-      <a class="btn btn-primary" href="mailto:tera-support@teramoby.com" data-i18n="help.emailBtn"></a>
-      <a class="btn btn-outline" href="https://groups.google.com/g/tera-help" target="_blank" rel="noopener" data-i18n="help.groupBtn"></a>
+    <div class="cta-band-inner">
+      <p class="section-eyebrow" data-i18n="help.label"></p>
+      <div>
+        <h2 data-i18n="help.title"></h2>
+        <p data-i18n="help.desc"></p>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="mailto:tera-support@teramoby.com" data-i18n="help.emailBtn"></a>
+          <a class="btn btn-outline" href="https://groups.google.com/g/tera-help" target="_blank" rel="noopener" data-i18n="help.groupBtn"></a>
+        </div>
+      </div>
     </div>
   </section>
 </main>
@@ -146,14 +156,16 @@
     zh: {
       "nav.appstore": "App Store 下载",
       "hero.badge": "AI Journal Companion",
-      "hero.title": "记录生活，AI 相伴。",
+      "hero.titleLead": "记录生活，",
+      "hero.titleEm": "AI 相伴。",
       "hero.subtitle": "用文字记录每一天，TeraJournal 会认真聆听并给出 AI 的回复与思考，让日记不再只是自言自语。",
       "hero.downloadBtn": "在 App Store 下载",
       "hero.downloadMeta": "iPhone · iPad · Mac",
       "hero.qrTitle": "扫码下载",
       "hero.appstoreLabel": "App Store · iPhone · iPad · Mac",
       "features.label": "功能特点",
-      "features.headline": "一款日记应用，因 AI 陪伴而不同。",
+      "features.headlineLead": "一款日记应用，",
+      "features.headlineEm": "因 AI 陪伴而不同。",
       "features.ai.title": "安静的陪伴",
       "features.ai.desc": "自由地写，TeraJournal 会轻声回应你的文字，像一位安静陪在身边的倾听者。",
       "features.privacy.title": "数据本地存储",
@@ -241,6 +253,11 @@
   const saved = localStorage.getItem('terajournal-lang');
   const preferred = saved || (navigator.language.startsWith('zh') ? 'zh' : 'en');
   setLang(preferred);
+
+  window.addEventListener('scroll', () => {
+    const h = document.querySelector('.site-header');
+    if (h) h.classList.toggle('scrolled', window.scrollY > 4);
+  }, { passive: true });
 </script>
 
 </body>

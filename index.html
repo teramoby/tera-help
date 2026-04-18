@@ -10,7 +10,7 @@
   <title>tera · Many Models, One Answer</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;1,8..60,400&display=swap">
   <link rel="stylesheet" href="/assets/site.css">
 </head>
 <body>
@@ -36,61 +36,82 @@
 </header>
 
 <main>
-  <section class="hero">
-    <p class="eyebrow" data-i18n="hero.badge"></p>
-    <h1 data-i18n="hero.title"></h1>
-    <p class="lede" data-i18n="hero.subtitle"></p>
+  <section class="hero has-visual">
+    <div class="hero-copy">
+      <p class="eyebrow"><span class="dot"></span><span data-i18n="hero.badge"></span></p>
+      <h1><span data-i18n="hero.titleLead"></span> <em data-i18n="hero.titleEm"></em><span data-i18n="hero.titleTail"></span></h1>
+      <p class="lede" data-i18n="hero.subtitle"></p>
 
-    <div class="hero-download">
-      <div class="download-stack">
-        <a class="btn btn-primary" href="tera-1.1.0.dmg" download>
-          <svg viewBox="0 0 814 1000"><path d="M788.1 340.9c-5.8 4.5-108.2 62.2-108.2 190.5 0 148.4 130.3 200.9 134.2 202.2-.6 3.2-20.7 71.9-68.7 141.9-42.8 61.6-87.5 123.1-155.5 123.1s-85.5-39.5-164-39.5c-76 0-103.7 40.8-165.9 40.8s-105-37.5-155.5-112.2c-48.3-72.3-92.5-191.2-92.5-302.9 0-171.6 112-262.2 222.1-262.2 82.4 0 151.3 54.2 203.9 54.2 50.3 0 129.2-58.2 220.9-58.2 35.4 0 127.3 3.2 190.5 111.3zm-180.3-147.4c36.3-44.5 62.6-106.1 62.6-167.7 0-8.3-.6-16.7-2-24.4-59.3 2.3-128.9 39.5-170.3 90.2-33.3 38.9-65 100.5-65 162.8 0 9.3 1.3 18.7 2 21.9 3.5.7 9.5 1.3 15.5 1.3 53.6 0 119.9-35.9 157.2-84.1z"/></svg>
-          <span data-i18n="hero.downloadBtn"></span>
-        </a>
-        <p class="download-meta" data-i18n="hero.downloadMeta"></p>
-      </div>
-
-      <a class="hero-qr" href="https://apps.apple.com/us/app/teramoby-tera-tt/id6760287852" target="_blank" rel="noopener">
-        <img src="/img/qr-appstore.png" alt="App Store QR">
-        <div class="qr-text">
-          <strong data-i18n="hero.qrTitle"></strong>
-          <span data-i18n="hero.appstoreLabel"></span>
+      <div class="hero-download">
+        <div class="download-stack">
+          <a class="btn btn-primary" href="tera-1.1.0.dmg" download>
+            <svg viewBox="0 0 814 1000"><path d="M788.1 340.9c-5.8 4.5-108.2 62.2-108.2 190.5 0 148.4 130.3 200.9 134.2 202.2-.6 3.2-20.7 71.9-68.7 141.9-42.8 61.6-87.5 123.1-155.5 123.1s-85.5-39.5-164-39.5c-76 0-103.7 40.8-165.9 40.8s-105-37.5-155.5-112.2c-48.3-72.3-92.5-191.2-92.5-302.9 0-171.6 112-262.2 222.1-262.2 82.4 0 151.3 54.2 203.9 54.2 50.3 0 129.2-58.2 220.9-58.2 35.4 0 127.3 3.2 190.5 111.3zm-180.3-147.4c36.3-44.5 62.6-106.1 62.6-167.7 0-8.3-.6-16.7-2-24.4-59.3 2.3-128.9 39.5-170.3 90.2-33.3 38.9-65 100.5-65 162.8 0 9.3 1.3 18.7 2 21.9 3.5.7 9.5 1.3 15.5 1.3 53.6 0 119.9-35.9 157.2-84.1z"/></svg>
+            <span data-i18n="hero.downloadBtn"></span>
+          </a>
+          <p class="download-meta" data-i18n="hero.downloadMeta"></p>
         </div>
-      </a>
+
+        <a class="hero-qr" href="https://apps.apple.com/us/app/teramoby-tera-tt/id6760287852" target="_blank" rel="noopener">
+          <img src="/img/qr-appstore.png" alt="App Store QR">
+          <div class="qr-text">
+            <strong data-i18n="hero.qrTitle"></strong>
+            <span data-i18n="hero.appstoreLabel"></span>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <div class="hero-visual">
+      <div class="phone-frame">
+        <img src="/img/screenshot-result.jpeg" alt="tera synthesized answer">
+      </div>
     </div>
   </section>
 
   <section class="section">
-    <p class="section-eyebrow" data-i18n="features.label"></p>
-    <h2 class="section-title" data-i18n="features.headline"></h2>
+    <div class="section-header">
+      <p class="section-eyebrow" data-i18n="features.label"></p>
+      <h2 class="section-title"><span data-i18n="features.headlineLead"></span> <em data-i18n="features.headlineEm"></em></h2>
+    </div>
 
-    <div class="grid">
-      <div class="grid-item">
-        <p class="num">01</p>
+    <div class="features">
+      <div class="feature">
+        <span class="num">01</span>
         <h3 data-i18n="features.connect.title"></h3>
         <p data-i18n="features.connect.desc"></p>
       </div>
-      <div class="grid-item">
-        <p class="num">02</p>
+      <div class="feature">
+        <span class="num">02</span>
         <h3 data-i18n="features.parallel.title"></h3>
         <p data-i18n="features.parallel.desc"></p>
       </div>
-      <div class="grid-item">
-        <p class="num">03</p>
+      <div class="feature">
+        <span class="num">03</span>
         <h3 data-i18n="features.verify.title"></h3>
         <p data-i18n="features.verify.desc"></p>
       </div>
-      <div class="grid-item">
-        <p class="num">04</p>
+      <div class="feature">
+        <span class="num">04</span>
         <h3 data-i18n="features.synthesis.title"></h3>
         <p data-i18n="features.synthesis.desc"></p>
       </div>
     </div>
   </section>
 
+  <section class="showcase">
+    <p class="showcase-caption" data-i18n="showcase.caption"></p>
+    <div class="showcase-images">
+      <div class="mock"><img src="/img/screenshot-appstore.jpeg" alt=""></div>
+      <div class="mock"><img src="/img/screenshot-home.jpeg" alt=""></div>
+      <div class="mock"><img src="/img/screenshot-settings.jpeg" alt=""></div>
+    </div>
+  </section>
+
   <section class="section">
-    <p class="section-eyebrow" data-i18n="privacy.label"></p>
-    <h2 class="section-title" data-i18n="privacy.title"></h2>
+    <div class="section-header">
+      <p class="section-eyebrow" data-i18n="privacy.label"></p>
+      <h2 class="section-title"><span data-i18n="privacy.titleLead"></span> <em data-i18n="privacy.titleEm"></em></h2>
+    </div>
 
     <div class="deflist">
       <div class="item">
@@ -122,21 +143,29 @@
   </section>
 
   <section class="cta-band">
-    <p class="section-eyebrow" data-i18n="help.label"></p>
-    <h2 data-i18n="help.title"></h2>
-    <p data-i18n="help.desc"></p>
-    <div class="cta-row">
-      <a class="btn btn-primary" href="mailto:tera-support@teramoby.com" data-i18n="help.emailBtn"></a>
-      <a class="btn btn-outline" href="https://groups.google.com/g/tera-help" target="_blank" rel="noopener" data-i18n="help.groupBtn"></a>
+    <div class="cta-band-inner">
+      <p class="section-eyebrow" data-i18n="help.label"></p>
+      <div>
+        <h2 data-i18n="help.title"></h2>
+        <p data-i18n="help.desc"></p>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="mailto:tera-support@teramoby.com" data-i18n="help.emailBtn"></a>
+          <a class="btn btn-outline" href="https://groups.google.com/g/tera-help" target="_blank" rel="noopener" data-i18n="help.groupBtn"></a>
+        </div>
+      </div>
     </div>
   </section>
 
   <section class="cta-band">
-    <p class="section-eyebrow" data-i18n="feature.label"></p>
-    <h2 data-i18n="feature.title"></h2>
-    <p data-i18n="feature.desc"></p>
-    <div class="cta-row">
-      <a class="btn btn-outline" href="mailto:tera-support@teramoby.com" data-i18n="feature.btn"></a>
+    <div class="cta-band-inner">
+      <p class="section-eyebrow" data-i18n="feature.label"></p>
+      <div>
+        <h2 data-i18n="feature.title"></h2>
+        <p data-i18n="feature.desc"></p>
+        <div class="cta-row">
+          <a class="btn btn-outline" href="mailto:tera-support@teramoby.com" data-i18n="feature.btn"></a>
+        </div>
+      </div>
     </div>
   </section>
 </main>
@@ -149,7 +178,27 @@
         <span>tera</span>
       </div>
       <p class="tagline" data-i18n="footer.tagline"></p>
+      <p class="footer-tagline-sm" data-i18n="footer.slogan"></p>
     </div>
+
+    <div class="footer-col">
+      <h4 data-i18n="footer.colProduct"></h4>
+      <ul>
+        <li><a href="/launch.html" data-i18n="footer.launch"></a></li>
+        <li><a href="/blog-getting-started.html" data-i18n="nav.guide"></a></li>
+        <li><a href="/faq.html" data-i18n="footer.faq"></a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h4 data-i18n="footer.colCompany"></h4>
+      <ul>
+        <li><a href="/privacy.html" data-i18n="footer.privacy"></a></li>
+        <li><a href="mailto:tera-support@teramoby.com" data-i18n="footer.email"></a></li>
+        <li><a href="https://groups.google.com/g/tera-help" target="_blank" rel="noopener" data-i18n="footer.community"></a></li>
+      </ul>
+    </div>
+
     <a class="footer-qr" href="https://apps.apple.com/us/app/teramoby-tera-tt/id6760287852" target="_blank" rel="noopener">
       <img src="/img/qr-appstore.png" alt="App Store QR">
       <span data-i18n="footer.qrCaption"></span>
@@ -158,9 +207,8 @@
   <div class="meta">
     <span data-i18n="footer.copy"></span>
     <nav>
-      <a href="/faq.html" data-i18n="footer.faq"></a>
+      <a href="/" data-i18n="footer.home"></a>
       <a href="/privacy.html" data-i18n="footer.privacy"></a>
-      <a href="/launch.html" data-i18n="footer.launch"></a>
     </nav>
   </div>
 </footer>
@@ -173,14 +221,17 @@
       "nav.faq": "常见问题",
       "nav.privacy": "隐私政策",
       "hero.badge": "Many Models, One Answer",
-      "hero.title": "多模型 AI，一个可靠答案。",
+      "hero.titleLead": "多模型 AI，",
+      "hero.titleEm": "一个可靠",
+      "hero.titleTail": "答案。",
       "hero.subtitle": "连接主流大语言模型，同时调用多个模型，再由 AI 汇总生成一个可靠的综合答案。",
       "hero.downloadBtn": "下载 for Mac",
       "hero.downloadMeta": "macOS 26.2+  ·  通用版（Apple Silicon & Intel）",
       "hero.qrTitle": "在 App Store 下载",
       "hero.appstoreLabel": "iPhone · iPad · Mac",
       "features.label": "功能",
-      "features.headline": "一款 App，汇聚多方模型的判断。",
+      "features.headlineLead": "一款 App，",
+      "features.headlineEm": "汇聚多方模型的判断。",
       "features.connect.title": "连接主流模型",
       "features.connect.desc": "支持接入目前流行的大语言模型，一个 App 满足所有对话需求。",
       "features.parallel.title": "多模型并发调用",
@@ -189,8 +240,10 @@
       "features.verify.desc": "获得多个模型的回答后，tera 将所有答案发给一个模型，由它综合整理出最终答案。",
       "features.synthesis.title": "综合答案",
       "features.synthesis.desc": "基于多模型的反馈自动整合，给出更全面、更准确的最终结论。",
+      "showcase.caption": "设计为 iPhone · iPad · Mac 打造",
       "privacy.label": "隐私",
-      "privacy.title": "您的数据，只属于您。",
+      "privacy.titleLead": "您的数据，",
+      "privacy.titleEm": "只属于您。",
       "privacy.local.title": "数据本地存储",
       "privacy.local.desc": "您的所有对话记录、配置信息均仅保存在您所安装的设备上，不会上传至任何服务器。",
       "privacy.nocollect.title": "零数据收集",
@@ -210,12 +263,18 @@
       "feature.title": "想要新功能？",
       "feature.desc": "有好的想法或功能需求？发邮件告诉我们，我们认真阅读每一条建议。",
       "feature.btn": "提交建议",
-      "footer.tagline": "Many Models, One Answer. 由 teramoby 开发。",
+      "footer.tagline": "让多模型 AI 成为你每一个问题的参谋。",
+      "footer.slogan": "Many Models · One Answer",
       "footer.qrCaption": "扫码下载 App Store",
       "footer.copy": "© 2026 teramoby · tera-support@teramoby.com",
+      "footer.colProduct": "产品",
+      "footer.colCompany": "关于",
+      "footer.home": "首页",
       "footer.faq": "常见问题",
       "footer.privacy": "隐私政策",
       "footer.launch": "发布公告",
+      "footer.email": "发送邮件",
+      "footer.community": "Google Group",
     },
     en: {
       "nav.launch": "Launch",
@@ -223,14 +282,17 @@
       "nav.faq": "FAQ",
       "nav.privacy": "Privacy",
       "hero.badge": "Many Models, One Answer",
-      "hero.title": "Many models. One reliable answer.",
+      "hero.titleLead": "Many models.",
+      "hero.titleEm": "One reliable",
+      "hero.titleTail": " answer.",
       "hero.subtitle": "Connect to leading large language models, query multiple models in parallel, and let AI synthesize their answers into one reliable response.",
       "hero.downloadBtn": "Download for Mac",
       "hero.downloadMeta": "macOS 26.2+  ·  Universal (Apple Silicon & Intel)",
       "hero.qrTitle": "Get it on the App Store",
       "hero.appstoreLabel": "iPhone · iPad · Mac",
       "features.label": "Features",
-      "features.headline": "One app. The collective judgment of every leading model.",
+      "features.headlineLead": "One app.",
+      "features.headlineEm": "The judgment of every leading model.",
       "features.connect.title": "Connect to Popular Models",
       "features.connect.desc": "Integrate with today's most popular large language models — one app for all your AI conversations.",
       "features.parallel.title": "Parallel Model Calls",
@@ -239,8 +301,10 @@
       "features.verify.desc": "After collecting responses from all models, tera sends them to a single model which synthesizes them into one final, reliable answer.",
       "features.synthesis.title": "Synthesized Answer",
       "features.synthesis.desc": "Automatically combines insights from all models into one comprehensive, accurate final answer.",
+      "showcase.caption": "Designed for iPhone · iPad · Mac",
       "privacy.label": "Privacy",
-      "privacy.title": "Your data belongs to you — always.",
+      "privacy.titleLead": "Your data belongs to you —",
+      "privacy.titleEm": "always.",
       "privacy.local.title": "Stored Locally on Your Device",
       "privacy.local.desc": "All your conversations and settings are saved exclusively on your device and are never uploaded to any server.",
       "privacy.nocollect.title": "Zero Data Collection",
@@ -260,12 +324,18 @@
       "feature.title": "Want a new feature?",
       "feature.desc": "Got an idea or a feature you'd love to see? Send us an email — we read every suggestion.",
       "feature.btn": "Share Your Idea",
-      "footer.tagline": "Many Models, One Answer. Built by teramoby.",
+      "footer.tagline": "Multi-model AI in your pocket — so every question gets the benefit of every perspective.",
+      "footer.slogan": "Many Models · One Answer",
       "footer.qrCaption": "Scan for the App Store",
       "footer.copy": "© 2026 teramoby · tera-support@teramoby.com",
+      "footer.colProduct": "Product",
+      "footer.colCompany": "Company",
+      "footer.home": "Home",
       "footer.faq": "FAQ",
       "footer.privacy": "Privacy",
       "footer.launch": "Launch",
+      "footer.email": "Email",
+      "footer.community": "Community",
     }
   };
 
