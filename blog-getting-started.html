@@ -3,318 +3,34 @@
 <head>
   <meta charset="UTF-8">
   <link rel="icon" type="image/x-icon" href="/favicon.ico?v=2">
-  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png?v=2">
+  <link rel="icon" type="image/png" sizes="32x32" href="/icon-64.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png?v=2">
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=2">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>tera · 使用指南</title>
-  <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scrollbar-gutter: stable; }
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", sans-serif;
-      background: transparent; color: #1d1d1f; line-height: 1.7;
-    }
-
-    /* ── Animated background ── */
-    .bg-wrap { position: fixed; inset: 0; z-index: -1; background: #f0effa; overflow: hidden; transform: translateZ(0); }
-    .orb { position: absolute; border-radius: 50%; filter: blur(80px); will-change: transform; }
-    .orb-1 { width:640px; height:640px; background: radial-gradient(circle, rgba(110,64,247,0.32), transparent 68%); top:-220px; left:-140px; animation: drift1 22s ease-in-out infinite alternate; }
-    .orb-2 { width:520px; height:520px; background: radial-gradient(circle, rgba(59,130,246,0.26), transparent 68%); top:30%; right:-160px; animation: drift2 28s ease-in-out infinite alternate; }
-    .orb-3 { width:460px; height:460px; background: radial-gradient(circle, rgba(6,182,212,0.22), transparent 68%); bottom:-100px; left:28%; animation: drift3 24s ease-in-out infinite alternate; }
-    .orb-4 { width:320px; height:320px; background: radial-gradient(circle, rgba(236,72,153,0.14), transparent 68%); top:55%; left:-60px; animation: drift1 32s ease-in-out infinite alternate-reverse; }
-    @keyframes drift1 { from { transform: translate(0,0); } to { transform: translate(100px,80px); } }
-    @keyframes drift2 { from { transform: translate(0,0); } to { transform: translate(-80px,100px); } }
-    @keyframes drift3 { from { transform: translate(0,0); } to { transform: translate(70px,-90px); } }
-    .ring { position: absolute; border-radius: 50%; pointer-events: none; will-change: transform, opacity; }
-    .ring-1 { width:380px; height:380px; top:-40px; right:6%; border:1px solid rgba(110,64,247,0.16); animation: spin-ring 65s linear infinite, breathe 9s ease-in-out infinite alternate; }
-    .ring-2 { width:240px; height:240px; top:36%; left:2%; border:1px solid rgba(59,130,246,0.13); animation: spin-ring 85s linear infinite reverse, breathe 13s ease-in-out infinite alternate; }
-    .ring-3 { width:130px; height:130px; bottom:12%; right:22%; border:1px solid rgba(6,182,212,0.12); animation: spin-ring 50s linear infinite, breathe 7s ease-in-out infinite alternate; }
-    .diamond { position: absolute; pointer-events: none; will-change: transform, opacity; }
-    .diamond-1 { width:70px; height:70px; top:18%; left:7%; border:1px solid rgba(110,64,247,0.14); animation: spin-diamond 42s linear infinite, breathe 8s ease-in-out infinite alternate; }
-    .diamond-2 { width:44px; height:44px; bottom:22%; right:8%; border:1px solid rgba(59,130,246,0.11); animation: spin-diamond 58s linear infinite reverse, breathe 11s ease-in-out infinite alternate; }
-    .diamond-3 { width:108px; height:108px; top:54%; right:14%; border:1px solid rgba(110,64,247,0.08); animation: spin-diamond 72s linear infinite, breathe 16s ease-in-out infinite alternate; }
-    @keyframes spin-ring    { from { transform: rotate(0deg); }   to { transform: rotate(360deg); } }
-    @keyframes spin-diamond { from { transform: rotate(45deg); }  to { transform: rotate(405deg); } }
-    @keyframes breathe      { from { opacity: 0.35; }             to { opacity: 1; } }
-
-    /* ── Header ── */
-    header {
-      background: rgba(240,239,250,0.6);
-      backdrop-filter: blur(24px) saturate(1.8);
-      -webkit-backdrop-filter: blur(24px) saturate(1.8);
-      border-bottom: 1px solid rgba(110,64,247,0.12);
-      position: sticky; top: 0; z-index: 100;
-    }
-    header .inner {
-      max-width: 760px; margin: 0 auto; padding: 16px 24px;
-      display: flex; align-items: center; gap: 12px;
-    }
-    header .logo {
-      width: 38px; height: 38px; border-radius: 10px;
-      overflow: hidden; flex-shrink: 0; text-decoration: none;
-    }
-    header .breadcrumb { flex: 1; font-size: 15px; color: #6e6e73; }
-    header .breadcrumb a { color: #6e40f7; text-decoration: none; font-weight: 700; }
-    header .breadcrumb a:hover { opacity: 0.7; }
-    header .breadcrumb span.sep { margin: 0 6px; color: #b0b0c0; }
-
-    .lang-toggle {
-      display: flex; background: rgba(110,64,247,0.1);
-      border-radius: 980px; padding: 3px; gap: 2px;
-    }
-    .lang-toggle button {
-      border: none; background: transparent;
-      padding: 5px 14px; border-radius: 980px;
-      font-size: 13px; font-weight: 500; color: #6e6e73;
-      cursor: pointer; transition: background 0.2s, color 0.2s;
-    }
-    .lang-toggle button.active {
-      background: #fff; color: #6e40f7; font-weight: 700;
-      box-shadow: 0 1px 4px rgba(0,0,0,0.12);
-    }
-
-    /* ── Main ── */
-    main { max-width: 760px; margin: 0 auto; padding: 48px 24px 80px; }
-
-    /* ── Post header ── */
-    .post-header {
-      padding: 48px 0 40px;
-      border-bottom: 1px solid rgba(110,64,247,0.1);
-      margin-bottom: 40px;
-      animation: fadeUp 0.6s ease both;
-    }
-    .post-meta {
-      font-size: 12px; font-weight: 700; text-transform: uppercase;
-      letter-spacing: 0.08em; color: #9696a8;
-      margin-bottom: 16px;
-    }
-    .post-title {
-      font-size: 38px; font-weight: 800; letter-spacing: -1.2px;
-      background: linear-gradient(135deg, #4c1d95 0%, #6e40f7 40%, #3b82f6 80%, #06b6d4 100%);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-      background-clip: text; line-height: 1.15; margin-bottom: 16px;
-    }
-    .post-lead {
-      font-size: 17px; color: #5a5a6a; line-height: 1.75; max-width: 600px;
-    }
-
-    /* ── Blog body ── */
-    .post-body { animation: fadeUp 0.6s 0.1s ease both; }
-
-    .post-body h2 {
-      font-size: 22px; font-weight: 800; color: #1d1d1f;
-      margin: 44px 0 14px; letter-spacing: -0.4px;
-    }
-    .post-body h2:first-child { margin-top: 0; }
-
-    .post-body p {
-      font-size: 16px; color: #3a3a4a; line-height: 1.85;
-      margin-bottom: 16px;
-    }
-
-    .name-badge {
-      display: inline-block;
-      background: rgba(110,64,247,0.08);
-      border: 1px solid rgba(110,64,247,0.18);
-      color: #6e40f7;
-      font-size: 14px; font-weight: 700;
-      padding: 3px 10px; border-radius: 6px;
-      font-family: ui-monospace, "SF Mono", monospace;
-    }
-
-    /* ── Steps ── */
-    .steps { display: flex; flex-direction: column; gap: 12px; margin: 24px 0; }
-    .step {
-      background: rgba(255,255,255,0.62);
-      backdrop-filter: blur(24px) saturate(1.8);
-      -webkit-backdrop-filter: blur(24px) saturate(1.8);
-      border: 1px solid rgba(255,255,255,0.88);
-      border-radius: 16px; padding: 20px 24px;
-      box-shadow: 0 3px 16px rgba(110,64,247,0.07), inset 0 1px 0 rgba(255,255,255,0.95);
-      display: flex; align-items: flex-start; gap: 16px;
-    }
-    .step-num {
-      width: 32px; height: 32px; border-radius: 9px; flex-shrink: 0;
-      background: linear-gradient(135deg, #6e40f7, #3b82f6);
-      color: #fff; font-size: 14px; font-weight: 800;
-      display: flex; align-items: center; justify-content: center;
-      box-shadow: 0 2px 8px rgba(110,64,247,0.32);
-    }
-    .step-body h4 { font-size: 15px; font-weight: 700; color: #1d1d1f; margin-bottom: 4px; }
-    .step-body p  { font-size: 14px; color: #6e6e73; line-height: 1.65; margin: 0; }
-    .step-body a  { color: #6e40f7; text-decoration: none; font-weight: 500; }
-    .step-body a:hover { text-decoration: underline; }
-
-    /* ── Callout ── */
-    .callout {
-      background: rgba(110,64,247,0.05);
-      border-left: 3px solid rgba(110,64,247,0.4);
-      border-radius: 0 12px 12px 0;
-      padding: 16px 20px; margin: 24px 0;
-      font-size: 14px; color: #4a4a5a; line-height: 1.75;
-    }
-    .callout strong { color: #6e40f7; }
-
-    /* ── Screenshot ── */
-    .screenshot-row {
-      display: flex;
-      gap: 20px;
-      justify-content: center;
-      margin: 28px 0;
-    }
-    .screenshot-row .screenshot {
-      margin: 0;
-      flex: 1;
-    }
-    .screenshot {
-      margin: 28px auto;
-      text-align: center;
-    }
-    .screenshot img {
-      max-width: 280px;
-      width: 100%;
-      border-radius: 24px;
-      box-shadow: 0 12px 48px rgba(0,0,0,0.14), 0 2px 8px rgba(0,0,0,0.08);
-      display: block;
-      margin: 0 auto;
-    }
-    .screenshot figcaption {
-      margin-top: 10px;
-      font-size: 13px;
-      color: #9696a8;
-      font-style: italic;
-    }
-
-    /* ── API links ── */
-    .api-links { list-style: none; margin: 14px 0; display: flex; flex-direction: column; gap: 8px; }
-    .api-links li { font-size: 14px; color: #4a4a5a; display: flex; align-items: center; gap: 10px; }
-    .api-links li::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: #6e40f7; flex-shrink: 0; }
-    .api-links .provider { font-weight: 700; color: #1d1d1f; min-width: 170px; }
-    .api-links a { color: #6e40f7; text-decoration: none; font-weight: 500; }
-    .api-links a:hover { text-decoration: underline; }
-
-    /* ── Pain point cards ── */
-    .painpoints {
-      display: flex; flex-direction: column; gap: 16px;
-      margin: 20px 0;
-    }
-    .painpoint {
-      background: rgba(255,255,255,0.62);
-      backdrop-filter: blur(24px) saturate(1.8);
-      -webkit-backdrop-filter: blur(24px) saturate(1.8);
-      border: 1px solid rgba(255,255,255,0.88);
-      border-radius: 18px; padding: 24px 28px;
-      box-shadow: 0 3px 16px rgba(110,64,247,0.07), inset 0 1px 0 rgba(255,255,255,0.95);
-      position: relative; overflow: hidden;
-    }
-    .painpoint::before {
-      content: '';
-      position: absolute; top: 0; left: 0; bottom: 0;
-      width: 3px;
-      background: linear-gradient(to bottom, #6e40f7, #3b82f6);
-    }
-    .painpoint h4 {
-      font-size: 15px; font-weight: 700; color: #1d1d1f;
-      margin-bottom: 8px;
-    }
-    .painpoint p {
-      font-size: 14px; color: #4a4a5a; line-height: 1.8; margin: 0;
-    }
-
-    /* ── Aside ── */
-    .aside-note {
-      margin-top: 52px;
-      padding: 24px 28px;
-      background: rgba(255,255,255,0.5);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border: 1px solid rgba(110,64,247,0.12);
-      border-radius: 16px;
-      box-shadow: 0 2px 12px rgba(110,64,247,0.06);
-    }
-    .aside-note h3 {
-      font-size: 14px; font-weight: 800;
-      text-transform: uppercase; letter-spacing: 0.08em;
-      color: #9696a8; margin-bottom: 12px;
-    }
-    .aside-note p {
-      font-size: 14px; color: #6e6e73; line-height: 1.8; margin-bottom: 10px;
-    }
-    .aside-note p:last-child { margin-bottom: 0; }
-
-    /* ── Footer divider ── */
-    .post-footer {
-      margin-top: 56px; padding-top: 32px;
-      border-top: 1px solid rgba(110,64,247,0.1);
-      font-size: 14px; color: #6e6e73; line-height: 1.75;
-    }
-    .post-footer a { color: #6e40f7; text-decoration: none; font-weight: 500; }
-    .post-footer a:hover { text-decoration: underline; }
-
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-
-    footer {
-      text-align: center; padding: 32px 24px;
-      font-size: 13px; color: #9696a8; position: relative;
-    }
-    footer::before {
-      content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%);
-      width: 200px; height: 1px;
-      background: linear-gradient(to right, transparent, rgba(110,64,247,0.4), transparent);
-    }
-    footer a { color: #9696a8; text-decoration: none; margin: 0 8px; }
-    footer a:hover { color: #6e40f7; }
-
-    @media (max-width: 600px) {
-      .post-title { font-size: 28px; }
-    }
-
-    /* ── Footer QR ── */
-    .footer-qr {
-      margin-bottom: 18px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 7px;
-    }
-    .footer-qr a { display: block; }
-    .footer-qr img {
-      width: 88px; height: 88px;
-      border-radius: 10px;
-      opacity: 0.82;
-      transition: opacity 0.2s;
-    }
-    .footer-qr img:hover { opacity: 1; }
-    .footer-qr span {
-      font-size: 11px;
-      color: #b0b0c0;
-      letter-spacing: 0.02em;
-    }
-  </style>
+  <title>tera · Getting Started</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap">
+  <link rel="stylesheet" href="/assets/site.css">
 </head>
 <body>
 
-<div class="bg-wrap" aria-hidden="true">
-  <div class="orb orb-1"></div><div class="orb orb-2"></div>
-  <div class="orb orb-3"></div><div class="orb orb-4"></div>
-  <div class="ring ring-1"></div><div class="ring ring-2"></div>
-  <div class="ring ring-3"></div>
-  <div class="diamond diamond-1"></div><div class="diamond diamond-2"></div>
-  <div class="diamond diamond-3"></div>
-</div>
-
-<header>
+<header class="site-header">
   <div class="inner">
-    <a class="logo" href="index.html"><img src="/icon-64.png" alt="tera" width="38" height="38" style="display:block;"></a>
+    <a href="/" class="brand">
+      <img src="/icon-64.png" alt="">
+      <span>tera</span>
+    </a>
     <div class="breadcrumb">
-      <a href="index.html">tera</a>
-      <span class="sep">›</span>
+      <span class="sep">/</span>
       <span data-i18n="nav.blog"></span>
     </div>
+    <div class="spacer"></div>
+    <nav>
+      <a href="/launch.html" data-i18n="nav.launch"></a>
+      <a href="/faq.html" data-i18n="nav.faq"></a>
+      <a href="/privacy.html" data-i18n="nav.privacy"></a>
+    </nav>
     <div class="lang-toggle">
       <button id="btn-zh" class="active" onclick="setLang('zh')">中文</button>
       <button id="btn-en" onclick="setLang('en')">EN</button>
@@ -322,145 +38,134 @@
   </div>
 </header>
 
-<main>
-  <div class="post-header">
-    <p class="post-meta" data-i18n="post.meta"></p>
-    <h1 class="post-title" data-i18n="post.title"></h1>
-    <p class="post-lead" data-i18n="post.lead"></p>
+<main class="reading">
+  <p class="dateline" data-i18n="post.meta"></p>
+  <h1 data-i18n="post.title"></h1>
+  <p class="lede" data-i18n="post.lead"></p>
+
+  <p data-i18n="intro.p1"></p>
+  <p data-i18n="intro.p2"></p>
+  <p data-i18n="intro.p3"></p>
+
+  <h2 data-i18n="s2.title"></h2>
+  <p data-i18n="s2.p1"></p>
+  <div class="callout" data-i18n="s2.note"></div>
+  <figure>
+    <img src="/img/screenshot-appstore.jpeg" alt="tera on the App Store">
+    <figcaption data-i18n="img1.caption"></figcaption>
+  </figure>
+
+  <h2 data-i18n="s3.title"></h2>
+  <p data-i18n="s3.p1"></p>
+  <ul class="api-links">
+    <li><span class="provider">ChatGPT (OpenAI)</span><a href="https://help.openai.com/en/articles/4936850-where-do-i-find-my-openai-api-key" target="_blank" rel="noopener" data-i18n="apikey.get"></a></li>
+    <li><span class="provider">Claude (Anthropic)</span><a href="https://platform.claude.com/login?returnTo=%2Fsettings%2Fkeys" target="_blank" rel="noopener" data-i18n="apikey.get"></a></li>
+    <li><span class="provider">Grok (xAI)</span><a href="https://console.x.ai/team/5aeeaef0-f088-49bd-90fb-8658c2992539" target="_blank" rel="noopener" data-i18n="apikey.get"></a></li>
+    <li><span class="provider">Gemini (Google)</span><a href="https://ai.google.dev/gemini-api/docs/api-key" target="_blank" rel="noopener" data-i18n="apikey.get"></a></li>
+    <li><span class="provider">DeepSeek</span><a href="https://platform.deepseek.com/api_keys" target="_blank" rel="noopener" data-i18n="apikey.get"></a></li>
+    <li><span class="provider">AWS Bedrock</span><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/api-keys.html" target="_blank" rel="noopener" data-i18n="apikey.get"></a></li>
+    <li><span class="provider">火山引擎 (VolcEngine)</span><a href="https://console.volcengine.com/auth/login?redirectURI=%2Fark%2Fregion%3Aark%2Bcn-beijing%2FapiKey" target="_blank" rel="noopener" data-i18n="apikey.get"></a></li>
+  </ul>
+  <p data-i18n="s3.faq" style="margin-top: 24px;"></p>
+  <div class="callout" data-i18n="s3.tip"></div>
+  <div class="screenshot-row">
+    <figure>
+      <img src="/img/screenshot-home.jpeg" alt="tera main screen">
+      <figcaption data-i18n="img3.caption"></figcaption>
+    </figure>
+    <figure>
+      <img src="/img/screenshot-settings.jpeg" alt="tera Settings — LLM Configuration">
+      <figcaption data-i18n="img2.caption"></figcaption>
+    </figure>
   </div>
 
-  <div class="post-body">
-
-    <!-- Flowing intro -->
-    <p data-i18n="intro.p1"></p>
-    <p data-i18n="intro.p2"></p>
-    <p data-i18n="intro.p3"></p>
-
-    <!-- Section: Install -->
-    <h2 data-i18n="s2.title"></h2>
-    <p data-i18n="s2.p1"></p>
-    <div class="callout" data-i18n="s2.note"></div>
-    <figure class="screenshot">
-      <img src="/img/screenshot-appstore.jpeg" alt="tera on the App Store">
-      <figcaption data-i18n="img1.caption"></figcaption>
-    </figure>
-
-    <!-- Section: API Keys -->
-    <h2 data-i18n="s3.title"></h2>
-    <p data-i18n="s3.p1"></p>
-    <ul class="api-links">
-      <li><span class="provider">ChatGPT (OpenAI)</span><a href="https://help.openai.com/en/articles/4936850-where-do-i-find-my-openai-api-key" target="_blank" rel="noopener" data-i18n="apikey.get"></a></li>
-      <li><span class="provider">Claude (Anthropic)</span><a href="https://platform.claude.com/login?returnTo=%2Fsettings%2Fkeys" target="_blank" rel="noopener" data-i18n="apikey.get"></a></li>
-      <li><span class="provider">Grok (xAI)</span><a href="https://console.x.ai/team/5aeeaef0-f088-49bd-90fb-8658c2992539" target="_blank" rel="noopener" data-i18n="apikey.get"></a></li>
-      <li><span class="provider">Gemini (Google)</span><a href="https://ai.google.dev/gemini-api/docs/api-key" target="_blank" rel="noopener" data-i18n="apikey.get"></a></li>
-      <li><span class="provider">DeepSeek</span><a href="https://platform.deepseek.com/api_keys" target="_blank" rel="noopener" data-i18n="apikey.get"></a></li>
-      <li><span class="provider">AWS Bedrock</span><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/api-keys.html" target="_blank" rel="noopener" data-i18n="apikey.get"></a></li>
-      <li><span class="provider">火山引擎 (VolcEngine)</span><a href="https://console.volcengine.com/auth/login?redirectURI=%2Fark%2Fregion%3Aark%2Bcn-beijing%2FapiKey" target="_blank" rel="noopener" data-i18n="apikey.get"></a></li>
-    </ul>
-    <p data-i18n="s3.faq"></p>
-    <div class="callout" data-i18n="s3.tip"></div>
-    <div class="screenshot-row">
-      <figure class="screenshot">
-        <img src="/img/screenshot-home.jpeg" alt="tera main screen">
-        <figcaption data-i18n="img3.caption"></figcaption>
-      </figure>
-      <figure class="screenshot">
-        <img src="/img/screenshot-settings.jpeg" alt="tera Settings — LLM Configuration">
-        <figcaption data-i18n="img2.caption"></figcaption>
-      </figure>
-    </div>
-
-    <!-- Section: Using tera -->
-    <h2 data-i18n="s4.title"></h2>
-    <p data-i18n="s4.p1"></p>
-    <div class="steps">
-      <div class="step">
-        <div class="step-num">1</div>
-        <div class="step-body">
-          <h4 data-i18n="step1.title"></h4>
-          <p data-i18n="step1.desc"></p>
-        </div>
-      </div>
-      <div class="step">
-        <div class="step-num">2</div>
-        <div class="step-body">
-          <h4 data-i18n="step2.title"></h4>
-          <p data-i18n="step2.desc"></p>
-        </div>
-      </div>
-      <div class="step">
-        <div class="step-num">3</div>
-        <div class="step-body">
-          <h4 data-i18n="step3.title"></h4>
-          <p data-i18n="step3.desc"></p>
-        </div>
-      </div>
-      <div class="step">
-        <div class="step-num">4</div>
-        <div class="step-body">
-          <h4 data-i18n="step4.title"></h4>
-          <p data-i18n="step4.desc"></p>
-        </div>
+  <h2 data-i18n="s4.title"></h2>
+  <p data-i18n="s4.p1"></p>
+  <div class="steps">
+    <div class="step">
+      <div>
+        <h4 data-i18n="step1.title"></h4>
+        <p data-i18n="step1.desc"></p>
       </div>
     </div>
-
-    <figure class="screenshot">
-      <img src="/img/screenshot-result.jpeg" alt="tera synthesized answer">
-      <figcaption data-i18n="img4.caption"></figcaption>
-    </figure>
-
-    <aside class="aside-note">
-      <h3 data-i18n="s1.title"></h3>
-      <p data-i18n="s1.p1"></p>
-      <p data-i18n="s1.p2"></p>
-    </aside>
-
-    <div class="post-footer">
-      <p data-i18n="footer.help"></p>
+    <div class="step">
+      <div>
+        <h4 data-i18n="step2.title"></h4>
+        <p data-i18n="step2.desc"></p>
+      </div>
     </div>
-
+    <div class="step">
+      <div>
+        <h4 data-i18n="step3.title"></h4>
+        <p data-i18n="step3.desc"></p>
+      </div>
+    </div>
+    <div class="step">
+      <div>
+        <h4 data-i18n="step4.title"></h4>
+        <p data-i18n="step4.desc"></p>
+      </div>
+    </div>
   </div>
+
+  <figure>
+    <img src="/img/screenshot-result.jpeg" alt="tera synthesized answer">
+    <figcaption data-i18n="img4.caption"></figcaption>
+  </figure>
+
+  <aside class="aside-note">
+    <h3 data-i18n="s1.title"></h3>
+    <p data-i18n="s1.p1"></p>
+    <p data-i18n="s1.p2"></p>
+  </aside>
+
+  <p style="margin-top: 48px; font-size: 14px; color: var(--grey-800);" data-i18n="footer.help"></p>
 </main>
 
-<footer>
-  <div class="footer-qr">
-    <a href="https://apps.apple.com/us/app/teramoby-tera-tt/id6760287852" target="_blank" rel="noopener">
-      <img src="/img/qr-appstore.png" alt="Download tera on the App Store">
+<footer class="site-footer">
+  <div class="inner">
+    <div class="brand-col">
+      <div class="brand"><img src="/icon-64.png" alt=""><span>tera</span></div>
+      <p class="tagline" data-i18n="footer.tagline"></p>
+    </div>
+    <a class="footer-qr" href="https://apps.apple.com/us/app/teramoby-tera-tt/id6760287852" target="_blank" rel="noopener">
+      <img src="/img/qr-appstore.png" alt="App Store QR">
+      <span data-i18n="footer.qrCaption"></span>
     </a>
-    <span>Scan to download on the App Store</span>
   </div>
-  <span data-i18n="footer.copy"></span>
-  <br style="margin-bottom:6px;">
-  <a href="index.html" data-i18n="footer.home"></a>
-  <a href="faq.html" data-i18n="footer.faq"></a>
+  <div class="meta">
+    <span data-i18n="footer.copy"></span>
+    <nav>
+      <a href="/" data-i18n="footer.home"></a>
+      <a href="/faq.html" data-i18n="footer.faq"></a>
+    </nav>
+  </div>
 </footer>
 
 <script>
   const i18n = {
     zh: {
+      "nav.launch": "发布公告",
       "nav.blog": "使用指南",
+      "nav.faq": "常见问题",
+      "nav.privacy": "隐私政策",
       "post.meta": "指南 · 2026 年 3 月 19 日",
       "post.title": "如何使用 tera（tt）：多模型 AI 助手入门",
       "post.lead": "tera 是一款让你同时向多个 AI 模型提问、并得到一个综合答案的原生客户端，适用于 iPhone、iPad 及 Mac。",
-
       "intro.p1": "大语言模型在过去几年重塑了人机交互的方式，但一个根本问题始终没有得到解决：幻觉（Hallucination）。模型会以高度自信的语气生成看似合理、实则错误的内容，而用户几乎没有可靠的手段来判断一个回答是否值得信任。你问了一个问题，得到了一个听起来很有道理的答案——但它是真的吗？",
       "intro.p2": "与此同时，另一个问题同样被忽视：企业级 LLM 服务——例如 AWS Bedrock、火山引擎方舟——拥有强大的模型能力，却长期缺乏面向普通用户的成熟客户端。这类服务的访问方式以 API 调用为主，技术门槛将大多数潜在用户拒之门外。",
       "intro.p3": "tera 尝试同时解决这两个问题。它将同一个问题同时提交给多个独立的 LLM——包括 OpenAI、Anthropic、AWS Bedrock、DeepSeek 等——并行收集各自的回答。多个模型得出一致结论时，可信度显著提升；出现分歧时，分歧本身就是值得审视的信号。最终，tera 将所有回答汇总发给一个指定的总结模型，生成兼顾多方视角的综合答案。",
-
       "s1.title": "为什么这个 App 有两个名字？",
       "s1.p1": "这款应用的正式名称是 tera，由 teramoby 开发，全名为 teramoby tera。日常中常被缩写为 tt——取自 teramoby tera 的首字母。tt 和 tera 是同一款应用，并无区别。",
       "s1.p2": "在 App Store 中，应用以 tera 上架；搜索时需要输入开发者名称 teramoby 才能准确找到它，因为 tera 是个较为通用的词，单独搜索容易混入无关结果。",
-
       "s2.title": "安装",
       "s2.p1": "在 App Store 中搜索 teramoby，找到 tera 后免费下载。首次启动会看到隐私说明页面，阅读并确认后即可进入应用。",
       "s2.note": "⚠️ 注意：由于合规要求，tera 目前暂不在中国区 App Store 上架。",
-
       "s3.title": "配置 API 密钥",
       "s3.p1": "tera 本身不提供 AI 能力——它是一个连接各家服务商的客户端，数据直接从你的设备发往服务商，不经过任何中间服务器。使用前，需要在各服务商处申请 API 密钥，然后在 tera 的「Settings → Providers」中填入。以下是各服务商密钥申请页面的直链：",
       "s3.faq": "如需了解最新支持的服务商列表，请参阅 <a href=\"https://app.teramoby.com/faq.html\">app.teramoby.com/faq.html</a>。",
       "s3.tip": "建议配置两个以上的服务商。模型越多，综合答案的参考维度越丰富，准确性和客观性也越高。",
       "apikey.get": "获取 API Key →",
-
       "s4.title": "开始提问",
       "s4.p1": "配置完成后即可使用。流程很直接：",
       "step1.title": "选择模型",
@@ -471,40 +176,39 @@
       "step3.desc": "各模型的回答并行返回，可以分别查看每个模型的完整原始答案。",
       "step4.title": "获取综合答案",
       "step4.desc": "tera 将所有回答汇总发给总结模型，生成一个客观可靠的最终答案。",
-
       "footer.help": "遇到问题或有建议？发邮件至 <a href=\"mailto:tera-support@teramoby.com\">tera-support@teramoby.com</a>，也欢迎加入 <a href=\"https://groups.google.com/g/tera-help\" target=\"_blank\" rel=\"noopener\">Google Group</a> 与其他用户交流。",
       "img1.caption": "在 App Store 搜索 teramoby 即可找到 tera",
       "img2.caption": "在 Settings → Providers 中配置服务商和 API 密钥",
       "img3.caption": "配置完成后，主界面提示你可以开始提问了",
       "img4.caption": "tera 将多模型回答汇总，由 Summarizer 生成最终答案",
+      "footer.tagline": "Many Models, One Answer. 由 teramoby 开发。",
+      "footer.qrCaption": "扫码下载 App Store",
       "footer.copy": "© 2026 teramoby · tera-support@teramoby.com",
       "footer.home": "帮助中心",
       "footer.faq": "常见问题",
     },
     en: {
-      "nav.blog": "Getting Started",
+      "nav.launch": "Launch",
+      "nav.blog": "Guide",
+      "nav.faq": "FAQ",
+      "nav.privacy": "Privacy",
       "post.meta": "Guide · March 19, 2026",
       "post.title": "Getting Started with tera (tt): A Multi-Model AI Assistant",
       "post.lead": "tera is a native multi-model AI client for iPhone, iPad, and Mac that lets you query multiple LLMs at once and receive a single, synthesized answer.",
-
       "intro.p1": "Large language models have transformed how people interact with information, but one fundamental problem remains stubbornly unsolved: hallucination. Models generate plausible-sounding answers with apparent confidence, and users have no reliable way to know whether what they're reading is actually true. You ask a question, you get a well-written answer — but is it right?",
       "intro.p2": "A separate but equally overlooked problem: powerful enterprise LLM services — AWS Bedrock, VolcEngine Ark, and others — have long lacked a polished end-user client. They're API-first by design, built for developers, and that technical barrier has kept most people from using them directly.",
       "intro.p3": "tera addresses both. It dispatches the same question to multiple independent LLMs simultaneously — OpenAI, Anthropic, AWS Bedrock, DeepSeek, and more — and collects their responses in parallel. Where models agree, confidence is higher. Where they diverge, the disagreement itself is worth examining. tera then sends all responses to a designated summarizer model, which synthesizes them into a single, well-rounded final answer.",
-
       "s1.title": "Why Does This App Have Two Names?",
       "s1.p1": "The app's official name is tera, developed by teramoby — full name teramoby tera. In practice it's often shortened to tt, from the initials of teramoby tera. Both names refer to the same app; tt is just the everyday shorthand.",
       "s1.p2": "On the App Store, the app is listed as tera. Search for teramoby — the developer name — to find it reliably, since tera alone is a common word that may surface unrelated results.",
-
       "s2.title": "Installation",
       "s2.p1": "Search for teramoby on the App Store, download tera for free, and open it. On first launch you'll see a privacy disclosure — read it and tap to continue.",
       "s2.note": "⚠️ Note: tera is not currently available on the China App Store due to compliance requirements.",
-
       "s3.title": "Setting Up API Keys",
       "s3.p1": "tera is a client — it doesn't supply AI of its own. Data flows directly from your device to the provider; nothing passes through our servers. To get started, you'll need an API key from at least one provider, entered in Settings → Providers. Direct links to each provider's key page:",
       "s3.faq": "For the latest list of supported providers, see <a href=\"https://app.teramoby.com/faq.html\">app.teramoby.com/faq.html</a>.",
       "s3.tip": "Configure two or more providers if you can. The more models in the mix, the richer the perspectives feeding into the final answer.",
       "apikey.get": "Get API Key →",
-
       "s4.title": "Asking Your First Question",
       "s4.p1": "Once your keys are in, you're ready. The workflow is simple:",
       "step1.title": "Select your models",
@@ -515,12 +219,13 @@
       "step3.desc": "Responses come back simultaneously. You can read each model's full answer individually.",
       "step4.title": "Get the synthesized answer",
       "step4.desc": "tera sends all responses to the summarizer model, which produces one objective, reliable final answer.",
-
       "footer.help": "Questions or feedback? Email <a href=\"mailto:tera-support@teramoby.com\">tera-support@teramoby.com</a> or join the <a href=\"https://groups.google.com/g/tera-help\" target=\"_blank\" rel=\"noopener\">Google Group</a>.",
       "img1.caption": "Search for teramoby on the App Store",
       "img2.caption": "Settings → Providers: configure your LLM providers and API keys",
       "img3.caption": "The main screen, ready for your first question",
       "img4.caption": "The Summarizer model synthesizes all responses into one final answer",
+      "footer.tagline": "Many Models, One Answer. Built by teramoby.",
+      "footer.qrCaption": "Scan for the App Store",
       "footer.copy": "© 2026 teramoby · tera-support@teramoby.com",
       "footer.home": "Help Center",
       "footer.faq": "FAQ",

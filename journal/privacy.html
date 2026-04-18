@@ -3,333 +3,32 @@
 <head>
   <meta charset="UTF-8">
   <link rel="icon" type="image/x-icon" href="/favicon.ico?v=2">
-  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png?v=2">
+  <link rel="icon" type="image/png" sizes="32x32" href="/icon-64.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png?v=2">
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=2">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>TeraJournal · Privacy Policy</title>
-  <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", sans-serif;
-      background: transparent; color: #1d1d1f; line-height: 1.7;
-    }
-
-    /* ── Animated background ── */
-    .bg-wrap { position: fixed; inset: 0; z-index: -1; background: #f0fdf4; overflow: hidden; }
-
-    .orb { position: absolute; border-radius: 50%; filter: blur(80px); }
-    .orb-1 { width:640px; height:640px; background: radial-gradient(circle, rgba(90,153,120,0.18), transparent 68%); top:-220px; left:-140px; animation: drift1 22s ease-in-out infinite alternate; }
-    .orb-2 { width:520px; height:520px; background: radial-gradient(circle, rgba(74,133,104,0.14), transparent 68%); top:30%; right:-160px; animation: drift2 28s ease-in-out infinite alternate; }
-    .orb-3 { width:460px; height:460px; background: radial-gradient(circle, rgba(128,200,168,0.14), transparent 68%); bottom:-100px; left:28%; animation: drift3 24s ease-in-out infinite alternate; }
-    .orb-4 { width:320px; height:320px; background: radial-gradient(circle, rgba(144,220,180,0.08), transparent 68%); top:55%; left:-60px; animation: drift1 32s ease-in-out infinite alternate-reverse; }
-
-    @keyframes drift1 { from { transform: translate(0,0); } to { transform: translate(100px,80px); } }
-    @keyframes drift2 { from { transform: translate(0,0); } to { transform: translate(-80px,100px); } }
-    @keyframes drift3 { from { transform: translate(0,0); } to { transform: translate(70px,-90px); } }
-
-    .ring { position: absolute; border-radius: 50%; pointer-events: none; }
-    .ring-1 { width:380px; height:380px; top:-40px; right:6%; border:1px solid rgba(90,153,120,0.16); animation: spin-ring 65s linear infinite, breathe 9s ease-in-out infinite alternate; }
-    .ring-2 { width:240px; height:240px; top:36%; left:2%; border:1px solid rgba(74,133,104,0.13); animation: spin-ring 85s linear infinite reverse, breathe 13s ease-in-out infinite alternate; }
-    .ring-3 { width:130px; height:130px; bottom:12%; right:22%; border:1px solid rgba(128,200,168,0.12); animation: spin-ring 50s linear infinite, breathe 7s ease-in-out infinite alternate; }
-    .ring-4 { width:180px; height:180px; top:8%; left:28%; border:1px solid rgba(134,239,172,0.10); animation: spin-ring 75s linear infinite reverse, breathe 10s ease-in-out infinite alternate; }
-    .ring-5 { width:90px; height:90px; top:72%; left:42%; border:1px solid rgba(90,153,120,0.11); animation: spin-ring 40s linear infinite, breathe 6s ease-in-out infinite alternate; }
-
-    .diamond { position: absolute; pointer-events: none; }
-    .diamond-1 { width:70px; height:70px; top:18%; left:7%; border:1px solid rgba(90,153,120,0.14); animation: spin-diamond 42s linear infinite, breathe 8s ease-in-out infinite alternate; }
-    .diamond-2 { width:44px; height:44px; bottom:22%; right:8%; border:1px solid rgba(74,133,104,0.11); animation: spin-diamond 58s linear infinite reverse, breathe 11s ease-in-out infinite alternate; }
-    .diamond-3 { width:108px; height:108px; top:54%; right:14%; border:1px solid rgba(90,153,120,0.08); animation: spin-diamond 72s linear infinite, breathe 16s ease-in-out infinite alternate; }
-    .diamond-4 { width:56px; height:56px; top:32%; right:3%; border:1px solid rgba(128,200,168,0.12); animation: spin-diamond 48s linear infinite, breathe 10s ease-in-out infinite alternate; }
-    .diamond-5 { width:34px; height:34px; top:62%; left:22%; border:1px solid rgba(74,133,104,0.10); animation: spin-diamond 36s linear infinite reverse, breathe 8s ease-in-out infinite alternate; }
-
-    @keyframes spin-ring    { from { transform: rotate(0deg); }  to { transform: rotate(360deg); } }
-    @keyframes spin-diamond { from { transform: rotate(45deg); } to { transform: rotate(405deg); } }
-    @keyframes breathe      { from { opacity: 0.35; }            to { opacity: 1; } }
-
-    /* ── Header ── */
-    header {
-      background: rgba(240,253,244,0.6);
-      backdrop-filter: blur(24px) saturate(1.8);
-      -webkit-backdrop-filter: blur(24px) saturate(1.8);
-      border-bottom: 1px solid rgba(90,153,120,0.12);
-      position: sticky; top: 0; z-index: 100;
-    }
-    header .inner {
-      max-width: 860px; margin: 0 auto;
-      padding: 16px 24px;
-      display: flex; align-items: center; gap: 12px;
-    }
-    header .logo {
-      width: 34px; height: 34px;
-      background: linear-gradient(135deg, #5a9978, #4a8568);
-      border-radius: 10px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 13px; color: #fff; font-weight: 800; flex-shrink: 0;
-      text-decoration: none;
-      box-shadow: 0 3px 14px rgba(90,153,120,0.42);
-      letter-spacing: -0.5px;
-    }
-    header .breadcrumb { flex: 1; font-size: 15px; color: #6e6e73; }
-    header .breadcrumb a { color: #5a9978; text-decoration: none; font-weight: 700; }
-    header .breadcrumb a:hover { opacity: 0.7; }
-    header .breadcrumb span.sep { margin: 0 6px; color: #b0b0c0; }
-
-    .lang-toggle {
-      display: flex; background: rgba(90,153,120,0.1);
-      border-radius: 980px; padding: 3px; gap: 2px;
-    }
-    .lang-toggle button {
-      border: none; background: transparent;
-      padding: 5px 14px; border-radius: 980px;
-      font-size: 13px; font-weight: 500; color: #6e6e73;
-      cursor: pointer; transition: background 0.2s, color 0.2s;
-    }
-    .lang-toggle button.active {
-      background: #fff; color: #5a9978; font-weight: 700;
-      box-shadow: 0 1px 4px rgba(0,0,0,0.12);
-    }
-
-    /* ── Main ── */
-    main { max-width: 860px; margin: 0 auto; padding: 48px 24px 80px; }
-
-    /* ── Hero ── */
-    .hero {
-      text-align: center; padding: 64px 0 72px;
-      position: relative; overflow: hidden;
-    }
-    .hero::after {
-      content: ''; position: absolute; inset: 0;
-      background-image: radial-gradient(circle, rgba(90,153,120,0.14) 1px, transparent 1px);
-      background-size: 28px 28px;
-      mask-image: radial-gradient(ellipse at 50% 55%, black 15%, transparent 62%);
-      -webkit-mask-image: radial-gradient(ellipse at 50% 55%, black 15%, transparent 62%);
-      pointer-events: none; z-index: 0;
-    }
-    .hero > * { position: relative; z-index: 1; }
-    .hero h2 {
-      font-size: 46px; font-weight: 800; letter-spacing: -1.5px;
-      background: linear-gradient(135deg, #1a4030 0%, #5a9978 40%, #4a8568 80%, #80c8a8 100%);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-      background-clip: text; margin-bottom: 20px; line-height: 1.12;
-    }
-    .hero p { font-size: 17px; color: #5a5a6a; max-width: 520px; margin: 0 auto; line-height: 1.75; }
-
-    /* ── Section title ── */
-    .section-title {
-      font-size: 11px; font-weight: 800; text-transform: uppercase;
-      letter-spacing: 0.12em; color: #5a9978;
-      margin: 52px 0 16px;
-      display: flex; align-items: center; gap: 10px;
-    }
-    .section-title::before {
-      content: ''; display: block; width: 18px; height: 3px;
-      background: linear-gradient(to right, #5a9978, #4a8568);
-      border-radius: 2px; flex-shrink: 0;
-    }
-
-    /* ── Date chip ── */
-    .date-chip {
-      display: inline-flex; align-items: center;
-      background: rgba(90,153,120,0.08); color: #5a9978;
-      font-size: 12px; font-weight: 600;
-      padding: 5px 14px; border-radius: 980px;
-      margin-bottom: 36px;
-      border: 1px solid rgba(90,153,120,0.16);
-      backdrop-filter: blur(8px);
-    }
-
-    /* ── Cards ── */
-    .cards {
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: 14px; margin-bottom: 32px;
-    }
-    @media (max-width: 600px) {
-      .cards { grid-template-columns: 1fr; }
-      .hero h2 { font-size: 32px; }
-    }
-    .card {
-      background: rgba(255,255,255,0.62);
-      backdrop-filter: blur(24px) saturate(1.8);
-      -webkit-backdrop-filter: blur(24px) saturate(1.8);
-      border: 1px solid rgba(255,255,255,0.88);
-      border-radius: 20px; padding: 28px;
-      box-shadow: 0 4px 24px rgba(90,153,120,0.08), 0 1px 4px rgba(0,0,0,0.04), inset 0 1px 0 rgba(255,255,255,0.95);
-      transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
-      animation: fadeUp 0.5s ease both;
-    }
-    .cards .card:nth-child(1) { animation-delay: 0.05s; }
-    .cards .card:nth-child(2) { animation-delay: 0.13s; }
-    .card:hover {
-      transform: translateY(-6px); border-color: rgba(90,153,120,0.22);
-      box-shadow: 0 0 0 1px rgba(90,153,120,0.18), 0 20px 56px rgba(90,153,120,0.14), 0 4px 12px rgba(0,0,0,0.06), inset 0 1px 0 rgba(255,255,255,0.95);
-    }
-    .card .icon {
-      width: 52px; height: 52px; border-radius: 14px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 26px; margin-bottom: 16px;
-    }
-    .cards .card:nth-child(1) .icon { background: rgba(220,252,231,0.9); }
-    .cards .card:nth-child(2) .icon { background: rgba(167,243,208,0.9); }
-    .card h3 { font-size: 16px; font-weight: 700; margin-bottom: 8px; color: #1d1d1f; }
-    .card p  { font-size: 14px; color: #6e6e73; line-height: 1.65; }
-
-    /* ── Prose card ── */
-    .prose-card {
-      background: rgba(255,255,255,0.62);
-      backdrop-filter: blur(24px) saturate(1.8);
-      -webkit-backdrop-filter: blur(24px) saturate(1.8);
-      border: 1px solid rgba(255,255,255,0.88);
-      border-radius: 20px; padding: 28px;
-      box-shadow: 0 4px 24px rgba(90,153,120,0.08), 0 1px 4px rgba(0,0,0,0.04), inset 0 1px 0 rgba(255,255,255,0.95);
-      margin-bottom: 20px;
-      animation: fadeUp 0.5s 0.18s ease both;
-    }
-    .prose-card .icon {
-      width: 52px; height: 52px; border-radius: 14px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 26px; margin-bottom: 16px;
-    }
-    .prose-card h3 { font-size: 16px; font-weight: 700; margin-bottom: 8px; color: #1d1d1f; }
-    .prose-card p  { font-size: 14px; color: #6e6e73; line-height: 1.65; }
-    .prose-card .note {
-      margin-top: 16px; padding: 12px 16px;
-      background: rgba(90,153,120,0.06);
-      border-left: 3px solid rgba(90,153,120,0.4);
-      border-radius: 0 10px 10px 0;
-      font-size: 13px; color: #6e6e73;
-    }
-
-    /* ── Contact card ── */
-    .contact-card {
-      background: rgba(255,255,255,0.62);
-      backdrop-filter: blur(24px) saturate(1.8);
-      -webkit-backdrop-filter: blur(24px) saturate(1.8);
-      border: 1px solid rgba(255,255,255,0.88);
-      border-radius: 20px; padding: 32px 36px;
-      box-shadow: 0 4px 24px rgba(90,153,120,0.08), 0 1px 4px rgba(0,0,0,0.04), inset 0 1px 0 rgba(255,255,255,0.95);
-      display: flex; align-items: flex-start; gap: 20px;
-      position: relative; overflow: hidden;
-      animation: fadeUp 0.5s 0.24s ease both;
-    }
-    .contact-card::before {
-      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
-      background: linear-gradient(to right, #5a9978, #4a8568, #80c8a8);
-    }
-    .contact-card .contact-icon {
-      font-size: 26px; flex-shrink: 0; width: 56px; height: 56px;
-      background: rgba(90,153,120,0.1); border: 1px solid rgba(90,153,120,0.15);
-      border-radius: 16px; display: flex; align-items: center; justify-content: center;
-    }
-    .contact-card h3 { font-size: 17px; font-weight: 700; margin-bottom: 8px; }
-    .contact-card p  { font-size: 15px; color: #6e6e73; margin-bottom: 18px; }
-    .contact-card .email-link {
-      display: inline-flex; align-items: center;
-      background: linear-gradient(135deg, #5a9978, #4a8568);
-      color: #fff; text-decoration: none;
-      padding: 10px 22px; border-radius: 980px;
-      font-size: 14px; font-weight: 600;
-      transition: opacity 0.18s, transform 0.18s, box-shadow 0.18s;
-      box-shadow: 0 4px 16px rgba(90,153,120,0.36);
-    }
-    .contact-card .email-link:hover {
-      opacity: 0.9; transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(90,153,120,0.44);
-    }
-
-    /* ── Animations ── */
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(24px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-    .hero      { animation: fadeUp 0.65s ease both; }
-    .date-chip { animation: fadeUp 0.5s 0.1s ease both; }
-
-    /* ── Footer ── */
-    footer {
-      text-align: center; padding: 32px 24px;
-      font-size: 13px; color: #9696a8; position: relative;
-    }
-    footer::before {
-      content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%);
-      width: 200px; height: 1px;
-      background: linear-gradient(to right, transparent, rgba(90,153,120,0.4), transparent);
-    }
-
-    /* ── Announce bar ── */
-    .announce-bar {
-      background: linear-gradient(90deg, #1a4030, #5a9978 50%, #80c8a8);
-      color: #fff;
-      text-align: center;
-      padding: 11px 24px;
-      font-size: 14px;
-      font-weight: 600;
-      letter-spacing: 0.01em;
-      position: relative;
-      z-index: 101;
-    }
-    .announce-bar a {
-      color: #fff;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      transition: opacity 0.18s;
-    }
-    .announce-bar a:hover { opacity: 0.85; }
-
-    /* ── Footer QR ── */
-    .footer-qr {
-      margin-bottom: 18px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 7px;
-    }
-    .footer-qr a { display: block; }
-    .footer-qr img {
-      width: 88px; height: 88px;
-      border-radius: 10px;
-      opacity: 0.82;
-      transition: opacity 0.2s;
-    }
-    .footer-qr img:hover { opacity: 1; }
-    .footer-qr span {
-      font-size: 11px;
-      color: #b0b0c0;
-      letter-spacing: 0.02em;
-    }
-  </style>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap">
+  <link rel="stylesheet" href="/assets/site.css">
 </head>
-<body>
+<body class="theme-journal">
 
-<div class="bg-wrap" aria-hidden="true">
-  <div class="orb orb-1"></div>
-  <div class="orb orb-2"></div>
-  <div class="orb orb-3"></div>
-  <div class="orb orb-4"></div>
-  <div class="ring ring-1"></div>
-  <div class="ring ring-2"></div>
-  <div class="ring ring-3"></div>
-  <div class="diamond diamond-1"></div>
-  <div class="diamond diamond-2"></div>
-  <div class="diamond diamond-3"></div>
-  <div class="ring ring-4"></div>
-  <div class="ring ring-5"></div>
-  <div class="diamond diamond-4"></div>
-  <div class="diamond diamond-5"></div>
-</div>
-
-  <div class="announce-bar"><a href="https://apps.apple.com/us/app/terajournal/id6760472493" target="_blank" rel="noopener"><span id="announce-text">🎉 TeraJournal 现已上架 App Store！</span></a></div>
-
-<header>
+<header class="site-header">
   <div class="inner">
-    <a class="logo" href="index.html">td</a>
+    <a href="/journal/" class="brand">
+      <img src="/icon-64.png" alt="">
+      <span>TeraJournal</span>
+    </a>
     <div class="breadcrumb">
-      <a href="index.html">TeraJournal</a>
-      <span class="sep">›</span>
+      <span class="sep">/</span>
       <span data-i18n="nav.privacy"></span>
     </div>
+    <div class="spacer"></div>
+    <nav>
+      <a href="/journal/" data-i18n="nav.home"></a>
+    </nav>
     <div class="lang-toggle">
       <button id="btn-zh" class="active" onclick="setLang('zh')">中文</button>
       <button id="btn-en" onclick="setLang('en')">EN</button>
@@ -337,83 +36,65 @@
   </div>
 </header>
 
-<main>
-  <section class="hero">
-    <h2 data-i18n="hero.title"></h2>
-    <p data-i18n="hero.subtitle"></p>
-  </section>
+<main class="reading">
+  <p class="dateline" data-i18n="page.date"></p>
+  <h1 data-i18n="hero.title"></h1>
+  <p class="lede" data-i18n="hero.subtitle"></p>
 
-  <span class="date-chip" data-i18n="page.date"></span>
+  <h2 data-i18n="s.storage.label"></h2>
+  <h3 data-i18n="s1.title"></h3>
+  <p data-i18n="s1.body"></p>
+  <h3 data-i18n="s2.title"></h3>
+  <p data-i18n="s2.body"></p>
 
-  <p class="section-title" data-i18n="s.storage.label"></p>
-  <div class="cards">
-    <div class="card">
-      <div class="icon">🔒</div>
-      <h3 data-i18n="s1.title"></h3>
-      <p data-i18n="s1.body"></p>
-    </div>
-    <div class="card">
-      <div class="icon">🚫</div>
-      <h3 data-i18n="s2.title"></h3>
-      <p data-i18n="s2.body"></p>
-    </div>
-  </div>
+  <h2 data-i18n="s.icloud.label"></h2>
+  <h3 data-i18n="s3.title"></h3>
+  <p data-i18n="s3.body"></p>
+  <div class="callout" data-i18n="s3.note"></div>
 
-  <p class="section-title" data-i18n="s.icloud.label"></p>
-  <div class="prose-card">
-    <div class="icon" style="background: rgba(167,243,208,0.9);">☁️</div>
-    <h3 data-i18n="s3.title"></h3>
-    <p data-i18n="s3.body"></p>
-    <div class="note" data-i18n="s3.note"></div>
-  </div>
+  <h2 data-i18n="s.ai.label"></h2>
+  <h3 data-i18n="s4.title"></h3>
+  <p data-i18n="s4.body"></p>
+  <p data-i18n="s4.body2"></p>
+  <div class="callout" data-i18n="s4.note"></div>
 
-  <p class="section-title" data-i18n="s.ai.label"></p>
-  <div class="prose-card">
-    <div class="icon" style="background: rgba(220,252,231,0.9);">🤖</div>
-    <h3 data-i18n="s4.title"></h3>
-    <p data-i18n="s4.body"></p>
-    <p data-i18n="s4.body2" style="margin-top:12px;"></p>
-    <div class="note" data-i18n="s4.note"></div>
-  </div>
+  <h2 data-i18n="s.access.label"></h2>
+  <h3 data-i18n="s5.title"></h3>
+  <p data-i18n="s5.body"></p>
+  <h3 data-i18n="s6.title"></h3>
+  <p data-i18n="s6.body"></p>
 
-  <p class="section-title" data-i18n="s.access.label"></p>
-  <div class="cards">
-    <div class="card">
-      <div class="icon">🛡️</div>
-      <h3 data-i18n="s5.title"></h3>
-      <p data-i18n="s5.body"></p>
-    </div>
-    <div class="card">
-      <div class="icon">🔑</div>
-      <h3 data-i18n="s6.title"></h3>
-      <p data-i18n="s6.body"></p>
-    </div>
-  </div>
-
-  <p class="section-title" data-i18n="s.contact.label"></p>
-  <div class="contact-card">
-    <div class="contact-icon">✉️</div>
-    <div>
-      <h3 data-i18n="s7.title"></h3>
-      <p data-i18n="s7.body"></p>
-      <a class="email-link" href="mailto:tera-support@teramoby.com" data-i18n="s7.btn"></a>
-    </div>
-  </div>
+  <h2 data-i18n="s.contact.label"></h2>
+  <h3 data-i18n="s7.title"></h3>
+  <p data-i18n="s7.body"></p>
+  <p style="margin-top: 24px;">
+    <a class="btn btn-primary" href="mailto:tera-support@teramoby.com" data-i18n="s7.btn"></a>
+  </p>
 </main>
 
-<footer>
-  <div class="footer-qr">
-    <a href="https://apps.apple.com/us/app/terajournal/id6760472493" target="_blank" rel="noopener">
-      <img src="/img/qr-journal-appstore.png" alt="Download TeraJournal on the App Store">
+<footer class="site-footer">
+  <div class="inner">
+    <div class="brand-col">
+      <div class="brand"><img src="/icon-64.png" alt=""><span>TeraJournal</span></div>
+      <p class="tagline" data-i18n="footer.tagline"></p>
+    </div>
+    <a class="footer-qr" href="https://apps.apple.com/us/app/terajournal/id6760472493" target="_blank" rel="noopener">
+      <img src="/img/qr-journal-appstore.png" alt="App Store QR">
+      <span data-i18n="footer.qrCaption"></span>
     </a>
-    <span>Scan to download on the App Store</span>
   </div>
-  <span data-i18n="footer.copy"></span>
+  <div class="meta">
+    <span data-i18n="footer.copy"></span>
+    <nav>
+      <a href="/journal/" data-i18n="nav.home"></a>
+    </nav>
+  </div>
 </footer>
 
 <script>
   const i18n = {
     zh: {
+      "nav.home": "首页",
       "nav.privacy": "隐私政策",
       "hero.title": "隐私政策",
       "hero.subtitle": "TeraJournal 不收集您的任何数据。您的日记只属于您，开发者在技术上无任何途径获取您的内容。",
@@ -441,9 +122,12 @@
       "s7.title": "对本政策有疑问？",
       "s7.body": "如您对本隐私政策有任何疑问，欢迎发送邮件与我们联系。",
       "s7.btn": "发送邮件",
+      "footer.tagline": "A quiet AI companion for your journal. 由 teramoby 开发。",
+      "footer.qrCaption": "扫码下载 App Store",
       "footer.copy": "© 2026 teramoby · tera-support@teramoby.com",
     },
     en: {
+      "nav.home": "Home",
       "nav.privacy": "Privacy Policy",
       "hero.title": "Privacy Policy",
       "hero.subtitle": "TeraJournal collects none of your data. Your journal belongs only to you, and our developers have no technical means to access your content — ever.",
@@ -471,6 +155,8 @@
       "s7.title": "Questions About This Policy?",
       "s7.body": "If you have any questions about this Privacy Policy, feel free to reach out by email.",
       "s7.btn": "Send Email",
+      "footer.tagline": "A quiet AI companion for your journal. Built by teramoby.",
+      "footer.qrCaption": "Scan for the App Store",
       "footer.copy": "© 2026 teramoby · tera-support@teramoby.com",
     }
   };
@@ -484,8 +170,6 @@
     document.getElementById('btn-zh').classList.toggle('active', lang === 'zh');
     document.getElementById('btn-en').classList.toggle('active', lang === 'en');
     localStorage.setItem('terajournal-lang', lang);
-    const at = document.getElementById('announce-text');
-    if (at) at.textContent = lang === 'zh' ? '🎉 TeraJournal 现已上架 App Store！' : '🎉 TeraJournal is now on the App Store!';
   }
 
   const saved = localStorage.getItem('terajournal-lang');
