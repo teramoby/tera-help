@@ -366,15 +366,19 @@
   const preferred = saved || (navigator.language.startsWith('zh') ? 'zh' : 'en');
   setLang(preferred);
 
-  // HLS hero video: Safari uses native playback, other browsers load hls.js
+  // HLS hero video: Safari native, hls.js elsewhere. Force play() after load.
   (function () {
     const v = document.getElementById('hero-video');
     if (!v) return;
     const src = v.dataset.hls;
-    if (!src) return;
-    if (v.canPlayType('application/vnd.apple.mpegurl')) {
+    const tryPlay = () => {
+      const p = v.play();
+      if (p && p.catch) p.catch(() => {});
+    };
+    if (src && v.canPlayType('application/vnd.apple.mpegurl')) {
       v.src = src;
-    } else {
+      v.addEventListener('loadedmetadata', tryPlay, { once: true });
+    } else if (src) {
       const s = document.createElement('script');
       s.src = 'https://cdn.jsdelivr.net/npm/hls.js@1/dist/hls.min.js';
       s.onload = function () {
@@ -382,10 +386,17 @@
           const hls = new window.Hls({ lowLatencyMode: false });
           hls.loadSource(src);
           hls.attachMedia(v);
+          hls.on(window.Hls.Events.MANIFEST_PARSED, tryPlay);
+        } else {
+          tryPlay();
         }
       };
+      s.onerror = tryPlay;
       document.head.appendChild(s);
+    } else {
+      tryPlay();
     }
+    v.addEventListener('canplay', tryPlay, { once: true });
   })();
 </script>
 
