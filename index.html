@@ -64,6 +64,7 @@
     <div class="hero-visual">
       <div class="art-tile">
         <video
+          id="hero-video"
           class="art-video"
           autoplay
           muted
@@ -71,7 +72,8 @@
           playsinline
           preload="metadata"
           poster="/media/tt-hero-poster.jpg"
-          aria-label="tera app demo">
+          aria-label="tera app demo"
+          data-hls="/media/hls/tt-hero.m3u8">
           <source src="/media/tt-hero.mp4" type="video/mp4">
         </video>
       </div>
@@ -363,6 +365,28 @@
   const saved = localStorage.getItem('tera-lang');
   const preferred = saved || (navigator.language.startsWith('zh') ? 'zh' : 'en');
   setLang(preferred);
+
+  // HLS hero video: Safari uses native playback, other browsers load hls.js
+  (function () {
+    const v = document.getElementById('hero-video');
+    if (!v) return;
+    const src = v.dataset.hls;
+    if (!src) return;
+    if (v.canPlayType('application/vnd.apple.mpegurl')) {
+      v.src = src;
+    } else {
+      const s = document.createElement('script');
+      s.src = 'https://cdn.jsdelivr.net/npm/hls.js@1/dist/hls.min.js';
+      s.onload = function () {
+        if (window.Hls && window.Hls.isSupported()) {
+          const hls = new window.Hls({ lowLatencyMode: false });
+          hls.loadSource(src);
+          hls.attachMedia(v);
+        }
+      };
+      document.head.appendChild(s);
+    }
+  })();
 </script>
 
 </body>
