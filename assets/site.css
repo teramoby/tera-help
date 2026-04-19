@@ -262,9 +262,9 @@ main.reading {
 }
 .hero-visual .art-tile {
   width: 100%;
-  max-width: 350px;
+  max-width: 280px;
   aspect-ratio: 9 / 19;
-  border-radius: 38px;
+  border-radius: 32px;
   background: #000;
   border: 1px solid var(--rule);
   position: relative;
