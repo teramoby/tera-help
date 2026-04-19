@@ -249,6 +249,81 @@ main.reading {
   letter-spacing: -0.005em;
 }
 
+/* ── Hero bullet points ─────────────────────────────── */
+.hero-points {
+  list-style: none;
+  margin: 0 0 44px;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  max-width: 560px;
+}
+.hero-points li {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--ink-2);
+  letter-spacing: -0.005em;
+}
+.hero-points .tick {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--accent-soft);
+  position: relative;
+  margin-top: 3px;
+}
+.hero-points .tick::after {
+  content: '';
+  position: absolute;
+  left: 6px; top: 8px;
+  width: 4px; height: 8px;
+  border: solid var(--accent-deep);
+  border-width: 0 1.8px 1.8px 0;
+  transform: rotate(45deg);
+}
+
+/* ── Works-with row ─────────────────────────────────── */
+.works-with {
+  margin-top: 40px;
+  padding-top: 28px;
+  border-top: 1px solid var(--rule);
+  max-width: 560px;
+}
+.works-with-label {
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-4);
+  margin-bottom: 14px;
+  font-weight: 500;
+}
+.works-with-list {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 18px;
+}
+.works-with-list li {
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-size: 15px;
+  color: var(--ink-2);
+  letter-spacing: -0.01em;
+  font-variant-numeric: oldstyle-nums;
+  position: relative;
+}
+.works-with-list li + li::before {
+  content: '·';
+  position: absolute;
+  left: -12px;
+  color: var(--ink-4);
+}
+
 /* ── Hero visual (simple illustration tile rather than phone) ─ */
 .hero-visual {
   position: relative;
