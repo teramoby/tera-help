@@ -403,6 +403,23 @@ main.reading {
   font-size: 12px;
   color: var(--ink-3);
 }
+.platform-downloads {
+  align-items: flex-start;
+  gap: 16px;
+}
+.platform-downloads .download-stack {
+  flex: 1 1 160px;
+  min-width: 0;
+}
+.platform-downloads .download-stack .btn {
+  justify-content: center;
+  white-space: nowrap;
+}
+.platform-downloads .download-meta {
+  max-width: 210px;
+  line-height: 1.4;
+}
+.platform-downloads .hero-qr { flex: 0 0 auto; }
 .hero-qr {
   display: flex;
   align-items: center;
@@ -1096,6 +1113,10 @@ main.reading {
   .hero { padding-top: 24px; padding-bottom: 72px; }
   .section, .cta-band, .showcase { padding: 72px 0; }
   .showcase { margin: 0 -24px; padding-left: 24px; padding-right: 24px; }
+  .platform-downloads { align-items: stretch; }
+  .platform-downloads .download-stack { flex-basis: 100%; }
+  .platform-downloads .download-stack .btn,
+  .platform-downloads .hero-qr { width: 100%; }
 }
 
 /* ── Journal theme (olive) ──────────────────────────────── */
