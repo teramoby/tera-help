@@ -7,11 +7,11 @@
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png?v=2">
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=2">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>tera · Privacy Policy</title>
+  <title>隐私政策｜tt by teramoby</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;1,8..60,400&display=swap">
-  <link rel="stylesheet" href="/assets/site.css">
+  <link rel="stylesheet" href="/assets/site.css?v=20260816-brand-seo">
 </head>
 <body>
 
@@ -19,7 +19,7 @@
   <div class="inner">
     <a href="/" class="brand">
       <img src="/icon-64.png" alt="">
-      <span>tera</span>
+      <span class="brand-lockup">tt <small>by teramoby</small></span>
     </a>
     <div class="breadcrumb">
       <span class="sep">/</span>
@@ -28,6 +28,7 @@
     <div class="spacer"></div>
     <nav>
       <a href="/launch.html" data-i18n="nav.launch"></a>
+      <a href="/#download" data-i18n="nav.download"></a>
       <a href="/blog-getting-started.html" data-i18n="nav.guide"></a>
       <a href="/faq.html" data-i18n="nav.faq"></a>
     </nav>
@@ -76,15 +77,11 @@
 </main>
 
 <footer class="site-footer">
-  <div class="inner">
+  <div class="inner footer-simple">
     <div class="brand-col">
-      <div class="brand"><img src="/icon-64.png" alt=""><span>tera</span></div>
+      <div class="brand"><img src="/icon-64.png" alt=""><span class="brand-lockup">tt <small>by teramoby</small></span></div>
       <p class="tagline" data-i18n="footer.tagline"></p>
     </div>
-    <a class="footer-qr" href="https://apps.apple.com/us/app/teramoby-tera-tt/id6760287852" target="_blank" rel="noopener">
-      <img src="/img/qr-appstore.png" alt="App Store QR">
-      <span data-i18n="footer.qrCaption"></span>
-    </a>
   </div>
   <div class="meta">
     <span data-i18n="footer.copy"></span>
@@ -98,67 +95,67 @@
 <script>
   const i18n = {
     zh: {
+      "nav.download": "下载",
       "nav.launch": "发布公告",
       "nav.guide": "使用指南",
       "nav.faq": "常见问题",
       "nav.privacy": "隐私政策",
       "hero.title": "隐私政策",
-      "hero.subtitle": "tera 不保存您的任何信息。所有数据仅存储在您的设备上，开发者在技术上无任何途径获取您的数据。",
+      "hero.subtitle": "tt by teramoby（以下简称“tt”）不保存您的任何信息。所有数据仅存储在您的设备上，开发者在技术上无任何途径获取您的数据。",
       "page.date": "生效日期：2026 年 3 月 13 日",
       "s.storage.label": "数据存储",
       "s1.title": "数据本地存储",
-      "s1.body": "您在 tera 中产生的所有数据——包括对话记录、应用配置、偏好设置——均仅保存在您所安装的设备上。我们没有云端同步、没有远程备份，也没有任何形式的服务器端存储。",
+      "s1.body": "您在 tt 中产生的所有数据——包括对话记录、应用配置、偏好设置——均仅保存在您所安装的设备上。我们没有云端同步、没有远程备份，也没有任何形式的服务器端存储。",
       "s2.title": "零数据收集",
-      "s2.body": "tera 不收集、不记录、不传输任何用户数据，包括：对话内容与历史记录、使用行为与统计、设备信息与标识符、地理位置信息，以及任何个人身份信息（PII）。",
+      "s2.body": "tt 不收集、不记录、不传输任何用户数据，包括：对话内容与历史记录、使用行为与统计、设备信息与标识符、地理位置信息，以及任何个人身份信息（PII）。",
       "s.access.label": "数据安全",
       "s3.title": "开发者无法访问您的数据",
-      "s3.body": "tera 不设任何后端服务器、数据管道或遥测系统。即便开发者想获取您的数据，在技术上也无从实现。您的隐私受到架构层面的保护，而非仅依赖于承诺。",
+      "s3.body": "tt 不设任何后端服务器、数据管道或遥测系统。即便开发者想获取您的数据，在技术上也无从实现。您的隐私受到架构层面的保护，而非仅依赖于承诺。",
       "s4.title": "API 密钥安全",
-      "s4.body": "您配置的第三方 AI 服务商 API 密钥，仅存储于本地设备的系统安全存储中（如 macOS Keychain）。这些密钥不会传输给 tera 开发者，也不会用于其他任何目的。",
+      "s4.body": "您配置的第三方 AI 服务商 API 密钥，仅存储于本地设备的系统安全存储中。这些密钥不会传输给 tt 开发者，也不会用于其他任何目的。",
       "s.third.label": "第三方服务",
       "s5.title": "第三方 AI 服务商",
-      "s5.body": "tera 的核心功能是将您在对话框中输入的文本内容（消息与提示词）直接从您的设备传输至您主动选择并配置的 AI 服务商（如 OpenAI、Anthropic、Google Gemini 等），以获取 AI 生成的回复。传输通过您自己提供的 API 密钥与服务商直接建立连接，tera 不对此内容进行拦截、存储或任何形式的处理。",
+      "s5.body": "tt 的核心功能是将您在对话框中输入的文本内容（消息与提示词）直接从您的设备传输至您主动选择并配置的 AI 服务商（如 OpenAI、Anthropic、Google Gemini 等），以获取 AI 生成的回复。传输通过您自己提供的 API 密钥与服务商直接建立连接，tt 不对此内容进行拦截、存储或任何形式的处理。",
       "s5.body2": "此数据传输完全由您主动发起：您自主决定使用哪家服务商、配置对应的 API 密钥，并在每次对话时决定发送的内容。您对所有数据的流向拥有完全控制权。您的对话内容仅用于向所选服务商请求回复，不作任何其他用途。",
-      "s5.note": "各 AI 服务商将依据其自身隐私政策处理收到的数据，与 tera 无关。建议您在使用前阅读所选服务商的隐私政策，以了解其数据处理方式。",
+      "s5.note": "各 AI 服务商将依据其自身隐私政策处理收到的数据，与 tt 无关。建议您在使用前阅读所选服务商的隐私政策，以了解其数据处理方式。",
       "s.contact.label": "联系我们",
       "s6.title": "对本政策有疑问？",
       "s6.body": "如您对本隐私政策有任何疑问，欢迎发送邮件与我们联系。",
       "s6.btn": "发送邮件",
-      "footer.tagline": "Many Models, One Answer. 由 teramoby 开发。",
-      "footer.qrCaption": "扫码下载 App Store",
+      "footer.tagline": "一个客户端，用遍所有模型。",
       "footer.copy": "© 2026 teramoby · tera-support@teramoby.com",
       "footer.home": "帮助中心",
       "footer.faq": "常见问题",
     },
     en: {
+      "nav.download": "Download",
       "nav.launch": "Launch",
       "nav.guide": "Guide",
       "nav.faq": "FAQ",
       "nav.privacy": "Privacy",
       "hero.title": "Privacy Policy",
-      "hero.subtitle": "tera stores nothing about you. All data lives on your device, and our developers have no technical means to access it — ever.",
+      "hero.subtitle": "tt by teramoby (referred to below as “tt”) stores nothing about you. All data lives on your device, and our developers have no technical means to access it — ever.",
       "page.date": "Effective Date: March 13, 2026",
       "s.storage.label": "Data Storage",
       "s1.title": "Stored Locally on Your Device",
-      "s1.body": "Everything you create in tera — conversations, configurations, preferences — is stored exclusively on your device. There is no cloud sync, no remote backup, and no server-side storage of any kind.",
+      "s1.body": "Everything you create in tt — conversations, configurations, preferences — is stored exclusively on your device. There is no cloud sync, no remote backup, and no server-side storage of any kind.",
       "s2.title": "We Collect Zero Data",
-      "s2.body": "tera does not collect, log, or transmit any user data — including conversation content and history, usage behavior and analytics, device information and identifiers, location data, or any personally identifiable information (PII).",
+      "s2.body": "tt does not collect, log, or transmit any user data — including conversation content and history, usage behavior and analytics, device information and identifiers, location data, or any personally identifiable information (PII).",
       "s.access.label": "Data Security",
       "s3.title": "Developers Cannot Access Your Data",
-      "s3.body": "tera has no backend servers, data pipelines, or telemetry systems. Even if we wanted to access your data, it would be technically impossible. Your privacy is protected at the architectural level — not just by policy.",
+      "s3.body": "tt has no backend servers, data pipelines, or telemetry systems. Even if we wanted to access your data, it would be technically impossible. Your privacy is protected at the architectural level — not just by policy.",
       "s4.title": "API Key Security",
-      "s4.body": "API keys you configure for third-party AI providers are stored only in your device's secure system storage (e.g., macOS Keychain). They are never transmitted to tera's developers and are never used for any other purpose.",
+      "s4.body": "API keys you configure for third-party AI providers are stored only in your device's secure system storage. They are never transmitted to tt's developers and are never used for any other purpose.",
       "s.third.label": "Third-Party Services",
       "s5.title": "Third-Party AI Providers",
-      "s5.body": "tera's core function is to transmit the text you type into the conversation interface (your messages and prompts) directly from your device to the AI provider you choose and configure (such as OpenAI, Anthropic, Google Gemini, etc.) in order to generate AI responses. This transmission uses your own API key to connect directly with the provider. tera does not intercept, store, or process this content in any way.",
+      "s5.body": "tt's core function is to transmit the text you type into the conversation interface (your messages and prompts) directly from your device to the AI provider you choose and configure (such as OpenAI, Anthropic, Google Gemini, etc.) in order to generate AI responses. This transmission uses your own API key to connect directly with the provider. tt does not intercept, store, or process this content in any way.",
       "s5.body2": "This data transmission is entirely user-initiated: you choose which provider to use, configure your own API key, and decide what to send in each conversation. You retain full control over all data flows. Your conversation content is used solely to request responses from your chosen provider and for no other purpose.",
-      "s5.note": "Each AI provider processes the data it receives under its own privacy policy, independently of tera. We recommend reviewing the privacy policy of your chosen provider before use.",
+      "s5.note": "Each AI provider processes the data it receives under its own privacy policy, independently of tt. We recommend reviewing the privacy policy of your chosen provider before use.",
       "s.contact.label": "Contact",
       "s6.title": "Questions About This Policy?",
       "s6.body": "If you have any questions about this Privacy Policy, feel free to reach out by email.",
       "s6.btn": "Send Email",
-      "footer.tagline": "Many Models, One Answer. Built by teramoby.",
-      "footer.qrCaption": "Scan for the App Store",
+      "footer.tagline": "One client. Every model.",
       "footer.copy": "© 2026 teramoby · tera-support@teramoby.com",
       "footer.home": "Help Center",
       "footer.faq": "FAQ",

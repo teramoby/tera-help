@@ -7,11 +7,11 @@
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png?v=2">
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=2">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>tera · Launch Announcement</title>
+  <title>发布公告｜tt by teramoby</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;1,8..60,400&display=swap">
-  <link rel="stylesheet" href="/assets/site.css">
+  <link rel="stylesheet" href="/assets/site.css?v=20260816-brand-seo">
   <style>
     .video-wrap {
       margin: 48px -40px 32px;
@@ -55,7 +55,7 @@
   <div class="inner">
     <a href="/" class="brand">
       <img src="/icon-64.png" alt="">
-      <span>tera</span>
+      <span class="brand-lockup">tt <small>by teramoby</small></span>
     </a>
     <div class="breadcrumb">
       <span class="sep">/</span>
@@ -63,6 +63,7 @@
     </div>
     <div class="spacer"></div>
     <nav>
+      <a href="/#download" data-i18n="nav.download"></a>
       <a href="/blog-getting-started.html" data-i18n="nav.guide"></a>
       <a href="/faq.html" data-i18n="nav.faq"></a>
       <a href="/privacy.html" data-i18n="nav.privacy"></a>
@@ -152,15 +153,11 @@
 </main>
 
 <footer class="site-footer">
-  <div class="inner">
+  <div class="inner footer-simple">
     <div class="brand-col">
-      <div class="brand"><img src="/icon-64.png" alt=""><span>tera</span></div>
+      <div class="brand"><img src="/icon-64.png" alt=""><span class="brand-lockup">tt <small>by teramoby</small></span></div>
       <p class="tagline" data-i18n="footer.tagline"></p>
     </div>
-    <a class="footer-qr" href="https://apps.apple.com/us/app/teramoby-tera-tt/id6760287852" target="_blank" rel="noopener">
-      <img src="/img/qr-appstore.png" alt="App Store QR">
-      <span data-i18n="footer.qrCaption"></span>
-    </a>
   </div>
   <div class="meta">
     <span data-i18n="footer.copy"></span>
@@ -175,29 +172,30 @@
 <script>
   const i18n = {
     zh: {
+      "nav.download": "下载",
       "nav.launch": "发布公告",
       "nav.guide": "使用指南",
       "nav.faq": "常见问题",
       "nav.privacy": "隐私政策",
       "hero.badge": "现已上市",
-      "hero.title": "tera 正式上市",
-      "hero.subtitle": "适用于 iPhone、iPad 及 Mac 的多模型 AI 助手，并行调用多个模型，由 AI 汇总生成一个客观可靠的答案。",
+      "hero.title": "tt by teramoby 正式发布",
+      "hero.subtitle": "适用于 Android、iPhone、iPad 及 Mac 的多模型 AI 客户端，让不同模型共同讨论，并由 AI 汇总生成综合答案。",
       "intro.dateline": "2026 年 3 月 17 日",
-      "intro.p1": "teramoby 今日宣布 tera 正式上市。tera 是一款适用于 iPhone、iPad 及 Mac 的多模型 AI 助手，支持用户同时向多个主流大语言模型发起查询，并将所有回答汇总，由 AI 综合生成一个客观可靠的最终答案。",
-      "intro.p2": "当前主流 AI 应用通常依赖单一模型，而不同模型对同一问题往往给出差异显著乃至相互矛盾的回答。tera 通过并行调用 OpenAI、Anthropic、Google 等多家主流服务商的模型，同步获取多个独立视角的回答，再将所有结果汇总交由一个模型进行综合整理，生成兼顾多方意见的最终答案。",
-      "intro.quote": "最可靠的答案，不一定来自最强的单个模型，而是来自多个独立视角的汇聚。tera 让这一过程变得触手可及。",
-      "intro.p3": "tera 采用自带密钥（BYOK）模式，用户自行提供各 AI 服务商的 API 密钥。所有对话数据直接在用户设备与服务商之间传输，不经过 teramoby 的任何服务器，从架构层面确保数据隐私。",
+      "intro.p1": "teramoby 今日宣布 tt by teramoby 正式发布。tt 是一款适用于 iPhone、iPad、Mac 及 Android 的多模型 AI 客户端，支持用户同时向多个主流大语言模型发起查询，并将所有回答汇总，由 AI 综合生成一个客观可靠的最终答案。",
+      "intro.p2": "当前主流 AI 应用通常依赖单一模型，而不同模型对同一问题往往给出差异显著乃至相互矛盾的回答。tt 通过并行调用 OpenAI、Anthropic、Google 等多家主流服务商的模型，同步获取多个独立视角的回答，再将所有结果汇总交由一个模型进行综合整理，生成兼顾多方意见的最终答案。",
+      "intro.quote": "最可靠的答案，不一定来自最强的单个模型，而是来自多个独立视角的汇聚。tt 让这一过程变得触手可及。",
+      "intro.p3": "tt 采用自带密钥（BYOK）模式，用户自行提供各 AI 服务商的 API 密钥。所有对话数据直接在用户设备与服务商之间传输，不经过 teramoby 的任何服务器，从架构层面确保数据隐私。",
       "intro.avail.title": "上市信息",
-      "intro.avail.body": "tera 即日起在 App Store 免费上架，支持 iPhone、iPad 及 Mac。在 App Store 中搜索 teramoby 即可下载。使用时需自行准备所选 AI 服务商的 API 密钥。",
+      "intro.avail.body": "tt by teramoby 现已提供下载，支持 iPhone、iPad、Mac 及 Android。App Store 当前以 tera 上架；搜索 teramoby 即可找到。使用时需自行准备所选 AI 服务商的 API 密钥。",
       "howto.label": "如何使用",
       "step1.title": "从 App Store 下载",
       "step1.desc": "在 App Store 中搜索 teramoby，找到 tera 后点击获取，即可在 iPhone、iPad 或 Mac 上免费下载安装。",
       "step2.title": "配置 API 密钥",
-      "step2.desc": "打开 tera，进入「设置 → 模型配置」，选择你想使用的 AI 服务商（如 OpenAI、Anthropic 等），粘贴对应的 API 密钥并保存。密钥会安全存储在系统 Keychain 中。",
+      "step2.desc": "打开 tt，进入「设置 → 模型配置」，选择你想使用的 AI 服务商（如 OpenAI、Anthropic 等），粘贴对应的 API 密钥并保存。密钥会安全存储在系统安全存储中。",
       "step3.title": "选择模型并提问",
-      "step3.desc": "在主界面选择你想同时调用的模型，输入问题后发送。tera 会并行向所有选中的模型发起请求，同步获取各自的回答。",
+      "step3.desc": "在主界面选择你想同时调用的模型，输入问题后发送。tt 会并行向所有选中的模型发起请求，同步获取各自的回答。",
       "step4.title": "获取综合答案",
-      "step4.desc": "tera 将所有模型的回答汇总，发给一个模型进行综合整理，生成客观可靠的最终答案。",
+      "step4.desc": "tt 将所有模型的回答汇总，发给一个模型进行综合整理，生成客观可靠的最终答案。",
       "help.label": "遇到问题？",
       "help.faq.title": "常见问题",
       "help.faq.desc": "覆盖安装、配置、隐私等高频问题，大多数疑问都能在这里找到答案。",
@@ -208,37 +206,37 @@
       "help.group.title": "加入社群",
       "help.group.desc": "加入 Google Groups 与其他用户交流使用心得，也可以在这里提出建议和反馈。",
       "help.group.btn": "加入 Google Group",
-      "footer.tagline": "Many Models, One Answer. 由 teramoby 开发。",
-      "footer.qrCaption": "扫码下载 App Store",
+      "footer.tagline": "一个客户端，用遍所有模型。",
       "footer.copy": "© 2026 teramoby · tera-support@teramoby.com",
       "footer.home": "帮助中心",
       "footer.faq": "常见问题",
       "footer.privacy": "隐私政策",
     },
     en: {
+      "nav.download": "Download",
       "nav.launch": "Launch",
       "nav.guide": "Guide",
       "nav.faq": "FAQ",
       "nav.privacy": "Privacy",
       "hero.badge": "Generally Available",
-      "hero.title": "Introducing tera",
-      "hero.subtitle": "A multi-model AI assistant for iPhone, iPad, and Mac that queries multiple models in parallel and synthesizes their answers into one reliable response.",
+      "hero.title": "Introducing tt by teramoby",
+      "hero.subtitle": "A multi-model AI client for Android, iPhone, iPad, and Mac that lets models discuss a question and synthesizes their perspectives into one answer.",
       "intro.dateline": "March 17, 2026",
-      "intro.p1": "teramoby today announced the general availability of tera, a multi-model AI assistant for iPhone, iPad, and Mac that enables users to query multiple large language models simultaneously and receive a single, synthesized answer.",
-      "intro.p2": "Most AI applications today rely on a single model, yet different models frequently produce divergent — and sometimes contradictory — responses to the same question. tera addresses this by querying multiple leading providers in parallel, including OpenAI, Anthropic, and Google, then collecting all responses and sending them to a designated model for synthesis. The result is a final answer that draws on multiple independent perspectives.",
-      "intro.quote": "The most reliable answer doesn't come from the best single model — it comes from bringing multiple independent perspectives together. tera makes that accessible to everyone.",
-      "intro.p3": "tera operates on a bring-your-own-key (BYOK) model. Users supply their own API keys for each AI provider, and all conversation data flows directly between the user's device and the provider. No data passes through teramoby's servers, ensuring privacy at the architectural level.",
+      "intro.p1": "teramoby today announced the general availability of tt by teramoby, a multi-model AI client for iPhone, iPad, Mac, and Android that enables users to query multiple large language models simultaneously and receive a single, synthesized answer.",
+      "intro.p2": "Most AI applications today rely on a single model, yet different models frequently produce divergent — and sometimes contradictory — responses to the same question. tt addresses this by querying multiple leading providers in parallel, including OpenAI, Anthropic, and Google, then collecting all responses and sending them to a designated model for synthesis. The result is a final answer that draws on multiple independent perspectives.",
+      "intro.quote": "The most reliable answer doesn't come from the best single model — it comes from bringing multiple independent perspectives together. tt makes that accessible to everyone.",
+      "intro.p3": "tt operates on a bring-your-own-key (BYOK) model. Users supply their own API keys for each AI provider, and all conversation data flows directly between the user's device and the provider. No data passes through teramoby's servers, ensuring privacy at the architectural level.",
       "intro.avail.title": "Pricing and Availability",
-      "intro.avail.body": "tera is available today as a free download on the App Store for iPhone, iPad, and Mac. Search for teramoby to download. Users are required to supply their own API keys from supported AI providers.",
+      "intro.avail.body": "tt by teramoby is available for iPhone, iPad, Mac, and Android. The current App Store listing is named tera; search for teramoby to find it. Users supply their own API keys from supported AI providers.",
       "howto.label": "Getting Started",
       "step1.title": "Download from the App Store",
       "step1.desc": "Search for teramoby on the App Store, then click Get to download and install tera for free on your iPhone, iPad, or Mac.",
       "step2.title": "Configure Your API Keys",
-      "step2.desc": "Open tera and go to Settings → Model Configuration. Select the AI providers you want to use (e.g. OpenAI, Anthropic), paste in your API keys, and save. Keys are stored securely in your system Keychain.",
+      "step2.desc": "Open tt and go to Settings → Model Configuration. Select the AI providers you want to use (e.g. OpenAI, Anthropic), paste in your API keys, and save. Keys are stored securely in your system's secure storage.",
       "step3.title": "Choose Models & Ask",
-      "step3.desc": "On the main screen, select the models you want to query at the same time. Type your question and send — tera will fire off requests to all selected models in parallel.",
+      "step3.desc": "On the main screen, select the models you want to query at the same time. Type your question and send — tt will fire off requests to all selected models in parallel.",
       "step4.title": "Get a Synthesized Answer",
-      "step4.desc": "tera collects all responses and sends them to a single model, which synthesizes them into one objective, reliable final answer.",
+      "step4.desc": "tt collects all responses and sends them to a single model, which synthesizes them into one objective, reliable final answer.",
       "help.label": "Need Help?",
       "help.faq.title": "FAQ",
       "help.faq.desc": "Covers common questions about setup, configuration, privacy, and more. Most questions are answered here.",
@@ -249,8 +247,7 @@
       "help.group.title": "Join the Community",
       "help.group.desc": "Join our Google Group to connect with other users, share tips, and post feedback or feature requests.",
       "help.group.btn": "Join Google Group",
-      "footer.tagline": "Many Models, One Answer. Built by teramoby.",
-      "footer.qrCaption": "Scan for the App Store",
+      "footer.tagline": "One client. Every model.",
       "footer.copy": "© 2026 teramoby · tera-support@teramoby.com",
       "footer.home": "Help Center",
       "footer.faq": "FAQ",
