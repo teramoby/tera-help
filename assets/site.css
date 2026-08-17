@@ -127,6 +127,7 @@ img { display: block; max-width: 100%; }
   align-items: baseline;
   gap: 6px;
   white-space: nowrap;
+  font-weight: 700;
 }
 .brand-lockup small {
   font-family: 'Styrene A', 'Figtree', 'Inter', sans-serif;
