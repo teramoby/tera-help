@@ -1,5 +1,5 @@
 /* ============================================================
-   tera — immersive technology theme
+   tt by teramoby — immersive technology theme
    Near-black surfaces, restrained cool-blue light and generous
    spacing. The product demo remains the visual focal point.
    ============================================================ */
@@ -183,6 +183,7 @@ img { display: block; max-width: 100%; }
   gap: 0;
   font-family: 'Styrene A', 'Figtree', 'Inter', sans-serif;
 }
+.lang-toggle a,
 .lang-toggle button {
   border: none;
   background: transparent;
@@ -193,11 +194,19 @@ img { display: block; max-width: 100%; }
   cursor: pointer;
   font-family: inherit;
   border-radius: var(--radius-pill);
+  text-decoration: none;
   transition: background 0.2s var(--ease-out), color 0.2s var(--ease-out);
 }
+.lang-toggle a.active,
 .lang-toggle button.active {
   background: var(--ink);
   color: #090A0D;
+}
+
+.lang-toggle a:focus-visible,
+.lang-toggle button:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 2px;
 }
 
 /* ── Main ──────────────────────────────────────────────── */
