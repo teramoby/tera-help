@@ -9,11 +9,15 @@ const pages = [
   { file: 'blog-getting-started.html', lang: 'en', canonical: `${SITE}/blog-getting-started.html`, alternate: `${SITE}/zh/blog-getting-started.html` },
   { file: 'launch.html', lang: 'en', canonical: `${SITE}/launch.html`, alternate: `${SITE}/zh/launch.html` },
   { file: 'privacy.html', lang: 'en', canonical: `${SITE}/privacy.html`, alternate: `${SITE}/zh/privacy.html` },
+  { file: 'models.html', lang: 'en', canonical: `${SITE}/models.html`, alternate: `${SITE}/zh/models.html` },
+  { file: 'team-mode.html', lang: 'en', canonical: `${SITE}/team-mode.html`, alternate: `${SITE}/zh/team-mode.html` },
   { file: 'zh/index.html', lang: 'zh-CN', canonical: `${SITE}/zh/`, alternate: `${SITE}/` },
   { file: 'zh/faq.html', lang: 'zh-CN', canonical: `${SITE}/zh/faq.html`, alternate: `${SITE}/faq.html` },
   { file: 'zh/blog-getting-started.html', lang: 'zh-CN', canonical: `${SITE}/zh/blog-getting-started.html`, alternate: `${SITE}/blog-getting-started.html` },
   { file: 'zh/launch.html', lang: 'zh-CN', canonical: `${SITE}/zh/launch.html`, alternate: `${SITE}/launch.html` },
   { file: 'zh/privacy.html', lang: 'zh-CN', canonical: `${SITE}/zh/privacy.html`, alternate: `${SITE}/privacy.html` },
+  { file: 'zh/models.html', lang: 'zh-CN', canonical: `${SITE}/zh/models.html`, alternate: `${SITE}/models.html` },
+  { file: 'zh/team-mode.html', lang: 'zh-CN', canonical: `${SITE}/zh/team-mode.html`, alternate: `${SITE}/team-mode.html` },
 ];
 
 const errors = [];
@@ -35,7 +39,7 @@ function stripTags(value) {
 }
 
 async function validateInternalReferences(html, page) {
-  const references = [...html.matchAll(/\b(href|src|poster|data-hls)="([^"]+)"/g)]
+  const references = [...html.matchAll(/\b(href|src|poster|data-hls|data-mp4)="([^"]+)"/g)]
     .map(match => ({ attribute: match[1], value: match[2] }));
   for (const { attribute, value } of references) {
     if (/^(https?:|mailto:|tel:|data:|#|\/\/)/.test(value)) continue;
@@ -76,19 +80,43 @@ for (const page of pages) {
   assert(!html.includes("localStorage.getItem('tera-lang')"), `${label}: browser-language switching remains`);
   await validateInternalReferences(html, page);
 
-  if (page.file.endsWith('index.html')) {
-    const jsonLd = html.match(/<script type="application\/ld\+json">\s*([\s\S]*?)\s*<\/script>/)?.[1];
-    assert(Boolean(jsonLd), `${label}: missing SoftwareApplication JSON-LD`);
-    if (jsonLd) {
-      try {
-        const data = JSON.parse(jsonLd);
-        assert(data['@type'] === 'SoftwareApplication', `${label}: incorrect JSON-LD type`);
-        assert(data.url === page.canonical, `${label}: JSON-LD URL must match canonical`);
-        assert(data.name === 'tt by teramoby', `${label}: JSON-LD brand mismatch`);
-      } catch (error) {
-        errors.push(`${label}: invalid JSON-LD (${error.message})`);
-      }
+  const jsonLdBlocks = [...html.matchAll(/<script type="application\/ld\+json">\s*([\s\S]*?)\s*<\/script>/g)]
+    .map(match => match[1]);
+  const jsonLd = [];
+  for (const block of jsonLdBlocks) {
+    try {
+      jsonLd.push(JSON.parse(block));
+    } catch (error) {
+      errors.push(`${label}: invalid JSON-LD (${error.message})`);
     }
+  }
+
+  if (page.file.endsWith('index.html')) {
+    const app = jsonLd.find(data => data['@type'] === 'SoftwareApplication');
+    assert(Boolean(app), `${label}: missing SoftwareApplication JSON-LD`);
+    if (app) {
+      assert(app.url === page.canonical, `${label}: JSON-LD URL must match canonical`);
+      assert(app.name === 'tt by teramoby', `${label}: JSON-LD brand mismatch`);
+    }
+  }
+
+  if (page.file === 'index.html') {
+    assert(jsonLd.some(data => data['@type'] === 'WebSite'), `${label}: missing WebSite JSON-LD`);
+  }
+
+  if (page.file.endsWith('models.html') || page.file.endsWith('team-mode.html') || page.file.endsWith('blog-getting-started.html')) {
+    const types = jsonLd.flatMap(data => data['@graph']?.map(item => item['@type']) ?? [data['@type']]);
+    assert(types.includes('BreadcrumbList'), `${label}: missing BreadcrumbList JSON-LD`);
+  }
+
+  if (page.file.endsWith('faq.html')) {
+    assert(html.includes('function toggle(trigger)'), `${label}: FAQ toggle implementation missing`);
+    assert(html.includes("trigger.setAttribute('role', 'button')"), `${label}: FAQ controls must expose button semantics`);
+    assert(html.includes("trigger.setAttribute('tabindex', '0')"), `${label}: FAQ controls must be keyboard focusable`);
+    assert(html.includes("trigger.setAttribute('aria-expanded', 'false')"), `${label}: FAQ controls must expose expanded state`);
+    assert(html.includes("answer.setAttribute('aria-hidden', 'true')"), `${label}: collapsed FAQ answers must be hidden from assistive technology`);
+    assert(html.includes('answer.inert = true'), `${label}: collapsed FAQ answers must not expose focusable content`);
+    assert(html.includes("event.key !== 'Enter' && event.key !== ' '"), `${label}: FAQ controls must support Enter and Space`);
   }
 }
 

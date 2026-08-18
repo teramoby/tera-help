@@ -30,10 +30,37 @@
   <meta name="twitter:title" content="How to Use tt: Multi-Model AI Client Guide | tt by teramoby">
   <meta name="twitter:description" content="Set up tt on iPhone, iPad, Mac, or Android, add your AI provider API keys, ask multiple models at once, and review a synthesized answer.">
   <meta name="twitter:image" content="https://app.teramoby.com/img/og-tt.png">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BlogPosting",
+        "headline": "How to Configure tt and Start a Multi-Model Conversation",
+        "description": "Set up tt, add your AI provider API keys, ask multiple models, and review a synthesized answer.",
+        "image": "https://app.teramoby.com/img/og-tt.png",
+        "datePublished": "2026-03-19",
+        "dateModified": "2026-08-18",
+        "inLanguage": "en",
+        "mainEntityOfPage": "https://app.teramoby.com/blog-getting-started.html",
+        "author": { "@type": "Organization", "name": "teramoby" },
+        "publisher": { "@type": "Organization", "name": "teramoby", "url": "https://app.teramoby.com/" }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://app.teramoby.com/" },
+          { "@type": "ListItem", "position": 2, "name": "Getting Started", "item": "https://app.teramoby.com/blog-getting-started.html" }
+        ]
+      }
+    ]
+  }
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500&amp;family=Source+Serif+4:ital,opsz,wght@0,8..60,400;1,8..60,400&amp;display=swap">
-  <link rel="stylesheet" href="/assets/site.css?v=20260817-static-locales">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500&amp;display=swap" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500&amp;display=swap"></noscript>
+  <link rel="stylesheet" href="/assets/site.css?v=20260818-seo1">
 </head>
 <body>
 
@@ -48,13 +75,13 @@
       <span>Guide</span>
     </div>
     <div class="spacer"></div>
-    <nav>
+    <nav aria-label="Primary navigation">
       <a href="/launch.html">Launch</a>
       <a href="/#download">Download</a>
       <a href="/faq.html">FAQ</a>
       <a href="/privacy.html">Privacy</a>
     </nav>
-    <div class="lang-toggle" aria-label="Language">
+    <div class="lang-toggle" role="group" aria-label="Language">
       <a class="active" aria-current="page" href="/blog-getting-started.html" lang="en" hreflang="en">EN</a>
       <a href="/zh/blog-getting-started.html" lang="zh-CN" hreflang="zh-CN">中文</a>
     </div>
@@ -62,42 +89,41 @@
 </header>
 
 <main class="reading">
-  <p class="dateline">Guide · March 19, 2026</p>
-  <h1>Getting Started with tt by teramoby: A Multi-Model AI Client</h1>
-  <p class="lede">tt is a native multi-model AI client for iPhone, iPad, Mac, and Android that lets you query multiple LLMs at once and receive a single, synthesized answer.</p>
+  <p class="dateline">Guide · Updated August 18, 2026</p>
+  <h1>How to Configure tt and Start a Multi-Model Conversation</h1>
+  <p class="lede">tt is a native multi-model AI client for iPhone, iPad, Mac, and Android. This guide shows how to connect your AI services, ask your first question, and read the result.</p>
 
-  <p>Large language models have transformed how people interact with information, but one fundamental problem remains stubbornly unsolved: hallucination. Models generate plausible-sounding answers with apparent confidence, and users have no reliable way to know whether what they're reading is actually true. You ask a question, you get a well-written answer — but is it right?</p>
-  <p>A separate but equally overlooked problem: powerful enterprise LLM services — AWS Bedrock, VolcEngine Ark, and others — have long lacked a polished end-user client. They're API-first by design, built for developers, and that technical barrier has kept most people from using them directly.</p>
-  <p>tt addresses both. It dispatches the same question to multiple independent LLMs simultaneously — OpenAI, Anthropic, AWS Bedrock, DeepSeek, and more — and collects their responses in parallel. Where models agree, confidence is higher. Where they diverge, the disagreement itself is worth examining. tt then sends all responses to a designated summarizer model, which synthesizes them into a single, well-rounded final answer.</p>
+  <p>In a standard chat, tt sends the same question to every service whose model and credential configuration is complete, preserves each original response, and asks your chosen summarizer to organize the common points and differences into one synthesized answer. With one configured service, tt shows that service&#39;s response directly.</p>
+  <p><a href="/team-mode.html">Team Mode</a> is a different workflow: participating models can read the shared discussion, respond to one another, and stop when they have nothing useful to add. In either mode, a model-generated answer can still be wrong. For important decisions, inspect the original responses and verify claims against reliable sources.</p>
 
   <h2>Installation</h2>
   <p>Open the direct App Store link on this site, or search for teramoby and download “teramoby tera (tt)” for free. On first launch, review the privacy disclosure and continue into the app.</p>
   <div class="callout">⚠️ Note: tt is not currently available on the China App Store due to compliance requirements.</div>
   <figure>
-    <img src="/img/screenshot-appstore.jpeg" alt="tt by teramoby on the App Store">
+    <img src="/img/screenshot-appstore.jpeg" alt="tt by teramoby on the App Store" width="360" height="782" loading="lazy" decoding="async">
     <figcaption>Search for teramoby on the App Store to find teramoby tera (tt)</figcaption>
   </figure>
 
   <h2>Setting Up API Keys</h2>
-  <p>tt is a client — it doesn't supply AI of its own. Data flows directly from your device to the provider; nothing passes through our servers. To get started, you'll need an API key from at least one provider, entered in Settings → Providers. Direct links to each provider's key page:</p>
+  <p>tt is a client — it doesn&#39;t supply AI of its own. Model requests travel directly from your device to the configured providers. When Online Search is active and a search is needed, a derived query also goes to the search endpoint described in the Privacy Policy. To get started, enter an API key from at least one provider in Settings → Providers. Here are official links for several common providers:</p>
   <ul class="api-links">
     <li><span class="provider">ChatGPT (OpenAI)</span><a href="https://help.openai.com/en/articles/4936850-where-do-i-find-my-openai-api-key" target="_blank" rel="noopener">Get API Key →</a></li>
     <li><span class="provider">Claude (Anthropic)</span><a href="https://platform.claude.com/login?returnTo=%2Fsettings%2Fkeys" target="_blank" rel="noopener">Get API Key →</a></li>
-    <li><span class="provider">Grok (xAI)</span><a href="https://console.x.ai/team/5aeeaef0-f088-49bd-90fb-8658c2992539" target="_blank" rel="noopener">Get API Key →</a></li>
+    <li><span class="provider">Grok (xAI)</span><a href="https://console.x.ai/home" target="_blank" rel="noopener">Open xAI Console →</a></li>
     <li><span class="provider">Gemini (Google)</span><a href="https://ai.google.dev/gemini-api/docs/api-key" target="_blank" rel="noopener">Get API Key →</a></li>
     <li><span class="provider">DeepSeek</span><a href="https://platform.deepseek.com/api_keys" target="_blank" rel="noopener">Get API Key →</a></li>
     <li><span class="provider">AWS Bedrock</span><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/api-keys.html" target="_blank" rel="noopener">Get API Key →</a></li>
-    <li><span class="provider">火山引擎 (VolcEngine)</span><a href="https://console.volcengine.com/auth/login?redirectURI=%2Fark%2Fregion%3Aark%2Bcn-beijing%2FapiKey" target="_blank" rel="noopener">Get API Key →</a></li>
+    <li><span class="provider">Doubao (VolcEngine Ark)</span><a href="https://console.volcengine.com/auth/login?redirectURI=%2Fark%2Fregion%3Aark%2Bcn-beijing%2FapiKey" target="_blank" rel="noopener">Get API Key →</a></li>
   </ul>
-  <p style="margin-top: 24px;">For the latest list of supported providers, see <a href="https://app.teramoby.com/faq.html">app.teramoby.com/faq.html</a>.</p>
-  <div class="callout">Configure two or more providers if you can. The more models in the mix, the richer the perspectives feeding into the final answer.</div>
+  <p style="margin-top: 24px;">See the current <a href="/models.html">AI provider and hosting-platform integrations</a>. Exact configuration choices appear in the app.</p>
+  <div class="callout">Configure two or more providers to compare more perspectives. Model count alone does not make an answer correct; review the originals and verify important claims.</div>
   <div class="screenshot-row">
     <figure>
-      <img src="/img/screenshot-home.jpeg" alt="tt main screen">
+      <img src="/img/screenshot-home.jpeg" alt="tt multi-model chat home screen" width="914" height="1978" loading="lazy" decoding="async">
       <figcaption>The main screen, ready for your first question</figcaption>
     </figure>
     <figure>
-      <img src="/img/screenshot-settings.jpeg" alt="tt Settings — LLM Configuration">
+      <img src="/img/screenshot-settings.jpeg" alt="tt AI provider and API key settings" width="914" height="1978" loading="lazy" decoding="async">
       <figcaption>Settings → Providers: configure your LLM providers and API keys</figcaption>
     </figure>
   </div>
@@ -107,37 +133,37 @@
   <div class="steps">
     <div class="step">
       <div>
-        <h4>Select your models</h4>
-        <p>On the main screen, pick one or more models to query at the same time.</p>
+        <h3>Check your configured services</h3>
+        <p>Every service with a complete model and credential configuration will participate in the chat workflow.</p>
       </div>
     </div>
     <div class="step">
       <div>
-        <h4>Type your question and send</h4>
-        <p>tt fires the request to all selected models in parallel.</p>
+        <h3>Type your question and send</h3>
+        <p>tt sends the request to all completely configured services in parallel.</p>
       </div>
     </div>
     <div class="step">
       <div>
-        <h4>Read each model's response</h4>
+        <h3>Read each model's response</h3>
         <p>Responses come back simultaneously. You can read each model's full answer individually.</p>
       </div>
     </div>
     <div class="step">
       <div>
-        <h4>Get the synthesized answer</h4>
-        <p>tt sends all responses to the summarizer model, which produces one objective, reliable final answer.</p>
+        <h3>Review the synthesized answer</h3>
+        <p>tt sends completed responses to the summarizer model, which organizes them into one answer. You can still return to every original response.</p>
       </div>
     </div>
   </div>
 
   <figure>
-    <img src="/img/screenshot-result.jpeg" alt="tt synthesized answer">
+    <img src="/img/screenshot-result.jpeg" alt="tt synthesized multi-model answer" width="914" height="1978" loading="lazy" decoding="async">
     <figcaption>The Summarizer model synthesizes all responses into one final answer</figcaption>
   </figure>
 
   <aside class="aside-note">
-    <h3>The tt by teramoby Brand</h3>
+    <h2>The tt by teramoby Brand</h2>
     <p>The product brand is tt by teramoby, shortened to tt in everyday use.</p>
     <p>The App Store listing is currently named “teramoby tera (tt).” Search for teramoby or use the direct App Store link on this site to find it reliably.</p>
   </aside>
@@ -154,7 +180,7 @@
   </div>
   <div class="meta">
     <span>© 2026 teramoby · tera-support@teramoby.com</span>
-    <nav>
+    <nav aria-label="Footer navigation">
       <a href="/">Help Center</a>
       <a href="/faq.html">FAQ</a>
     </nav>

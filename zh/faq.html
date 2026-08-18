@@ -32,8 +32,9 @@
   <meta name="twitter:image" content="https://app.teramoby.com/img/og-tt.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500&amp;family=Source+Serif+4:ital,opsz,wght@0,8..60,400;1,8..60,400&amp;display=swap">
-  <link rel="stylesheet" href="/assets/site.css?v=20260817-static-locales">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500&amp;display=swap" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500&amp;display=swap"></noscript>
+  <link rel="stylesheet" href="/assets/site.css?v=20260818-seo1">
 </head>
 <body>
 
@@ -48,13 +49,13 @@
       <span>常见问题</span>
     </div>
     <div class="spacer"></div>
-    <nav>
+    <nav aria-label="主要导航">
       <a href="/zh/launch.html">发布公告</a>
       <a href="/zh/#download">下载</a>
       <a href="/zh/blog-getting-started.html">使用指南</a>
       <a href="/zh/privacy.html">隐私政策</a>
     </nav>
-    <div class="lang-toggle" aria-label="语言">
+    <div class="lang-toggle" role="group" aria-label="语言">
       <a href="/faq.html" lang="en" hreflang="en">EN</a>
       <a class="active" aria-current="page" href="/zh/faq.html" lang="zh-CN" hreflang="zh-CN">中文</a>
     </div>
@@ -64,26 +65,26 @@
 <main>
   <section class="hero">
     <p class="eyebrow">FAQ</p>
-    <h1>有什么疑问？</h1>
+    <h1>tt 多模型 AI 客户端常见问题</h1>
     <p class="lede">这里整理了最常见的问题。没找到答案？随时发邮件联系我们。</p>
   </section>
 
   <section>
     <div class="faq-group">
-      <p class="faq-group-title">基础功能</p>
+      <h2 class="faq-group-title">基础功能</h2>
       <div class="faq-item">
         <div class="faq-q" onclick="toggle(this)">
-          <h3>tt 支持哪些 AI 模型？</h3>
+          <h3>tt 支持哪些模型服务商与托管平台？</h3>
           <div class="faq-chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
         </div>
-        <div class="faq-a"><div class="faq-a-inner"><p>tt 支持目前主流的大语言模型服务商，包括 OpenAI、Anthropic、Google、DeepSeek、Kimi、豆包等。具体可用的模型列表可在应用内「设置 → 模型配置」中查看，我们也会持续更新支持范围。</p></div></div>
+        <div class="faq-a"><div class="faq-a-inner"><p>tt 已提供 OpenAI、Anthropic、Google、xAI、DeepSeek、Kimi、豆包、通义千问、智谱 GLM、MiniMax 等模型服务商，以及 AWS Bedrock、Azure AI、Google Vertex AI、阿里云 Model Studio 等托管平台的连接配置。账户权限、地区、额度和可用模型仍由各服务决定。完整信息请查看<a href="/zh/models.html">模型服务商与托管平台</a>页面，当前配置项以应用内列表为准。</p></div></div>
       </div>
       <div class="faq-item">
         <div class="faq-q" onclick="toggle(this)">
           <h3>为什么需要我自己的 API 密钥？</h3>
           <div class="faq-chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
         </div>
-        <div class="faq-a"><div class="faq-a-inner"><p>tt 直接与 AI 服务商通信，不经过任何中间服务器。使用您自己的 API 密钥，请求从您的设备直接发送到服务商，数据流向完全透明。</p></div></div>
+        <div class="faq-a"><div class="faq-a-inner"><p>模型请求会从您的设备直接发送到已配置的 AI 服务商。联网搜索处于开启状态时，生成的搜索词可能会发送到由 teramoby 运营、Cloudflare 托管的搜索服务；当前 Android 版本会先由总结模型判断是否需要最新资料。各平台行为和完整数据流请查看隐私政策。</p></div></div>
       </div>
       <div class="faq-item">
         <div class="faq-q" onclick="toggle(this)">
@@ -97,24 +98,38 @@
           <h3>综合答案是如何生成的？</h3>
           <div class="faq-chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
         </div>
-        <div class="faq-a"><div class="faq-a-inner"><p>当您提交一个问题，tt 会同时向您选择的多个模型发起请求，并行获取各自的回答。收到所有回答后，tt 将它们汇总发给一个模型，由该模型综合整理，生成一个客观可靠的最终答案。</p></div></div>
+        <div class="faq-a"><div class="faq-a-inner"><p>在标准对话中，tt 会把问题发送给当前所有模型和凭证均已完整配置的服务，保留每个已完成的原始回答，再交给您指定的总结模型。只配置一个服务时，会直接显示该服务的回答。结果仍是模型生成内容，重要信息应另行核验。</p></div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggle(this)">
+          <h3>什么是 Team Mode？</h3>
+          <div class="faq-chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+        </div>
+        <div class="faq-a"><div class="faq-a-inner"><p>Team Mode 会让当前所有模型和凭证均已完整配置的服务进入同一段共享讨论。模型可以回应用户和其他模型、补充新信息、质疑前提，也可以在没有新内容时不再发言。输入 <span class="mono">@</span> 可以点名一个模型优先回应，但不会排除其他参与者。当所有参与者都不再补充时，讨论会自动结束。<a href="/zh/team-mode.html">了解 Team Mode 的工作方式</a>。</p></div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggle(this)">
+          <h3>什么时候用标准对话，什么时候用 Team Mode？</h3>
+          <div class="faq-chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+        </div>
+        <div class="faq-a"><div class="faq-a-inner"><p>需要快速回答、并排比较或综合结果时使用标准对话；需要批评、权衡利弊，或希望多个模型在共享上下文中彼此补充时使用 Team Mode。</p></div></div>
       </div>
       <div id="api-keys" class="faq-item">
         <div class="faq-q" onclick="toggle(this)">
-          <h3>在哪里获取各服务商的 API 密钥？</h3>
+          <h3>在哪里获取常用服务商的 API 密钥？</h3>
           <div class="faq-chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
         </div>
         <div class="faq-a">
           <div class="faq-a-inner">
-            <p>点击以下链接，前往各服务商的官方页面申请或查看 API 密钥：</p>
+            <p>以下官方页面覆盖部分常用服务；账户资格和最新凭证要求请以各服务商文档为准：</p>
             <ul class="api-list">
               <li><span class="provider">ChatGPT (OpenAI)</span><a href="https://help.openai.com/en/articles/4936850-where-do-i-find-my-openai-api-key" target="_blank" rel="noopener">获取 API Key →</a></li>
               <li><span class="provider">Claude (Anthropic)</span><a href="https://platform.claude.com/login?returnTo=%2Fsettings%2Fkeys" target="_blank" rel="noopener">获取 API Key →</a></li>
-              <li><span class="provider">Grok (xAI)</span><a href="https://console.x.ai/team/5aeeaef0-f088-49bd-90fb-8658c2992539" target="_blank" rel="noopener">获取 API Key →</a></li>
+              <li><span class="provider">Grok (xAI)</span><a href="https://console.x.ai/home" target="_blank" rel="noopener">打开 xAI Console →</a></li>
               <li><span class="provider">Gemini (Google)</span><a href="https://ai.google.dev/gemini-api/docs/api-key" target="_blank" rel="noopener">获取 API Key →</a></li>
               <li><span class="provider">DeepSeek</span><a href="https://platform.deepseek.com/api_keys" target="_blank" rel="noopener">获取 API Key →</a></li>
               <li><span class="provider">AWS Bedrock</span><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/api-keys.html" target="_blank" rel="noopener">获取 API Key →</a></li>
-              <li><span class="provider">火山引擎 (VolcEngine)</span><a href="https://console.volcengine.com/auth/login?redirectURI=%2Fark%2Fregion%3Aark%2Bcn-beijing%2FapiKey" target="_blank" rel="noopener">获取 API Key →</a></li>
+              <li><span class="provider">豆包（火山引擎方舟）</span><a href="https://console.volcengine.com/auth/login?redirectURI=%2Fark%2Fregion%3Aark%2Bcn-beijing%2FapiKey" target="_blank" rel="noopener">获取 API Key →</a></li>
             </ul>
           </div>
         </div>
@@ -122,32 +137,32 @@
     </div>
 
     <div class="faq-group">
-      <p class="faq-group-title">隐私与安全</p>
+      <h2 class="faq-group-title">隐私与安全</h2>
       <div class="faq-item">
         <div class="faq-q" onclick="toggle(this)">
           <h3>tt 会保存我的对话记录吗？</h3>
           <div class="faq-chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
         </div>
-        <div class="faq-a"><div class="faq-a-inner"><p>会，但仅保存在您的本地设备上。对话数据不会上传至任何 teramoby 服务器，tt 的开发者也在技术上无法访问您的任何数据。</p></div></div>
+        <div class="faq-a"><div class="faq-a-inner"><p>会。对话历史作为应用数据保存在您的设备上；操作系统可能依据平台设置，将这部分本地数据纳入系统备份或设备迁移。在 Android 上，对话历史和设置可以随系统备份或设备迁移，已加密的 API 密钥不包含在该备份中。</p></div></div>
       </div>
       <div class="faq-item">
         <div class="faq-q" onclick="toggle(this)">
           <h3>我的 API 密钥安全吗？</h3>
           <div class="faq-chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
         </div>
-        <div class="faq-a"><div class="faq-a-inner"><p>是的。您配置的所有 API 密钥均存储在设备的系统级安全存储中，不会以明文形式写入普通文件，也不会传输给 tt 的开发者或任何第三方。</p></div></div>
+        <div class="faq-a"><div class="faq-a-inner"><p>API 密钥存储在设备的系统安全存储中，不会以明文形式写入普通文件。密钥仅用于向您配置的服务商认证，不会发送给 teramoby 或无关服务。</p></div></div>
       </div>
       <div class="faq-item">
         <div class="faq-q" onclick="toggle(this)">
           <h3>tt 会收集使用数据或分析数据吗？</h3>
           <div class="faq-chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
         </div>
-        <div class="faq-a"><div class="faq-a-inner"><p>不会。tt 没有任何后端服务器、数据管道或遥测系统。我们不收集、不记录任何用户行为数据、设备信息或个人身份信息。</p></div></div>
+        <div class="faq-a"><div class="faq-a-inner"><p>tt 不会把使用分析、广告标识或完整对话历史发送给 teramoby。您发起的请求仍会发送给已配置的 AI 服务商；联网搜索处于开启状态时，生成的搜索词可能会发送到由 teramoby 运营、Cloudflare 托管的搜索服务。当前版本默认开启联网搜索，您可以在设置中关闭。各平台行为、接口、缓存和第三方处理详情请查看隐私政策。</p></div></div>
       </div>
     </div>
 
     <div class="faq-group">
-      <p class="faq-group-title">下载与费用</p>
+      <h2 class="faq-group-title">下载与费用</h2>
       <div class="faq-item">
         <div class="faq-q" onclick="toggle(this)">
           <h3>tt 是免费的吗？</h3>
@@ -160,7 +175,7 @@
           <h3>支持哪些平台？</h3>
           <div class="faq-chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
         </div>
-        <div class="faq-a"><div class="faq-a-inner"><p>tt 支持 Android、iPhone、iPad 及 Mac。Android 可从官网直接下载；在 App Store 搜索 teramoby，选择“teramoby tera (tt)”即可下载。</p></div></div>
+        <div class="faq-a"><div class="faq-a-inner"><p>tt 支持 Android、iPhone、iPad 和 Mac。Android 版本可从官网直接下载；在已上架的 App Store 地区，可搜索 teramoby 并选择“teramoby tera (tt)”。目前中国大陆 App Store 暂未上架。</p></div></div>
       </div>
     </div>
   </section>
@@ -184,7 +199,7 @@
   </div>
   <div class="meta">
     <span>© 2026 teramoby · tera-support@teramoby.com</span>
-    <nav>
+    <nav aria-label="页脚导航">
       <a href="/zh/">帮助中心</a>
       <a href="/zh/privacy.html">隐私政策</a>
     </nav>
@@ -192,12 +207,47 @@
 </footer>
 
 <script>
+  function toggle(trigger) {
+    const item = trigger.closest('.faq-item');
+    if (!item) return;
+    const open = !item.classList.contains('open');
+    const answer = trigger.nextElementSibling;
+    item.classList.toggle('open', open);
+    trigger.setAttribute('aria-expanded', String(open));
+    if (answer) {
+      answer.setAttribute('aria-hidden', String(!open));
+      answer.inert = !open;
+    }
+  }
 
+  document.querySelectorAll('.faq-q').forEach((trigger, index) => {
+    const answer = trigger.nextElementSibling;
+    trigger.setAttribute('role', 'button');
+    trigger.setAttribute('tabindex', '0');
+    trigger.setAttribute('aria-expanded', 'false');
+    if (answer) {
+      answer.id ||= `faq-answer-${index + 1}`;
+      answer.setAttribute('aria-hidden', 'true');
+      answer.inert = true;
+      trigger.setAttribute('aria-controls', answer.id);
+    }
+    trigger.addEventListener('keydown', (event) => {
+      if (event.key !== 'Enter' && event.key !== ' ') return;
+      event.preventDefault();
+      toggle(trigger);
+    });
+  });
 
   if (location.hash) {
     const target = document.querySelector(location.hash);
     if (target && target.classList.contains('faq-item')) {
       target.classList.add('open');
+      target.querySelector('.faq-q')?.setAttribute('aria-expanded', 'true');
+      const answer = target.querySelector('.faq-a');
+      if (answer) {
+        answer.setAttribute('aria-hidden', 'false');
+        answer.inert = false;
+      }
       setTimeout(() => target.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
     }
   }
