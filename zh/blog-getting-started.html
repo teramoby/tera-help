@@ -30,10 +30,37 @@
   <meta name="twitter:title" content="tt 多模型 AI 客户端使用指南｜安装、API Key 与综合答案">
   <meta name="twitter:description" content="在 iPhone、iPad、Mac 或 Android 上安装 tt，配置 AI 服务商 API Key，同时向多个模型提问并查看综合答案。">
   <meta name="twitter:image" content="https://app.teramoby.com/img/og-tt.png">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BlogPosting",
+        "headline": "如何配置 tt 并开始多模型对话",
+        "description": "安装 tt、添加 AI 服务商 API 密钥、向多个模型提问并查看综合答案。",
+        "image": "https://app.teramoby.com/img/og-tt.png",
+        "datePublished": "2026-03-19",
+        "dateModified": "2026-08-18",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": "https://app.teramoby.com/zh/blog-getting-started.html",
+        "author": { "@type": "Organization", "name": "teramoby" },
+        "publisher": { "@type": "Organization", "name": "teramoby", "url": "https://app.teramoby.com/" }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "首页", "item": "https://app.teramoby.com/zh/" },
+          { "@type": "ListItem", "position": 2, "name": "使用指南", "item": "https://app.teramoby.com/zh/blog-getting-started.html" }
+        ]
+      }
+    ]
+  }
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500&amp;family=Source+Serif+4:ital,opsz,wght@0,8..60,400;1,8..60,400&amp;display=swap">
-  <link rel="stylesheet" href="/assets/site.css?v=20260817-static-locales">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500&amp;display=swap" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500&amp;display=swap"></noscript>
+  <link rel="stylesheet" href="/assets/site.css?v=20260818-seo1">
 </head>
 <body>
 
@@ -48,13 +75,13 @@
       <span>使用指南</span>
     </div>
     <div class="spacer"></div>
-    <nav>
+    <nav aria-label="主要导航">
       <a href="/zh/launch.html">发布公告</a>
       <a href="/zh/#download">下载</a>
       <a href="/zh/faq.html">常见问题</a>
       <a href="/zh/privacy.html">隐私政策</a>
     </nav>
-    <div class="lang-toggle" aria-label="语言">
+    <div class="lang-toggle" role="group" aria-label="语言">
       <a href="/blog-getting-started.html" lang="en" hreflang="en">EN</a>
       <a class="active" aria-current="page" href="/zh/blog-getting-started.html" lang="zh-CN" hreflang="zh-CN">中文</a>
     </div>
@@ -62,42 +89,41 @@
 </header>
 
 <main class="reading">
-  <p class="dateline">指南 · 2026 年 3 月 19 日</p>
-  <h1>如何使用 tt by teramoby：多模型 AI 客户端入门</h1>
-  <p class="lede">tt 是一款让你同时向多个 AI 模型提问、并得到一个综合答案的原生客户端，适用于 iPhone、iPad、Mac 及 Android。</p>
+  <p class="dateline">指南 · 2026 年 8 月 18 日更新</p>
+  <h1>如何配置 tt 并开始多模型对话</h1>
+  <p class="lede">tt 是适用于 iPhone、iPad、Mac 与 Android 的原生多模型 AI 客户端。本文说明如何连接 AI 服务、完成第一次提问并阅读结果。</p>
 
-  <p>大语言模型在过去几年重塑了人机交互的方式，但一个根本问题始终没有得到解决：幻觉（Hallucination）。模型会以高度自信的语气生成看似合理、实则错误的内容，而用户几乎没有可靠的手段来判断一个回答是否值得信任。你问了一个问题，得到了一个听起来很有道理的答案——但它是真的吗？</p>
-  <p>与此同时，另一个问题同样被忽视：企业级 LLM 服务——例如 AWS Bedrock、火山引擎方舟——拥有强大的模型能力，却长期缺乏面向普通用户的成熟客户端。这类服务的访问方式以 API 调用为主，技术门槛将大多数潜在用户拒之门外。</p>
-  <p>tt 尝试同时解决这两个问题。它将同一个问题同时提交给多个独立的 LLM——包括 OpenAI、Anthropic、AWS Bedrock、DeepSeek 等——并行收集各自的回答。多个模型得出一致结论时，可信度显著提升；出现分歧时，分歧本身就是值得审视的信号。最终，tt 将所有回答汇总发给一个指定的总结模型，生成兼顾多方视角的综合答案。</p>
+  <p>在标准对话中，tt 会把同一个问题发送给所有模型和凭证均已完整配置的服务，保留每个模型的原始回答，再由你指定的总结模型整理共同点和差异，形成一份综合答案。只配置一个服务时，tt 会直接显示该服务的回答。</p>
+  <p><a href="/zh/team-mode.html">Team Mode</a> 是另一种工作方式：参与模型会阅读共享讨论、回应彼此，并在没有新内容时停止发言。无论哪种模式，模型生成的内容仍可能出错；涉及重要决定时，请查看原始回答并依据可靠来源核验。</p>
 
   <h2>安装</h2>
   <p>通过本站 App Store 直达链接，或搜索 teramoby，找到“teramoby tera (tt)”后免费下载。首次启动时请阅读隐私说明，然后进入应用。</p>
   <div class="callout">⚠️ 注意：由于合规要求，tt 目前暂不在中国区 App Store 上架。</div>
   <figure>
-    <img src="/img/screenshot-appstore.jpeg" alt="tt by teramoby 的 App Store 页面">
+    <img src="/img/screenshot-appstore.jpeg" alt="tt by teramoby 的 App Store 页面" width="360" height="782" loading="lazy" decoding="async">
     <figcaption>在 App Store 搜索 teramoby 即可找到 teramoby tera (tt)</figcaption>
   </figure>
 
   <h2>配置 API 密钥</h2>
-  <p>tt 本身不提供 AI 能力——它是一个连接各家服务商的客户端，数据直接从你的设备发往服务商，不经过任何中间服务器。使用前，需要在各服务商处申请 API 密钥，然后在 tt 的「Settings → Providers」中填入。以下是各服务商密钥申请页面的直链：</p>
+  <p>tt 本身不提供 AI 能力——它是一个连接各家服务商的客户端。模型请求会从你的设备直接发送到已配置的服务商；联网搜索处于开启状态且确有搜索需要时，生成的搜索词还会发送到隐私政策说明的搜索接口。使用前，请先在至少一家服务商处申请 API 密钥，并在 tt 的「Settings → Providers」中填入。以下是部分常用服务商的官方页面：</p>
   <ul class="api-links">
     <li><span class="provider">ChatGPT (OpenAI)</span><a href="https://help.openai.com/en/articles/4936850-where-do-i-find-my-openai-api-key" target="_blank" rel="noopener">获取 API Key →</a></li>
     <li><span class="provider">Claude (Anthropic)</span><a href="https://platform.claude.com/login?returnTo=%2Fsettings%2Fkeys" target="_blank" rel="noopener">获取 API Key →</a></li>
-    <li><span class="provider">Grok (xAI)</span><a href="https://console.x.ai/team/5aeeaef0-f088-49bd-90fb-8658c2992539" target="_blank" rel="noopener">获取 API Key →</a></li>
+    <li><span class="provider">Grok (xAI)</span><a href="https://console.x.ai/home" target="_blank" rel="noopener">打开 xAI Console →</a></li>
     <li><span class="provider">Gemini (Google)</span><a href="https://ai.google.dev/gemini-api/docs/api-key" target="_blank" rel="noopener">获取 API Key →</a></li>
     <li><span class="provider">DeepSeek</span><a href="https://platform.deepseek.com/api_keys" target="_blank" rel="noopener">获取 API Key →</a></li>
     <li><span class="provider">AWS Bedrock</span><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/api-keys.html" target="_blank" rel="noopener">获取 API Key →</a></li>
-    <li><span class="provider">火山引擎 (VolcEngine)</span><a href="https://console.volcengine.com/auth/login?redirectURI=%2Fark%2Fregion%3Aark%2Bcn-beijing%2FapiKey" target="_blank" rel="noopener">获取 API Key →</a></li>
+    <li><span class="provider">豆包（火山引擎方舟）</span><a href="https://console.volcengine.com/auth/login?redirectURI=%2Fark%2Fregion%3Aark%2Bcn-beijing%2FapiKey" target="_blank" rel="noopener">获取 API Key →</a></li>
   </ul>
-  <p style="margin-top: 24px;">如需了解最新支持的服务商列表，请参阅 <a href="/zh/faq.html">app.teramoby.com/faq.html</a>。</p>
-  <div class="callout">建议配置两个以上的服务商。模型越多，综合答案的参考维度越丰富，准确性和客观性也越高。</div>
+  <p style="margin-top: 24px;">查看当前<a href="/zh/models.html">模型服务商与托管平台连接列表</a>；具体配置项以应用内列表为准。</p>
+  <div class="callout">配置两个或更多服务商可以比较更多视角，但模型数量本身不能保证答案正确；请查看原始回答并核验重要信息。</div>
   <div class="screenshot-row">
     <figure>
-      <img src="/img/screenshot-home.jpeg" alt="tt main screen">
+      <img src="/img/screenshot-home.jpeg" alt="tt 多模型对话主界面" width="914" height="1978" loading="lazy" decoding="async">
       <figcaption>配置完成后，主界面提示你可以开始提问了</figcaption>
     </figure>
     <figure>
-      <img src="/img/screenshot-settings.jpeg" alt="tt Settings — LLM Configuration">
+      <img src="/img/screenshot-settings.jpeg" alt="tt 模型服务商与 API 密钥设置页" width="914" height="1978" loading="lazy" decoding="async">
       <figcaption>在 Settings → Providers 中配置服务商和 API 密钥</figcaption>
     </figure>
   </div>
@@ -107,39 +133,39 @@
   <div class="steps">
     <div class="step">
       <div>
-        <h4>选择模型</h4>
-        <p>在主界面勾选想同时调用的模型，一个或多个均可。</p>
+        <h3>检查已配置服务</h3>
+        <p>对话会使用所有模型和凭证均已完整配置的服务。</p>
       </div>
     </div>
     <div class="step">
       <div>
-        <h4>输入问题并发送</h4>
-        <p>tt 会将问题同时发给所有选中的模型，并行等待回答。</p>
+        <h3>输入问题并发送</h3>
+        <p>tt 会将问题同时发给所有配置完整的服务，并行等待回答。</p>
       </div>
     </div>
     <div class="step">
       <div>
-        <h4>查看各模型的原始回答</h4>
+        <h3>查看各模型的原始回答</h3>
         <p>各模型的回答并行返回，可以分别查看每个模型的完整原始答案。</p>
       </div>
     </div>
     <div class="step">
       <div>
-        <h4>获取综合答案</h4>
-        <p>tt 将所有回答汇总发给总结模型，生成一个客观可靠的最终答案。</p>
+        <h3>查看综合答案</h3>
+        <p>tt 将已完成的回答交给总结模型整理为一份综合答案；你仍然可以随时返回查看每份原始回答。</p>
       </div>
     </div>
   </div>
 
   <figure>
-    <img src="/img/screenshot-result.jpeg" alt="tt synthesized answer">
+    <img src="/img/screenshot-result.jpeg" alt="tt 多模型综合回答结果页" width="914" height="1978" loading="lazy" decoding="async">
     <figcaption>tt 将多模型回答汇总，由 Summarizer 生成最终答案</figcaption>
   </figure>
 
   <aside class="aside-note">
-    <h3>tt by teramoby 品牌名称</h3>
+    <h2>tt by teramoby 品牌名称</h2>
     <p>产品品牌统一为 tt by teramoby，日常简称 tt。</p>
-    <p>App Store 当前显示名称为“teramoby tera (tt)”。您可以搜索 teramoby，或使用本站的 App Store 直达链接。</p>
+    <p>App Store 当前显示名称为“teramoby tera (tt)”。你可以搜索 teramoby，或使用本站的 App Store 直达链接。</p>
   </aside>
 
   <p style="margin-top: 48px; font-size: 14px; color: var(--grey-800);">遇到问题或有建议？发邮件至 <a href="mailto:tera-support@teramoby.com">tera-support@teramoby.com</a>，也欢迎加入 <a href="https://groups.google.com/g/tera-help" target="_blank" rel="noopener">Google Group</a> 与其他用户交流。</p>
@@ -154,7 +180,7 @@
   </div>
   <div class="meta">
     <span>© 2026 teramoby · tera-support@teramoby.com</span>
-    <nav>
+    <nav aria-label="页脚导航">
       <a href="/zh/">帮助中心</a>
       <a href="/zh/faq.html">常见问题</a>
     </nav>

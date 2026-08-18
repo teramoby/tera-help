@@ -32,8 +32,9 @@
   <meta name="twitter:image" content="https://app.teramoby.com/img/og-tt.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500&amp;family=Source+Serif+4:ital,opsz,wght@0,8..60,400;1,8..60,400&amp;display=swap">
-  <link rel="stylesheet" href="/assets/site.css?v=20260817-static-locales">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500&amp;display=swap" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500&amp;display=swap"></noscript>
+  <link rel="stylesheet" href="/assets/site.css?v=20260818-seo1">
 </head>
 <body>
 
@@ -48,13 +49,13 @@
       <span>FAQ</span>
     </div>
     <div class="spacer"></div>
-    <nav>
+    <nav aria-label="Primary navigation">
       <a href="/launch.html">Launch</a>
       <a href="/#download">Download</a>
       <a href="/blog-getting-started.html">Guide</a>
       <a href="/privacy.html">Privacy</a>
     </nav>
-    <div class="lang-toggle" aria-label="Language">
+    <div class="lang-toggle" role="group" aria-label="Language">
       <a class="active" aria-current="page" href="/faq.html" lang="en" hreflang="en">EN</a>
       <a href="/zh/faq.html" lang="zh-CN" hreflang="zh-CN">中文</a>
     </div>
@@ -64,26 +65,26 @@
 <main>
   <section class="hero">
     <p class="eyebrow">FAQ</p>
-    <h1>Got Questions?</h1>
+    <h1>tt Multi-Model AI Client FAQ</h1>
     <p class="lede">Answers to the most common questions about tt. Still not finding what you need? Just email us.</p>
   </section>
 
   <section>
     <div class="faq-group">
-      <p class="faq-group-title">Basics</p>
+      <h2 class="faq-group-title">Basics</h2>
       <div class="faq-item">
         <div class="faq-q" onclick="toggle(this)">
-          <h3>What AI models does tt support?</h3>
+          <h3>What AI providers and hosting platforms does tt support?</h3>
           <div class="faq-chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
         </div>
-        <div class="faq-a"><div class="faq-a-inner"><p>tt supports major large language model providers including OpenAI, Anthropic, Google, DeepSeek, Kimi, Doubao, and more. The full list of available models can be found in the app under Settings → Model Configuration. We add new providers regularly.</p></div></div>
+        <div class="faq-a"><div class="faq-a-inner"><p>tt provides integrations for model providers including OpenAI, Anthropic, Google, xAI, DeepSeek, Kimi, Doubao, Qwen, Zhipu GLM, and MiniMax, plus managed platforms such as AWS Bedrock, Azure AI, Google Vertex AI, and Alibaba Cloud Model Studio. Account eligibility, regions, quotas, and available models still depend on each service. See the <a href="/models.html">AI providers and hosting platforms</a> page; the current configuration list in the app is the source of truth.</p></div></div>
       </div>
       <div class="faq-item">
         <div class="faq-q" onclick="toggle(this)">
           <h3>Why do I need my own API key?</h3>
           <div class="faq-chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
         </div>
-        <div class="faq-a"><div class="faq-a-inner"><p>tt communicates directly with AI providers without any intermediary server. Using your own API key means your requests travel straight from your device to the provider with a transparent data path.</p></div></div>
+        <div class="faq-a"><div class="faq-a-inner"><p>Model requests travel directly from your device to the AI providers you configure. When Online Search is active, a derived query may be sent to teramoby&#39;s Cloudflare-hosted search service; the current Android version first asks the summarizer whether current web information is needed. See the Privacy Policy for platform behavior and the complete data flow.</p></div></div>
       </div>
       <div class="faq-item">
         <div class="faq-q" onclick="toggle(this)">
@@ -97,24 +98,38 @@
           <h3>How does tt generate the final answer?</h3>
           <div class="faq-chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
         </div>
-        <div class="faq-a"><div class="faq-a-inner"><p>When you submit a question, tt simultaneously sends it to all the models you&#39;ve selected and collects their responses in parallel. Once all answers are in, tt sends them together to a single model, which synthesizes them into one objective, reliable final answer.</p></div></div>
+        <div class="faq-a"><div class="faq-a-inner"><p>In a standard chat, tt sends your question to every currently configured service with a complete model and credential, preserves each completed response, and passes them to your chosen summarizer. With only one configured service, that single response is shown directly. The result is still model-generated content, so important claims should be verified.</p></div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggle(this)">
+          <h3>What is Team Mode?</h3>
+          <div class="faq-chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+        </div>
+        <div class="faq-a"><div class="faq-a-inner"><p>Team Mode gives every currently configured service with a complete model and credential a shared discussion. They can respond to the user and to one another, add new information, challenge assumptions, or stop responding when they have nothing new to add. An <span class="mono">@</span> mention asks one model to respond first without excluding the others. The discussion ends automatically when every participant is quiet. <a href="/team-mode.html">Learn how Team Mode works</a>.</p></div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggle(this)">
+          <h3>When should I use standard chat instead of Team Mode?</h3>
+          <div class="faq-chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+        </div>
+        <div class="faq-a"><div class="faq-a-inner"><p>Use standard chat for a quick answer, side-by-side comparison, or a synthesized result. Use Team Mode when a question benefits from critique, trade-off analysis, or several models building on one another over a shared discussion.</p></div></div>
       </div>
       <div id="api-keys" class="faq-item">
         <div class="faq-q" onclick="toggle(this)">
-          <h3>Where do I get API keys for each provider?</h3>
+          <h3>Where do I get API keys for common providers?</h3>
           <div class="faq-chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
         </div>
         <div class="faq-a">
           <div class="faq-a-inner">
-            <p>Click the links below to visit each provider&#39;s official page to create or retrieve your API key:</p>
+            <p>These official pages cover several commonly used services. See each provider&#39;s documentation for account eligibility and current credential requirements:</p>
             <ul class="api-list">
               <li><span class="provider">ChatGPT (OpenAI)</span><a href="https://help.openai.com/en/articles/4936850-where-do-i-find-my-openai-api-key" target="_blank" rel="noopener">Get API Key →</a></li>
               <li><span class="provider">Claude (Anthropic)</span><a href="https://platform.claude.com/login?returnTo=%2Fsettings%2Fkeys" target="_blank" rel="noopener">Get API Key →</a></li>
-              <li><span class="provider">Grok (xAI)</span><a href="https://console.x.ai/team/5aeeaef0-f088-49bd-90fb-8658c2992539" target="_blank" rel="noopener">Get API Key →</a></li>
+              <li><span class="provider">Grok (xAI)</span><a href="https://console.x.ai/home" target="_blank" rel="noopener">Open xAI Console →</a></li>
               <li><span class="provider">Gemini (Google)</span><a href="https://ai.google.dev/gemini-api/docs/api-key" target="_blank" rel="noopener">Get API Key →</a></li>
               <li><span class="provider">DeepSeek</span><a href="https://platform.deepseek.com/api_keys" target="_blank" rel="noopener">Get API Key →</a></li>
               <li><span class="provider">AWS Bedrock</span><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/api-keys.html" target="_blank" rel="noopener">Get API Key →</a></li>
-              <li><span class="provider">火山引擎 (VolcEngine)</span><a href="https://console.volcengine.com/auth/login?redirectURI=%2Fark%2Fregion%3Aark%2Bcn-beijing%2FapiKey" target="_blank" rel="noopener">Get API Key →</a></li>
+              <li><span class="provider">Doubao (VolcEngine Ark)</span><a href="https://console.volcengine.com/auth/login?redirectURI=%2Fark%2Fregion%3Aark%2Bcn-beijing%2FapiKey" target="_blank" rel="noopener">Get API Key →</a></li>
             </ul>
           </div>
         </div>
@@ -122,32 +137,32 @@
     </div>
 
     <div class="faq-group">
-      <p class="faq-group-title">Privacy &amp; Security</p>
+      <h2 class="faq-group-title">Privacy &amp; Security</h2>
       <div class="faq-item">
         <div class="faq-q" onclick="toggle(this)">
           <h3>Does tt save my conversations?</h3>
           <div class="faq-chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
         </div>
-        <div class="faq-a"><div class="faq-a-inner"><p>Yes — but only locally on your device. No conversation data is uploaded to a teramoby server, and tt&#39;s developers have no technical means to access your data.</p></div></div>
+        <div class="faq-a"><div class="faq-a-inner"><p>Yes. Conversation history is stored as app data on your device. Your operating system may include that local app data in a system backup or device transfer according to your platform settings. On Android, conversation history and settings can be included, while encrypted API keys are excluded.</p></div></div>
       </div>
       <div class="faq-item">
         <div class="faq-q" onclick="toggle(this)">
           <h3>Are my API keys safe?</h3>
           <div class="faq-chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
         </div>
-        <div class="faq-a"><div class="faq-a-inner"><p>Yes. All API keys you configure are stored in the device&#39;s system secure storage. They are never written to ordinary files as plain text and are never transmitted to tt&#39;s developers or any third party.</p></div></div>
+        <div class="faq-a"><div class="faq-a-inner"><p>API keys are stored in the device&#39;s system secure storage and are not written to ordinary files as plain text. A key is used to authenticate directly with the provider you configured; it is not sent to teramoby or unrelated services.</p></div></div>
       </div>
       <div class="faq-item">
         <div class="faq-q" onclick="toggle(this)">
           <h3>Does tt collect usage or analytics data?</h3>
           <div class="faq-chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
         </div>
-        <div class="faq-a"><div class="faq-a-inner"><p>No. tt has no backend servers, data pipelines, or telemetry of any kind. We do not collect or record any user behavior, device information, or personal identifiers.</p></div></div>
+        <div class="faq-a"><div class="faq-a-inner"><p>tt does not send usage analytics, advertising identifiers, or full conversation history to teramoby. Requests you initiate still go to the AI providers you configure. When Online Search is active, a derived query may go to teramoby&#39;s Cloudflare-hosted search service. Online Search is enabled by default in current releases and can be turned off in Settings. See the Privacy Policy for platform behavior, endpoint, caching, and third-party processing details.</p></div></div>
       </div>
     </div>
 
     <div class="faq-group">
-      <p class="faq-group-title">Download &amp; Pricing</p>
+      <h2 class="faq-group-title">Download &amp; Pricing</h2>
       <div class="faq-item">
         <div class="faq-q" onclick="toggle(this)">
           <h3>Is tt free?</h3>
@@ -160,7 +175,7 @@
           <h3>What platforms are supported?</h3>
           <div class="faq-chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
         </div>
-        <div class="faq-a"><div class="faq-a-inner"><p>tt is available for Android, iPhone, iPad, and Mac. Download Android directly from the website; on the App Store, search for teramoby and select “teramoby tera (tt).”</p></div></div>
+        <div class="faq-a"><div class="faq-a-inner"><p>tt is available for Android, iPhone, iPad, and Mac. Download Android directly from the website; on a supported App Store storefront, search for teramoby and select “teramoby tera (tt).” The app is not currently listed in the mainland China App Store.</p></div></div>
       </div>
     </div>
   </section>
@@ -184,7 +199,7 @@
   </div>
   <div class="meta">
     <span>© 2026 teramoby · tera-support@teramoby.com</span>
-    <nav>
+    <nav aria-label="Footer navigation">
       <a href="/">Help Center</a>
       <a href="/privacy.html">Privacy Policy</a>
     </nav>
@@ -192,12 +207,47 @@
 </footer>
 
 <script>
+  function toggle(trigger) {
+    const item = trigger.closest('.faq-item');
+    if (!item) return;
+    const open = !item.classList.contains('open');
+    const answer = trigger.nextElementSibling;
+    item.classList.toggle('open', open);
+    trigger.setAttribute('aria-expanded', String(open));
+    if (answer) {
+      answer.setAttribute('aria-hidden', String(!open));
+      answer.inert = !open;
+    }
+  }
 
+  document.querySelectorAll('.faq-q').forEach((trigger, index) => {
+    const answer = trigger.nextElementSibling;
+    trigger.setAttribute('role', 'button');
+    trigger.setAttribute('tabindex', '0');
+    trigger.setAttribute('aria-expanded', 'false');
+    if (answer) {
+      answer.id ||= `faq-answer-${index + 1}`;
+      answer.setAttribute('aria-hidden', 'true');
+      answer.inert = true;
+      trigger.setAttribute('aria-controls', answer.id);
+    }
+    trigger.addEventListener('keydown', (event) => {
+      if (event.key !== 'Enter' && event.key !== ' ') return;
+      event.preventDefault();
+      toggle(trigger);
+    });
+  });
 
   if (location.hash) {
     const target = document.querySelector(location.hash);
     if (target && target.classList.contains('faq-item')) {
       target.classList.add('open');
+      target.querySelector('.faq-q')?.setAttribute('aria-expanded', 'true');
+      const answer = target.querySelector('.faq-a');
+      if (answer) {
+        answer.setAttribute('aria-hidden', 'false');
+        answer.inert = false;
+      }
       setTimeout(() => target.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
     }
   }

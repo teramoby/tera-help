@@ -8,7 +8,7 @@
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=2">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>隐私政策｜tt by teramoby</title>
-  <meta name="description" content="了解 tt 如何在设备本地保存对话、设置与 API 密钥，以及请求如何发送到您主动选择的第三方 AI 服务商。">
+  <meta name="description" content="了解 tt 如何处理本地应用数据、系统备份、AI 服务请求、API 密钥和联网搜索。">
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
   <link rel="canonical" href="https://app.teramoby.com/zh/privacy.html">
   <link rel="alternate" hreflang="en" href="https://app.teramoby.com/privacy.html">
@@ -19,7 +19,7 @@
   <meta property="og:locale" content="zh_CN">
   <meta property="og:locale:alternate" content="en_US">
   <meta property="og:title" content="隐私政策｜tt by teramoby">
-  <meta property="og:description" content="了解 tt 如何在设备本地保存对话、设置与 API 密钥，以及请求如何发送到您主动选择的第三方 AI 服务商。">
+  <meta property="og:description" content="了解 tt 如何处理本地应用数据、系统备份、AI 服务请求、API 密钥和联网搜索。">
   <meta property="og:url" content="https://app.teramoby.com/zh/privacy.html">
   <meta property="og:image" content="https://app.teramoby.com/img/og-tt.png">
   <meta property="og:image:type" content="image/png">
@@ -28,12 +28,13 @@
   <meta property="og:image:alt" content="tt by teramoby 多模型 AI 客户端">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="隐私政策｜tt by teramoby">
-  <meta name="twitter:description" content="了解 tt 如何在设备本地保存对话、设置与 API 密钥，以及请求如何发送到您主动选择的第三方 AI 服务商。">
+  <meta name="twitter:description" content="了解 tt 如何处理本地应用数据、系统备份、AI 服务请求、API 密钥和联网搜索。">
   <meta name="twitter:image" content="https://app.teramoby.com/img/og-tt.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500&amp;family=Source+Serif+4:ital,opsz,wght@0,8..60,400;1,8..60,400&amp;display=swap">
-  <link rel="stylesheet" href="/assets/site.css?v=20260817-static-locales">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500&amp;display=swap" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500&amp;display=swap"></noscript>
+  <link rel="stylesheet" href="/assets/site.css?v=20260818-seo1">
 </head>
 <body>
 
@@ -48,13 +49,13 @@
       <span>隐私政策</span>
     </div>
     <div class="spacer"></div>
-    <nav>
+    <nav aria-label="主要导航">
       <a href="/zh/launch.html">发布公告</a>
       <a href="/zh/#download">下载</a>
       <a href="/zh/blog-getting-started.html">使用指南</a>
       <a href="/zh/faq.html">常见问题</a>
     </nav>
-    <div class="lang-toggle" aria-label="语言">
+    <div class="lang-toggle" role="group" aria-label="语言">
       <a href="/privacy.html" lang="en" hreflang="en">EN</a>
       <a class="active" aria-current="page" href="/zh/privacy.html" lang="zh-CN" hreflang="zh-CN">中文</a>
     </div>
@@ -62,33 +63,38 @@
 </header>
 
 <main class="reading">
-  <p class="dateline">生效日期：2026 年 3 月 13 日</p>
+  <p class="dateline">生效日期：2026 年 8 月 18 日</p>
   <h1>隐私政策</h1>
-  <p class="lede">tt by teramoby（以下简称“tt”）不保存您的任何信息。所有数据仅存储在您的设备上，开发者在技术上无任何途径获取您的数据。</p>
+  <p class="lede">tt 会把对话、设置和凭证作为应用数据保存在您的设备上。模型请求会发送给您配置的 AI 服务；联网搜索处于开启状态时，生成的搜索词还可能发送到下文说明的 teramoby 搜索服务。</p>
 
   <h2>数据存储</h2>
 
   <h3>数据本地存储</h3>
-  <p>您在 tt 中产生的所有数据——包括对话记录、应用配置、偏好设置——均仅保存在您所安装的设备上。我们没有云端同步、没有远程备份，也没有任何形式的服务器端存储。</p>
+  <p>您的对话记录、服务商配置和偏好设置作为应用数据保存在设备上。tt 不提供 teramoby 账户或自有云同步服务；操作系统可能依据平台设置，将本地应用数据纳入系统备份或设备迁移。在 Android 上，对话记录、服务商配置和偏好设置可以随系统备份或设备迁移，已加密的 API 密钥不包含在该备份中。</p>
 
-  <h3>零数据收集</h3>
-  <p>tt 不收集、不记录、不传输任何用户数据，包括：对话内容与历史记录、使用行为与统计、设备信息与标识符、地理位置信息，以及任何个人身份信息（PII）。</p>
+  <h3>不向 teramoby 发送分析数据</h3>
+  <p>tt 不会为了账户同步、广告或产品分析，把完整对话历史、使用分析、广告标识、位置或个人身份信息发送给 teramoby。为提供特定功能而必须离开设备的数据，会在“第三方服务”和“联网搜索”中说明。</p>
 
   <h2>数据安全</h2>
 
-  <h3>开发者无法访问您的数据</h3>
-  <p>tt 不设任何后端服务器、数据管道或遥测系统。即便开发者想获取您的数据，在技术上也无从实现。您的隐私受到架构层面的保护，而非仅依赖于承诺。</p>
+  <h3>本地数据不会提供给 teramoby</h3>
+  <p>tt 不使用 teramoby 账户、自有云同步管道或遥测服务，因此 teramoby 无法通过应用获取保存在本地的对话、设置或凭证。平台备份服务商可能依据您的操作系统账户和备份设置处理被备份的应用数据。</p>
 
   <h3>API 密钥安全</h3>
-  <p>您配置的第三方 AI 服务商 API 密钥，仅存储于本地设备的系统安全存储中。这些密钥不会传输给 tt 开发者，也不会用于其他任何目的。</p>
+  <p>您配置的第三方 AI 服务商 API 密钥存储在设备的系统安全存储中。密钥仅在认证请求时发送给对应服务商，不会发送给 teramoby 或无关服务。</p>
 
   <h2>第三方服务</h2>
 
   <h3>第三方 AI 服务商</h3>
-  <p>tt 的核心功能是将您在对话框中输入的文本内容（消息与提示词）直接从您的设备传输至您主动选择并配置的 AI 服务商（如 OpenAI、Anthropic、Google Gemini 等），以获取 AI 生成的回复。传输通过您自己提供的 API 密钥与服务商直接建立连接，tt 不对此内容进行拦截、存储或任何形式的处理。</p>
-  <p>此数据传输完全由您主动发起：您自主决定使用哪家服务商、配置对应的 API 密钥，并在每次对话时决定发送的内容。您对所有数据的流向拥有完全控制权。您的对话内容仅用于向所选服务商请求回复，不作任何其他用途。</p>
+  <p>为生成回复，tt 会把您的消息及当前工作方式所需的上下文，从设备直接发送给每个已经完整配置模型和凭证的 AI 服务（如 OpenAI、Anthropic、Google 或 DeepSeek）。标准多模型综合和 Team Mode 的后续请求，可能包含其他模型的回答或共享讨论上下文。</p>
+  <p>您决定配置哪些服务以及提交哪些内容。各服务商会依据自己的条款和隐私政策处理收到的请求；teramoby 不处于模型服务商的请求链路中。</p>
 
-  <div class="callout">各 AI 服务商将依据其自身隐私政策处理收到的数据，与 tt 无关。建议您在使用前阅读所选服务商的隐私政策，以了解其数据处理方式。</div>
+  <h3>联网搜索</h3>
+  <p>联网搜索（RAG）使用由 teramoby 运营并托管在 Cloudflare 的搜索服务。当前 Android 接口为 <span class="mono">https://wanjucool.com/api/search</span>；当前 Apple 实现使用对应的 <span class="mono">https://terasear.wcai.workers.dev/api/search</span> 路径。搜索服务会收到根据提示词生成的简短搜索词；返回的结果随后可能作为上下文发送给已配置的 AI 服务商。</p>
+  <p>搜索接口会把搜索词发送给上游搜索来源，并使用 Cloudflare KV 将搜索词和返回结果临时缓存最长五分钟。teramoby 未为该接口配置专用的 Worker 日志导出；Cloudflare 和上游搜索来源仍可能依据各自条款处理搜索词及常规请求元数据。</p>
+  <p>当前版本默认开启联网搜索。当前 Android 版本会先由已配置的总结模型判断是否需要最新网络资料；当前 Apple 实现会在联网搜索开启时对非空提示词进行搜索。您可以在设置中关闭联网搜索，以阻止应用使用搜索服务。如果您配置自己的 Search API Key，它会替代应用内置的接口凭证，保存在本地安全存储中，并仅为认证而发送至搜索接口。</p>
+
+  <div class="callout">请查看每项已配置 AI 服务的隐私和保留条款。模型服务商、Cloudflare、平台备份服务商及上游搜索来源会依据各自条款处理其收到的数据。</div>
 
   <h2>联系我们</h2>
   <h3>对本政策有疑问？</h3>
@@ -107,7 +113,7 @@
   </div>
   <div class="meta">
     <span>© 2026 teramoby · tera-support@teramoby.com</span>
-    <nav>
+    <nav aria-label="页脚导航">
       <a href="/zh/">帮助中心</a>
       <a href="/zh/faq.html">常见问题</a>
     </nav>

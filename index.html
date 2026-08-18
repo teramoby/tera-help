@@ -8,7 +8,7 @@
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=2">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>tt – Multi-Model AI Client for ChatGPT, Claude, Gemini &amp; DeepSeek</title>
-  <meta name="description" content="tt by teramoby is a private, cross-platform multi-model AI client. Ask ChatGPT, Claude, Gemini, DeepSeek and more, compare responses, and synthesize one answer with Team Mode.">
+  <meta name="description" content="tt by teramoby is a BYOK, local-first multi-model AI client. Compare and synthesize replies in standard chat, or let models discuss in Team Mode.">
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
   <link rel="canonical" href="https://app.teramoby.com/">
   <link rel="alternate" hreflang="en" href="https://app.teramoby.com/">
@@ -19,7 +19,7 @@
   <meta property="og:locale" content="en_US">
   <meta property="og:locale:alternate" content="zh_CN">
   <meta property="og:title" content="tt – Multi-Model AI Client for ChatGPT, Claude, Gemini &amp; DeepSeek">
-  <meta property="og:description" content="tt by teramoby is a private, cross-platform multi-model AI client. Ask ChatGPT, Claude, Gemini, DeepSeek and more, compare responses, and synthesize one answer with Team Mode.">
+  <meta property="og:description" content="tt by teramoby is a BYOK, local-first multi-model AI client. Compare and synthesize replies in standard chat, or let models discuss in Team Mode.">
   <meta property="og:url" content="https://app.teramoby.com/">
   <meta property="og:image" content="https://app.teramoby.com/img/og-tt.png">
   <meta property="og:image:type" content="image/png">
@@ -28,7 +28,7 @@
   <meta property="og:image:alt" content="tt by teramoby multi-model AI client">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="tt – Multi-Model AI Client for ChatGPT, Claude, Gemini &amp; DeepSeek">
-  <meta name="twitter:description" content="tt by teramoby is a private, cross-platform multi-model AI client. Ask ChatGPT, Claude, Gemini, DeepSeek and more, compare responses, and synthesize one answer with Team Mode.">
+  <meta name="twitter:description" content="tt by teramoby is a BYOK, local-first multi-model AI client. Compare and synthesize replies in standard chat, or let models discuss in Team Mode.">
   <meta name="twitter:image" content="https://app.teramoby.com/img/og-tt.png">
   <script type="application/ld+json">
   {
@@ -39,7 +39,7 @@
       "tt",
       "teramoby tera (tt)"
     ],
-    "description": "tt by teramoby is a private, cross-platform multi-model AI client. Ask ChatGPT, Claude, Gemini, DeepSeek and more, compare responses, and synthesize one answer with Team Mode.",
+    "description": "tt by teramoby is a BYOK, local-first multi-model AI client. Compare and synthesize replies in standard chat, or let models discuss in Team Mode.",
     "url": "https://app.teramoby.com/",
     "image": "https://app.teramoby.com/img/og-tt.png",
     "applicationCategory": "UtilitiesApplication",
@@ -65,10 +65,27 @@
     ]
   }
   </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "@id": "https://app.teramoby.com/#website",
+    "url": "https://app.teramoby.com/",
+    "name": "tt by teramoby",
+    "alternateName": "tt",
+    "inLanguage": ["en", "zh-CN"],
+    "publisher": {
+      "@type": "Organization",
+      "name": "teramoby",
+      "url": "https://app.teramoby.com/"
+    }
+  }
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500&amp;family=Source+Serif+4:ital,opsz,wght@0,8..60,400;1,8..60,400&amp;display=swap">
-  <link rel="stylesheet" href="/assets/site.css?v=20260817-static-locales">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500&amp;display=swap" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500&amp;display=swap"></noscript>
+  <link rel="stylesheet" href="/assets/site.css?v=20260818-seo1">
 </head>
 <body>
 
@@ -79,14 +96,14 @@
       <span class="brand-lockup">tt <small>by teramoby</small></span>
     </a>
     <div class="spacer"></div>
-    <nav>
+    <nav aria-label="Primary navigation">
       <a href="/launch.html">Launch</a>
       <a href="#download">Download</a>
       <a href="/blog-getting-started.html">Guide</a>
       <a href="/faq.html">FAQ</a>
       <a href="/privacy.html">Privacy</a>
     </nav>
-    <div class="lang-toggle" aria-label="Language">
+    <div class="lang-toggle" role="group" aria-label="Language">
       <a class="active" aria-current="page" href="/" lang="en" hreflang="en">EN</a>
       <a href="/zh/" lang="zh-CN" hreflang="zh-CN">中文</a>
     </div>
@@ -98,11 +115,11 @@
     <canvas id="hero-particles" class="hero-particles" aria-hidden="true"></canvas>
     <div class="hero-copy">
       <h1><span>The multi-model </span><em>AI client</em><span></span></h1>
-      <p class="lede">One client for leading AI models worldwide. Chat with any model individually, or bring several together to discuss a question and synthesize one answer.</p>
+      <p class="lede">One client for leading AI models worldwide. Use one model, compare and synthesize several replies, or let a team of models discuss the question together.</p>
 
       <ul class="hero-points">
         <li><span class="tick" aria-hidden="true"></span><span>Connect leading AI models and managed platforms worldwide</span></li>
-        <li><span class="tick" aria-hidden="true"></span><span>Choose any model to chat with in the same app</span></li>
+        <li><span class="tick" aria-hidden="true"></span><span>Configure one service for a single-model chat or several for a multi-model chat</span></li>
         <li><span class="tick" aria-hidden="true"></span><span>Team Mode lets models discuss, challenge and build on one another</span></li>
         <li><span class="tick" aria-hidden="true"></span><span>Turn consensus and disagreement into one synthesized answer</span></li>
       </ul>
@@ -113,7 +130,7 @@
             <svg viewBox="0 0 814 1000"><path d="M788.1 340.9c-5.8 4.5-108.2 62.2-108.2 190.5 0 148.4 130.3 200.9 134.2 202.2-.6 3.2-20.7 71.9-68.7 141.9-42.8 61.6-87.5 123.1-155.5 123.1s-85.5-39.5-164-39.5c-76 0-103.7 40.8-165.9 40.8s-105-37.5-155.5-112.2c-48.3-72.3-92.5-191.2-92.5-302.9 0-171.6 112-262.2 222.1-262.2 82.4 0 151.3 54.2 203.9 54.2 50.3 0 129.2-58.2 220.9-58.2 35.4 0 127.3 3.2 190.5 111.3zm-180.3-147.4c36.3-44.5 62.6-106.1 62.6-167.7 0-8.3-.6-16.7-2-24.4-59.3 2.3-128.9 39.5-170.3 90.2-33.3 38.9-65 100.5-65 162.8 0 9.3 1.3 18.7 2 21.9 3.5.7 9.5 1.3 15.5 1.3 53.6 0 119.9-35.9 157.2-84.1z"/></svg>
             <span>Download for Mac</span>
           </a>
-          <p class="download-meta">macOS 26.2+  ·  Universal (Apple Silicon &amp; Intel)</p>
+          <p class="download-meta">macOS 14.0+  ·  Universal (Apple Silicon &amp; Intel)</p>
         </div>
 
         <div class="download-stack">
@@ -128,7 +145,7 @@
           <img src="/img/qr-appstore.png" alt="App Store QR">
           <div class="qr-text">
             <strong>Get it on the App Store</strong>
-            <span>iPhone · iPad · Mac</span>
+            <span>iPhone · iPad · Mac · availability varies by region</span>
           </div>
         </a>
       </div>
@@ -141,15 +158,13 @@
         <video
           id="hero-video"
           class="art-video"
-          autoplay
           muted
           loop
           playsinline
-          preload="metadata"
+          preload="none"
           poster="/media/tt-hero-poster.jpg"
-          aria-label="tt by teramoby app demo"
-          data-hls="/media/hls/tt-hero.m3u8">
-          <source src="/media/tt-hero.mp4" type="video/mp4">
+          aria-hidden="true"
+          data-mp4="/media/tt-hero.mp4">
         </video>
       </div>
     </div>
@@ -157,24 +172,26 @@
 
   <section class="section">
     <div class="section-header section-header-solo">
-      <h2 class="section-title"><span>Different models,</span> <em>one complete answer</em></h2>
+      <h2 class="section-title"><span>Different models,</span> <em>one synthesized answer</em></h2>
     </div>
 
     <div class="features">
       <div class="feature">
         <span class="feature-kicker">ONE FOR ALL</span>
-        <h3>Every leading model, one gateway</h3>
-        <p>Choose the right model for each question without being tied to one platform or switching between different apps.</p>
+        <h3>Leading AI models, one gateway</h3>
+        <p>Connect the AI services you use in one place without being tied to one platform or switching between different apps.</p>
+        <a class="feature-link" href="/models.html">See supported services <span aria-hidden="true">→</span></a>
       </div>
       <div class="feature">
         <span class="feature-kicker">TEAM MODE</span>
-        <h3>Let the models discuss before they answer</h3>
+        <h3>Give the models a shared discussion</h3>
         <p>Different models respond, challenge and build on one another around the same question, bringing their strengths together.</p>
+        <a class="feature-link" href="/team-mode.html">Explore Team Mode <span aria-hidden="true">→</span></a>
       </div>
       <div class="feature">
         <span class="feature-kicker">SYNTHESIZED ANSWER</span>
         <h3>Different perspectives, one conclusion</h3>
-        <p>tt preserves both consensus and disagreement, then turns the discussion into one clear, complete answer you can use.</p>
+        <p>tt keeps every original response visible, then asks your chosen summarizer to organize common points and differences into one synthesized answer.</p>
       </div>
       <div class="feature">
         <span class="feature-kicker">IN YOUR CONTROL</span>
@@ -185,40 +202,40 @@
   </section>
 
   <section class="showcase">
-    <p class="showcase-caption">Available on Android · iPhone · iPad · Mac</p>
+    <p class="showcase-caption">Available on Android · iPhone · iPad · Mac (App Store availability varies by region)</p>
     <div class="showcase-images">
-      <div class="mock"><img src="/img/screenshot-appstore.jpeg" alt="tt on the App Store"></div>
-      <div class="mock"><img src="/img/screenshot-home.jpeg" alt="tt multi-model AI chat home screen"></div>
-      <div class="mock"><img src="/img/screenshot-settings.jpeg" alt="tt AI provider and API key settings"></div>
+      <div class="mock"><img src="/img/screenshot-appstore.jpeg" alt="tt on the App Store" width="360" height="782" loading="lazy" decoding="async"></div>
+      <div class="mock"><img src="/img/screenshot-home.jpeg" alt="tt multi-model AI chat home screen" width="914" height="1978" loading="lazy" decoding="async"></div>
+      <div class="mock"><img src="/img/screenshot-settings.jpeg" alt="tt AI provider and API key settings" width="914" height="1978" loading="lazy" decoding="async"></div>
     </div>
   </section>
 
   <section class="section">
     <div class="section-header">
       <p class="section-eyebrow">Privacy</p>
-      <h2 class="section-title"><span>Your data belongs to you —</span> <em>always.</em></h2>
+      <h2 class="section-title"><span>Local-first,</span> <em>with a clear data flow</em></h2>
     </div>
 
     <div class="deflist">
       <div class="item">
-        <h4>Stored Locally on Your Device</h4>
-        <p>All your conversations and settings are saved exclusively on your device and are never uploaded to any server.</p>
+        <h3>Stored Locally on Your Device</h3>
+        <p>Your conversation history and settings are stored as app data on your device. Your operating system may include this data in system backup or device transfer.</p>
       </div>
       <div class="item">
-        <h4>Zero Data Collection</h4>
-        <p>tt does not collect or record any user data — including but not limited to conversation content, usage patterns, device information, or personal identifiers.</p>
+        <h3>No teramoby Analytics</h3>
+        <p>tt does not send full conversation history, usage analytics, device identifiers, or personal identifiers to teramoby for product analytics.</p>
       </div>
       <div class="item">
-        <h4>Developers Cannot Access Your Data</h4>
-        <p>tt&#39;s developers have no technical means to access your data. There are no backend servers, no data pipelines, and no telemetry systems of any kind.</p>
+        <h3>No teramoby Account or Cloud</h3>
+        <p>tt does not use a teramoby account, app cloud-sync service, data pipeline, or telemetry service.</p>
       </div>
       <div class="item">
-        <h4>API Key Security</h4>
-        <p>Any third-party API keys you configure are stored only in your device&#39;s secure local storage. They are inaccessible to tt&#39;s developers and are never used for any other purpose.</p>
+        <h3>API Key Security</h3>
+        <p>Third-party API keys are kept in your device&#39;s secure system storage and used only to authenticate with the service you configure. They are not sent to teramoby.</p>
       </div>
     </div>
 
-    <div class="note">tt communicates directly from your device to the AI provider of your choice. Please refer to your chosen model provider&#39;s privacy policy for details on how they handle your data.</div>
+    <div class="note">Model requests travel directly from your device to the configured AI providers. When Online Search is active and a search is needed, a derived query is sent to teramoby&#39;s Cloudflare-hosted search endpoint. See the Privacy Policy for backup, caching, and third-party processing details.</div>
 
     <div style="margin-top: 32px;">
       <a href="/privacy.html" class="arrow-link">
@@ -268,8 +285,10 @@
     </div>
 
     <div class="footer-col">
-      <h4>Product</h4>
+      <h2>Product</h2>
       <ul>
+        <li><a href="/models.html">Supported Models</a></li>
+        <li><a href="/team-mode.html">Team Mode</a></li>
         <li><a href="/launch.html">Launch</a></li>
         <li><a href="/blog-getting-started.html">Guide</a></li>
         <li><a href="/faq.html">FAQ</a></li>
@@ -277,7 +296,7 @@
     </div>
 
     <div class="footer-col">
-      <h4>Company</h4>
+      <h2>Company</h2>
       <ul>
         <li><a href="/privacy.html">Privacy</a></li>
         <li><a href="mailto:tera-support@teramoby.com">Email</a></li>
@@ -288,7 +307,7 @@
   </div>
   <div class="meta">
     <span>© 2026 teramoby · tera-support@teramoby.com</span>
-    <nav>
+    <nav aria-label="Footer navigation">
       <a href="/">Home</a>
       <a href="/privacy.html">Privacy</a>
     </nav>
@@ -298,37 +317,57 @@
 <script>
 
 
-  // HLS hero video: Safari native, hls.js elsewhere. Force play() after load.
+  // Keep the poster available for first paint, then load the demo after the
+  // page is complete and the browser has idle time. Reduced-motion users keep
+  // the still poster.
   (function () {
     const v = document.getElementById('hero-video');
     if (!v) return;
-    const src = v.dataset.hls;
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    if (reducedMotion.matches) return;
+    let started = false;
+    let scheduled = false;
+    let visible = false;
     const tryPlay = () => {
       const p = v.play();
       if (p && p.catch) p.catch(() => {});
     };
-    if (src && v.canPlayType('application/vnd.apple.mpegurl')) {
-      v.src = src;
+    const start = () => {
+      if (started) return;
+      started = true;
+      v.src = v.dataset.mp4;
       v.addEventListener('loadedmetadata', tryPlay, { once: true });
-    } else if (src) {
-      const s = document.createElement('script');
-      s.src = 'https://cdn.jsdelivr.net/npm/hls.js@1/dist/hls.min.js';
-      s.onload = function () {
-        if (window.Hls && window.Hls.isSupported()) {
-          const hls = new window.Hls({ lowLatencyMode: false });
-          hls.loadSource(src);
-          hls.attachMedia(v);
-          hls.on(window.Hls.Events.MANIFEST_PARSED, tryPlay);
-        } else {
-          tryPlay();
-        }
+      v.load();
+    };
+    const schedule = () => {
+      if (started || scheduled || !visible) return;
+      scheduled = true;
+      const afterLoad = () => {
+        const run = () => {
+          scheduled = false;
+          if (visible) start();
+        };
+        if ('requestIdleCallback' in window) requestIdleCallback(run, { timeout: 2500 });
+        else setTimeout(run, 1200);
       };
-      s.onerror = tryPlay;
-      document.head.appendChild(s);
+      if (document.readyState === 'complete') afterLoad();
+      else window.addEventListener('load', afterLoad, { once: true });
+    };
+    if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver(([entry]) => {
+        visible = entry.isIntersecting;
+        if (visible) {
+          if (started) tryPlay();
+          else schedule();
+        } else if (started) {
+          v.pause();
+        }
+      }, { rootMargin: '160px 0px' });
+      observer.observe(v);
     } else {
-      tryPlay();
+      visible = true;
+      schedule();
     }
-    v.addEventListener('canplay', tryPlay, { once: true });
   })();
 
   // A precise digital point surface behind the product demo. The ordered grid
@@ -347,6 +386,8 @@
     let points = [];
     let frame = 0;
     let visible = true;
+    let animationReady = false;
+    let lastDraw = 0;
 
     function rebuild() {
       const rect = canvas.getBoundingClientRect();
@@ -358,8 +399,8 @@
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
       const compact = width < 640;
-      const columns = compact ? 38 : 62;
-      const rows = compact ? 25 : 34;
+      const columns = compact ? 30 : 44;
+      const rows = compact ? 20 : 26;
       const startX = compact ? width * 0.08 : width * 0.34;
       const startY = compact ? height * 0.47 : height * 0.08;
       const fieldWidth = compact ? width * 0.98 : width * 0.72;
@@ -450,14 +491,17 @@
     }
 
     function tick(time) {
-      draw(time);
+      if (time - lastDraw >= 32) {
+        draw(time);
+        lastDraw = time;
+      }
       frame = visible && !reduceMotion.matches ? requestAnimationFrame(tick) : 0;
     }
 
     function restart() {
       if (frame) cancelAnimationFrame(frame);
       frame = 0;
-      if (visible && !document.hidden && !reduceMotion.matches) {
+      if (animationReady && visible && !document.hidden && !reduceMotion.matches) {
         frame = requestAnimationFrame(tick);
       } else {
         draw(0);
@@ -480,6 +524,12 @@
     document.addEventListener('visibilitychange', restart);
     rebuild();
     restart();
+    const enableAnimation = () => setTimeout(() => {
+      animationReady = true;
+      restart();
+    }, 3000);
+    if (document.readyState === 'complete') enableAnimation();
+    else window.addEventListener('load', enableAnimation, { once: true });
   })();
 </script>
 

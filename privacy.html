@@ -8,7 +8,7 @@
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=2">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Privacy Policy | tt by teramoby</title>
-  <meta name="description" content="Learn how tt stores conversations, settings, and API keys locally on your device and how requests are sent to the AI providers you choose.">
+  <meta name="description" content="Learn how tt handles local app data, system backups, AI provider requests, API keys, and online search.">
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
   <link rel="canonical" href="https://app.teramoby.com/privacy.html">
   <link rel="alternate" hreflang="en" href="https://app.teramoby.com/privacy.html">
@@ -19,7 +19,7 @@
   <meta property="og:locale" content="en_US">
   <meta property="og:locale:alternate" content="zh_CN">
   <meta property="og:title" content="Privacy Policy | tt by teramoby">
-  <meta property="og:description" content="Learn how tt stores conversations, settings, and API keys locally on your device and how requests are sent to the AI providers you choose.">
+  <meta property="og:description" content="Learn how tt handles local app data, system backups, AI provider requests, API keys, and online search.">
   <meta property="og:url" content="https://app.teramoby.com/privacy.html">
   <meta property="og:image" content="https://app.teramoby.com/img/og-tt.png">
   <meta property="og:image:type" content="image/png">
@@ -28,12 +28,13 @@
   <meta property="og:image:alt" content="tt by teramoby multi-model AI client">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Privacy Policy | tt by teramoby">
-  <meta name="twitter:description" content="Learn how tt stores conversations, settings, and API keys locally on your device and how requests are sent to the AI providers you choose.">
+  <meta name="twitter:description" content="Learn how tt handles local app data, system backups, AI provider requests, API keys, and online search.">
   <meta name="twitter:image" content="https://app.teramoby.com/img/og-tt.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500&amp;family=Source+Serif+4:ital,opsz,wght@0,8..60,400;1,8..60,400&amp;display=swap">
-  <link rel="stylesheet" href="/assets/site.css?v=20260817-static-locales">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500&amp;display=swap" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500&amp;display=swap"></noscript>
+  <link rel="stylesheet" href="/assets/site.css?v=20260818-seo1">
 </head>
 <body>
 
@@ -48,13 +49,13 @@
       <span>Privacy</span>
     </div>
     <div class="spacer"></div>
-    <nav>
+    <nav aria-label="Primary navigation">
       <a href="/launch.html">Launch</a>
       <a href="/#download">Download</a>
       <a href="/blog-getting-started.html">Guide</a>
       <a href="/faq.html">FAQ</a>
     </nav>
-    <div class="lang-toggle" aria-label="Language">
+    <div class="lang-toggle" role="group" aria-label="Language">
       <a class="active" aria-current="page" href="/privacy.html" lang="en" hreflang="en">EN</a>
       <a href="/zh/privacy.html" lang="zh-CN" hreflang="zh-CN">中文</a>
     </div>
@@ -62,33 +63,38 @@
 </header>
 
 <main class="reading">
-  <p class="dateline">Effective Date: March 13, 2026</p>
+  <p class="dateline">Effective Date: August 18, 2026</p>
   <h1>Privacy Policy</h1>
-  <p class="lede">tt by teramoby (referred to below as “tt”) stores nothing about you. All data lives on your device, and our developers have no technical means to access it — ever.</p>
+  <p class="lede">tt stores conversations, settings, and credentials as app data on your device. Model requests are sent to the AI services you configure. When Online Search is active, a derived search query may also be sent to the teramoby-operated search service described below.</p>
 
   <h2>Data Storage</h2>
 
   <h3>Stored Locally on Your Device</h3>
-  <p>Everything you create in tt — conversations, configurations, preferences — is stored exclusively on your device. There is no cloud sync, no remote backup, and no server-side storage of any kind.</p>
+  <p>Your conversation history, provider configurations, and preferences are stored as app data on your device. tt does not provide a teramoby account or its own cloud-sync service. Your operating system may include local app data in a system backup or device transfer according to your platform settings. On Android, conversation history, provider configuration, and preferences can be included; encrypted API keys are excluded from that backup.</p>
 
-  <h3>We Collect Zero Data</h3>
-  <p>tt does not collect, log, or transmit any user data — including conversation content and history, usage behavior and analytics, device information and identifiers, location data, or any personally identifiable information (PII).</p>
+  <h3>No teramoby Analytics</h3>
+  <p>tt does not send full conversation history, usage analytics, advertising identifiers, location, or personal identifiers to teramoby for account sync, advertising, or product analytics. Data that must leave your device to provide a feature is described under Third-Party Services and Online Search.</p>
 
   <h2>Data Security</h2>
 
-  <h3>Developers Cannot Access Your Data</h3>
-  <p>tt has no backend servers, data pipelines, or telemetry systems. Even if we wanted to access your data, it would be technically impossible. Your privacy is protected at the architectural level — not just by policy.</p>
+  <h3>Local Data Is Not Available to teramoby</h3>
+  <p>Because tt has no teramoby account, app cloud-sync pipeline, or telemetry service, teramoby cannot retrieve local conversations, settings, or credentials through the app. A platform backup provider may process backed-up app data according to your operating-system account and backup settings.</p>
 
   <h3>API Key Security</h3>
-  <p>API keys you configure for third-party AI providers are stored only in your device&#39;s secure system storage. They are never transmitted to tt&#39;s developers and are never used for any other purpose.</p>
+  <p>API keys you configure for third-party AI providers are stored in your device&#39;s secure system storage. A key is sent only to the corresponding provider as needed to authenticate your request; it is not sent to teramoby or unrelated services.</p>
 
   <h2>Third-Party Services</h2>
 
   <h3>Third-Party AI Providers</h3>
-  <p>tt&#39;s core function is to transmit the text you type into the conversation interface (your messages and prompts) directly from your device to the AI provider you choose and configure (such as OpenAI, Anthropic, Google Gemini, etc.) in order to generate AI responses. This transmission uses your own API key to connect directly with the provider. tt does not intercept, store, or process this content in any way.</p>
-  <p>This data transmission is entirely user-initiated: you choose which provider to use, configure your own API key, and decide what to send in each conversation. You retain full control over all data flows. Your conversation content is used solely to request responses from your chosen provider and for no other purpose.</p>
+  <p>To generate a response, tt sends your message and the context needed for the current workflow directly from your device to each AI service for which you have completed the model and credential configuration (such as OpenAI, Anthropic, Google, or DeepSeek). Standard multi-model synthesis and Team Mode may include model responses or shared discussion context in later provider requests.</p>
+  <p>You decide which services to configure and what to submit. Each provider receives and processes these requests under its own terms and privacy policy. teramoby is not an intermediary in the model-provider connection.</p>
 
-  <div class="callout">Each AI provider processes the data it receives under its own privacy policy, independently of tt. We recommend reviewing the privacy policy of your chosen provider before use.</div>
+  <h3>Online Search</h3>
+  <p>Online Search (RAG) uses a teramoby-operated service hosted on Cloudflare. The current Android endpoint is <span class="mono">https://wanjucool.com/api/search</span>; the current Apple implementation uses the corresponding <span class="mono">https://terasear.wcai.workers.dev/api/search</span> route. The service receives a concise query derived from your prompt, and returned results may then be included as context in requests to the configured AI providers.</p>
+  <p>The search endpoint sends the query to upstream search sources and uses Cloudflare KV to cache the query together with returned results for up to five minutes. teramoby has not configured dedicated Worker log export for this endpoint. Cloudflare and upstream search sources may still process the query and ordinary request metadata under their own terms.</p>
+  <p>Online Search is enabled by default in current releases. The current Android version first asks the configured summarizer whether current web information is needed; the current Apple implementation searches non-empty prompts whenever Online Search is active. You can turn Online Search off in Settings to prevent use of the search service. If you configure your own Search API Key, it replaces the app&#39;s built-in endpoint credential, is stored in secure local storage, and is sent only to the search endpoint for authentication.</p>
+
+  <div class="callout">Review the privacy and retention terms of every AI service you configure. Model providers, Cloudflare, platform backup providers, and upstream search sources process the data they receive under their respective terms.</div>
 
   <h2>Contact</h2>
   <h3>Questions About This Policy?</h3>
@@ -107,7 +113,7 @@
   </div>
   <div class="meta">
     <span>© 2026 teramoby · tera-support@teramoby.com</span>
-    <nav>
+    <nav aria-label="Footer navigation">
       <a href="/">Help Center</a>
       <a href="/faq.html">FAQ</a>
     </nav>
