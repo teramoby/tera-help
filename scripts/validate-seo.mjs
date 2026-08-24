@@ -14,6 +14,10 @@ const pages = [
   { file: 'team-mode.html', lang: 'en', canonical: `${SITE}/team-mode.html`, alternate: `${SITE}/zh/team-mode.html` },
   { file: 'compare-ai-models.html', lang: 'en', canonical: `${SITE}/compare-ai-models.html`, alternate: `${SITE}/zh/compare-ai-models.html` },
   { file: 'download.html', lang: 'en', canonical: `${SITE}/download.html`, alternate: `${SITE}/zh/download.html` },
+  { file: 'guides.html', lang: 'en', canonical: `${SITE}/guides.html`, alternate: `${SITE}/zh/guides.html` },
+  { file: 'download/mac/index.html', lang: 'en', canonical: `${SITE}/download/mac/`, alternate: `${SITE}/zh/download/mac/` },
+  { file: 'download/iphone-ipad/index.html', lang: 'en', canonical: `${SITE}/download/iphone-ipad/`, alternate: `${SITE}/zh/download/iphone-ipad/` },
+  { file: 'download/android/index.html', lang: 'en', canonical: `${SITE}/download/android/`, alternate: `${SITE}/zh/download/android/` },
   { file: 'zh/index.html', lang: 'zh-CN', canonical: `${SITE}/zh/`, alternate: `${SITE}/` },
   { file: 'zh/faq.html', lang: 'zh-CN', canonical: `${SITE}/zh/faq.html`, alternate: `${SITE}/faq.html` },
   { file: 'zh/blog-getting-started.html', lang: 'zh-CN', canonical: `${SITE}/zh/blog-getting-started.html`, alternate: `${SITE}/blog-getting-started.html` },
@@ -24,6 +28,10 @@ const pages = [
   { file: 'zh/team-mode.html', lang: 'zh-CN', canonical: `${SITE}/zh/team-mode.html`, alternate: `${SITE}/team-mode.html` },
   { file: 'zh/compare-ai-models.html', lang: 'zh-CN', canonical: `${SITE}/zh/compare-ai-models.html`, alternate: `${SITE}/compare-ai-models.html` },
   { file: 'zh/download.html', lang: 'zh-CN', canonical: `${SITE}/zh/download.html`, alternate: `${SITE}/download.html` },
+  { file: 'zh/guides.html', lang: 'zh-CN', canonical: `${SITE}/zh/guides.html`, alternate: `${SITE}/guides.html` },
+  { file: 'zh/download/mac/index.html', lang: 'zh-CN', canonical: `${SITE}/zh/download/mac/`, alternate: `${SITE}/download/mac/` },
+  { file: 'zh/download/iphone-ipad/index.html', lang: 'zh-CN', canonical: `${SITE}/zh/download/iphone-ipad/`, alternate: `${SITE}/download/iphone-ipad/` },
+  { file: 'zh/download/android/index.html', lang: 'zh-CN', canonical: `${SITE}/zh/download/android/`, alternate: `${SITE}/download/android/` },
 ];
 
 const errors = [];
@@ -48,17 +56,26 @@ async function validateInternalReferences(html, page) {
   const references = [...html.matchAll(/\b(href|src|poster|data-hls|data-mp4)="([^"]+)"/g)]
     .map(match => ({ attribute: match[1], value: match[2] }));
   for (const { attribute, value } of references) {
-    if (/^(https?:|mailto:|tel:|data:|#|\/\/)/.test(value)) continue;
-    const cleanValue = value.split('#')[0].split('?')[0];
-    if (!cleanValue) continue;
-    const base = cleanValue.startsWith('/')
-      ? path.join(ROOT, cleanValue.slice(1))
-      : path.resolve(ROOT, path.dirname(page.file), cleanValue);
+    if (/^(https?:|mailto:|tel:|data:|\/\/)/.test(value)) continue;
+    const [pathAndQuery, rawFragment] = value.split('#', 2);
+    const cleanValue = pathAndQuery.split('?')[0];
+    const base = !cleanValue
+      ? path.join(ROOT, page.file)
+      : cleanValue.startsWith('/')
+        ? path.join(ROOT, cleanValue.slice(1))
+        : path.resolve(ROOT, path.dirname(page.file), cleanValue);
     const target = cleanValue.endsWith('/') ? path.join(base, 'index.html') : base;
     try {
       await fs.access(target);
     } catch {
       errors.push(`${page.file}: missing internal ${attribute} target ${value}`);
+      continue;
+    }
+    if (rawFragment && target.endsWith('.html')) {
+      const fragment = decodeURIComponent(rawFragment);
+      const targetHtml = await fs.readFile(target, 'utf8');
+      const fragmentPattern = new RegExp(`\\b(?:id|name)=["']${escapeRegex(fragment)}["']`);
+      assert(fragmentPattern.test(targetHtml), `${page.file}: missing fragment target ${value}`);
     }
   }
 }
@@ -97,7 +114,7 @@ for (const page of pages) {
     }
   }
 
-  if (page.file.endsWith('index.html')) {
+  if (page.file === 'index.html' || page.file === 'zh/index.html') {
     const app = jsonLd.find(data => data['@type'] === 'SoftwareApplication');
     assert(Boolean(app), `${label}: missing SoftwareApplication JSON-LD`);
     if (app) {
@@ -119,14 +136,18 @@ for (const page of pages) {
     assert(jsonLd.some(data => data['@type'] === 'Organization'), `${label}: missing Organization JSON-LD`);
   }
 
-  if (page.file.endsWith('models.html') || page.file.endsWith('team-mode.html') || page.file.endsWith('byok-privacy.html') || page.file.endsWith('blog-getting-started.html') || page.file.endsWith('compare-ai-models.html') || page.file.endsWith('download.html')) {
+  if (page.file.endsWith('models.html') || page.file.endsWith('team-mode.html') || page.file.endsWith('byok-privacy.html') || page.file.endsWith('blog-getting-started.html') || page.file.endsWith('compare-ai-models.html') || page.file.endsWith('download.html') || page.file.endsWith('guides.html') || page.file.includes('/download/')) {
     const types = jsonLd.flatMap(data => data['@graph']?.map(item => item['@type']) ?? [data['@type']]);
     assert(types.includes('BreadcrumbList'), `${label}: missing BreadcrumbList JSON-LD`);
     if (page.file.endsWith('compare-ai-models.html')) {
       assert(types.includes('Article'), `${label}: missing Article JSON-LD`);
     }
-    if (page.file.endsWith('download.html')) {
+    if (page.file.endsWith('download.html') || page.file.includes('/download/')) {
       assert(types.includes('WebPage'), `${label}: missing WebPage JSON-LD`);
+    }
+    if (page.file.endsWith('guides.html')) {
+      assert(types.includes('CollectionPage'), `${label}: missing CollectionPage JSON-LD`);
+      assert(types.includes('ItemList'), `${label}: missing ItemList JSON-LD`);
     }
   }
 
@@ -148,6 +169,16 @@ for (const file of ['journal/index.html', 'journal/privacy.html']) {
     `${file}: requires exactly one noindex,follow directive`,
   );
 }
+
+const legacyAndroidPage = await fs.readFile(path.join(ROOT, 'android/index.html'), 'utf8');
+assert(
+  count(legacyAndroidPage, /<meta name="robots" content="noindex,follow">/g) === 1,
+  'android/index.html: requires exactly one noindex,follow directive',
+);
+assert(
+  legacyAndroidPage.includes('href="/zh/download/android/"'),
+  'android/index.html: missing link to the indexed Android guide',
+);
 
 const robots = await fs.readFile(path.join(ROOT, 'robots.txt'), 'utf8');
 assert(robots.includes('Sitemap: https://app.teramoby.com/sitemap.xml'), 'robots.txt: sitemap declaration missing');

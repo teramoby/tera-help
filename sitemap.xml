@@ -142,4 +142,60 @@
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://app.teramoby.com/zh/download.html" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://app.teramoby.com/download.html" />
   </url>
+  <url>
+    <loc>https://app.teramoby.com/guides.html</loc>
+    <lastmod>2026-08-24</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://app.teramoby.com/guides.html" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://app.teramoby.com/zh/guides.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://app.teramoby.com/guides.html" />
+  </url>
+  <url>
+    <loc>https://app.teramoby.com/zh/guides.html</loc>
+    <lastmod>2026-08-24</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://app.teramoby.com/guides.html" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://app.teramoby.com/zh/guides.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://app.teramoby.com/guides.html" />
+  </url>
+  <url>
+    <loc>https://app.teramoby.com/download/mac/</loc>
+    <lastmod>2026-08-24</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://app.teramoby.com/download/mac/" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://app.teramoby.com/zh/download/mac/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://app.teramoby.com/download/mac/" />
+  </url>
+  <url>
+    <loc>https://app.teramoby.com/zh/download/mac/</loc>
+    <lastmod>2026-08-24</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://app.teramoby.com/download/mac/" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://app.teramoby.com/zh/download/mac/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://app.teramoby.com/download/mac/" />
+  </url>
+  <url>
+    <loc>https://app.teramoby.com/download/iphone-ipad/</loc>
+    <lastmod>2026-08-24</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://app.teramoby.com/download/iphone-ipad/" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://app.teramoby.com/zh/download/iphone-ipad/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://app.teramoby.com/download/iphone-ipad/" />
+  </url>
+  <url>
+    <loc>https://app.teramoby.com/zh/download/iphone-ipad/</loc>
+    <lastmod>2026-08-24</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://app.teramoby.com/download/iphone-ipad/" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://app.teramoby.com/zh/download/iphone-ipad/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://app.teramoby.com/download/iphone-ipad/" />
+  </url>
+  <url>
+    <loc>https://app.teramoby.com/download/android/</loc>
+    <lastmod>2026-08-24</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://app.teramoby.com/download/android/" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://app.teramoby.com/zh/download/android/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://app.teramoby.com/download/android/" />
+  </url>
+  <url>
+    <loc>https://app.teramoby.com/zh/download/android/</loc>
+    <lastmod>2026-08-24</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://app.teramoby.com/download/android/" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://app.teramoby.com/zh/download/android/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://app.teramoby.com/download/android/" />
+  </url>
 </urlset>
