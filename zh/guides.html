@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico?v=2">
+  <link rel="icon" type="image/png" sizes="32x32" href="/icon-64.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=2">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>多模型 AI 使用指南：安装、模型比较、BYOK 与 Team Mode | tt</title>
+  <meta name="description" content="tt 多模型 AI 指南中心：安装和配置服务商 API Key，公平比较多个 AI 回答，理解 BYOK 隐私边界，并正确使用 Team Mode。">
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+  <link rel="canonical" href="https://app.teramoby.com/zh/guides.html">
+  <link rel="alternate" hreflang="en" href="https://app.teramoby.com/guides.html">
+  <link rel="alternate" hreflang="zh-CN" href="https://app.teramoby.com/zh/guides.html">
+  <link rel="alternate" hreflang="x-default" href="https://app.teramoby.com/guides.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="tt by teramoby">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta property="og:title" content="tt by teramoby 多模型 AI 使用指南">
+  <meta property="og:description" content="覆盖安装、BYOK 隐私、AI 回答比较和多模型协作的实用指南。">
+  <meta property="og:url" content="https://app.teramoby.com/zh/guides.html">
+  <meta property="og:image" content="https://app.teramoby.com/img/og-tt.png">
+  <meta property="og:image:width" content="1731">
+  <meta property="og:image:height" content="909">
+  <meta property="og:image:alt" content="tt by teramoby 多模型 AI 使用指南">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="tt by teramoby 多模型 AI 使用指南">
+  <meta name="twitter:description" content="安装、BYOK 隐私、模型比较和多模型协作指南。">
+  <meta name="twitter:image" content="https://app.teramoby.com/img/og-tt.png">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "CollectionPage",
+        "name": "多模型 AI 使用指南",
+        "url": "https://app.teramoby.com/zh/guides.html",
+        "description": "关于安装 tt、配置服务商凭证、比较 AI 回答、理解隐私和使用 Team Mode 的实用指南。",
+        "dateModified": "2026-08-24",
+        "inLanguage": "zh-CN",
+        "isPartOf": { "@id": "https://app.teramoby.com/#website" },
+        "mainEntity": { "@id": "https://app.teramoby.com/zh/guides.html#guide-list" }
+      },
+      {
+        "@type": "ItemList",
+        "@id": "https://app.teramoby.com/zh/guides.html#guide-list",
+        "name": "tt 使用指南",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "url": "https://app.teramoby.com/zh/download.html", "name": "下载并安装 tt" },
+          { "@type": "ListItem", "position": 2, "url": "https://app.teramoby.com/zh/blog-getting-started.html", "name": "配置 tt 并开始多模型对话" },
+          { "@type": "ListItem", "position": 3, "url": "https://app.teramoby.com/zh/compare-ai-models.html", "name": "并排比较 AI 模型" },
+          { "@type": "ListItem", "position": 4, "url": "https://app.teramoby.com/zh/team-mode.html", "name": "使用 Team Mode" },
+          { "@type": "ListItem", "position": 5, "url": "https://app.teramoby.com/zh/byok-privacy.html", "name": "理解 BYOK 与本地隐私" },
+          { "@type": "ListItem", "position": 6, "url": "https://app.teramoby.com/zh/download/mac/", "name": "在 Mac 安装 tt" },
+          { "@type": "ListItem", "position": 7, "url": "https://app.teramoby.com/zh/download/iphone-ipad/", "name": "在 iPhone 与 iPad 安装 tt" },
+          { "@type": "ListItem", "position": 8, "url": "https://app.teramoby.com/zh/download/android/", "name": "在 Android 安装 tt" }
+        ]
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "首页", "item": "https://app.teramoby.com/zh/" },
+          { "@type": "ListItem", "position": 2, "name": "使用指南", "item": "https://app.teramoby.com/zh/guides.html" }
+        ]
+      }
+    ]
+  }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500&amp;display=swap" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500&amp;display=swap"></noscript>
+  <link rel="stylesheet" href="/assets/site.css?v=20260824-seo3">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="inner">
+    <a href="/zh/" class="brand"><img src="/icon-64.png" alt=""><span class="brand-lockup">tt <small>by teramoby</small></span></a>
+    <div class="breadcrumb"><span class="sep">/</span><span>使用指南</span></div>
+    <div class="spacer"></div>
+    <nav aria-label="主要导航">
+      <a href="/zh/models.html">支持的模型</a>
+      <a href="/zh/team-mode.html">Team Mode</a>
+      <a href="/zh/download.html">下载</a>
+      <a href="/zh/privacy.html">隐私政策</a>
+    </nav>
+    <div class="lang-toggle" role="group" aria-label="语言">
+      <a href="/guides.html" lang="en" hreflang="en">EN</a>
+      <a class="active" aria-current="page" href="/zh/guides.html" lang="zh-CN" hreflang="zh-CN">中文</a>
+    </div>
+  </div>
+</header>
+
+<main class="reading">
+  <p class="dateline">指南中心 · 2026 年 8 月 24 日更新</p>
+  <h1>正确使用多个 AI 模型的实用指南</h1>
+  <p class="lede">多模型客户端能提供更多视角，但有用的结果仍依赖正确配置、公平比较、清晰的隐私边界和独立核验。请从与你当前任务最接近的指南开始。</p>
+
+  <h2>从安装和服务商配置开始</h2>
+  <div class="mode-grid">
+    <div class="mode-card">
+      <h3>在你的平台下载 tt</h3>
+      <p>选择 Mac、iPhone、iPad 或 Android 官方下载，并阅读相应平台的安装与更新注意事项。</p>
+      <p><a href="/zh/download.html">打开下载指南 →</a></p>
+    </div>
+    <div class="mode-card">
+      <h3>配置第一个模型服务</h3>
+      <p>添加你自己的服务商账户凭证，选择模型；完整配置一个服务即可开始，也可以配置多个服务进行多模型对话。</p>
+      <p><a href="/zh/blog-getting-started.html">按照入门教程配置 →</a></p>
+    </div>
+  </div>
+
+  <h2>比较 AI 回答时，不要把自信当作准确</h2>
+  <p>向每个模型提供相同提示词、上下文、工具和评分标准，保存原始回答，并通过独立来源核验重要主张，同时记录模型版本和测试日期。多个模型意见一致可以帮助确定核验优先级，但不能代替事实证据。</p>
+  <div class="content-actions">
+    <a class="btn btn-primary" href="/zh/compare-ai-models.html">阅读模型比较方法</a>
+    <a class="btn btn-outline" href="/zh/models.html">查看支持的服务</a>
+  </div>
+
+  <h2>选择独立回答，还是共享讨论</h2>
+  <div class="mode-grid">
+    <div class="mode-card">
+      <h3>标准多模型对话</h3>
+      <p>需要独立的第一轮回答时使用标准对话。tt 会保留每份已完成回答，并可整理其中的共同点和差异，形成综合答案。</p>
+    </div>
+    <div class="mode-card">
+      <h3>Team Mode</h3>
+      <p>问题需要批评、补充和反复推敲时使用 Team Mode。参与模型可以阅读共享讨论、彼此回应，并在没有新内容时停止发言。</p>
+      <p><a href="/zh/team-mode.html">了解 Team Mode →</a></p>
+    </div>
+  </div>
+
+  <h2>理解 BYOK 与数据流</h2>
+  <p>BYOK 表示 tt 连接由你掌控的服务商账户与凭证，并不意味着所有模型处理都在本地完成，也不会覆盖服务商自己的条款。请了解哪些数据作为应用数据保存在设备上、哪些内容会发送给模型服务、联网搜索有什么不同，以及系统备份或卸载可能带来的影响。</p>
+  <div class="content-actions">
+    <a class="btn btn-primary" href="/zh/byok-privacy.html">阅读 BYOK 与隐私指南</a>
+    <a class="btn btn-outline" href="/zh/privacy.html">阅读隐私政策</a>
+  </div>
+
+  <h2>平台指南</h2>
+  <div class="provider-grid">
+    <div class="provider-card"><h3>Mac</h3><p>了解 DMG 与 App Store 下载、当前系统要求、安装、更新和 BYOK 配置。</p><p><a href="/zh/download/mac/">打开 Mac 指南 →</a></p></div>
+    <div class="provider-card"><h3>iPhone 与 iPad</h3><p>了解 App Store 可用性、首次配置、服务商凭证、隐私边界与多模型工作方式。</p><p><a href="/zh/download/iphone-ipad/">打开 iPhone 与 iPad 指南 →</a></p></div>
+    <div class="provider-card"><h3>Android</h3><p>核对官方 APK、SHA-256、谨慎侧载、更新方式和本地数据注意事项。</p><p><a href="/zh/download/android/">打开 Android 指南 →</a></p></div>
+  </div>
+
+  <div class="callout">即使多个模型意见一致，AI 生成内容仍可能不完整或错误。涉及医疗、法律、财务、安全和重要技术决策时，请依据适当的权威来源和专业人士意见核验。</div>
+</main>
+
+<footer class="site-footer">
+  <div class="inner footer-simple">
+    <div class="brand-col"><div class="brand"><img src="/icon-64.png" alt=""><span class="brand-lockup">tt <small>by teramoby</small></span></div><p>一个客户端，用遍所有模型。</p></div>
+  </div>
+  <div class="meta"><span>© 2026 teramoby · tera-support@teramoby.com</span><nav aria-label="页脚导航"><a href="/zh/">首页</a><a href="/zh/privacy.html">隐私政策</a></nav></div>
+</footer>
+
+</body>
+</html>
