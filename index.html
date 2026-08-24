@@ -52,6 +52,7 @@
     },
     "author": {
       "@type": "Organization",
+      "@id": "https://app.teramoby.com/#organization",
       "name": "teramoby",
       "url": "https://app.teramoby.com"
     },
@@ -75,10 +76,27 @@
     "alternateName": "tt",
     "inLanguage": ["en", "zh-CN"],
     "publisher": {
-      "@type": "Organization",
-      "name": "teramoby",
-      "url": "https://app.teramoby.com/"
+      "@id": "https://app.teramoby.com/#organization"
     }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "@id": "https://app.teramoby.com/#organization",
+    "name": "teramoby",
+    "url": "https://app.teramoby.com/",
+    "email": "tera-support@teramoby.com",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://app.teramoby.com/apple-touch-icon.png",
+      "width": 180,
+      "height": 180
+    },
+    "sameAs": [
+      "https://github.com/teramoby"
+    ]
   }
   </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -201,6 +219,7 @@
         <span class="feature-kicker">SYNTHESIZED ANSWER</span>
         <h3>Different perspectives, one conclusion</h3>
         <p>tt keeps every original response visible, then asks your chosen summarizer to organize common points and differences into one synthesized answer.</p>
+        <a class="feature-link" href="/compare-ai-models.html">Learn how to compare answers <span aria-hidden="true">→</span></a>
       </div>
       <div class="feature">
         <span class="feature-kicker">IN YOUR CONTROL</span>
@@ -300,7 +319,9 @@
     <div class="footer-col">
       <h2>Product</h2>
       <ul>
+        <li><a href="/download.html">Download</a></li>
         <li><a href="/models.html">Supported Models</a></li>
+        <li><a href="/compare-ai-models.html">Compare AI Models</a></li>
         <li><a href="/team-mode.html">Team Mode</a></li>
         <li><a href="/byok-privacy.html">BYOK &amp; Privacy</a></li>
         <li><a href="/launch.html">Launch</a></li>
@@ -440,12 +461,19 @@
     let visible = true;
     let animationReady = false;
     let lastDraw = 0;
+    let initialized = false;
 
     function rebuild() {
       const rect = canvas.getBoundingClientRect();
-      width = Math.max(1, rect.width);
-      height = Math.max(1, rect.height);
-      dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+      const nextWidth = Math.max(1, rect.width);
+      const nextHeight = Math.max(1, rect.height);
+      const nextDpr = Math.min(window.devicePixelRatio || 1, 1.5);
+      if (width === nextWidth && height === nextHeight && dpr === nextDpr && points.length) {
+        return false;
+      }
+      width = nextWidth;
+      height = nextHeight;
+      dpr = nextDpr;
       canvas.width = Math.round(width * dpr);
       canvas.height = Math.round(height * dpr);
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
@@ -470,6 +498,7 @@
           });
         }
       }
+      return true;
     }
 
     function draw(time) {
@@ -566,16 +595,35 @@
     }, { threshold: 0.02 });
 
     const resizeObserver = new ResizeObserver(() => {
-      rebuild();
-      restart();
+      if (rebuild()) restart();
     });
 
-    observer.observe(canvas);
-    resizeObserver.observe(canvas);
     reduceMotion.addEventListener?.('change', restart);
     document.addEventListener('visibilitychange', restart);
-    rebuild();
-    restart();
+    const initialize = () => {
+      if (initialized) return;
+      initialized = true;
+      rebuild();
+      restart();
+      observer.observe(canvas);
+      resizeObserver.observe(canvas);
+    };
+    if (
+      'PerformanceObserver' in window &&
+      PerformanceObserver.supportedEntryTypes?.includes('paint')
+    ) {
+      const paintObserver = new PerformanceObserver((list) => {
+        if (list.getEntries().some((entry) => entry.name === 'first-contentful-paint')) {
+          paintObserver.disconnect();
+          initialize();
+        }
+      });
+      paintObserver.observe({ type: 'paint', buffered: true });
+    } else {
+      const initializeAfterRender = () => requestAnimationFrame(() => setTimeout(initialize, 0));
+      if (document.readyState === 'complete') initializeAfterRender();
+      else window.addEventListener('load', initializeAfterRender, { once: true });
+    }
     const enableAnimation = () => setTimeout(() => {
       animationReady = true;
       restart();

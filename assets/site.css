@@ -1133,6 +1133,13 @@ html[lang="en"] .section-header-solo .section-title {
   gap: 12px;
   margin-top: 34px;
 }
+.content-spacer-sm { margin-top: 24px; }
+.support-note {
+  margin-top: 48px;
+  font-size: 14px;
+  color: var(--grey-800);
+}
+.deflist .arrow-link { margin-top: 8px; }
 .reading .content-actions a { border-bottom: 0; }
 .reading .content-actions .btn-primary { color: #090A0D; }
 .reading .content-actions .btn-outline { color: var(--ink); }

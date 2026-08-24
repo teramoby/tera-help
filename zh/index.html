@@ -52,6 +52,7 @@
     },
     "author": {
       "@type": "Organization",
+      "@id": "https://app.teramoby.com/#organization",
       "name": "teramoby",
       "url": "https://app.teramoby.com"
     },
@@ -185,6 +186,7 @@
         <span class="feature-kicker">综合回答</span>
         <h3>从不同观点，到一个结论</h3>
         <p>tt 保留每个模型的原始回答，再由你指定的总结模型整理共同点和差异，形成一份综合答案。</p>
+        <a class="feature-link" href="/zh/compare-ai-models.html">学习如何比较 AI 回答 <span aria-hidden="true">→</span></a>
       </div>
       <div class="feature">
         <span class="feature-kicker">由你掌握</span>
@@ -284,7 +286,9 @@
     <div class="footer-col">
       <h2>产品</h2>
       <ul>
+        <li><a href="/zh/download.html">下载</a></li>
         <li><a href="/zh/models.html">支持的模型</a></li>
+        <li><a href="/zh/compare-ai-models.html">比较 AI 模型</a></li>
         <li><a href="/zh/team-mode.html">Team Mode</a></li>
         <li><a href="/zh/byok-privacy.html">BYOK 与隐私</a></li>
         <li><a href="/zh/launch.html">发布公告</a></li>
@@ -423,12 +427,19 @@
     let visible = true;
     let animationReady = false;
     let lastDraw = 0;
+    let initialized = false;
 
     function rebuild() {
       const rect = canvas.getBoundingClientRect();
-      width = Math.max(1, rect.width);
-      height = Math.max(1, rect.height);
-      dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+      const nextWidth = Math.max(1, rect.width);
+      const nextHeight = Math.max(1, rect.height);
+      const nextDpr = Math.min(window.devicePixelRatio || 1, 1.5);
+      if (width === nextWidth && height === nextHeight && dpr === nextDpr && points.length) {
+        return false;
+      }
+      width = nextWidth;
+      height = nextHeight;
+      dpr = nextDpr;
       canvas.width = Math.round(width * dpr);
       canvas.height = Math.round(height * dpr);
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
@@ -453,6 +464,7 @@
           });
         }
       }
+      return true;
     }
 
     function draw(time) {
@@ -549,16 +561,35 @@
     }, { threshold: 0.02 });
 
     const resizeObserver = new ResizeObserver(() => {
-      rebuild();
-      restart();
+      if (rebuild()) restart();
     });
 
-    observer.observe(canvas);
-    resizeObserver.observe(canvas);
     reduceMotion.addEventListener?.('change', restart);
     document.addEventListener('visibilitychange', restart);
-    rebuild();
-    restart();
+    const initialize = () => {
+      if (initialized) return;
+      initialized = true;
+      rebuild();
+      restart();
+      observer.observe(canvas);
+      resizeObserver.observe(canvas);
+    };
+    if (
+      'PerformanceObserver' in window &&
+      PerformanceObserver.supportedEntryTypes?.includes('paint')
+    ) {
+      const paintObserver = new PerformanceObserver((list) => {
+        if (list.getEntries().some((entry) => entry.name === 'first-contentful-paint')) {
+          paintObserver.disconnect();
+          initialize();
+        }
+      });
+      paintObserver.observe({ type: 'paint', buffered: true });
+    } else {
+      const initializeAfterRender = () => requestAnimationFrame(() => setTimeout(initialize, 0));
+      if (document.readyState === 'complete') initializeAfterRender();
+      else window.addEventListener('load', initializeAfterRender, { once: true });
+    }
     const enableAnimation = () => setTimeout(() => {
       animationReady = true;
       restart();

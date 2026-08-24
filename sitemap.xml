@@ -88,14 +88,14 @@
   </url>
   <url>
     <loc>https://app.teramoby.com/team-mode.html</loc>
-    <lastmod>2026-08-18</lastmod>
+    <lastmod>2026-08-24</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://app.teramoby.com/team-mode.html" />
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://app.teramoby.com/zh/team-mode.html" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://app.teramoby.com/team-mode.html" />
   </url>
   <url>
     <loc>https://app.teramoby.com/zh/team-mode.html</loc>
-    <lastmod>2026-08-18</lastmod>
+    <lastmod>2026-08-24</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://app.teramoby.com/team-mode.html" />
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://app.teramoby.com/zh/team-mode.html" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://app.teramoby.com/team-mode.html" />
@@ -113,5 +113,33 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://app.teramoby.com/byok-privacy.html" />
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://app.teramoby.com/zh/byok-privacy.html" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://app.teramoby.com/byok-privacy.html" />
+  </url>
+  <url>
+    <loc>https://app.teramoby.com/compare-ai-models.html</loc>
+    <lastmod>2026-08-24</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://app.teramoby.com/compare-ai-models.html" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://app.teramoby.com/zh/compare-ai-models.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://app.teramoby.com/compare-ai-models.html" />
+  </url>
+  <url>
+    <loc>https://app.teramoby.com/zh/compare-ai-models.html</loc>
+    <lastmod>2026-08-24</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://app.teramoby.com/compare-ai-models.html" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://app.teramoby.com/zh/compare-ai-models.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://app.teramoby.com/compare-ai-models.html" />
+  </url>
+  <url>
+    <loc>https://app.teramoby.com/download.html</loc>
+    <lastmod>2026-08-24</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://app.teramoby.com/download.html" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://app.teramoby.com/zh/download.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://app.teramoby.com/download.html" />
+  </url>
+  <url>
+    <loc>https://app.teramoby.com/zh/download.html</loc>
+    <lastmod>2026-08-24</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://app.teramoby.com/download.html" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://app.teramoby.com/zh/download.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://app.teramoby.com/download.html" />
   </url>
 </urlset>

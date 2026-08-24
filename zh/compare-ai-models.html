@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico?v=2">
+  <link rel="icon" type="image/png" sizes="32x32" href="/icon-64.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png?v=2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=2">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>如何同时比较 ChatGPT、Claude、Gemini 与 DeepSeek 的回答｜tt</title>
+  <meta name="description" content="用相同提示词、统一评分标准和独立事实核验，同时比较 ChatGPT、Claude、Gemini、DeepSeek 等多个 AI 模型的回答。">
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+  <link rel="canonical" href="https://app.teramoby.com/zh/compare-ai-models.html">
+  <link rel="alternate" hreflang="en" href="https://app.teramoby.com/compare-ai-models.html">
+  <link rel="alternate" hreflang="zh-CN" href="https://app.teramoby.com/zh/compare-ai-models.html">
+  <link rel="alternate" hreflang="x-default" href="https://app.teramoby.com/compare-ai-models.html">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="tt by teramoby">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta property="og:title" content="如何同时比较多个 AI 模型的回答">
+  <meta property="og:description" content="一套可复现的 AI 回答比较方法：控制提示词、统一评分、独立核验，不把流畅度或多数意见当作事实。">
+  <meta property="og:url" content="https://app.teramoby.com/zh/compare-ai-models.html">
+  <meta property="og:image" content="https://app.teramoby.com/img/og-tt.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1731">
+  <meta property="og:image:height" content="909">
+  <meta property="og:image:alt" content="tt by teramoby 多模型 AI 客户端">
+  <meta property="article:published_time" content="2026-08-24">
+  <meta property="article:modified_time" content="2026-08-24">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="如何同时比较多个 AI 模型的回答">
+  <meta name="twitter:description" content="用同一提示词、统一测试条件、评分量表和独立来源，公平比较多个 AI 回答。">
+  <meta name="twitter:image" content="https://app.teramoby.com/img/og-tt.png">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Article",
+        "headline": "如何同时比较 ChatGPT、Claude、Gemini 与 DeepSeek 的回答",
+        "description": "用统一提示词、评分量表和独立事实核验，可复现地比较 ChatGPT、Claude、Gemini、DeepSeek 等 AI 模型回答。",
+        "image": "https://app.teramoby.com/img/og-tt.png",
+        "datePublished": "2026-08-24",
+        "dateModified": "2026-08-24",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": "https://app.teramoby.com/zh/compare-ai-models.html",
+        "author": { "@type": "Organization", "name": "teramoby" },
+        "publisher": { "@type": "Organization", "name": "teramoby", "url": "https://app.teramoby.com/" }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "首页", "item": "https://app.teramoby.com/zh/" },
+          { "@type": "ListItem", "position": 2, "name": "比较 AI 模型", "item": "https://app.teramoby.com/zh/compare-ai-models.html" }
+        ]
+      }
+    ]
+  }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500&amp;display=swap" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500&amp;display=swap"></noscript>
+  <link rel="stylesheet" href="/assets/site.css?v=20260824-seo3">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="inner">
+    <a href="/zh/" class="brand"><img src="/icon-64.png" alt=""><span class="brand-lockup">tt <small>by teramoby</small></span></a>
+    <div class="breadcrumb"><span class="sep">/</span><span>比较 AI 模型</span></div>
+    <div class="spacer"></div>
+    <nav aria-label="主要导航">
+      <a href="/zh/models.html">模型</a>
+      <a href="/zh/team-mode.html">Team Mode</a>
+      <a href="/zh/blog-getting-started.html">使用指南</a>
+      <a href="/zh/download.html">下载</a>
+    </nav>
+    <div class="lang-toggle" role="group" aria-label="语言">
+      <a href="/compare-ai-models.html" lang="en" hreflang="en">EN</a>
+      <a class="active" aria-current="page" href="/zh/compare-ai-models.html" lang="zh-CN" hreflang="zh-CN">中文</a>
+    </div>
+  </div>
+</header>
+
+<main class="reading">
+  <p class="dateline">指南 · 发布于 2026 年 8 月 24 日</p>
+  <h1>如何同时比较 ChatGPT、Claude、Gemini 与 DeepSeek 的回答</h1>
+  <p class="lede">公平比较多个 AI 模型，要从同一个任务开始，以可核验的证据结束；表达最自信、文字最流畅的回答，不一定就是最准确的回答。</p>
+
+  <p>面对同一个问题，不同模型可能采用不同解释、注意到不同限制，也可能犯下不同错误。同时比较多个 AI 回答，可以把这些差异显露出来，但前提是测试条件足够一致。模型写得像专家，不等于内容已经得到事实支持；多个模型意见一致，也不等于结论已经被证明。</p>
+  <p>本文提供一套可以重复执行的方法，不宣布某个模型永远胜出，也不会用一次测试替代所有使用场景。模型版本、参数和工具能力都会变化；真正有价值的结果，是一份记录清楚、他人能够理解并复现的比较。</p>
+
+  <h2>什么情况下值得同时比较多个 AI</h2>
+  <div class="mode-grid">
+    <div class="mode-card">
+      <h3>资料研究与事实查找</h3>
+      <p>通过多份回答发现需要核验的主张、缺失的证据，以及对日期和来源敏感的内容。</p>
+    </div>
+    <div class="mode-card">
+      <h3>规划与决策辅助</h3>
+      <p>在采取行动之前，比较各自采用的前提、利弊、风险和遗漏步骤。</p>
+    </div>
+    <div class="mode-card">
+      <h3>写作与解释</h3>
+      <p>评估结构、清晰度、是否适合目标读者，以及回答是否真正遵守要求。</p>
+    </div>
+    <div class="mode-card">
+      <h3>代码与技术工作</h3>
+      <p>比较不同实现方案，再到真实环境中测试代码、命令、依赖和安全前提。</p>
+    </div>
+  </div>
+  <div class="callout">涉及医疗、法律、财务、安全等高风险问题时，多模型比较只能帮助发现不确定性，不能替代专业人士意见或权威证据。</div>
+
+  <h2>一套可复现的六步比较方法</h2>
+  <div class="steps">
+    <div class="step"><div><h3>先定义任务和合格标准</h3><p>在阅读任何回答之前，写清楚优秀答案必须完成什么：目标读者、输出格式、限制条件、所需证据，以及不能接受的错误。问题含糊，比较结果也会含糊。</p></div></div>
+    <div class="step"><div><h3>记录完整测试条件</h3><p>记录测试日期、准确的模型标识、服务商、系统指令、可用时的温度或创造性参数、已开启工具和输入上下文。“ChatGPT”“Claude”“Gemini”“DeepSeek”是模型家族或产品名称，不能替代准确的实验标签。每次受控测试都从新对话开始。</p></div></div>
+    <div class="step"><div><h3>发送完全相同的提示词</h3><p>提示词文字、附件、上下文、输出长度和工具权限都应保持一致。如果一个模型可以联网或执行代码，而另一个不可以，应关闭额外能力，或者明确说明你比较的是完整工作流，而不只是基础模型。</p></div></div>
+    <div class="step"><div><h3>保存每份原始回答</h3><p>在改写、汇总或继续追问之前，保存所有回答。失败和拒答也属于结果。不要悄悄删除不符合预期的一次运行，也不要修改会影响比较结论的措辞。</p></div></div>
+    <div class="step"><div><h3>使用同一套评分量表</h3><p>按照预先确定的标准逐项评分，并为每个分数写一句依据。如果条件允许，评审时先隐藏模型名称，减少对品牌的先入为主。</p></div></div>
+    <div class="step"><div><h3>独立核验并重复测试</h3><p>依据独立的一手或权威来源核验重要事实。对于输出波动较大的任务，在全新对话中重复同一提示词，报告结果范围，而不是只选择最有利的一次回答。</p></div></div>
+  </div>
+
+  <h2>评分标准必须匹配真实任务</h2>
+  <p>只给一个“最佳回答”总分，会掩盖答案之间真正的差异。可以从下面几个维度中选择适合任务的项目，并提前定义每个分数代表什么。权重应服务于你的实际用途，而不是为了让偏好的模型获胜。</p>
+  <div class="mode-grid">
+    <div class="mode-card">
+      <h3>事实准确性</h3>
+      <p>事实是否正确、是否适用于测试日期，有没有虚构细节？</p>
+    </div>
+    <div class="mode-card">
+      <h3>任务遵循度</h3>
+      <p>是否遵守目标读者、范围、格式、限制条件和篇幅要求？</p>
+    </div>
+    <div class="mode-card">
+      <h3>证据与可追溯性</h3>
+      <p>重要主张能否追溯到可靠证据？不确定性和证据缺口是否清晰可见？</p>
+    </div>
+    <div class="mode-card">
+      <h3>覆盖完整性</h3>
+      <p>是否回答了全部必要部分，而没有用无关细节代替深度？</p>
+    </div>
+    <div class="mode-card">
+      <h3>推理质量</h3>
+      <p>前提、取舍和决策过程是否容易理解、内部是否一致？</p>
+    </div>
+    <div class="mode-card">
+      <h3>实际可用性</h3>
+      <p>目标读者能否安全、高效地根据这份回答采取行动？</p>
+    </div>
+  </div>
+  <p>简单的 1–5 分通常已经够用：1 分代表未满足标准，3 分代表经过明显修正后可以使用，5 分代表未发现实质问题。先记录评分依据，再计算总分。</p>
+
+  <h2>如何核验 AI 回答中的事实</h2>
+  <p>把每份回答拆分成可以检查的具体主张。对每项重要主张记录原文、核验来源、来源日期，以及“得到支持”“被反驳”“信息不完整”或“无法核验”等结论。优先使用原始文档、官方数据、标准、法规或原始研究，而不是另一份 AI 总结。</p>
+  <ul>
+    <li>实际打开引用内容；看起来合理的标题或网址，可能并不存在，也可能无法支持该主张。</li>
+    <li>检查日期和版本；一项说法可能过去正确，但在测试日已经过时。</li>
+    <li>验证可执行内容；在安全环境中运行代码、复核计算，并依据当前官方文档检查 API。</li>
+    <li>把事实准确性与表达质量分开；写得清楚的答案也可能错误，表达生硬的答案也可能拥有更强证据。</li>
+  </ul>
+
+  <h2>正确理解共识与分歧</h2>
+  <p>多个模型意见相同，只能标注为“本次测试输出之间的共识”，不能标注为“已经确认的事实”。模型可能使用相似训练材料、检索到同一个薄弱来源，或重复常见误解。共识可以帮助确定优先核验什么，但真正的验证仍需来自比较之外的证据。</p>
+  <p>模型出现分歧时，先判断它属于哪一种：</p>
+  <ul>
+    <li><strong>事实分歧：</strong>核验底层事实及其适用日期。</li>
+    <li><strong>前提分歧：</strong>把隐藏前提写出来，判断哪一个符合当前任务。</li>
+    <li><strong>价值取舍：</strong>明确各方优先级，不要把价值判断伪装成唯一事实答案。</li>
+    <li><strong>范围分歧：</strong>进一步限定定义、时间、司法辖区、目标读者或约束条件。</li>
+  </ul>
+  <div class="callout">不要让一个模型独自评判其他所有模型，再把它的裁决当作标准答案。总结模型可以整理多份回答，但综合结果本身仍是一份需要审阅的模型输出。</div>
+
+  <h2>标准多模型对话，还是 Team Mode？</h2>
+  <div class="mode-grid">
+    <div class="mode-card">
+      <h3>标准多模型对话</h3>
+      <p>适合最干净的并行比较。在 tt 中，同一个问题会发送给所有配置完整的服务，每份原始回答均可查看，再由你指定的总结模型整理已完成回答，形成一份综合答案。</p>
+    </div>
+    <div class="mode-card">
+      <h3>Team Mode</h3>
+      <p>适合让模型阅读共享讨论、质疑前提并逐步补充信息。后续回答可能受到先前发言影响，因此 Team Mode 测试的是协作效果，而不是彼此独立的首轮回答。</p>
+    </div>
+  </div>
+  <p>进行可复现测试时，建议先通过标准对话收集独立回答，再单独发起一次 <a href="/zh/team-mode.html">Team Mode 讨论</a>，观察相互交流是发现了遗漏前提，还是仅仅让模型趋向同一结论。</p>
+
+  <h2>可直接复用的提示词模板</h2>
+  <aside class="aside-note">
+    <h3>补全后，原样发送给每个模型</h3>
+    <p><strong>任务：</strong>[写明准确的问题或交付物。]</p>
+    <p><strong>目标读者：</strong>[谁会使用答案？他们已经掌握哪些知识？]</p>
+    <p><strong>上下文：</strong>[向每个模型提供完全相同的事实、文本、数据或代码。]</p>
+    <p><strong>限制：</strong>[时间范围、司法辖区、预算、可用工具、排除项和篇幅。]</p>
+    <p><strong>证据：</strong>请区分可核验事实与假设；在有一手来源时给出来源和日期，无法核验时明确说明。</p>
+    <p><strong>输出格式：</strong>[规定标题、表格字段、清单、代码格式或决策标准。]</p>
+  </aside>
+  <p>结果记录应包括提示词版本、模型准确标识、日期时间、参数、工具权限、完整原始回答、各项评分、核验备注；如果延迟、用量或费用会影响决策，也要记录服务商提供的相关数据。</p>
+
+  <h2>常见的比较错误</h2>
+  <ul>
+    <li>对不同模型使用不同提示词、上下文或追加帮助。</li>
+    <li>让一个模型联网，另一个模型无法获得最新信息，却不披露这种差异。</li>
+    <li>只评判一次输出，忽略生成结果可能波动。</li>
+    <li>先看到模型名称再评分，或看到结果后才修改评分规则。</li>
+    <li>把篇幅、语气自信、引用数量或多数意见自动当作高质量证据。</li>
+    <li>发布结论时不附准确模型版本、测试日期、原始回答和已知限制。</li>
+  </ul>
+
+  <h2>公平比较也无法证明什么</h2>
+  <p>受控测试只能说明你实际测试的模型、配置和提示词，不能证明某家服务商在所有任务上都更好，也无法预测未来版本或替代领域专家。API 与消费级聊天产品的行为可能不同；服务商默认参数可能调整；费用和延迟也可能受地区、负载、回答长度及账户影响。</p>
+  <p>应当依据比较结果，为一个定义明确的任务选择工作流；模型、提示词、数据、参数或业务要求发生变化时，需要重新测试。</p>
+
+  <h2>在 tt 中比较多个 AI 模型</h2>
+  <p>tt 是一个<a href="/zh/byok-privacy.html">自带 API Key 的多模型客户端</a>。先查看当前<a href="/zh/models.html">模型服务商与托管平台连接</a>，再按照<a href="/zh/blog-getting-started.html">配置指南</a>连接自己账户可用的服务。收集独立回答时从标准对话开始；需要共享讨论时再使用 Team Mode。</p>
+  <div class="content-actions">
+    <a class="btn btn-primary" href="/zh/download.html">下载 tt</a>
+    <a class="btn btn-outline" href="/zh/models.html">查看模型连接</a>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="inner footer-simple">
+    <div class="brand-col">
+      <div class="brand"><img src="/icon-64.png" alt=""><span class="brand-lockup">tt <small>by teramoby</small></span></div>
+      <p class="tagline">一个客户端，用遍所有模型。</p>
+    </div>
+  </div>
+  <div class="meta"><span>© 2026 teramoby · tera-support@teramoby.com</span><nav aria-label="页脚导航"><a href="/zh/">首页</a><a href="/zh/privacy.html">隐私政策</a></nav></div>
+</footer>
+
+<script>
+  window.addEventListener('scroll', () => {
+    const h = document.querySelector('.site-header');
+    if (h) h.classList.toggle('scrolled', window.scrollY > 4);
+  }, { passive: true });
+</script>
+</body>
+</html>

@@ -12,6 +12,8 @@ const pages = [
   { file: 'byok-privacy.html', lang: 'en', canonical: `${SITE}/byok-privacy.html`, alternate: `${SITE}/zh/byok-privacy.html` },
   { file: 'models.html', lang: 'en', canonical: `${SITE}/models.html`, alternate: `${SITE}/zh/models.html` },
   { file: 'team-mode.html', lang: 'en', canonical: `${SITE}/team-mode.html`, alternate: `${SITE}/zh/team-mode.html` },
+  { file: 'compare-ai-models.html', lang: 'en', canonical: `${SITE}/compare-ai-models.html`, alternate: `${SITE}/zh/compare-ai-models.html` },
+  { file: 'download.html', lang: 'en', canonical: `${SITE}/download.html`, alternate: `${SITE}/zh/download.html` },
   { file: 'zh/index.html', lang: 'zh-CN', canonical: `${SITE}/zh/`, alternate: `${SITE}/` },
   { file: 'zh/faq.html', lang: 'zh-CN', canonical: `${SITE}/zh/faq.html`, alternate: `${SITE}/faq.html` },
   { file: 'zh/blog-getting-started.html', lang: 'zh-CN', canonical: `${SITE}/zh/blog-getting-started.html`, alternate: `${SITE}/blog-getting-started.html` },
@@ -20,6 +22,8 @@ const pages = [
   { file: 'zh/byok-privacy.html', lang: 'zh-CN', canonical: `${SITE}/zh/byok-privacy.html`, alternate: `${SITE}/byok-privacy.html` },
   { file: 'zh/models.html', lang: 'zh-CN', canonical: `${SITE}/zh/models.html`, alternate: `${SITE}/models.html` },
   { file: 'zh/team-mode.html', lang: 'zh-CN', canonical: `${SITE}/zh/team-mode.html`, alternate: `${SITE}/team-mode.html` },
+  { file: 'zh/compare-ai-models.html', lang: 'zh-CN', canonical: `${SITE}/zh/compare-ai-models.html`, alternate: `${SITE}/compare-ai-models.html` },
+  { file: 'zh/download.html', lang: 'zh-CN', canonical: `${SITE}/zh/download.html`, alternate: `${SITE}/download.html` },
 ];
 
 const errors = [];
@@ -112,11 +116,18 @@ for (const page of pages) {
 
   if (page.file === 'index.html') {
     assert(jsonLd.some(data => data['@type'] === 'WebSite'), `${label}: missing WebSite JSON-LD`);
+    assert(jsonLd.some(data => data['@type'] === 'Organization'), `${label}: missing Organization JSON-LD`);
   }
 
-  if (page.file.endsWith('models.html') || page.file.endsWith('team-mode.html') || page.file.endsWith('byok-privacy.html') || page.file.endsWith('blog-getting-started.html')) {
+  if (page.file.endsWith('models.html') || page.file.endsWith('team-mode.html') || page.file.endsWith('byok-privacy.html') || page.file.endsWith('blog-getting-started.html') || page.file.endsWith('compare-ai-models.html') || page.file.endsWith('download.html')) {
     const types = jsonLd.flatMap(data => data['@graph']?.map(item => item['@type']) ?? [data['@type']]);
     assert(types.includes('BreadcrumbList'), `${label}: missing BreadcrumbList JSON-LD`);
+    if (page.file.endsWith('compare-ai-models.html')) {
+      assert(types.includes('Article'), `${label}: missing Article JSON-LD`);
+    }
+    if (page.file.endsWith('download.html')) {
+      assert(types.includes('WebPage'), `${label}: missing WebPage JSON-LD`);
+    }
   }
 
   if (page.file.endsWith('faq.html')) {
