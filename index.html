@@ -85,7 +85,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500&amp;display=swap" media="print" onload="this.media='all'">
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500&amp;display=swap"></noscript>
-  <link rel="stylesheet" href="/assets/site.css?v=20260818-seo1">
+  <link rel="stylesheet" href="/assets/site.css?v=20260824-seo2">
 </head>
 <body>
 
@@ -166,6 +166,15 @@
           aria-hidden="true"
           data-mp4="/media/tt-hero.mp4">
         </video>
+        <button
+          class="hero-video-toggle"
+          type="button"
+          aria-controls="hero-video"
+          aria-pressed="false"
+          aria-label="Play product demo"
+          hidden>
+          <span class="hero-video-icon" aria-hidden="true"></span>
+        </button>
       </div>
     </div>
   </section>
@@ -237,7 +246,11 @@
 
     <div class="note">Model requests travel directly from your device to the configured AI providers. When Online Search is active and a search is needed, a derived query is sent to teramoby&#39;s Cloudflare-hosted search endpoint. See the Privacy Policy for backup, caching, and third-party processing details.</div>
 
-    <div style="margin-top: 32px;">
+    <div class="content-actions">
+      <a href="/byok-privacy.html" class="arrow-link">
+        <span>Understand BYOK and local privacy</span>
+        <span class="arrow">→</span>
+      </a>
       <a href="/privacy.html" class="arrow-link">
         <span>Read the full Privacy Policy</span>
         <span class="arrow">→</span>
@@ -289,6 +302,7 @@
       <ul>
         <li><a href="/models.html">Supported Models</a></li>
         <li><a href="/team-mode.html">Team Mode</a></li>
+        <li><a href="/byok-privacy.html">BYOK &amp; Privacy</a></li>
         <li><a href="/launch.html">Launch</a></li>
         <li><a href="/blog-getting-started.html">Guide</a></li>
         <li><a href="/faq.html">FAQ</a></li>
@@ -317,35 +331,45 @@
 <script>
 
 
-  // Keep the poster available for first paint, then load the demo after the
-  // page is complete and the browser has idle time. Reduced-motion users keep
-  // the still poster.
+  // Keep the poster available for first paint. Desktops load the single MP4
+  // source near the viewport after the page is idle; mobile, data-saver and
+  // reduced-motion users opt in with the accessible play button.
   (function () {
     const v = document.getElementById('hero-video');
-    if (!v) return;
+    const toggle = document.querySelector('.hero-video-toggle');
+    if (!v || !toggle) return;
+    toggle.hidden = false;
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-    if (reducedMotion.matches) return;
+    const mobile = window.matchMedia('(max-width: 820px), (pointer: coarse)');
+    const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
     let started = false;
     let scheduled = false;
     let visible = false;
+    let userPaused = false;
+    const canAutoplay = () => !reducedMotion.matches && !mobile.matches && !(connection && connection.saveData);
+    const syncToggle = (playing) => {
+      toggle.setAttribute('aria-pressed', String(playing));
+      toggle.setAttribute('aria-label', playing ? 'Pause product demo' : 'Play product demo');
+    };
     const tryPlay = () => {
       const p = v.play();
       if (p && p.catch) p.catch(() => {});
     };
     const start = () => {
-      if (started) return;
-      started = true;
-      v.src = v.dataset.mp4;
-      v.addEventListener('loadedmetadata', tryPlay, { once: true });
-      v.load();
+      if (!started) {
+        started = true;
+        v.src = v.dataset.mp4;
+        v.load();
+      }
+      tryPlay();
     };
     const schedule = () => {
-      if (started || scheduled || !visible) return;
+      if (started || scheduled || userPaused || !visible || !canAutoplay()) return;
       scheduled = true;
       const afterLoad = () => {
         const run = () => {
           scheduled = false;
-          if (visible) start();
+          if (visible && canAutoplay()) start();
         };
         if ('requestIdleCallback' in window) requestIdleCallback(run, { timeout: 2500 });
         else setTimeout(run, 1200);
@@ -353,11 +377,27 @@
       if (document.readyState === 'complete') afterLoad();
       else window.addEventListener('load', afterLoad, { once: true });
     };
+    toggle.addEventListener('click', () => {
+      if (!v.paused) {
+        userPaused = true;
+        v.pause();
+      } else {
+        userPaused = false;
+        start();
+      }
+    });
+    v.addEventListener('play', () => syncToggle(true));
+    v.addEventListener('pause', () => syncToggle(false));
+    v.addEventListener('error', () => {
+      syncToggle(false);
+      started = false;
+      v.removeAttribute('src');
+    });
     if ('IntersectionObserver' in window) {
       const observer = new IntersectionObserver(([entry]) => {
         visible = entry.isIntersecting;
         if (visible) {
-          if (started) tryPlay();
+          if (started && canAutoplay() && !userPaused) tryPlay();
           else schedule();
         } else if (started) {
           v.pause();
@@ -368,6 +408,18 @@
       visible = true;
       schedule();
     }
+    const handlePreferenceChange = () => {
+      if (!canAutoplay()) {
+        if (!v.paused) v.pause();
+      } else if (visible && !userPaused) {
+        if (started) tryPlay();
+        else schedule();
+      }
+    };
+    [reducedMotion, mobile].forEach((query) => {
+      if (query.addEventListener) query.addEventListener('change', handlePreferenceChange);
+      else if (query.addListener) query.addListener(handlePreferenceChange);
+    });
   })();
 
   // A precise digital point surface behind the product demo. The ordered grid

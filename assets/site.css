@@ -398,6 +398,70 @@ main.reading {
   border: 0;
   background: #000;
 }
+.hero-video-toggle {
+  position: absolute;
+  z-index: 2;
+  left: 50%;
+  top: 50%;
+  width: 58px;
+  height: 58px;
+  transform: translate(-50%, -50%);
+  border: 1px solid rgba(255, 255, 255, 0.42);
+  border-radius: 50%;
+  color: #fff;
+  background: rgba(5, 6, 8, 0.72);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  cursor: pointer;
+  transition: background 0.2s var(--ease-out), border-color 0.2s var(--ease-out),
+              opacity 0.2s var(--ease-out), transform 0.2s var(--ease-out);
+}
+.hero-video-toggle:hover {
+  border-color: rgba(255, 255, 255, 0.78);
+  background: rgba(5, 6, 8, 0.88);
+  transform: translate(-50%, -50%) scale(1.05);
+}
+.hero-video-toggle:focus-visible {
+  outline: 3px solid var(--accent-ink);
+  outline-offset: 3px;
+}
+.hero-video-toggle[aria-pressed="true"] {
+  left: auto;
+  top: auto;
+  right: 14px;
+  bottom: 14px;
+  width: 42px;
+  height: 42px;
+  transform: none;
+  opacity: 0.76;
+}
+.hero-video-toggle[aria-pressed="true"]:hover {
+  transform: none;
+  opacity: 1;
+}
+.hero-video-icon::before {
+  content: '';
+  position: absolute;
+  left: 22px;
+  top: 18px;
+  width: 0;
+  height: 0;
+  border-top: 11px solid transparent;
+  border-bottom: 11px solid transparent;
+  border-left: 17px solid currentColor;
+}
+.hero-video-toggle[aria-pressed="true"] .hero-video-icon::before,
+.hero-video-toggle[aria-pressed="true"] .hero-video-icon::after {
+  content: '';
+  position: absolute;
+  top: 12px;
+  width: 5px;
+  height: 18px;
+  border: 0;
+  background: currentColor;
+}
+.hero-video-toggle[aria-pressed="true"] .hero-video-icon::before { left: 13px; }
+.hero-video-toggle[aria-pressed="true"] .hero-video-icon::after { right: 13px; }
 .hero-visual .tile-label {
   position: absolute;
   bottom: 20px; left: 24px;
@@ -1333,6 +1397,7 @@ html[lang="en"] .section-header-solo .section-title {
 
 @media (prefers-reduced-motion: reduce) {
   .hero-particles { opacity: 0.52; }
+  .hero-video-toggle { transition: none; }
 }
 
 /* ── Journal theme (olive) ──────────────────────────────── */

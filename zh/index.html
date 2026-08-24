@@ -69,7 +69,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500&amp;display=swap" media="print" onload="this.media='all'">
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500&amp;display=swap"></noscript>
-  <link rel="stylesheet" href="/assets/site.css?v=20260818-seo1">
+  <link rel="stylesheet" href="/assets/site.css?v=20260824-seo2">
 </head>
 <body>
 
@@ -150,6 +150,15 @@
           aria-hidden="true"
           data-mp4="/media/tt-hero.mp4">
         </video>
+        <button
+          class="hero-video-toggle"
+          type="button"
+          aria-controls="hero-video"
+          aria-pressed="false"
+          aria-label="播放产品演示"
+          hidden>
+          <span class="hero-video-icon" aria-hidden="true"></span>
+        </button>
       </div>
     </div>
   </section>
@@ -221,7 +230,11 @@
 
     <div class="note">模型请求会从你的设备直接发送到已配置的 AI 服务商。联网搜索处于开启状态且确有搜索需要时，生成的搜索词会发送到由 teramoby 运营、Cloudflare 托管的搜索接口。备份、缓存和第三方处理详情请参阅隐私政策。</div>
 
-    <div style="margin-top: 32px;">
+    <div class="content-actions">
+      <a href="/zh/byok-privacy.html" class="arrow-link">
+        <span>了解 BYOK 与本地隐私</span>
+        <span class="arrow">→</span>
+      </a>
       <a href="/zh/privacy.html" class="arrow-link">
         <span>查看完整隐私政策</span>
         <span class="arrow">→</span>
@@ -273,6 +286,7 @@
       <ul>
         <li><a href="/zh/models.html">支持的模型</a></li>
         <li><a href="/zh/team-mode.html">Team Mode</a></li>
+        <li><a href="/zh/byok-privacy.html">BYOK 与隐私</a></li>
         <li><a href="/zh/launch.html">发布公告</a></li>
         <li><a href="/zh/blog-getting-started.html">使用指南</a></li>
         <li><a href="/zh/faq.html">常见问题</a></li>
@@ -301,34 +315,44 @@
 <script>
 
 
-  // 首屏先显示静态海报，页面加载完成且浏览器空闲后再加载演示视频；
-  // 对“减少动态效果”用户只保留静态海报。
+  // 首屏先显示静态海报。桌面端仅在接近视口且浏览器空闲时加载一个 MP4；
+  // 移动端、节省流量和“减少动态效果”用户需要点击播放按钮后才加载。
   (function () {
     const v = document.getElementById('hero-video');
-    if (!v) return;
+    const toggle = document.querySelector('.hero-video-toggle');
+    if (!v || !toggle) return;
+    toggle.hidden = false;
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-    if (reducedMotion.matches) return;
+    const mobile = window.matchMedia('(max-width: 820px), (pointer: coarse)');
+    const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
     let started = false;
     let scheduled = false;
     let visible = false;
+    let userPaused = false;
+    const canAutoplay = () => !reducedMotion.matches && !mobile.matches && !(connection && connection.saveData);
+    const syncToggle = (playing) => {
+      toggle.setAttribute('aria-pressed', String(playing));
+      toggle.setAttribute('aria-label', playing ? '暂停产品演示' : '播放产品演示');
+    };
     const tryPlay = () => {
       const p = v.play();
       if (p && p.catch) p.catch(() => {});
     };
     const start = () => {
-      if (started) return;
-      started = true;
-      v.src = v.dataset.mp4;
-      v.addEventListener('loadedmetadata', tryPlay, { once: true });
-      v.load();
+      if (!started) {
+        started = true;
+        v.src = v.dataset.mp4;
+        v.load();
+      }
+      tryPlay();
     };
     const schedule = () => {
-      if (started || scheduled || !visible) return;
+      if (started || scheduled || userPaused || !visible || !canAutoplay()) return;
       scheduled = true;
       const afterLoad = () => {
         const run = () => {
           scheduled = false;
-          if (visible) start();
+          if (visible && canAutoplay()) start();
         };
         if ('requestIdleCallback' in window) requestIdleCallback(run, { timeout: 2500 });
         else setTimeout(run, 1200);
@@ -336,11 +360,27 @@
       if (document.readyState === 'complete') afterLoad();
       else window.addEventListener('load', afterLoad, { once: true });
     };
+    toggle.addEventListener('click', () => {
+      if (!v.paused) {
+        userPaused = true;
+        v.pause();
+      } else {
+        userPaused = false;
+        start();
+      }
+    });
+    v.addEventListener('play', () => syncToggle(true));
+    v.addEventListener('pause', () => syncToggle(false));
+    v.addEventListener('error', () => {
+      syncToggle(false);
+      started = false;
+      v.removeAttribute('src');
+    });
     if ('IntersectionObserver' in window) {
       const observer = new IntersectionObserver(([entry]) => {
         visible = entry.isIntersecting;
         if (visible) {
-          if (started) tryPlay();
+          if (started && canAutoplay() && !userPaused) tryPlay();
           else schedule();
         } else if (started) {
           v.pause();
@@ -351,6 +391,18 @@
       visible = true;
       schedule();
     }
+    const handlePreferenceChange = () => {
+      if (!canAutoplay()) {
+        if (!v.paused) v.pause();
+      } else if (visible && !userPaused) {
+        if (started) tryPlay();
+        else schedule();
+      }
+    };
+    [reducedMotion, mobile].forEach((query) => {
+      if (query.addEventListener) query.addEventListener('change', handlePreferenceChange);
+      else if (query.addListener) query.addListener(handlePreferenceChange);
+    });
   })();
 
   // A precise digital point surface behind the product demo. The ordered grid

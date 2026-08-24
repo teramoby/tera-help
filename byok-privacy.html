@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico?v=2">
+  <link rel="icon" type="image/png" sizes="32x32" href="/icon-64.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=2">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BYOK AI Client &amp; Local Privacy: How tt Handles Data</title>
+  <meta name="description" content="Learn how tt uses your own AI provider API keys, what stays on your device, what is sent to model providers, and where BYOK privacy boundaries apply.">
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+  <link rel="canonical" href="https://app.teramoby.com/byok-privacy.html">
+  <link rel="alternate" hreflang="en" href="https://app.teramoby.com/byok-privacy.html">
+  <link rel="alternate" hreflang="zh-CN" href="https://app.teramoby.com/zh/byok-privacy.html">
+  <link rel="alternate" hreflang="x-default" href="https://app.teramoby.com/byok-privacy.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="tt by teramoby">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="zh_CN">
+  <meta property="og:title" content="BYOK AI Client &amp; Local Privacy in tt">
+  <meta property="og:description" content="A clear guide to local app data, provider requests, API key security, multi-model context, and web search in tt.">
+  <meta property="og:url" content="https://app.teramoby.com/byok-privacy.html">
+  <meta property="og:image" content="https://app.teramoby.com/img/og-tt.png">
+  <meta property="og:image:width" content="1731">
+  <meta property="og:image:height" content="909">
+  <meta property="og:image:alt" content="tt by teramoby BYOK multi-model AI client">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="BYOK AI Client &amp; Local Privacy in tt">
+  <meta name="twitter:description" content="Understand what stays on your device and what tt sends to the AI services you choose.">
+  <meta name="twitter:image" content="https://app.teramoby.com/img/og-tt.png">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebPage",
+        "name": "BYOK AI Client and Local Privacy in tt",
+        "url": "https://app.teramoby.com/byok-privacy.html",
+        "description": "How tt uses user-supplied AI provider API keys, stores app data locally, and sends requests to selected third-party services.",
+        "datePublished": "2026-08-24",
+        "dateModified": "2026-08-24",
+        "inLanguage": "en",
+        "isPartOf": { "@id": "https://app.teramoby.com/#website" },
+        "about": [
+          { "@type": "Thing", "name": "Bring your own key AI client" },
+          { "@type": "Thing", "name": "Local data privacy" }
+        ]
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://app.teramoby.com/" },
+          { "@type": "ListItem", "position": 2, "name": "BYOK and Privacy", "item": "https://app.teramoby.com/byok-privacy.html" }
+        ]
+      }
+    ]
+  }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500&amp;display=swap" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500&amp;display=swap"></noscript>
+  <link rel="stylesheet" href="/assets/site.css?v=20260824-seo2">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="inner">
+    <a href="/" class="brand"><img src="/icon-64.png" alt=""><span class="brand-lockup">tt <small>by teramoby</small></span></a>
+    <div class="breadcrumb"><span class="sep">/</span><span>BYOK &amp; Privacy</span></div>
+    <div class="spacer"></div>
+    <nav aria-label="Primary navigation">
+      <a href="/models.html">Models</a>
+      <a href="/team-mode.html">Team Mode</a>
+      <a href="/#download">Download</a>
+      <a href="/privacy.html">Privacy</a>
+    </nav>
+    <div class="lang-toggle" role="group" aria-label="Language">
+      <a class="active" aria-current="page" href="/byok-privacy.html" lang="en" hreflang="en">EN</a>
+      <a href="/zh/byok-privacy.html" lang="zh-CN" hreflang="zh-CN">中文</a>
+    </div>
+  </div>
+</header>
+
+<main class="reading">
+  <p class="dateline">BYOK &amp; Privacy Guide · Updated August 24, 2026</p>
+  <h1>Bring Your Own AI API Keys—with Clear Privacy Boundaries</h1>
+  <p class="lede">tt is a bring-your-own-key (BYOK) AI client. You connect your own provider accounts, choose the services you use, and keep conversations and settings as app data on your device. Model requests still go to the providers you select.</p>
+
+  <div class="callout">BYOK means you control the provider accounts and credentials. It does not mean fully offline AI: a cloud model cannot answer until the necessary prompt and context are sent to its service.</div>
+
+  <h2>What BYOK Means in tt</h2>
+  <div class="mode-grid">
+    <div class="mode-card">
+      <h3>Your Provider Accounts</h3>
+      <p>You obtain credentials from each AI provider or managed platform and remain responsible for that service&#39;s billing, quotas, regions, and acceptable-use terms.</p>
+    </div>
+    <div class="mode-card">
+      <h3>Your Choice of Services</h3>
+      <p>Configure one service for a single-model workflow or several for multi-model chat. The current in-app configuration list is the source of truth for available connections.</p>
+    </div>
+    <div class="mode-card">
+      <h3>Local App Data</h3>
+      <p>Conversations, provider configuration, and preferences are stored as app data on your device. tt does not provide a teramoby account or proprietary cloud-sync service.</p>
+    </div>
+    <div class="mode-card">
+      <h3>Direct Provider Requests</h3>
+      <p>AI requests go from your device to the configured service. teramoby is not a proxy in the model-provider request path.</p>
+    </div>
+  </div>
+
+  <h2>How Data Moves Through a Chat</h2>
+  <div class="steps">
+    <div class="step"><div><h3>You Create a Message on Your Device</h3><p>tt combines your message with the conversation context needed for the current workflow. Your provider choice determines which external service receives a request.</p></div></div>
+    <div class="step"><div><h3>tt Authenticates with Your Credential</h3><p>The relevant API key or service credential is retrieved from the device&#39;s secure system storage and used only to authenticate the request to its corresponding service.</p></div></div>
+    <div class="step"><div><h3>The Provider Processes the Request</h3><p>The selected provider receives the prompt and required context under its own privacy, retention, billing, and usage policies. The response returns directly to tt.</p></div></div>
+    <div class="step"><div><h3>The Conversation Is Kept as Local App Data</h3><p>tt saves the conversation on the device. Your operating system may include eligible local app data in system backup or device migration according to your platform settings.</p></div></div>
+  </div>
+
+  <h2>What Leaves Your Device</h2>
+  <h3>Single-model and standard multi-model chats</h3>
+  <p>A single-model chat sends the necessary message and context to the service you use. In a standard multi-model chat, every service with a complete model and credential configuration can receive the prompt. The synthesizing service may also receive completed model replies so it can organize them into one answer.</p>
+
+  <h3>Team Mode discussions</h3>
+  <p><a href="/team-mode.html">Team Mode</a> gives participating models shared discussion context. A later request to one provider can therefore include messages or model responses produced earlier in the discussion by another provider.</p>
+
+  <h3>Optional online search</h3>
+  <p>When online search is enabled, a short search query derived from your prompt may be sent to the teramoby-operated search service and its upstream search source. Returned results may then be included in context sent to your configured AI provider. You can disable online search in settings. See the <a href="/privacy.html">full Privacy Policy</a> for current platform-specific behavior and service details.</p>
+
+  <h2>The API Key Security Boundary</h2>
+  <p>Configured AI provider API keys are stored in the device&#39;s secure system storage. An AI provider key is sent only when needed to authenticate with that corresponding provider; tt does not send it to teramoby or unrelated services.</p>
+  <p>A separately configured Search API Key is also stored in secure local storage, but it must be sent to the teramoby-operated search endpoint when authenticating an online-search request. The <a href="/privacy.html">full Privacy Policy</a> documents this separate search data flow.</p>
+  <p>This boundary does not replace account security. The provider necessarily receives its own credential, and a compromised device or provider account can still put access at risk. If a device is lost or a key may have been exposed, revoke or rotate that credential in the provider&#39;s console.</p>
+
+  <h2>Practical BYOK Safety Checklist</h2>
+  <ul>
+    <li>Create a dedicated API key for tt instead of reusing a broadly privileged credential.</li>
+    <li>Use provider-side budgets, quotas, and scope restrictions when the provider supports them.</li>
+    <li>Review each provider&#39;s data-retention and model-training terms before sending sensitive material.</li>
+    <li>Do not paste API keys, passwords, or recovery codes into a chat message.</li>
+    <li>Disable online search when a task does not need current web information.</li>
+    <li>Monitor provider usage and rotate credentials when access changes.</li>
+  </ul>
+
+  <h2>When tt Is—and Is Not—the Right Fit</h2>
+  <div class="mode-grid">
+    <div class="mode-card">
+      <h3>A Good Fit</h3>
+      <p>You already use provider APIs, want one native client for several services, and prefer local conversation storage while retaining direct control of provider accounts.</p>
+    </div>
+    <div class="mode-card">
+      <h3>Choose Additional Controls When Needed</h3>
+      <p>If data must never leave a device, you need fully offline inference, or your organization requires centrally managed keys, DLP, auditing, or provider agreements, verify those requirements before using a cloud-model workflow.</p>
+    </div>
+  </div>
+
+  <h2>Choose the Services You Trust</h2>
+  <p>BYOK gives you control over the accounts tt connects to; it does not override a provider&#39;s policies. Review the <a href="/models.html">supported providers and hosting platforms</a>, connect only the services appropriate for your data, and read the <a href="/privacy.html">full Privacy Policy</a> before using sensitive information.</p>
+
+  <div class="content-actions">
+    <a class="btn btn-primary" href="/#download">Download tt</a>
+    <a class="btn btn-outline" href="/models.html">See Supported Services</a>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="inner footer-simple">
+    <div class="brand-col">
+      <div class="brand"><img src="/icon-64.png" alt=""><span class="brand-lockup">tt <small>by teramoby</small></span></div>
+      <p class="tagline">One client. Every model.</p>
+    </div>
+  </div>
+  <div class="meta"><span>© 2026 teramoby · tera-support@teramoby.com</span><nav aria-label="Footer navigation"><a href="/">Home</a><a href="/privacy.html">Privacy</a></nav></div>
+</footer>
+
+<script>
+  window.addEventListener('scroll', () => {
+    const h = document.querySelector('.site-header');
+    if (h) h.classList.toggle('scrolled', window.scrollY > 4);
+  }, { passive: true });
+</script>
+</body>
+</html>
