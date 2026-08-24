@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico?v=2">
+  <link rel="icon" type="image/png" sizes="32x32" href="/icon-64.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=2">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BYOK AI 客户端与本地隐私：tt 如何处理数据</title>
+  <meta name="description" content="了解 tt 如何使用你自己的 AI 服务 API 密钥、哪些数据保存在设备上、哪些内容会发送给模型服务商，以及 BYOK 的隐私边界。">
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+  <link rel="canonical" href="https://app.teramoby.com/zh/byok-privacy.html">
+  <link rel="alternate" hreflang="en" href="https://app.teramoby.com/byok-privacy.html">
+  <link rel="alternate" hreflang="zh-CN" href="https://app.teramoby.com/zh/byok-privacy.html">
+  <link rel="alternate" hreflang="x-default" href="https://app.teramoby.com/byok-privacy.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="tt by teramoby">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta property="og:title" content="tt 的 BYOK AI 客户端与本地隐私">
+  <meta property="og:description" content="清楚了解 tt 的本地应用数据、服务商请求、API 密钥安全、多模型上下文与联网搜索。">
+  <meta property="og:url" content="https://app.teramoby.com/zh/byok-privacy.html">
+  <meta property="og:image" content="https://app.teramoby.com/img/og-tt.png">
+  <meta property="og:image:width" content="1731">
+  <meta property="og:image:height" content="909">
+  <meta property="og:image:alt" content="tt by teramoby BYOK 多模型 AI 客户端">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="tt 的 BYOK AI 客户端与本地隐私">
+  <meta name="twitter:description" content="了解哪些数据保存在设备上，以及 tt 会向你选择的 AI 服务发送哪些内容。">
+  <meta name="twitter:image" content="https://app.teramoby.com/img/og-tt.png">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebPage",
+        "name": "tt 的 BYOK AI 客户端与本地隐私",
+        "url": "https://app.teramoby.com/zh/byok-privacy.html",
+        "description": "tt 如何使用用户提供的 AI 服务商 API 密钥、在本地保存应用数据，并向选定的第三方服务发送请求。",
+        "datePublished": "2026-08-24",
+        "dateModified": "2026-08-24",
+        "inLanguage": "zh-CN",
+        "isPartOf": { "@id": "https://app.teramoby.com/#website" },
+        "about": [
+          { "@type": "Thing", "name": "自带 API Key 的 AI 客户端" },
+          { "@type": "Thing", "name": "本地数据隐私" }
+        ]
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "首页", "item": "https://app.teramoby.com/zh/" },
+          { "@type": "ListItem", "position": 2, "name": "BYOK 与隐私", "item": "https://app.teramoby.com/zh/byok-privacy.html" }
+        ]
+      }
+    ]
+  }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500&amp;display=swap" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500&amp;display=swap"></noscript>
+  <link rel="stylesheet" href="/assets/site.css?v=20260824-seo2">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="inner">
+    <a href="/zh/" class="brand"><img src="/icon-64.png" alt=""><span class="brand-lockup">tt <small>by teramoby</small></span></a>
+    <div class="breadcrumb"><span class="sep">/</span><span>BYOK 与隐私</span></div>
+    <div class="spacer"></div>
+    <nav aria-label="主要导航">
+      <a href="/zh/models.html">支持的模型</a>
+      <a href="/zh/team-mode.html">Team Mode</a>
+      <a href="/zh/#download">下载</a>
+      <a href="/zh/privacy.html">隐私政策</a>
+    </nav>
+    <div class="lang-toggle" role="group" aria-label="语言">
+      <a href="/byok-privacy.html" lang="en" hreflang="en">EN</a>
+      <a class="active" aria-current="page" href="/zh/byok-privacy.html" lang="zh-CN" hreflang="zh-CN">中文</a>
+    </div>
+  </div>
+</header>
+
+<main class="reading">
+  <p class="dateline">BYOK 与隐私指南 · 2026 年 8 月 24 日更新</p>
+  <h1>使用你自己的 AI API Key，同时看清隐私边界</h1>
+  <p class="lede">tt 是一个自带密钥（BYOK）的 AI 客户端。你可以连接自己的服务商账户、决定使用哪些服务，并把对话和设置作为应用数据保存在设备上；模型请求仍然会发送给你选择的服务商。</p>
+
+  <div class="callout">BYOK 表示服务商账户和凭证由你掌控，并不等于 AI 完全离线运行：云端模型只有收到必要的提示词和上下文后才能生成回答。</div>
+
+  <h2>BYOK 在 tt 中意味着什么</h2>
+  <div class="mode-grid">
+    <div class="mode-card">
+      <h3>使用你自己的服务商账户</h3>
+      <p>你需要向各 AI 服务商或托管平台申请凭证，并自行承担对应服务的计费、额度、地区限制和使用条款。</p>
+    </div>
+    <div class="mode-card">
+      <h3>自主选择连接哪些服务</h3>
+      <p>只配置一个服务可以进行单模型工作；配置多个服务可以进行多模型对话。当前应用内的配置列表是可用连接的准确信息来源。</p>
+    </div>
+    <div class="mode-card">
+      <h3>应用数据保存在本地</h3>
+      <p>对话、服务商配置和偏好设置作为应用数据保存在设备上。tt 不提供 teramoby 账户或自有云同步服务。</p>
+    </div>
+    <div class="mode-card">
+      <h3>直接请求模型服务商</h3>
+      <p>AI 请求从设备发送给已配置的服务；teramoby 不作为模型服务商请求链路中的代理。</p>
+    </div>
+  </div>
+
+  <h2>一次对话中的数据如何流动</h2>
+  <div class="steps">
+    <div class="step"><div><h3>你在设备上输入消息</h3><p>tt 会把消息与当前工作方式所需的对话上下文组合起来。你选择的服务决定哪些外部服务商会收到请求。</p></div></div>
+    <div class="step"><div><h3>tt 使用你的凭证完成认证</h3><p>对应的 API Key 或服务凭证会从设备的系统安全存储中读取，仅用于向其对应服务发出的认证请求。</p></div></div>
+    <div class="step"><div><h3>模型服务商处理请求</h3><p>所选服务商会依据自己的隐私、保留、计费和使用政策处理提示词及所需上下文，再把回答直接返回 tt。</p></div></div>
+    <div class="step"><div><h3>对话作为应用数据保存在本地</h3><p>tt 将对话保存在设备上。操作系统可能依据你的平台设置，把符合条件的本地应用数据纳入系统备份或设备迁移。</p></div></div>
+  </div>
+
+  <h2>哪些数据仍会离开设备</h2>
+  <h3>单模型与标准多模型对话</h3>
+  <p>单模型对话会把必要的消息和上下文发送给你使用的服务。标准多模型对话中，模型和凭证均已完整配置的每项服务都可能收到提示词；负责综合的服务还可能收到各模型已经完成的回答，以便整理为一份综合答案。</p>
+
+  <h3>Team Mode 共享讨论</h3>
+  <p><a href="/zh/team-mode.html">Team Mode</a> 会向参与模型提供共享讨论上下文。因此，后续发送给某个服务商的请求，可能包含讨论中其他服务商先前生成的消息或模型回答。</p>
+
+  <h3>可关闭的联网搜索</h3>
+  <p>开启联网搜索时，根据提示词生成的简短搜索词可能被发送给 teramoby 运营的搜索服务及其上游搜索来源；返回结果随后可能作为上下文发送给你配置的 AI 服务商。你可以在设置中关闭联网搜索。有关当前各平台的具体行为和服务信息，请查看<a href="/zh/privacy.html">完整隐私政策</a>。</p>
+
+  <h2>API Key 的安全边界</h2>
+  <p>已配置的 AI 服务商 API Key 保存在设备的系统安全存储中。AI 服务商密钥仅在向对应服务商进行认证时发送；tt 不会把这类密钥发送给 teramoby 或无关服务。</p>
+  <p>单独配置的 Search API Key 同样保存在本地安全存储中，但在认证联网搜索请求时，必须发送给 teramoby 运营的搜索接口。这项独立的搜索数据流已在<a href="/zh/privacy.html">完整隐私政策</a>中说明。</p>
+  <p>这项边界不能替代账户安全。对应服务商必然会收到用于其自身认证的凭证；设备或服务商账户一旦失陷，访问权限仍可能面临风险。如果设备丢失，或你怀疑密钥已经暴露，应立即在服务商控制台撤销或轮换凭证。</p>
+
+  <h2>实用的 BYOK 安全清单</h2>
+  <ul>
+    <li>为 tt 创建单独的 API Key，不要复用权限范围过大的凭证。</li>
+    <li>如果服务商支持，请设置预算、额度和权限范围限制。</li>
+    <li>发送敏感资料前，先查看每家服务商的数据保留和模型训练条款。</li>
+    <li>不要把 API Key、密码或恢复码粘贴到对话消息中。</li>
+    <li>不需要最新网络资料时，关闭联网搜索。</li>
+    <li>定期查看服务商用量；访问关系发生变化时及时轮换凭证。</li>
+  </ul>
+
+  <h2>什么情况下适合或不适合使用 tt</h2>
+  <div class="mode-grid">
+    <div class="mode-card">
+      <h3>适合的场景</h3>
+      <p>你已经使用模型 API，希望在一个原生客户端中连接多家服务，并且倾向于把对话保存在本地，同时直接掌控服务商账户。</p>
+    </div>
+    <div class="mode-card">
+      <h3>需要额外控制的场景</h3>
+      <p>如果数据绝不能离开设备、需要完全离线推理，或组织要求集中管理密钥、DLP、审计及特定服务商协议，请先核验这些要求，再决定是否使用云端模型工作流。</p>
+    </div>
+  </div>
+
+  <h2>只连接你信任的服务</h2>
+  <p>BYOK 让你掌控 tt 连接的账户，但不会覆盖服务商自己的政策。请查看<a href="/zh/models.html">支持的模型服务商与托管平台</a>，仅连接适合处理相应数据的服务，并在处理敏感信息前阅读<a href="/zh/privacy.html">完整隐私政策</a>。</p>
+
+  <div class="content-actions">
+    <a class="btn btn-primary" href="/zh/#download">下载 tt</a>
+    <a class="btn btn-outline" href="/zh/models.html">查看支持的服务</a>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="inner footer-simple">
+    <div class="brand-col">
+      <div class="brand"><img src="/icon-64.png" alt=""><span class="brand-lockup">tt <small>by teramoby</small></span></div>
+      <p class="tagline">一个客户端，用遍所有模型。</p>
+    </div>
+  </div>
+  <div class="meta"><span>© 2026 teramoby · tera-support@teramoby.com</span><nav aria-label="页脚导航"><a href="/zh/">首页</a><a href="/zh/privacy.html">隐私政策</a></nav></div>
+</footer>
+
+<script>
+  window.addEventListener('scroll', () => {
+    const h = document.querySelector('.site-header');
+    if (h) h.classList.toggle('scrolled', window.scrollY > 4);
+  }, { passive: true });
+</script>
+</body>
+</html>

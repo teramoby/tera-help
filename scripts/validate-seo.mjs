@@ -9,6 +9,7 @@ const pages = [
   { file: 'blog-getting-started.html', lang: 'en', canonical: `${SITE}/blog-getting-started.html`, alternate: `${SITE}/zh/blog-getting-started.html` },
   { file: 'launch.html', lang: 'en', canonical: `${SITE}/launch.html`, alternate: `${SITE}/zh/launch.html` },
   { file: 'privacy.html', lang: 'en', canonical: `${SITE}/privacy.html`, alternate: `${SITE}/zh/privacy.html` },
+  { file: 'byok-privacy.html', lang: 'en', canonical: `${SITE}/byok-privacy.html`, alternate: `${SITE}/zh/byok-privacy.html` },
   { file: 'models.html', lang: 'en', canonical: `${SITE}/models.html`, alternate: `${SITE}/zh/models.html` },
   { file: 'team-mode.html', lang: 'en', canonical: `${SITE}/team-mode.html`, alternate: `${SITE}/zh/team-mode.html` },
   { file: 'zh/index.html', lang: 'zh-CN', canonical: `${SITE}/zh/`, alternate: `${SITE}/` },
@@ -16,6 +17,7 @@ const pages = [
   { file: 'zh/blog-getting-started.html', lang: 'zh-CN', canonical: `${SITE}/zh/blog-getting-started.html`, alternate: `${SITE}/blog-getting-started.html` },
   { file: 'zh/launch.html', lang: 'zh-CN', canonical: `${SITE}/zh/launch.html`, alternate: `${SITE}/launch.html` },
   { file: 'zh/privacy.html', lang: 'zh-CN', canonical: `${SITE}/zh/privacy.html`, alternate: `${SITE}/privacy.html` },
+  { file: 'zh/byok-privacy.html', lang: 'zh-CN', canonical: `${SITE}/zh/byok-privacy.html`, alternate: `${SITE}/byok-privacy.html` },
   { file: 'zh/models.html', lang: 'zh-CN', canonical: `${SITE}/zh/models.html`, alternate: `${SITE}/models.html` },
   { file: 'zh/team-mode.html', lang: 'zh-CN', canonical: `${SITE}/zh/team-mode.html`, alternate: `${SITE}/team-mode.html` },
 ];
@@ -100,11 +102,19 @@ for (const page of pages) {
     }
   }
 
+  if (page.file === 'index.html' || page.file === 'zh/index.html') {
+    assert(html.includes('preload="none"'), `${label}: hero video must not preload`);
+    assert(html.includes('data-mp4="/media/tt-hero.mp4"'), `${label}: deferred hero MP4 source missing`);
+    assert(!html.includes('src="/media/tt-hero.mp4"'), `${label}: hero MP4 must not load eagerly`);
+    assert(!html.includes('data-hls='), `${label}: duplicate HLS source must not return`);
+    assert(html.includes('class="hero-video-toggle"'), `${label}: opt-in video control missing`);
+  }
+
   if (page.file === 'index.html') {
     assert(jsonLd.some(data => data['@type'] === 'WebSite'), `${label}: missing WebSite JSON-LD`);
   }
 
-  if (page.file.endsWith('models.html') || page.file.endsWith('team-mode.html') || page.file.endsWith('blog-getting-started.html')) {
+  if (page.file.endsWith('models.html') || page.file.endsWith('team-mode.html') || page.file.endsWith('byok-privacy.html') || page.file.endsWith('blog-getting-started.html')) {
     const types = jsonLd.flatMap(data => data['@graph']?.map(item => item['@type']) ?? [data['@type']]);
     assert(types.includes('BreadcrumbList'), `${label}: missing BreadcrumbList JSON-LD`);
   }
@@ -120,12 +130,37 @@ for (const page of pages) {
   }
 }
 
+for (const file of ['journal/index.html', 'journal/privacy.html']) {
+  const html = await fs.readFile(path.join(ROOT, file), 'utf8');
+  assert(
+    count(html, /<meta name="robots" content="noindex,follow">/g) === 1,
+    `${file}: requires exactly one noindex,follow directive`,
+  );
+}
+
 const robots = await fs.readFile(path.join(ROOT, 'robots.txt'), 'utf8');
 assert(robots.includes('Sitemap: https://app.teramoby.com/sitemap.xml'), 'robots.txt: sitemap declaration missing');
 
 const sitemap = await fs.readFile(path.join(ROOT, 'sitemap.xml'), 'utf8');
+const sitemapEntries = [...sitemap.matchAll(/<url>([\s\S]*?)<\/url>/g)].map(match => match[1]);
 for (const page of pages) {
-  assert(sitemap.includes(`<loc>${page.canonical}</loc>`), `sitemap.xml: missing ${page.canonical}`);
+  const entry = sitemapEntries.find(block => block.includes(`<loc>${page.canonical}</loc>`));
+  assert(Boolean(entry), `sitemap.xml: missing ${page.canonical}`);
+  if (!entry) continue;
+  const english = page.lang === 'en' ? page.canonical : page.alternate;
+  const chinese = page.lang === 'zh-CN' ? page.canonical : page.alternate;
+  assert(
+    entry.includes(`<xhtml:link rel="alternate" hreflang="en" href="${english}" />`),
+    `sitemap.xml: incorrect English alternate for ${page.canonical}`,
+  );
+  assert(
+    entry.includes(`<xhtml:link rel="alternate" hreflang="zh-CN" href="${chinese}" />`),
+    `sitemap.xml: incorrect Chinese alternate for ${page.canonical}`,
+  );
+  assert(
+    entry.includes(`<xhtml:link rel="alternate" hreflang="x-default" href="${english}" />`),
+    `sitemap.xml: incorrect x-default for ${page.canonical}`,
+  );
 }
 assert(count(sitemap, /<url>/g) === pages.length, `sitemap.xml: expected ${pages.length} URLs`);
 
