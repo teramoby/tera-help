@@ -1419,6 +1419,7 @@ body.theme-journal {
   font-variant-numeric: tabular-nums;
   font-family: 'JetBrains Mono', ui-monospace, monospace;
 }
+.reading .mono { overflow-wrap: anywhere; }
 
 .fade-up { animation: fadeUp 0.7s var(--ease-smooth) both; }
 @keyframes fadeUp {
