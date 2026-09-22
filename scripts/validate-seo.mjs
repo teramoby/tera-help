@@ -162,6 +162,45 @@ for (const page of pages) {
   }
 }
 
+for (const file of ['models.html', 'zh/models.html']) {
+  const html = await fs.readFile(path.join(ROOT, file), 'utf8');
+  const title = html.match(/<title>([^<]+)<\/title>/)?.[1] ?? '';
+  const h1 = stripTags(html.match(/<h1(?:\s[^>]*)?>([\s\S]*?)<\/h1>/)?.[1] ?? '');
+  for (const term of ['ChatGPT', 'Claude', 'Gemini', 'DeepSeek']) {
+    assert(title.includes(term), `${file}: title must include ${term}`);
+    assert(h1.includes(term), `${file}: h1 must include ${term}`);
+  }
+}
+
+for (const [file, links] of [
+  ['download.html', ['/download/iphone-ipad/', '/download/android/', '/download/mac/']],
+  ['zh/download.html', ['/zh/download/iphone-ipad/', '/zh/download/android/', '/zh/download/mac/']],
+]) {
+  const html = await fs.readFile(path.join(ROOT, file), 'utf8');
+  const chooser = html.indexOf('<nav class="content-actions content-spacer-sm"');
+  const lede = html.indexOf('<p class="lede">');
+  assert(chooser !== -1 && chooser < lede, `${file}: platform chooser must appear before the long introduction`);
+  for (const link of links) assert(html.includes(`href="${link}"`), `${file}: missing platform choice ${link}`);
+}
+
+for (const [file, download] of [
+  ['download/android/index.html', '/android/tera-android.apk'],
+  ['zh/download/android/index.html', '/android/tera-android.apk'],
+  ['download/mac/index.html', '/tera-1.1.1.dmg'],
+  ['zh/download/mac/index.html', '/tera-1.1.1.dmg'],
+]) {
+  const html = await fs.readFile(path.join(ROOT, file), 'utf8');
+  const primaryDownload = html.indexOf(`href="${download}"`);
+  const lede = html.indexOf('<p class="lede">');
+  assert(primaryDownload !== -1 && primaryDownload < lede, `${file}: primary download must appear before the long introduction`);
+}
+
+const siteCss = await fs.readFile(path.join(ROOT, 'assets/site.css'), 'utf8');
+assert(
+  /\.reading\s+\.mono\s*\{[^}]*overflow-wrap:\s*anywhere;?[^}]*\}/.test(siteCss),
+  'assets/site.css: long technical strings must wrap inside reading pages',
+);
+
 for (const file of ['journal/index.html', 'journal/privacy.html']) {
   const html = await fs.readFile(path.join(ROOT, file), 'utf8');
   assert(
