@@ -35,7 +35,12 @@ No Android, iOS, or Mac application source was changed. APK, DMG, and TeraJourna
 
 ### Deployment
 
-- Status: pending commit, merge, GitHub Pages deployment, and live verification.
+- Pull request: [#8](https://github.com/teramoby/tera-help/pull/8), merged to `main` as `db907452e4f952a10c71310b9db5e25089a87c32`.
+- GitHub Pages: [deployment run 35681176400](https://github.com/teramoby/tera-help/actions/runs/35681176400) completed successfully in 19 seconds, including the 28-page SEO validator.
+- Live verification: all 28 sitemap URLs returned 200; the new bilingual model-page titles, bilingual platform chooser, privacy CSS cache version, long-string wrapping rule, and eight updated sitemap dates were present on production.
+- Live mobile verification: at 320 px the three download-platform choices were visible without horizontal overflow; at 390 px the Chinese privacy page width matched the viewport exactly.
+- Production download-page Lighthouse after deployment: Performance 97, Accessibility 100, Best Practices 100, SEO 100; FCP/LCP 1.8 s, TBT 0 ms, CLS 0.001, transfer 38 KiB.
+- APK and DMG URLs continued to return 200 with their expected content types; their repository bytes and SHA-256 values were unchanged.
 
 ### Known limitations and next hypothesis
 
