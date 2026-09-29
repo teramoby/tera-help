@@ -195,6 +195,24 @@ for (const [file, download] of [
   assert(primaryDownload !== -1 && primaryDownload < lede, `${file}: primary download must appear before the long introduction`);
 }
 
+for (const [file, downloadHub] of [
+  ['blog-getting-started.html', '/download.html'],
+  ['launch.html', '/download.html'],
+  ['faq.html', '/download.html'],
+  ['zh/blog-getting-started.html', '/zh/download.html'],
+  ['zh/launch.html', '/zh/download.html'],
+  ['zh/faq.html', '/zh/download.html'],
+]) {
+  const html = await fs.readFile(path.join(ROOT, file), 'utf8');
+  const mainStart = html.indexOf('<main');
+  const mainEnd = html.indexOf('</main>');
+  const contextualDownload = html.indexOf(`href="${downloadHub}"`, mainStart);
+  assert(
+    mainStart !== -1 && mainEnd !== -1 && contextualDownload > mainStart && contextualDownload < mainEnd,
+    `${file}: missing in-content link to ${downloadHub}`,
+  );
+}
+
 const siteCss = await fs.readFile(path.join(ROOT, 'assets/site.css'), 'utf8');
 assert(
   /\.reading\s+\.mono\s*\{[^}]*overflow-wrap:\s*anywhere;?[^}]*\}/.test(siteCss),
