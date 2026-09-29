@@ -83,7 +83,12 @@ No Android, iOS, or Mac application source was changed. APK, DMG, privacy promis
 
 ### Deployment
 
-- Deployment details will be recorded after the reviewed change reaches `main` and GitHub Pages completes.
+- Pull request: [#9](https://github.com/teramoby/tera-help/pull/9), merged to `main` as `d0cdb54c6498e3787c26b6f5a8daaa3034eefd62`.
+- GitHub Pages: [deployment run 36511868949](https://github.com/teramoby/tera-help/actions/runs/36511868949) completed successfully in 21 seconds, including the 28-page SEO validator.
+- Live verification: all eight changed English and Chinese pages returned 200 and contained their expected localized download actions or final Anthropic link; all eight corresponding sitemap entries reported `2026-09-29` and the sitemap retained 28 URLs.
+- Live responsive verification: all 28 sitemap pages at 320 px and 390 px, 56 combinations total, returned 200 with no horizontal overflow.
+- Production Lighthouse after deployment: getting-started guide 97/100/100/100, FCP/LCP 1.7 s, TBT 0 ms, CLS 0, transfer 87 KiB; FAQ 100/100/100/100, FCP/LCP 1.1 s, TBT 0 ms, CLS 0, transfer 38 KiB.
+- Live APK and DMG downloads retained their recorded SHA-256 values.
 
 ### Known limitations and next hypothesis
 
