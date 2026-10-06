@@ -95,3 +95,47 @@ No Android, iOS, or Mac application source was changed. APK, DMG, privacy promis
 - Search Console remains the highest-priority missing measurement. Public search samples cannot confirm Google-selected canonicals, full index coverage, impressions, clicks, or query position.
 - Do not create more broad keyword landing pages from public samples alone. If Search Console confirms that the localized pages are indexed but generic impressions remain weak, the next hypothesis is to earn relevant third-party references to the existing model, comparison, and download pages rather than repeating their content on new pages.
 - The App Store listing remains unavailable in the mainland China storefront. Existing bilingual download and installation pages already disclose that limitation and route Chinese visitors to platform-appropriate options, so no additional copy was added in this run.
+
+## 2026-10-06
+
+### Baseline
+
+- Repository: clean `main` synchronized from `origin/main` at `389f688` before this run.
+- Availability: HTTPS homepage, `robots.txt`, and `sitemap.xml` returned 200; HTTP redirected to HTTPS with 301; a fabricated path returned a real 404.
+- Sitemap and metadata: all 28 sitemap URLs returned 200 without redirects, with exact self-canonical URLs and matching `en` / `zh-CN` / `x-default` alternates; all 26 JSON-LD blocks parsed successfully.
+- Links: all 47 normalized same-origin targets returned 2xx. Eleven user-facing external anchor targets had no confirmed failure; OpenAI and xAI rejected automated checks but rendered in a real browser, DeepSeek returned 200 to `GET`, and the Gemini API-key guide loaded in a real browser despite an automated redirect loop.
+- Responsive behavior: all 28 sitemap pages at 320 px and 390 px, 56 combinations total, had no horizontal overflow.
+- Production Lighthouse mobile samples: English homepage, Chinese homepage, and download hub each scored 100/100/100/100. Their LCP values were 1.5 s, 1.3 s, and 1.2 s respectively; TBT was 20 ms or less, CLS was 0.001 or less, and homepage transfer remained 124 KiB.
+- Public search sample at 2026-10-06 10:03–10:08 China Standard Time: `tt by teramoby` returned four direct `app.teramoby.com` results, with FAQ newly observed alongside the getting-started guide, privacy page, and homepage. The Chinese homepage was newly observed for both `万能模型客户端` and `多模型 AI 客户端`, which were absent from the 2026-09-29 sample. No direct tt result appeared for the sampled `ChatGPT Claude Gemini DeepSeek 客户端` query. Bare `site:` output remained provider-dependent while scoped `site:` queries exposed multiple English and Chinese pages. These observations do not establish rankings, traffic, or complete index coverage.
+
+### Evidence-backed changes
+
+1. Corrected stale `dateModified` values on the bilingual getting-started, launch, and model-reference pages, then added a validator rule requiring JSON-LD modification dates to match sitemap `lastmod`. The indexed getting-started result still showed the pre-September copy, and the source previously gave crawlers contradictory freshness signals.
+2. Added Apple Smart App Banner metadata to the bilingual iPhone/iPad download pages using the existing App Store ID. Apple documents this as a native, dismissible install/open action that stays hidden when the app is unsupported or unavailable in the visitor's location. The pages' visible dates, JSON-LD dates, and sitemap dates now consistently reflect the update.
+3. Added compact, descriptive links from the bilingual homepage download area to the Mac, Android APK, and iPhone/iPad installation guides. Direct DMG, APK, and App Store actions remain unchanged; the new links give cautious visitors safety and setup context while strengthening discovery paths to the dedicated platform pages.
+
+No Android, iOS, or Mac application source was changed. APK, DMG, privacy promises, tracking behavior, and TeraJournal files and content were not modified.
+
+### Regression results before deployment
+
+- `node scripts/validate-seo.mjs`: 28 localized pages passed, including new Smart App Banner, homepage platform-link, and JSON-LD/sitemap date-consistency assertions.
+- `html-validate`: all 28 localized pages passed.
+- Inline JavaScript parse check: 28 scripts passed.
+- Browser responsive check: 28 pages at 320 px and 390 px, 56 combinations total, with zero horizontal-overflow failures.
+- Browser conversion checks at 390 px: all six localized homepage guide links rendered with their expected targets, and both iPhone/iPad pages exposed exactly the expected App Store ID in Smart App Banner metadata.
+- Visual review: the new homepage links remained secondary to the direct download controls at desktop and mobile widths.
+- Local Lighthouse: homepage and iPhone/iPad download page both scored 100/100/100/100; LCP was 1.5 s and 1.1 s respectively, with TBT 0 ms and CLS 0.001.
+- Release artifact hashes remained unchanged:
+  - Android APK SHA-256: `391736033ead0db76c732f9cf87a8a1d595de3ce8fc75be53736d6ae4d7f3b1e`
+  - Mac DMG SHA-256: `b99939af57918c37ade7118236a346a261e68e812ed6024da5b43201e1363558`
+
+### Deployment
+
+- Deployment details will be recorded after the reviewed change reaches `main` and GitHub Pages completes.
+
+### Known limitations and next hypothesis
+
+- Search Console remains the highest-priority missing measurement. Public search samples cannot confirm Google-selected canonicals, complete index coverage, impressions, clicks, or query position.
+- The getting-started search snippet still reflected pre-September copy in this sample. Corrected dates and sitemap consistency remove conflicting site signals, but only a future crawl can refresh the result.
+- The next off-site hypothesis is that accurate references from reputable app directories or independent reviews would help the existing platform, comparison, and provider pages compete in generic result sets. Do not create another broad landing page while the current Chinese homepage is gaining visibility.
+- The mainland China App Store limitation remains disclosed. Apple states that the Smart App Banner does not appear where the app is unavailable, but this behavior cannot be fully exercised from automated Chrome tests.

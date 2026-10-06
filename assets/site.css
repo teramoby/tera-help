@@ -551,6 +551,24 @@ main.reading {
   line-height: 1.4;
 }
 .platform-downloads .hero-qr { flex: 0 0 auto; }
+.platform-guide-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 18px;
+  margin-top: 14px;
+  font-family: 'Styrene A', sans-serif;
+  font-size: 12px;
+  line-height: 1.45;
+}
+.platform-guide-links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: var(--ink-3);
+  transition: color 0.2s var(--ease-out);
+}
+.platform-guide-links a::after { content: '→'; color: var(--accent-deep); }
+.platform-guide-links a:hover { color: var(--ink); }
 .hero-qr {
   display: flex;
   align-items: center;

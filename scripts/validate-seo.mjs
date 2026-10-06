@@ -213,6 +213,28 @@ for (const [file, downloadHub] of [
   );
 }
 
+for (const [file, appId] of [
+  ['download/iphone-ipad/index.html', '6760287852'],
+  ['zh/download/iphone-ipad/index.html', '6760287852'],
+]) {
+  const html = await fs.readFile(path.join(ROOT, file), 'utf8');
+  assert(
+    count(html, new RegExp(`<meta name="apple-itunes-app" content="app-id=${appId}">`, 'g')) === 1,
+    `${file}: requires one Smart App Banner for App Store ID ${appId}`,
+  );
+}
+
+for (const [file, guideLinks] of [
+  ['index.html', ['/download/mac/', '/download/android/', '/download/iphone-ipad/']],
+  ['zh/index.html', ['/zh/download/mac/', '/zh/download/android/', '/zh/download/iphone-ipad/']],
+]) {
+  const html = await fs.readFile(path.join(ROOT, file), 'utf8');
+  const guideNav = html.match(/<nav class="platform-guide-links"[\s\S]*?<\/nav>/)?.[0] ?? '';
+  for (const guideLink of guideLinks) {
+    assert(guideNav.includes(`href="${guideLink}"`), `${file}: missing homepage platform guide ${guideLink}`);
+  }
+}
+
 const siteCss = await fs.readFile(path.join(ROOT, 'assets/site.css'), 'utf8');
 assert(
   /\.reading\s+\.mono\s*\{[^}]*overflow-wrap:\s*anywhere;?[^}]*\}/.test(siteCss),
@@ -260,6 +282,14 @@ for (const page of pages) {
     entry.includes(`<xhtml:link rel="alternate" hreflang="x-default" href="${english}" />`),
     `sitemap.xml: incorrect x-default for ${page.canonical}`,
   );
+  const html = await fs.readFile(path.join(ROOT, page.file), 'utf8');
+  const dateModified = html.match(/"dateModified":\s*"(\d{4}-\d{2}-\d{2})"/)?.[1];
+  if (dateModified) {
+    assert(
+      entry.includes(`<lastmod>${dateModified}</lastmod>`),
+      `${page.file}: JSON-LD dateModified must match sitemap lastmod`,
+    );
+  }
 }
 assert(count(sitemap, /<url>/g) === pages.length, `sitemap.xml: expected ${pages.length} URLs`);
 
