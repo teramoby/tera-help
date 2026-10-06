@@ -131,7 +131,12 @@ No Android, iOS, or Mac application source was changed. APK, DMG, privacy promis
 
 ### Deployment
 
-- Deployment details will be recorded after the reviewed change reaches `main` and GitHub Pages completes.
+- Pull request: [#10](https://github.com/teramoby/tera-help/pull/10), merged to `main` as `34b37c701f531d22962297d5f754e09b14babb78`.
+- GitHub Pages: [deployment run 37403215714](https://github.com/teramoby/tera-help/actions/runs/37403215714) completed successfully in 17 seconds, including the 28-page SEO validator.
+- Live verification: both homepages, both iPhone/iPad pages, all six corrected-date pages, and the updated stylesheet returned 200 with the expected links, Smart App Banner metadata, and JSON-LD dates. The sitemap retained 28 URLs and the expected modification dates.
+- Live responsive verification: all 28 sitemap pages at 320 px and 390 px, 56 combinations total, returned 200 with no horizontal overflow.
+- Production Lighthouse after deployment: homepage and iPhone/iPad download page both scored 100/100/100/100; LCP was 1.2 s and 1.3 s respectively, with TBT 0 ms, CLS 0.001, and unchanged transfer sizes of 124 KiB and 38 KiB.
+- Live APK and DMG downloads retained their recorded SHA-256 values.
 
 ### Known limitations and next hypothesis
 
