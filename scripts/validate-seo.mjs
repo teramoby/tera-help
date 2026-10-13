@@ -172,15 +172,19 @@ for (const file of ['models.html', 'zh/models.html']) {
   }
 }
 
-for (const [file, links] of [
-  ['download.html', ['/download/iphone-ipad/', '/download/android/', '/download/mac/']],
-  ['zh/download.html', ['/zh/download/iphone-ipad/', '/zh/download/android/', '/zh/download/mac/']],
+for (const [file, links, iosRequirements] of [
+  ['download.html', ['/download/iphone-ipad/', '/download/android/', '/download/mac/'], ['iOS 17.0 or later', 'iPadOS 17.0 or later']],
+  ['zh/download.html', ['/zh/download/iphone-ipad/', '/zh/download/android/', '/zh/download/mac/'], ['iOS 17.0 或更高版本', 'iPadOS 17.0 或更高版本']],
 ]) {
   const html = await fs.readFile(path.join(ROOT, file), 'utf8');
   const chooser = html.indexOf('<nav class="content-actions content-spacer-sm"');
   const lede = html.indexOf('<p class="lede">');
   assert(chooser !== -1 && chooser < lede, `${file}: platform chooser must appear before the long introduction`);
   for (const link of links) assert(html.includes(`href="${link}"`), `${file}: missing platform choice ${link}`);
+  const main = html.match(/<main[\s\S]*?<\/main>/)?.[0] ?? '';
+  for (const requirement of iosRequirements) {
+    assert(main.includes(requirement), `${file}: visible ${requirement} requirement is missing`);
+  }
 }
 
 for (const [file, download] of [
@@ -213,14 +217,69 @@ for (const [file, downloadHub] of [
   );
 }
 
-for (const [file, appId] of [
-  ['download/iphone-ipad/index.html', '6760287852'],
-  ['zh/download/iphone-ipad/index.html', '6760287852'],
+for (const [file, appId, visibleRequirements, metadataRequirement] of [
+  ['download/iphone-ipad/index.html', '6760287852', ['iOS 17.0 or later', 'iPadOS 17.0 or later'], 'iOS and iPadOS 17.0+'],
+  ['zh/download/iphone-ipad/index.html', '6760287852', ['iOS 17.0 或更高版本', 'iPadOS 17.0 或更高版本'], 'iOS 与 iPadOS 17.0+'],
 ]) {
   const html = await fs.readFile(path.join(ROOT, file), 'utf8');
   assert(
     count(html, new RegExp(`<meta name="apple-itunes-app" content="app-id=${appId}">`, 'g')) === 1,
     `${file}: requires one Smart App Banner for App Store ID ${appId}`,
+  );
+  const main = html.match(/<main[\s\S]*?<\/main>/)?.[0] ?? '';
+  for (const requirement of visibleRequirements) {
+    assert(main.includes(requirement), `${file}: visible ${requirement} requirement is missing`);
+  }
+  assert(
+    html.match(/<meta name="description" content="([^"]+)">/)?.[1].includes(metadataRequirement),
+    `${file}: metadata minimum OS summary is missing`,
+  );
+  assert(
+    !html.includes('does not state an independently verified minimum version') && !html.includes('没有声明经独立核实的最低版本'),
+    `${file}: stale minimum OS caveat remains`,
+  );
+}
+
+{
+  const html = await fs.readFile(path.join(ROOT, 'zh/download.html'), 'utf8');
+  const chooser = html.match(/<nav class="content-actions content-spacer-sm"[\s\S]*?<\/nav>/)?.[0] ?? '';
+  assert(
+    chooser.indexOf('href="/zh/download/android/"') < chooser.indexOf('href="/zh/download/iphone-ipad/"'),
+    'zh/download.html: Android must precede iPhone/iPad in the mainland-oriented chooser',
+  );
+  assert(
+    chooser.includes('class="btn btn-primary" href="/zh/download/android/"'),
+    'zh/download.html: Android must be the primary mainland download choice',
+  );
+  const notice = html.match(/<div class="callout"><strong>中国大陆用户：[\s\S]*?<\/div>/)?.[0] ?? '';
+  for (const alternative of ['/zh/download/android/', '/zh/download/mac/']) {
+    assert(notice.includes(`href="${alternative}"`), `zh/download.html: mainland notice missing ${alternative}`);
+  }
+}
+
+{
+  const html = await fs.readFile(path.join(ROOT, 'zh/download/iphone-ipad/index.html'), 'utf8');
+  const notice = html.indexOf('<div class="callout"><strong>地区可用性：');
+  const appStoreAction = html.indexOf('href="https://apps.apple.com/us/app/teramoby-tera-tt/id6760287852"', html.indexOf('<main'));
+  assert(notice !== -1 && notice < appStoreAction, 'zh iPhone/iPad guide: regional notice must precede App Store action');
+  for (const alternative of ['/zh/download/android/', '/zh/download/mac/']) {
+    assert(html.slice(notice, appStoreAction).includes(`href="${alternative}"`), `zh iPhone/iPad guide: regional notice missing ${alternative}`);
+  }
+}
+
+for (const file of ['models.html', 'zh/models.html']) {
+  const html = await fs.readFile(path.join(ROOT, file), 'utf8');
+  assert(
+    html.includes('https://support.claude.com/en/articles/9876003-i-have-a-paid-claude-subscription-pro-max-team-or-enterprise-plans-why-is-claude-api-usage-billed-separately-from-my-paid-claude-plan'),
+    `${file}: current Claude API billing article URL missing`,
+  );
+  assert(
+    !html.includes('why-do-i-have-to-pay-separately-to-use-the-claude-api-and-console'),
+    `${file}: redirected Claude API billing article URL remains`,
+  );
+  assert(
+    html.includes(file.startsWith('zh/') ? 'Max 与 Team 方案目前包含每月 API 额度' : 'Max and Team currently include monthly API credits'),
+    `${file}: Claude Max and Team API credit exception is missing`,
   );
 }
 
