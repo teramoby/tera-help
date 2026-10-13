@@ -144,3 +144,54 @@ No Android, iOS, or Mac application source was changed. APK, DMG, privacy promis
 - The getting-started search snippet still reflected pre-September copy in this sample. Corrected dates and sitemap consistency remove conflicting site signals, but only a future crawl can refresh the result.
 - The next off-site hypothesis is that accurate references from reputable app directories or independent reviews would help the existing platform, comparison, and provider pages compete in generic result sets. Do not create another broad landing page while the current Chinese homepage is gaining visibility.
 - The mainland China App Store limitation remains disclosed. Apple states that the Smart App Banner does not appear where the app is unavailable, but this behavior cannot be fully exercised from automated Chrome tests.
+
+## 2026-10-13
+
+### Baseline
+
+- Repository: clean `main` synchronized from `origin/main` at `670b373` before this run. The Android repository was also clean on `main`; no application source was opened for modification.
+- Availability: HTTPS homepage, `robots.txt`, and `sitemap.xml` returned 200; HTTP redirected to HTTPS with 301; a fabricated path returned a real 404.
+- Sitemap and metadata: all 28 sitemap URLs returned direct 200s with exact self-canonical URLs and matching `en` / `zh-CN` / `x-default` alternates; all 26 JSON-LD blocks parsed successfully.
+- Links: all 47 normalized same-origin references returned 200. Eleven user-facing external anchors had no confirmed broken destination. OpenAI and xAI denied automated requests but remained accessible in browser checks; the Claude billing article had begun redirecting to a renamed first-party URL.
+- Responsive behavior: all 28 pages at 320 px and 390 px, 56 combinations total, had no horizontal overflow.
+- Production Lighthouse mobile samples were affected by the same headless Chrome paint-timing variance seen in the technical audit: first homepage samples ranged from Performance 77 to 84 and repeated samples scored 97 and 100, while Accessibility, Best Practices, and SEO stayed at 100 and transfer remained unchanged at 124–125 KiB. The download hub scored 100/100/100/100. No changed bytes or runtime regression accompanied the slower samples.
+- Public search sample at approximately 10:03 China Standard Time: `tt by teramoby` continued to return direct results for the getting-started guide, privacy page, homepage, and FAQ. The getting-started snippet now reflected current Team Mode and online-search copy. The Chinese homepage remained observable for `多模型 AI 客户端`; it was not observed in this sample for `万能模型客户端`, after appearing on October 6. No direct tt result appeared for `ChatGPT Claude Gemini DeepSeek 客户端`. Bare `site:` output remained provider-dependent while scoped variants exposed multiple English and Chinese pages. These samples do not establish ranking, traffic, or complete index coverage.
+- Apple’s live lookup data returned the US listing as free with minimum OS version 17.0 and returned no mainland China listing. The US, Hong Kong, and Singapore listings agreed on the minimum version and free price.
+
+### Evidence-backed changes
+
+1. Replaced the stale “minimum version not verified” caveat on the bilingual iPhone/iPad guides and download hubs with dated Apple-verified requirements: iOS 17.0 or later on iPhone, iPadOS 17.0 or later on iPad, and a free App Store download where listed. Regional and future-version caveats remain explicit.
+2. Removed the Chinese mainland download dead end: the Chinese hub now presents Android first and as the primary available option, and both the hub and iPhone/iPad guide surface Android and Mac alternatives before an App Store action that is unavailable in the mainland storefront.
+3. Replaced the redirected Claude billing-support URL with its current direct URL and corrected the surrounding explanation to note that chat and Console API billing are separate while Max and Team currently include monthly API credits. Regression assertions now protect the exact bilingual OS requirements, Chinese action order, regional alternatives, current Claude URL and exception, and sitemap/date consistency.
+
+No Android, iOS, or Mac application source was changed. APK, DMG, privacy promises, tracking behavior, and TeraJournal files and content were not modified.
+
+### Regression results before deployment
+
+- `node scripts/validate-seo.mjs`: all 28 localized pages passed.
+- `html-validate`: all 28 localized pages passed; `xmllint` accepted the sitemap.
+- Inline JavaScript parse check: 26 scripts passed.
+- Browser responsive check: 28 pages at 320 px and 390 px, 56 combinations total, with zero horizontal-overflow failures.
+- Browser conversion checks at 390 px confirmed that Android is the first and primary Chinese hub option, all three platform choices remain visible, and the Chinese iPhone/iPad regional warning plus Android/Mac alternatives precede the App Store action.
+- Visual review found no layout regression on either changed Chinese download path.
+- Local Lighthouse: Chinese download hub, Chinese iPhone/iPad guide, and model-reference page each scored 100/100/100/100; LCP was 1.1 seconds, TBT 0 ms, and CLS no higher than 0.021.
+- Two independent read-only reviews found no remaining issue after correcting the Claude Max/Team exception and strengthening the platform-specific validators.
+- Release artifact hashes remained unchanged:
+  - Android APK SHA-256: `391736033ead0db76c732f9cf87a8a1d595de3ce8fc75be53736d6ae4d7f3b1e`
+  - Mac DMG SHA-256: `b99939af57918c37ade7118236a346a261e68e812ed6024da5b43201e1363558`
+
+### Deployment
+
+- Pull request: [#11](https://github.com/teramoby/tera-help/pull/11), merged to `main` as `7be41719f11adb25aba1bc6892c573913686b240`.
+- GitHub Pages: [deployment run 38336509565](https://github.com/teramoby/tera-help/actions/runs/38336509565) completed successfully in 33 seconds, including the 28-page SEO validator. The companion Pages build also completed successfully.
+- Live verification: all six changed English and Chinese pages returned 200 with the expected OS requirements, free-download wording, Chinese platform order and alternatives, current Claude URL and billing exception. The sitemap retained 28 URLs and reported `2026-10-13` for those pages.
+- Full live verification: all 28 sitemap URLs returned 200 with exact self-canonicals, complete language alternates, and 26 parseable JSON-LD blocks. All 56 live responsive checks at 320 px and 390 px passed without horizontal overflow.
+- Repeated production Lighthouse after deployment: Chinese download hub, Chinese iPhone/iPad guide, and English model-reference page each scored 100/100/100/100; LCP was 1.3 seconds or less, TBT 0 ms, CLS 0.021 or less, and transfer 37–39 KiB. Earlier samples on the same unchanged pages scored Performance 89–90, confirming the runner variance rather than a stable regression.
+- Live APK and DMG downloads retained their recorded SHA-256 values.
+
+### Known limitations and next hypothesis
+
+- Search Console remains the highest-priority missing measurement. Public search samples cannot confirm Google-selected canonicals, complete index coverage, impressions, clicks, or query position; week-to-week visibility of one generic query should not drive reactive copy changes.
+- Do not create another broad landing page while existing pages already cover the sampled terms. The next organic-growth hypothesis remains earning accurate references from reputable app directories, comparison sites, or independent reviews; pursue only genuine placements and measure them when first-party search data is available.
+- App Store price, compatibility, and regional availability can change. Recheck Apple’s first-party listing data before changing or re-dating the download guidance.
+- GitHub Pages reported that several official actions still target the deprecated Node.js 20 action runtime while being forced onto Node.js 24. Deployment succeeded; monitor upstream action releases rather than replacing current official actions without a supported upgrade path.
