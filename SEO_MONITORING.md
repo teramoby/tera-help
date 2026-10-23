@@ -195,3 +195,47 @@ No Android, iOS, or Mac application source was changed. APK, DMG, privacy promis
 - Do not create another broad landing page while existing pages already cover the sampled terms. The next organic-growth hypothesis remains earning accurate references from reputable app directories, comparison sites, or independent reviews; pursue only genuine placements and measure them when first-party search data is available.
 - App Store price, compatibility, and regional availability can change. Recheck Apple’s first-party listing data before changing or re-dating the download guidance.
 - GitHub Pages reported that several official actions still target the deprecated Node.js 20 action runtime while being forced onto Node.js 24. Deployment succeeded; monitor upstream action releases rather than replacing current official actions without a supported upgrade path.
+
+## 2026-10-23
+
+### Baseline
+
+- Repository: clean `main` synchronized with `origin/main` at `272811e` before this run. The Android repository was also clean. The release artifacts retained their October 13 hashes.
+- Availability: HTTPS homepage, `robots.txt`, and `sitemap.xml` returned 200; HTTP redirected to HTTPS with 301; a fabricated path returned a real 404.
+- Sitemap and metadata: all 28 sitemap URLs returned direct 200s with exact self-canonicals and matching `en` / `zh-CN` / `x-default` alternates; all 26 JSON-LD blocks parsed. Forty-six normalized same-origin page and resource references returned successful responses.
+- External anchors: eight of eleven automated checks returned 200. Two OpenAI Help pages and xAI returned 403 to automated clients, as on October 13; these are bot denials, not confirmed broken links. The App Store link redirected this China-region request to the mainland storefront homepage, consistent with the already documented listing gap.
+- Responsive behavior: all 28 live pages at 320 px and 390 px had no confirmed horizontal overflow. One instantaneous 320 px privacy-page width reading disappeared on a fresh navigation and had no offending element.
+- Mobile Lighthouse repeat samples: homepage 100/100/100/100 with LCP 1.26 s, TBT 26 ms, CLS 0.00087 and 127 KB transfer; Chinese download hub 99/100/100/100 with LCP 1.31 s, TBT 0 and 39 KB transfer. An initial homepage performance-only sample scored 67 with LCP 5.2 s on unchanged production content; the repeat result supports runner timing variance rather than a confirmed regression.
+- Public search sample at approximately 10:28 China Standard Time: `tt by teramoby` exposed direct results for the getting-started guide, homepage, privacy policy, FAQ, BYOK guide and Chinese homepage. No direct tt URL appeared in the sampled unscoped results for `万能模型客户端`, `多模型 AI 客户端`, or `ChatGPT Claude Gemini DeepSeek 客户端`. The Chinese homepage had appeared for `多模型 AI 客户端` on October 13; the difference in a single public sample does not establish a ranking loss. Bare `site:` output was empty while scoped `site:` queries exposed English and Chinese pages. Cached search extracts still showed older download copy despite the live page being current. These observations are not traffic, ranking, or complete index-coverage data.
+- Mac download evidence: the direct `tera-1.1.1.dmg` contains app version 1.1.1 and a Universal Intel/Apple Silicon executable. [Apple's US listing](https://apps.apple.com/us/app/teramoby-tera-tt/id6760287852), which covers iPhone, iPad and Mac, displayed version 2.0.0 on October 23. Apple lookup still returned no mainland China listing.
+
+### Evidence-backed change
+
+1. Made the direct DMG version visible beside the Mac download actions on both homepages. The bilingual download hubs and Mac guides now state the difference between direct DMG 1.1.1 and the version 2.0.0 shown on Apple's shared US listing, with a dated regional caveat. This lets visitors choose a download route with accurate version information. Six edited pages received matching sitemap dates; the four WebPage JSON-LD and visible guide dates were updated consistently.
+
+No Android, iOS or Mac application source was changed. APK, DMG, tracking, privacy promises and TeraJournal files were not modified. The public search samples did not justify a new broad landing page or reactive keyword edits.
+
+### Regression results before deployment
+
+- `node scripts/validate-seo.mjs`: all 28 localized pages passed. `html-validate` passed all 28 pages, `xmllint` accepted the sitemap and `git diff --check` was clean.
+- Browser checks: the six changed pages at 320 px, 390 px and 1440 px passed 18 status, version-copy and overflow checks. Mobile and desktop visual review found no layout regression.
+- Local Lighthouse: homepage 99/100/100/100, LCP 1.9 s, TBT 0, CLS 0.001; Mac guide 100/100/100/100, LCP 1.2 s, TBT 0, CLS 0.
+- Independent read-only content review verified the DMG app bundle version and architecture, checked the Apple listing claim and found no concrete wording issue.
+- Release artifact hashes remained unchanged:
+  - Android APK SHA-256: `391736033ead0db76c732f9cf87a8a1d595de3ce8fc75be53736d6ae4d7f3b1e`
+  - Mac DMG SHA-256: `b99939af57918c37ade7118236a346a261e68e812ed6024da5b43201e1363558`
+
+### Deployment
+
+- Pull request: [#12](https://github.com/teramoby/tera-help/pull/12), merged to `main` as `2846cbe53d9c20ce7838b1841ceead971004b97e`.
+- GitHub Pages: [deployment run 39890282849](https://github.com/teramoby/tera-help/actions/runs/39890282849) completed successfully, including the 28-page SEO validator. The companion Pages build also completed successfully.
+- Live verification: both homepages, both download hubs, both Mac guides and the sitemap returned 200 with the expected version wording and `2026-10-23` modification dates. All 28 sitemap pages returned 200 with exact self-canonicals, complete language alternates and 26 parseable JSON-LD blocks. The six changed pages passed twelve live 320/390 px responsive checks.
+- Production Lighthouse after deployment: homepage 99/100/100/100, LCP 1.4 s, TBT 0, CLS 0.001, transfer 124 KiB; Mac guide 98/100/100/100, LCP 1.6 s, TBT 0, CLS 0, transfer 39 KiB.
+- Live APK and DMG downloads retained their recorded SHA-256 values.
+
+### Known limitations and next hypothesis
+
+- Search Console remains the missing source for Google-selected canonicals, complete index coverage, impressions, clicks and actual query performance. Public search samples do not support a conclusion about ranking or traffic movement.
+- App Store version and regional availability can change. Recheck Apple's first-party listing on the next monitoring run before relying on the dated version comparison.
+- If first-party data eventually shows substantial Mac download traffic with poor subsequent engagement, test whether the older direct DMG contributes to that result. Replacing or rebuilding an application package is outside this website-only automation.
+- GitHub Pages again warned that several official actions target the deprecated Node.js 20 runtime while being forced onto Node.js 24. Both deployments succeeded; continue monitoring upstream action releases.
