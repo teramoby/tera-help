@@ -239,3 +239,35 @@ No Android, iOS or Mac application source was changed. APK, DMG, tracking, priva
 - App Store version and regional availability can change. Recheck Apple's first-party listing on the next monitoring run before relying on the dated version comparison.
 - If first-party data eventually shows substantial Mac download traffic with poor subsequent engagement, test whether the older direct DMG contributes to that result. Replacing or rebuilding an application package is outside this website-only automation.
 - GitHub Pages again warned that several official actions target the deprecated Node.js 20 runtime while being forced onto Node.js 24. Both deployments succeeded; continue monitoring upstream action releases.
+
+## 2026-10-27
+
+### Baseline
+
+- Repository: clean `main` synchronized with `origin/main` at `61b7a79` before this run. The APK and DMG retained their October 23 SHA-256 values.
+- Availability: HTTPS homepage, `robots.txt`, and `sitemap.xml` returned 200; HTTP redirected to HTTPS with 301, and a fabricated path returned a real 404.
+- Technical SEO: all 28 sitemap URLs returned direct 200s with exact self-canonicals and reciprocal `en` / `zh-CN` / `x-default` alternates; all 26 JSON-LD blocks parsed. All 46 unique same-origin page/resource references passed automated checks.
+- Links: nine of eleven external user-facing targets returned 200 to automated GET requests. Two OpenAI Help pages returned 403 bot denials, not confirmed broken links. The US App Store URL redirected a China-region request to the mainland storefront homepage, consistent with the documented regional gap.
+- Responsive and performance: all 28 live pages passed 320 px and 390 px horizontal-overflow checks (56 combinations). Mobile Lighthouse samples for the homepage and Chinese download hub each scored 100/100/100/100; LCP was 1.27 s and 1.23 s, TBT 0, CLS below 0.001, and transfer approximately 127 KB and 39 KB. No technical regression against October 23 was confirmed.
+- Public search sample at approximately 10:00 China Standard Time: `tt by teramoby` exposed direct results for the homepage, getting-started guide, FAQ, and privacy page. `多模型 AI 客户端` exposed the Chinese homepage in this sample; `万能模型客户端` and `ChatGPT Claude Gemini DeepSeek 客户端` did not expose a direct tt result. Bare `site:` output was empty while scoped variants exposed pages. Some search extracts still contained old download wording despite current live content. These samples cannot establish ranking, traffic, or full index coverage.
+- Apple's [US listing](https://apps.apple.com/us/app/teramoby-tera-tt/id6760287852) still displayed version 2.0.0 as a free iPhone/iPad/Mac app, and Apple's mainland China lookup returned zero results. Neither establishes *why* the app is absent from that storefront. The indexed bilingual getting-started guides nevertheless attributed absence to “compliance requirements” and gave unconditional App Store search instructions.
+
+### Evidence-backed change
+
+1. Corrected the bilingual getting-started guides to state only the observed mainland China App Store availability, qualify their App Store screenshot/search advice by region, and link the Android and Mac installation guides for visitors who also have those devices. The copy explicitly says those alternatives cannot install on iPhone/iPad. Added localized regression assertions and synchronized the two visible guide dates, BlogPosting `dateModified` values, and sitemap `lastmod` entries to 2026-10-27.
+
+No application source, APK, DMG, privacy promise, tracking, or TeraJournal file was changed. The public search samples did not justify a new keyword landing page.
+
+### Regression and deployment
+
+- Before deployment: `node scripts/validate-seo.mjs` passed all 28 pages; `html-validate` passed all 28 localized pages; `xmllint` accepted the sitemap; `git diff --check` was clean. The two changed guides passed six local 320/390/1440 px browser status, notice/link, and overflow checks, with mobile visual review. Local Chinese-guide Lighthouse scored 100/100/100/100, LCP 1.2 s, TBT 0, CLS 0. An independent read-only diff review found no concrete issue.
+- [Pull request #13](https://github.com/teramoby/tera-help/pull/13) merged to `main` as `bef3af37813f25a044353434ec8a238664c6852d`. [GitHub Pages deployment 40436590997](https://github.com/teramoby/tera-help/actions/runs/40436590997) and the companion Pages build/deployment both passed; the SEO validator passed in CI.
+- Live verification: both guides and the sitemap returned 200 with the new regional advice, links, and matching dates. Both guides passed four 320/390 px responsive checks. All 28 sitemap pages again returned direct 200s with exact self-canonicals, reciprocal alternates, and 26 parseable JSON-LD blocks. Production Chinese-guide Lighthouse scored 99/100/100/100, LCP 1.4 s, TBT 0, CLS 0.
+- Live Android APK SHA-256: `391736033ead0db76c732f9cf87a8a1d595de3ce8fc75be53736d6ae4d7f3b1e`; live Mac DMG SHA-256: `b99939af57918c37ade7118236a346a261e68e812ed6024da5b43201e1363558`—both unchanged.
+
+### Known limitations and next hypothesis
+
+- Search Console is still needed for Google-selected canonicals, index coverage, impressions, clicks, and actual query performance. Do not interpret public search samples as rankings or traffic, or make reactive keyword edits from a single sample.
+- Search snippets can lag live copy. Recheck whether the indexed getting-started extract eventually reflects the accurate regional guidance; do not keep redating unchanged pages to force a crawl.
+- Genuine relevant third-party references to the existing model, comparison, and platform pages remain a plausible off-site discovery hypothesis. Pursue only accurate placements, and measure their effect when first-party search data becomes available.
+- GitHub Pages again warned that some official actions target deprecated Node.js 20 while being forced onto Node.js 24. Deployment succeeded; monitor upstream releases.
