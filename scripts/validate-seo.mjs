@@ -217,6 +217,24 @@ for (const [file, downloadHub] of [
   );
 }
 
+for (const [file, regionalNotice, alternatives] of [
+  ['blog-getting-started.html', 'not currently listed in the mainland China App Store', ['/download/android/', '/download/mac/']],
+  ['zh/blog-getting-started.html', '目前未在中国大陆 App Store 上架', ['/zh/download/android/', '/zh/download/mac/']],
+]) {
+  const html = await fs.readFile(path.join(ROOT, file), 'utf8');
+  const installation = html.split('<h2>Installation</h2>')[1]?.split('<h2>Setting Up API Keys</h2>')[0]
+    ?? html.split('<h2>安装</h2>')[1]?.split('<h2>配置 API 密钥</h2>')[0]
+    ?? '';
+  assert(installation.includes(regionalNotice), `${file}: mainland App Store notice missing`);
+  for (const alternative of alternatives) {
+    assert(installation.includes(`href="${alternative}"`), `${file}: regional notice missing ${alternative}`);
+  }
+  assert(
+    !installation.includes('due to compliance requirements') && !installation.includes('由于合规要求'),
+    `${file}: unsupported explanation for App Store availability remains`,
+  );
+}
+
 for (const [file, appId, visibleRequirements, metadataRequirement] of [
   ['download/iphone-ipad/index.html', '6760287852', ['iOS 17.0 or later', 'iPadOS 17.0 or later'], 'iOS and iPadOS 17.0+'],
   ['zh/download/iphone-ipad/index.html', '6760287852', ['iOS 17.0 或更高版本', 'iPadOS 17.0 或更高版本'], 'iOS 与 iPadOS 17.0+'],
