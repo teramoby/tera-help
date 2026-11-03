@@ -569,6 +569,18 @@ main.reading {
 }
 .platform-guide-links a::after { content: '→'; color: var(--accent-deep); }
 .platform-guide-links a:hover { color: var(--ink); }
+.download-prereq {
+  max-width: 640px;
+  margin-top: 12px;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--ink-3);
+}
+.download-prereq a {
+  color: var(--accent-deep);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
 .hero-qr {
   display: flex;
   align-items: center;

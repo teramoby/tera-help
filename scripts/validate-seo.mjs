@@ -312,6 +312,21 @@ for (const [file, guideLinks] of [
   }
 }
 
+for (const [file, byokLink, costNotice] of [
+  ['index.html', '/byok-privacy.html', 'API charges may apply'],
+  ['zh/index.html', '/zh/byok-privacy.html', 'API 调用可能另行收费'],
+]) {
+  const html = await fs.readFile(path.join(ROOT, file), 'utf8');
+  const hero = html.match(/<section class="hero has-visual">[\s\S]*?<\/section>/)?.[0] ?? '';
+  const download = hero.indexOf('id="download"');
+  const prereq = hero.indexOf('class="download-prereq"');
+  const prereqMarkup = hero.match(/<p class="download-prereq">([\s\S]*?)<\/p>/)?.[1] ?? '';
+  const worksWith = hero.indexOf('class="works-with"');
+  assert(download !== -1 && prereq > download && worksWith > prereq, `${file}: BYOK prerequisite must appear beside homepage download actions`);
+  assert(prereqMarkup.includes(`href="${byokLink}"`), `${file}: homepage prerequisite missing localized BYOK guide`);
+  assert(prereqMarkup.includes(costNotice), `${file}: homepage prerequisite missing provider-cost notice`);
+}
+
 const siteCss = await fs.readFile(path.join(ROOT, 'assets/site.css'), 'utf8');
 assert(
   /\.reading\s+\.mono\s*\{[^}]*overflow-wrap:\s*anywhere;?[^}]*\}/.test(siteCss),
