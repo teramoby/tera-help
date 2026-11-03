@@ -271,3 +271,36 @@ No application source, APK, DMG, privacy promise, tracking, or TeraJournal file 
 - Search snippets can lag live copy. Recheck whether the indexed getting-started extract eventually reflects the accurate regional guidance; do not keep redating unchanged pages to force a crawl.
 - Genuine relevant third-party references to the existing model, comparison, and platform pages remain a plausible off-site discovery hypothesis. Pursue only accurate placements, and measure their effect when first-party search data becomes available.
 - GitHub Pages again warned that some official actions target deprecated Node.js 20 while being forced onto Node.js 24. Deployment succeeded; monitor upstream releases.
+
+## 2026-11-03
+
+### Baseline
+
+- Repository: clean `main` synchronized with `origin/main` at `09a8461` before this run. The Android APK and Mac DMG retained their October 27 SHA-256 values.
+- Availability: HTTPS homepage, `robots.txt`, and `sitemap.xml` returned 200; HTTP redirected to HTTPS with 301; a fabricated path returned a real 404.
+- Technical SEO: all 28 sitemap URLs returned direct 200s with exact self-canonicals and reciprocal `en` / `zh-CN` / `x-default` alternates; all 26 JSON-LD blocks parsed. The 43 normalized same-origin page/resource references identified in this run returned successful responses. All 28 pages passed 320 px and 390 px horizontal-overflow checks (56 combinations).
+- Mobile Lighthouse samples: homepage 100/100/100/100 with LCP 1.3 s, TBT 0, CLS 0.001 and 124 KB transfer; Chinese download hub 99/100/100/100 with LCP 1.3 s, TBT 0, CLS 0.001 and 38 KB transfer. No confirmed technical regression against October 27.
+- External links: eight of eleven automated GET checks returned 200; xAI Console and two OpenAI Help URLs returned 403 to this automated client. These responses are not proof of user-facing broken links. The US App Store link redirected this China-region request to the mainland storefront homepage, a known regional constraint.
+- Public search sample at approximately 09:58 China Standard Time: `tt by teramoby` exposed direct English and Chinese site results. `多模型 AI 客户端` exposed the Chinese homepage and FAQ; `ChatGPT Claude Gemini DeepSeek 客户端` exposed the Chinese homepage later in the returned set; `万能模型客户端` had no direct tt result in the sample. The English getting-started extract reflected the October 27 regional correction, while an older Chinese-homepage extract omitted the October 23 DMG label. Bare `site:` and scoped `site:` queries disagreed. These public samples are not Google ranking, traffic, or complete index-coverage measurements.
+- [Apple's US listing](https://apps.apple.com/us/app/teramoby-tera-tt/id6760287852) still showed a free version 2.0.0 for iPhone, iPad, and Mac, with the previously documented OS requirements; Apple's mainland China lookup still returned no listing. The site's version and regional notices remained accurate and did not need redating.
+- Conversion gap: both homepage download areas had direct installation actions but no nearby statement that users must configure their own provider credentials and may incur provider API charges. The localized download hubs and BYOK guides already explained this prerequisite, so an early homepage visitor could miss it before installing.
+
+### Evidence-backed change
+
+1. Added one concise, localized BYOK and possible provider-cost note immediately after the homepage platform download/guide actions, linked to the existing English or Chinese BYOK guide. Scoped CSS keeps the note readable without changing the primary download controls. The two homepage stylesheet cache keys and sitemap `lastmod` dates were updated, and the SEO validator now checks the note's position, localized link, and cost disclosure.
+
+No app source, APK, DMG, tracking, privacy promise, or TeraJournal file was changed. The public search samples did not justify reactive keyword edits or another landing page.
+
+### Regression and deployment
+
+- Before deployment: `node scripts/validate-seo.mjs` passed all 28 localized pages; `html-validate` passed all 28 pages; `xmllint` accepted the sitemap; `git diff --check` was clean. The two changed homepages passed six 320/390/1440 px browser status, note/link, and overflow checks. Visual inspection and a second six-check layout pass confirmed the note takes one line on desktop and two on narrow mobile, without overflow. Local homepage Lighthouse scored 100/100/100/100 with LCP 1.1 s, TBT 0 and CLS 0.001. Independent read-only review found no concrete issue; its suggestion to scope the validator's link assertion to the new note was incorporated.
+- [Pull request #14](https://github.com/teramoby/tera-help/pull/14) merged to `main` as `028519e055fd07dbb671cc9dd2619ff7898cc52b`. [GitHub Pages deployment 41563913798](https://github.com/teramoby/tera-help/actions/runs/41563913798) and the companion Pages build/deployment both passed; the 28-page SEO validator passed in CI.
+- Live verification: both homepages, the new stylesheet, and sitemap returned 200 with the expected localized note, links, cache key, and `2026-11-03` modification dates. All 28 sitemap pages returned direct 200s with exact self-canonicals, reciprocal alternates, and 26 parseable JSON-LD blocks. The changed homepages passed four live 320/390 px responsive checks with the new stylesheet loaded. Production homepage Lighthouse scored 99/100/100/100, LCP 1.4 s, TBT 0, CLS 0.001 and 124 KiB transfer.
+- Live Android APK SHA-256: `391736033ead0db76c732f9cf87a8a1d595de3ce8fc75be53736d6ae4d7f3b1e`; live Mac DMG SHA-256: `b99939af57918c37ade7118236a346a261e68e812ed6024da5b43201e1363558`—both unchanged.
+
+### Known limitations and next hypothesis
+
+- Search Console remains necessary for Google-selected canonicals, complete index coverage, impressions, clicks, and actual query performance. Public-search snippets may lag live copy; one observed result cannot establish a ranking change. No analytics or tracking was added.
+- The BYOK note is intended to reduce surprise after install and improve qualified trial completion, but its impact cannot be measured from current first-party data. Keep the wording accurate; do not add claims of conversion improvement without evidence.
+- Accurate independent references to the existing provider, comparison, and platform pages remain a plausible off-site discovery hypothesis. Pursue only genuine placements, and avoid broad duplicate keyword pages without query evidence.
+- GitHub Pages again warned that some official actions target deprecated Node.js 20 while being forced onto Node.js 24. Deployment succeeded; monitor upstream releases.
