@@ -327,6 +327,20 @@ for (const [file, byokLink, costNotice] of [
   assert(prereqMarkup.includes(costNotice), `${file}: homepage prerequisite missing provider-cost notice`);
 }
 
+for (const [file, conditionalCost, providerBilling] of [
+  ['download.html', 'Provider API charges may apply depending on your account, model, and usage', 'Any charges are billed by the provider'],
+  ['faq.html', 'Provider API charges may apply depending on your account, model, and usage', 'Any charges are billed by the provider'],
+  ['download/mac/index.html', 'Provider API charges may apply depending on your account, model, and usage', 'Any charges are billed by the provider'],
+  ['zh/download.html', '是否产生 API 调用费用取决于服务商、模型、账户及用量', '如有费用，由服务商'],
+  ['zh/faq.html', '是否产生 API 调用费用取决于服务商、模型、账户及用量', '如有费用，由服务商'],
+  ['zh/download/mac/index.html', '是否产生 API 调用费用取决于服务商、模型、账户及用量', '如有费用，由服务商'],
+]) {
+  const html = await fs.readFile(path.join(ROOT, file), 'utf8');
+  const main = html.match(/<main[\s\S]*?<\/main>/)?.[0] ?? '';
+  assert(main.toLowerCase().includes(conditionalCost.toLowerCase()), `${file}: conditional provider-cost explanation missing`);
+  assert(main.includes(providerBilling), `${file}: provider billing responsibility missing`);
+}
+
 const siteCss = await fs.readFile(path.join(ROOT, 'assets/site.css'), 'utf8');
 assert(
   /\.reading\s+\.mono\s*\{[^}]*overflow-wrap:\s*anywhere;?[^}]*\}/.test(siteCss),
