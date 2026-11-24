@@ -304,3 +304,35 @@ No app source, APK, DMG, tracking, privacy promise, or TeraJournal file was chan
 - The BYOK note is intended to reduce surprise after install and improve qualified trial completion, but its impact cannot be measured from current first-party data. Keep the wording accurate; do not add claims of conversion improvement without evidence.
 - Accurate independent references to the existing provider, comparison, and platform pages remain a plausible off-site discovery hypothesis. Pursue only genuine placements, and avoid broad duplicate keyword pages without query evidence.
 - GitHub Pages again warned that some official actions target deprecated Node.js 20 while being forced onto Node.js 24. Deployment succeeded; monitor upstream releases.
+
+## 2026-11-24
+
+### Baseline
+
+- Repository: clean `main` synchronized with `origin/main` at `70f4b86` before this run. Local APK and DMG SHA-256 values matched the November 3 baseline.
+- Availability and technical SEO: HTTPS homepage, `robots.txt`, and `sitemap.xml` returned 200; HTTP redirected to HTTPS with 301; a fabricated path returned a real 404. All 28 sitemap URLs returned direct 200s with exact self-canonicals and reciprocal `en` / `zh-CN` / `x-default` alternates; all 26 JSON-LD blocks parsed. All 46 normalized same-origin references passed automated checks, and all 28 pages at 320/390 px passed 56 horizontal-overflow checks.
+- External links: ten of eleven automated GET checks returned 200; xAI Console returned 403 to the automated client, not a confirmed user-facing break. The US App Store URL still redirects a China-region request to the mainland storefront homepage. The Gemini API-key and Claude billing-support links now make working redirects to updated first-party URLs; neither was broken, so no reactive link edit was made.
+- Mobile Lighthouse baseline: homepage 100/100/100/100 with LCP 1.2 s, TBT 0, CLS 0 and 124 KiB transfer. Chinese download hub scored 92 then 98 with stable LCP 1.2–1.1 s, TBT 0 and 38 KiB transfer; the difference was Speed Index timing variance on unchanged bytes, not a confirmed regression.
+- Public search sample at approximately 09:57 China Standard Time: brand `tt by teramoby` exposed direct site results. `万能模型客户端` exposed the Chinese homepage in this sample (not in November 3's sample), and `多模型 AI 客户端` exposed the Chinese homepage and FAQ. The sampled `ChatGPT Claude Gemini DeepSeek 客户端` set had no direct tt result, after one was observed on November 3. Bare and scoped `site:` queries disagreed; the English homepage extract contained the November 3 BYOK note while a Chinese homepage extract lagged. These observations are not rankings, traffic, or complete index coverage.
+- [Apple's US listing](https://apps.apple.com/us/app/teramoby-tera-tt/id6760287852) still displayed a free version 2.0.0 for iPhone, iPad, and Mac with the documented OS requirements; Apple's mainland China lookup still returned zero results. The direct DMG remained version 1.1.1.
+- Pricing-copy evidence: several bilingual download/FAQ/Mac-guide passages said or implied every provider API call was paid. [Google's official Gemini Developer API pricing](https://ai.google.dev/gemini-api/docs/pricing) documents a limited free tier with free input/output tokens for eligible models. Provider billing varies by model, account, and usage; the old blanket wording was inaccurate and could discourage a qualified trial.
+
+### Evidence-backed change
+
+1. Corrected the bilingual download hubs, pricing FAQ answers, and Mac-guide FAQ answers to say provider API charges *may* apply depending on account, model, and usage, and any charges come from the provider rather than tt. No specific free-tier entitlement is promised. Since Apple compatibility and shared US listing version were rechecked on November 24, their dated comparisons were refreshed in the four edited download/Mac pages. Visible guide dates, four WebPage JSON-LD `dateModified` values, and six sitemap `lastmod` entries were synchronized; the SEO validator now checks all six conditional-pricing passages.
+
+No Android/iOS/Mac app source, APK, DMG, tracking, privacy promise, or TeraJournal file was changed. The public search sample did not justify keyword or landing-page changes.
+
+### Regression and deployment
+
+- Before deployment: `node scripts/validate-seo.mjs` passed all 28 localized pages; `html-validate` passed all 28 pages; `xmllint` accepted the sitemap; `git diff --check` was clean. Six changed pages passed 18 local 320/390/1440 px status, conditional-pricing, FAQ-expansion, and overflow checks. An initial browser-harness pass received one benign local HTTP 304 from cache; the cache-disabled rerun passed 18/18. Mobile visual review showed no layout regression. Local Lighthouse scored 100/100/100/100 for the Chinese download hub (LCP 0.9 s, TBT 0, CLS 0.001) and English FAQ (LCP 1.1 s, TBT 0, CLS 0). Independent read-only review found no concrete issue.
+- [Pull request #15](https://github.com/teramoby/tera-help/pull/15) merged to `main` as `9c7f8bf7c7d5161d27de355d1271a8a63e44c154`. [GitHub Pages deployment 45309656448](https://github.com/teramoby/tera-help/actions/runs/45309656448) and the companion Pages build/deployment passed; CI ran the 28-page SEO validator.
+- Live verification: all six changed pages and sitemap returned 200 with conditional pricing copy and matching November 24 dates. All 28 sitemap pages returned direct 200s with exact self-canonicals, reciprocal alternates, and 26 parseable JSON-LD blocks. The six changed pages passed twelve live 320/390 px checks, including FAQ expansion. Production Chinese download hub Lighthouse scored 98/100/100/100, LCP 1.2 s, TBT 0, CLS 0 and 38 KiB transfer.
+- Live Android APK SHA-256: `391736033ead0db76c732f9cf87a8a1d595de3ce8fc75be53736d6ae4d7f3b1e`; live Mac DMG SHA-256: `b99939af57918c37ade7118236a346a261e68e812ed6024da5b43201e1363558`—both unchanged.
+
+### Known limitations and next hypothesis
+
+- Search Console remains necessary to measure Google-selected canonicals, index coverage, impressions, clicks, and actual query performance. Public-search result samples and stale snippets cannot prove ranking or traffic movement; no analytics or tracking was added.
+- Provider free tiers, eligible models, and pricing can change. Keep the conditional wording; recheck first-party provider documentation before any more specific cost claim. No measured conversion lift is claimed for this correction.
+- Accurate independent references to the existing provider, comparison, and platform pages remain a plausible off-site discovery hypothesis. Pursue only genuine placements; do not create another broad keyword page from single search samples.
+- GitHub Pages again warned that some official actions target deprecated Node.js 20 while being forced onto Node.js 24. Deployment succeeded; continue monitoring upstream releases.
